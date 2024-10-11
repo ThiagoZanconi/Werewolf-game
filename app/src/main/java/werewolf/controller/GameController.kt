@@ -149,8 +149,6 @@ class GameControllerImpl(
         gameActivity.startTurn(player)
     }
 
-
-
     private fun finishRound(){
         queueAbilities()
         resolveAbilities()
