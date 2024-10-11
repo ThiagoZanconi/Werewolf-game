@@ -1,5 +1,6 @@
 package werewolf.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -57,6 +58,11 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
         initComponents()
         initListeners()
         initModule()
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        
     }
 
     private fun initModule(){

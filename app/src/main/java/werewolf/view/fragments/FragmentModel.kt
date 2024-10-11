@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.entities.Player
@@ -22,6 +23,16 @@ abstract class FragmentModel: Fragment(){
     private lateinit var confirmButton: Button
     protected lateinit var imageView: ImageView
     protected lateinit var titleLabel: TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+
+            }
+        })
+    }
 
     protected open fun initComponents(view: View) {
         confirmButton = view.findViewById(R.id.confirmButton)
