@@ -2,7 +2,7 @@ package werewolf.model.entities.villagers
 
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Cooldown
-import werewolf.model.entities.EndOfRoundAbility
+import werewolf.model.entities.Ability
 import werewolf.model.entities.Neutral
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.Shield
@@ -21,7 +21,7 @@ class Cleric(
         signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
     }
 
-    override fun resolveAbility(): EndOfRoundAbility? {
+    override fun resolveAbility(): Ability? {
         if (targetPlayer != null) {
             abilityState = Cooldown()
             ability = Shield(targetPlayer!!)

@@ -3,7 +3,7 @@ package werewolf.model.entities.werewolves
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
-import werewolf.model.entities.EndOfRoundAbility
+import werewolf.model.entities.Ability
 import werewolf.model.entities.NotNullable
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.WerewolfAttack
@@ -23,7 +23,7 @@ class Werewolf(
         signalEvent(PlayerEventEnum.SetWerewolfTargets)
     }
 
-    override fun resolveAbility(): EndOfRoundAbility? {
+    override fun resolveAbility(): Ability? {
         return if(targetPlayer!=null){
             ability = WerewolfAttack(targetPlayer!!)
             ability

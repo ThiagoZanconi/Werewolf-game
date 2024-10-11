@@ -11,7 +11,7 @@ enum class DeathCause{
 }
 
 interface Player{
-    val playerObservable: Observable<EventSignal>
+    val playerObservable: Observable<PlayerSignal>
 
     fun fetchPlayerName(): String
     fun fetchRole(): String
@@ -22,7 +22,7 @@ interface Player{
     /*
     * Returns ability used in game
      */
-    fun fetchEndOfRoundAbility(): EndOfRoundAbility?
+    fun fetchEndOfRoundAbility(): Ability?
     /*
     * Returns ability used for logs
      */
@@ -38,11 +38,11 @@ interface Player{
 
     fun turnSetUp()
     fun receiveDamage(deathCause: DeathCause)
-    fun receiveAbility(ability: EndOfRoundAbility)
+    fun receiveAbility(ability: Ability)
     fun notifyKilledPlayer(deathCause: DeathCause)
     fun resetAbilityState()
     fun resetDefenseState()
-    fun nullifyAbility()
+    fun cancelAbility()
     fun signalEvent(event: PlayerEventEnum)
 }
 
@@ -53,14 +53,14 @@ abstract class AbstractPlayer: Player{
     protected open var abilityState: AbilityState = Neutral()
     protected lateinit var event: PlayerEventEnum
     protected lateinit var deathCause: DeathCause
-    protected open var ability: EndOfRoundAbility? = null
+    protected open var ability: Ability? = null
 
-    protected var abilitiesUsedOnMe: MutableList<EndOfRoundAbility> = mutableListOf()
+    protected var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayer: Player? = null
     private lateinit var targetPlayers: List<Player>
 
-    protected val onActionSubject = Subject<EventSignal>()
-    override val playerObservable: Observable<EventSignal> = onActionSubject
+    protected val onActionSubject = Subject<PlayerSignal>()
+    override val playerObservable: Observable<PlayerSignal> = onActionSubject
 
     override fun fetchPlayerName(): String{
         return playerName
@@ -86,7 +86,7 @@ abstract class AbstractPlayer: Player{
         return abilityState.getAbilityState()
     }
 
-    override fun fetchEndOfRoundAbility(): EndOfRoundAbility?{
+    override fun fetchEndOfRoundAbility(): Ability?{
         return abilityState.useAbility(this)
     }
 
@@ -122,7 +122,7 @@ abstract class AbstractPlayer: Player{
         defenseState.receiveDamage(this,deathCause)
     }
 
-    override fun receiveAbility(ability: EndOfRoundAbility) {
+    override fun receiveAbility(ability: Ability) {
         abilitiesUsedOnMe.add(ability)
     }
 
@@ -139,20 +139,20 @@ abstract class AbstractPlayer: Player{
         defenseState = NoDefense()
     }
 
-    override fun nullifyAbility() {
-        ability?.nullify()
+    override fun cancelAbility() {
+        ability?.cancel()
     }
 
     override fun signalEvent(event: PlayerEventEnum) {
         this.event = event
-        onActionSubject.notify(EventSignal(this))
+        onActionSubject.notify(PlayerSignal(this))
     }
 
     override fun turnSetUp() {
         signalEvent(PlayerEventEnum.SetNoTargets)
     }
 
-    abstract fun resolveAbility(): EndOfRoundAbility?
+    abstract fun resolveAbility(): Ability?
 
     open fun cooldownTimer(){
 

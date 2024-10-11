@@ -1,7 +1,7 @@
 package werewolf.model.entities.villagers
 
 import werewolf.model.entities.AbstractPlayer
-import werewolf.model.entities.EndOfRoundAbility
+import werewolf.model.entities.Ability
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.ReviveSpell
@@ -12,7 +12,7 @@ class Priest(
 ): AbstractPlayer(){
     override val role: String = "Priest"
 
-    override fun resolveAbility(): EndOfRoundAbility? {
+    override fun resolveAbility(): Ability? {
         if (targetPlayer != null) {
             abilityState = NoUsesLeft()
             ability = ReviveSpell(targetPlayer!!)

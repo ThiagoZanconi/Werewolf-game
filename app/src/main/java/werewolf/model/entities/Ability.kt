@@ -1,28 +1,40 @@
 package werewolf.model.entities
 
-interface EndOfRoundAbility{
+import com.example.observer.Observable
+import com.example.observer.Subject
+
+interface Ability{
+    val playerObservable: Observable<AbilitySignal>
     fun fetchAbilityName(): String
     fun fetchPriority(): Int
     fun fetchTargetPlayer(): Player?
+    fun fetchEvent(): AbilityEventEnum
     fun resolve()
-    fun nullify()
+    fun cancel()
 }
 
-abstract class AbstractEndOfRoundAbility(
+abstract class AbstractAbility(
     protected var targetPlayer: Player?
-): EndOfRoundAbility{
-    protected var nullified = false
+): Ability{
+    private lateinit var event: AbilityEventEnum
+    private val onActionSubject = Subject<AbilitySignal>()
+    override val playerObservable: Observable<AbilitySignal> = onActionSubject
 
     override fun fetchTargetPlayer(): Player?{
         return targetPlayer
     }
 
-    override fun nullify(){
-        nullified = true
+    override fun fetchEvent(): AbilityEventEnum {
+        return event
+    }
+
+    override fun cancel(){
+        event = AbilityEventEnum.CancelAbility
+        onActionSubject.notify(AbilitySignal(this))
     }
 }
 
-class WerewolfAttack(targetPlayer: Player?): AbstractEndOfRoundAbility(targetPlayer) {
+class WerewolfAttack(targetPlayer: Player?): AbstractAbility(targetPlayer) {
     override fun resolve(){
         targetPlayer?.receiveDamage(DeathCause.MAULED)
     }
@@ -31,7 +43,7 @@ class WerewolfAttack(targetPlayer: Player?): AbstractEndOfRoundAbility(targetPla
         return 4
     }
 
-    override fun nullify(){
+    override fun cancel(){
 
     }
 
@@ -41,9 +53,9 @@ class WerewolfAttack(targetPlayer: Player?): AbstractEndOfRoundAbility(targetPla
 
 }
 
-class CancelPlayerAbility(targetPlayer: Player?): AbstractEndOfRoundAbility(targetPlayer) {
+class CancelPlayerAbility(targetPlayer: Player?): AbstractAbility(targetPlayer) {
     override fun resolve() {
-        targetPlayer?.nullifyAbility()
+        targetPlayer?.cancelAbility()
     }
 
     override fun fetchAbilityName(): String {
@@ -58,11 +70,9 @@ class CancelPlayerAbility(targetPlayer: Player?): AbstractEndOfRoundAbility(targ
 
 class Shield(
     targetPlayer: Player?
-): AbstractEndOfRoundAbility(targetPlayer) {
+): AbstractAbility(targetPlayer) {
     override fun resolve() {
-        if(!nullified){
-            targetPlayer?.defineDefenseState(Immune())
-        }
+        targetPlayer?.defineDefenseState(Immune())
     }
 
     override fun fetchAbilityName(): String {
@@ -76,11 +86,9 @@ class Shield(
 
 class ReviveSpell(
     targetPlayer: Player?
-): AbstractEndOfRoundAbility(targetPlayer) {
+): AbstractAbility(targetPlayer) {
     override fun resolve() {
-        if(!nullified){
-            targetPlayer?.signalEvent(PlayerEventEnum.RevivedPlayer)
-        }
+        targetPlayer?.signalEvent(PlayerEventEnum.RevivedPlayer)
     }
 
     override fun fetchAbilityName(): String {
@@ -94,12 +102,10 @@ class ReviveSpell(
 
 class Shot(
     targetPlayer: Player?
-): AbstractEndOfRoundAbility(targetPlayer){
+): AbstractAbility(targetPlayer){
 
     override fun resolve() {
-        if(!nullified){
-            targetPlayer?.receiveDamage(DeathCause.SHOT)
-        }
+        targetPlayer?.receiveDamage(DeathCause.SHOT)
     }
 
     override fun fetchAbilityName(): String {
@@ -110,4 +116,3 @@ class Shot(
         return 2
     }
 }
-

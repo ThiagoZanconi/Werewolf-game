@@ -2,10 +2,12 @@ package werewolf.controller
 
 import com.example.observer.Observer
 import werewolf.model.GameStateModel
-import werewolf.model.entities.EndOfRoundAbility
-import werewolf.model.entities.EventSignal
+import werewolf.model.entities.Ability
+import werewolf.model.entities.AbilityEventEnum
+import werewolf.model.entities.AbilitySignal
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.model.entities.PlayerSignal
 import werewolf.view.GameActivity
 import werewolf.view.GameUiEvent
 import werewolf.view.fragments.WinnerTeam
@@ -21,7 +23,7 @@ class GameControllerImpl(
 ): GameController {
     private lateinit var gameActivity: GameActivity
 
-    private val priorityQueue: PriorityQueue<EndOfRoundAbility> = PriorityQueue<EndOfRoundAbility>(compareBy { it.fetchPriority() })
+    private val abilityPriorityQueue: PriorityQueue<Ability> = PriorityQueue<Ability>(compareBy { it.fetchPriority() })
     private var counter = 0
     private var eventsSummary: String = ""
     private var gameLogs: String = ""
@@ -42,7 +44,7 @@ class GameControllerImpl(
             }
         }
 
-    private val playerObserver: Observer<EventSignal> =
+    private val playerObserver: Observer<PlayerSignal> =
         Observer { value ->
             when (value.getPlayer().fetchEvent()){
                 PlayerEventEnum.SetWerewolfTargets -> setWerewolfTargets(value.getPlayer())
@@ -56,34 +58,12 @@ class GameControllerImpl(
             }
         }
 
-    private fun initGame(){
-        gameStateModel.initGame(players)
-        gameStateModel.getAlivePlayers().forEach {
-            player -> player.playerObservable.subscribe(playerObserver)
+    private val abilityObserver: Observer<AbilitySignal> =
+        Observer { value ->
+            when (value.getAbility().fetchEvent()){
+                AbilityEventEnum.CancelAbility -> cancelAbility(value.getAbility())
+            }
         }
-        setCurrentPlayer()
-    }
-
-    private fun setCurrentPlayer(){
-        gameActivity.setCurrentPlayer(gameStateModel.getAlivePlayers()[counter].fetchPlayerName())
-    }
-
-    private fun confirmAction(){
-        counter++
-        if(counter<gameStateModel.getAlivePlayers().size){
-            setCurrentPlayer()
-        }
-        else{
-            counter = 0
-            finishRound()
-        }
-    }
-
-    private fun startTurn(){
-        val player = gameStateModel.getAlivePlayers()[counter]
-        player.turnSetUp()
-        gameActivity.startTurn(player)
-    }
 
     private fun setWerewolfTargets(player: Player){
         player.defineTargetPlayers(gameStateModel.getAliveVillagers())
@@ -136,6 +116,41 @@ class GameControllerImpl(
         playerRevived?.playerObservable?.subscribe(playerObserver)
     }
 
+    private fun cancelAbility(ability: Ability){
+        abilityPriorityQueue.remove(ability)
+    }
+
+    private fun initGame(){
+        gameStateModel.initGame(players)
+        gameStateModel.getAlivePlayers().forEach {
+            player -> player.playerObservable.subscribe(playerObserver)
+        }
+        setCurrentPlayer()
+    }
+
+    private fun setCurrentPlayer(){
+        gameActivity.setCurrentPlayer(gameStateModel.getAlivePlayers()[counter].fetchPlayerName())
+    }
+
+    private fun confirmAction(){
+        counter++
+        if(counter<gameStateModel.getAlivePlayers().size){
+            setCurrentPlayer()
+        }
+        else{
+            counter = 0
+            finishRound()
+        }
+    }
+
+    private fun startTurn(){
+        val player = gameStateModel.getAlivePlayers()[counter]
+        player.turnSetUp()
+        gameActivity.startTurn(player)
+    }
+
+
+
     private fun finishRound(){
         queueAbilities()
         resolveAbilities()
@@ -150,16 +165,17 @@ class GameControllerImpl(
         gameStateModel.getAlivePlayers().forEach {
             val ability = it.fetchEndOfRoundAbility()
             if (ability != null) {
-                priorityQueue.add(ability)
+                ability.playerObservable.subscribe(abilityObserver)
+                abilityPriorityQueue.add(ability)
                 it.fetchTargetPlayer()?.receiveAbility(ability)
+                gameLogs+=it.fetchPlayerName()+" ("+it.fetchRole()+") used "+it.fetchUsedAbility()+" on "+ (it.fetchTargetPlayer()?.fetchPlayerName() ?: "no one") +"\n"
             }
-            gameLogs+=it.fetchPlayerName()+" ("+it.fetchRole()+") used "+it.fetchUsedAbility()+" on "+ (it.fetchTargetPlayer()?.fetchPlayerName() ?: "no one") +"\n"
         }
     }
 
     private fun resolveAbilities(){
-        while (priorityQueue.isNotEmpty()) {
-            val endOfRoundAbility = priorityQueue.poll()
+        while (abilityPriorityQueue.isNotEmpty()) {
+            val endOfRoundAbility = abilityPriorityQueue.poll()
             endOfRoundAbility?.resolve()
         }
     }

@@ -4,8 +4,18 @@ enum class PlayerEventEnum{
     SetWerewolfTargets, KilledPlayer, SetAlivePlayersTarget, JesterWin, WerewolfKilled, SetDeadTargets, RevivedPlayer, SetNoTargets
 }
 
-class EventSignal(private val player: Player){
+enum class AbilityEventEnum{
+    CancelAbility
+}
+
+class PlayerSignal(private val player: Player){
     fun getPlayer(): Player{
         return player
+    }
+}
+
+class AbilitySignal(private val ability: Ability){
+    fun getAbility(): Ability{
+        return ability
     }
 }
