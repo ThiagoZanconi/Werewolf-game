@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dark_village" />
+
+    <include
+        layout="@layout/textview_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/imageview_shape">
+        <ImageView
+            android:id="@+id/roleImageLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:src="@drawable/werewolf"
+            android:scaleType="fitXY"
+            android:background="@drawable/imageview_shape"
+            android:clipToOutline="true"
+            >
+        </ImageView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/abilityStateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="390dp"
+        android:text="Winners"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:background="@drawable/textview_shape2"
+        />
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="450dp"
+        android:columnCount="3"
+        android:padding="16dp">
+    </GridLayout>
+
+    <Button
+        android:id="@+id/gameLogsButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="580dp"
+        android:background="@drawable/button_shape"
+        android:text="Game Logs"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="650dp"
+        android:background="@drawable/button_shape"
+        android:text="Play Again"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
+
+</FrameLayout>

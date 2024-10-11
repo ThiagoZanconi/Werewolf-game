@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="InitActivityImpl">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dark_village" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="40dp"
+        android:text="Start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_shape"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="30dp"
+        android:gravity="center"
+        android:text="Name:"
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/textview_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startButton" />
+
+    <EditText
+        android:id="@+id/termEditText"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="30dp"
+        app:layout_constraintStart_toEndOf="@id/nameTextView"
+        app:layout_constraintEnd_toStartOf="@id/addButton"
+        app:layout_constraintTop_toBottomOf="@id/startButton"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="30dp"
+        android:text="Add"
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startButton"
+        android:textAllCaps="false"/>
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addButton"
+        android:rowCount="2"
+        android:columnCount="2"
+        android:padding="16dp">
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
