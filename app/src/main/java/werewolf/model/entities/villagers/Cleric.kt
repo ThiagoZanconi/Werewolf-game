@@ -12,7 +12,8 @@ class Cleric(
     override val playerName: String
 ): AbstractPlayer(){
     override val role: String = "Cleric"
-    private val COOLDOW = 2
+    private val COOLDOWN = 1
+    private var remainingCooldown = 0
 
     override fun fetchImageSrc(): Int {
         return R.drawable.cleric
@@ -23,19 +24,26 @@ class Cleric(
     }
 
     override fun useAbility(): Ability?{
+        cooldownTimer()
         return if(targetPlayer!=null){
             abilityState.useAbility(this)
-        } else
-            null
+        } else{
+            usedAbility = null
+            usedAbility
+        }
     }
 
     override fun resolveAbility(): Ability? {
+        remainingCooldown = COOLDOWN
         abilityState = Cooldown()
         usedAbility = Shield(targetPlayer!!)
         return usedAbility
     }
 
-    override fun cooldownTimer() {
-        abilityState = Neutral()
+    private fun cooldownTimer(){
+        when (remainingCooldown) {
+            0 -> abilityState = Neutral()
+            else -> remainingCooldown--
+        }
     }
 }

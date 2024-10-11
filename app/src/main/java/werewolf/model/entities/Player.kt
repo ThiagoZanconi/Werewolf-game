@@ -146,10 +146,6 @@ abstract class AbstractPlayer: Player{
 
     abstract fun resolveAbility(): Ability?
 
-    open fun cooldownTimer(){
-
-    }
-
     fun defineAbilityState(abilityState: AbilityState){
         this.abilityState = abilityState
     }
