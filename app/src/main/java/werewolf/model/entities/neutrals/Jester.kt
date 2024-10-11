@@ -6,7 +6,6 @@ import werewolf.model.entities.DeathCause
 import werewolf.model.entities.EndOfRoundAbility
 import werewolf.model.entities.EventSignal
 import werewolf.model.entities.NoAbility
-import werewolf.model.entities.NullAbility
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.view.R
 
@@ -16,8 +15,8 @@ class Jester(
     override val role: String = "Jester"
     override var abilityState: AbilityState = NoAbility()
 
-    override fun resolveAbility(): EndOfRoundAbility {
-        return NullAbility()
+    override fun resolveAbility(): EndOfRoundAbility? {
+        return null
     }
 
     override fun fetchImageSrc(): Int {

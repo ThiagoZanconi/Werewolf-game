@@ -16,7 +16,7 @@ interface GameStateModel{
     fun killVillager(player: Player)
     fun killWerewolf(player: Player)
     fun ascendWerewolf(): Player
-    fun revivePlayer(player: Player)
+    fun revivePlayer(player: Player): Player
 }
 
 class GameStateModelImpl: GameStateModel{
@@ -77,12 +77,11 @@ class GameStateModelImpl: GameStateModel{
         return gameState.ascendWerewolf()
     }
 
-    override fun revivePlayer(player: Player) {
+    override fun revivePlayer(player: Player): Player {
         var index = getDeadVillagers().indexOf(player)
-        if(index!=-1){
+        return if(index!=-1){
             gameState.reviveVillager(player)
-        }
-        else{
+        } else{
             gameState.reviveWerewolf(player)
         }
     }

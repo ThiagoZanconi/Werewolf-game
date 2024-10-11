@@ -21,7 +21,7 @@ class GameControllerImpl(
 ): GameController {
     private lateinit var gameActivity: GameActivity
 
-    private val priorityQueue: PriorityQueue<EndOfRoundAbility> = PriorityQueue<EndOfRoundAbility>(compareBy { it.getPriority() })
+    private val priorityQueue: PriorityQueue<EndOfRoundAbility> = PriorityQueue<EndOfRoundAbility>(compareBy { it.fetchPriority() })
     private var counter = 0
     private var eventsSummary: String = ""
     private var gameLogs: String = ""
@@ -132,7 +132,8 @@ class GameControllerImpl(
     private fun revivePlayer(player: Player){
         eventsSummary += player.fetchPlayerName()+" was revived\n"
         gameLogs += eventsSummary
-        gameStateModel.revivePlayer(player)
+        val playerRevived = gameStateModel.revivePlayer(player)
+        playerRevived.playerObservable.subscribe(playerObserver)
     }
 
     private fun finishRound(){
@@ -147,7 +148,11 @@ class GameControllerImpl(
 
     private fun queueAbilities(){
         gameStateModel.getAlivePlayers().forEach {
-            priorityQueue.add(it.fetchEndOfRoundAbility())
+            val ability = it.fetchEndOfRoundAbility()
+            if (ability != null) {
+                priorityQueue.add(ability)
+                it.fetchTargetPlayer()?.receiveAbility(ability)
+            }
             gameLogs+=it.fetchPlayerName()+" ("+it.fetchRole()+") used "+it.fetchUsedAbility()+" on "+ (it.fetchTargetPlayer()?.fetchPlayerName() ?: "no one") +"\n"
         }
     }

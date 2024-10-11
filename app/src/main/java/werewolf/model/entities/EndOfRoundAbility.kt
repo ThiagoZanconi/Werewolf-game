@@ -1,41 +1,33 @@
 package werewolf.model.entities
 
 interface EndOfRoundAbility{
-    fun getAbilityName(): String
-    fun getPriority(): Int
+    fun fetchAbilityName(): String
+    fun fetchPriority(): Int
+    fun fetchTargetPlayer(): Player?
     fun resolve()
     fun nullify()
 }
 
-abstract class AbstractEndOfRoundAbility: EndOfRoundAbility{
+abstract class AbstractEndOfRoundAbility(
+    protected var targetPlayer: Player?
+): EndOfRoundAbility{
     protected var nullified = false
+
+    override fun fetchTargetPlayer(): Player?{
+        return targetPlayer
+    }
 
     override fun nullify(){
         nullified = true
     }
 }
 
-class NullAbility: AbstractEndOfRoundAbility() {
+class WerewolfAttack(targetPlayer: Player?): AbstractEndOfRoundAbility(targetPlayer) {
     override fun resolve(){
-
+        targetPlayer?.receiveDamage(DeathCause.MAULED)
     }
 
-    override fun getAbilityName(): String {
-        return "No Ability"
-    }
-
-    override fun getPriority(): Int {
-        return 0
-    }
-
-}
-
-class WerewolfAttack(private val targetPlayer: Player): AbstractEndOfRoundAbility() {
-    override fun resolve(){
-        targetPlayer.receiveDamage(DeathCause.MAULED)
-    }
-
-    override fun getPriority(): Int {
+    override fun fetchPriority(): Int {
         return 4
     }
 
@@ -43,78 +35,78 @@ class WerewolfAttack(private val targetPlayer: Player): AbstractEndOfRoundAbilit
 
     }
 
-    override fun getAbilityName(): String {
+    override fun fetchAbilityName(): String {
         return "Werewolf Attack"
     }
 
 }
 
-class NullPlayerAbility(private val targetPlayer: Player): AbstractEndOfRoundAbility() {
+class CancelPlayerAbility(targetPlayer: Player?): AbstractEndOfRoundAbility(targetPlayer) {
     override fun resolve() {
-        targetPlayer.nullifyAbility()
+        targetPlayer?.nullifyAbility()
     }
 
-    override fun getAbilityName(): String {
+    override fun fetchAbilityName(): String {
         return "Null Player Ability"
     }
 
-    override fun getPriority(): Int {
+    override fun fetchPriority(): Int {
         return 1
     }
 
 }
 
 class Shield(
-    private val targetPlayer: Player
-): AbstractEndOfRoundAbility() {
+    targetPlayer: Player?
+): AbstractEndOfRoundAbility(targetPlayer) {
     override fun resolve() {
         if(!nullified){
-            targetPlayer.defineDefenseState(Immune())
+            targetPlayer?.defineDefenseState(Immune())
         }
     }
 
-    override fun getAbilityName(): String {
+    override fun fetchAbilityName(): String {
         return "Shield"
     }
 
-    override fun getPriority(): Int {
+    override fun fetchPriority(): Int {
         return 2
     }
 }
 
 class ReviveSpell(
-    private val targetPlayer: Player
-): AbstractEndOfRoundAbility() {
+    targetPlayer: Player?
+): AbstractEndOfRoundAbility(targetPlayer) {
     override fun resolve() {
         if(!nullified){
-            targetPlayer.signalEvent(PlayerEventEnum.RevivedPlayer)
+            targetPlayer?.signalEvent(PlayerEventEnum.RevivedPlayer)
         }
     }
 
-    override fun getAbilityName(): String {
+    override fun fetchAbilityName(): String {
         return "Revive Spell"
     }
 
-    override fun getPriority(): Int {
+    override fun fetchPriority(): Int {
         return 2
     }
 }
 
 class Shot(
-        private val targetPlayer: Player
-): AbstractEndOfRoundAbility(){
+    targetPlayer: Player?
+): AbstractEndOfRoundAbility(targetPlayer){
 
     override fun resolve() {
         if(!nullified){
-            targetPlayer.receiveDamage(DeathCause.SHOT)
+            targetPlayer?.receiveDamage(DeathCause.SHOT)
         }
     }
 
-    override fun getAbilityName(): String {
+    override fun fetchAbilityName(): String {
         return "Shot"
     }
 
-    override fun getPriority(): Int {
+    override fun fetchPriority(): Int {
         return 2
     }
 }

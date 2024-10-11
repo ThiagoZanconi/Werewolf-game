@@ -2,7 +2,7 @@ package werewolf.model.entities
 
 interface AbilityState{
     fun setAbilityState(player: AbstractPlayer, abilityState: AbilityState)
-    fun useAbility(player: AbstractPlayer): EndOfRoundAbility
+    fun useAbility(player: AbstractPlayer): EndOfRoundAbility?
     fun getAbilityState(): String
 }
 
@@ -17,7 +17,7 @@ class Neutral: AbstractAbilityState() {
         player.defineAbilityState(abilityState)
     }
 
-    override fun useAbility(player: AbstractPlayer):EndOfRoundAbility {
+    override fun useAbility(player: AbstractPlayer):EndOfRoundAbility? {
         return player.resolveAbility()
     }
 }
@@ -31,8 +31,8 @@ class NoAbility: AbstractAbilityState() {
 
     }
 
-    override fun useAbility(player: AbstractPlayer): EndOfRoundAbility {
-        return NullAbility()
+    override fun useAbility(player: AbstractPlayer): EndOfRoundAbility? {
+        return null
     }
 }
 
@@ -41,7 +41,7 @@ class NotNullable: AbstractAbilityState(){
 
     }
 
-    override fun useAbility(player: AbstractPlayer):EndOfRoundAbility {
+    override fun useAbility(player: AbstractPlayer):EndOfRoundAbility? {
         return player.resolveAbility()
     }
 }
@@ -49,9 +49,9 @@ class NotNullable: AbstractAbilityState(){
 class Cooldown: AbstractAbilityState(){
     override fun setAbilityState(player: AbstractPlayer, abilityState: AbilityState) {}
 
-    override fun useAbility(player: AbstractPlayer): EndOfRoundAbility {
+    override fun useAbility(player: AbstractPlayer): EndOfRoundAbility? {
         player.cooldownTimer()
-        return NullAbility()
+        return null
     }
 
     override fun getAbilityState(): String {
@@ -64,8 +64,8 @@ class NoUsesLeft: AbstractAbilityState(){
 
     }
 
-    override fun useAbility(player: AbstractPlayer): EndOfRoundAbility {
-        return NullAbility()
+    override fun useAbility(player: AbstractPlayer): EndOfRoundAbility? {
+        return null
     }
 
     override fun getAbilityState(): String {

@@ -16,7 +16,7 @@ class Villager(
         return R.drawable.villager
     }
 
-    override fun resolveAbility(): EndOfRoundAbility {
+    override fun resolveAbility(): EndOfRoundAbility? {
         return ability
     }
 }

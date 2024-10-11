@@ -1,9 +1,8 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.entities.AbstractPlayer
+import werewolf.model.entities.CancelPlayerAbility
 import werewolf.model.entities.EndOfRoundAbility
-import werewolf.model.entities.NullAbility
-import werewolf.model.entities.NullPlayerAbility
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.view.R
 
@@ -20,7 +19,7 @@ class Witch(
         signalEvent(PlayerEventEnum.SetWerewolfTargets)
     }
 
-    override fun resolveAbility(): EndOfRoundAbility {
-        return targetPlayer?.let { NullPlayerAbility(it) } ?: NullAbility()
+    override fun resolveAbility(): EndOfRoundAbility? {
+        return targetPlayer?.let { CancelPlayerAbility(it) }
     }
 }
