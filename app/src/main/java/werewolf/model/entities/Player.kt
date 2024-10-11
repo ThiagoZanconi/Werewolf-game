@@ -30,12 +30,10 @@ interface Player{
     fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
-
     fun defineDefenseState(defenseState: DefenseState)
     fun defineAbilityState(abilityState: AbilityState)
     fun defineTargetPlayers(targetPlayers: List<Player>)
     fun defineTargetPlayer(targetPlayer: Player?)
-
     fun turnSetUp()
     fun receiveDamage(deathCause: DeathCause)
     fun receiveAbility(ability: Ability)

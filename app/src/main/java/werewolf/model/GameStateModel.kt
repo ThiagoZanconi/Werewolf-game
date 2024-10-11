@@ -84,7 +84,7 @@ class GameStateModelImpl: GameStateModel{
         }
         index = getDeadWerewolves().indexOf(player)
         if(index!=-1){
-            return gameState.reviveVillager(player)
+            return gameState.reviveWerewolf(player)
         }
         return null
     }

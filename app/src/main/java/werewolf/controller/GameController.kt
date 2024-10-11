@@ -53,7 +53,6 @@ class GameControllerImpl(
                 PlayerEventEnum.SetDeadTargets -> setDeadTargets(value.getPlayer())
                 PlayerEventEnum.KilledPlayer -> killedPlayer(value.getPlayer())
                 PlayerEventEnum.WerewolfKilled -> werewolfKilled(value.getPlayer())
-                PlayerEventEnum.RevivedPlayer -> revivePlayer(value.getPlayer())
                 PlayerEventEnum.JesterWin -> jesterWin(value.getPlayer())
             }
         }
@@ -62,6 +61,7 @@ class GameControllerImpl(
         Observer { value ->
             when (value.getAbility().fetchEvent()){
                 AbilityEventEnum.CancelAbility -> cancelAbility(value.getAbility())
+                AbilityEventEnum.RevivePlayer -> revivePlayer(value.getAbility().fetchTargetPlayer())
             }
         }
 
@@ -110,10 +110,12 @@ class GameControllerImpl(
     }
 
     private fun revivePlayer(player: Player){
-        eventsSummary += player.fetchPlayerName()+" was revived\n"
-        gameLogs += eventsSummary
         val playerRevived = gameStateModel.revivePlayer(player)
         playerRevived?.playerObservable?.subscribe(playerObserver)
+        if(playerRevived!=null){
+            eventsSummary += player.fetchPlayerName()+" was revived\n"
+            gameLogs += eventsSummary
+        }
     }
 
     private fun cancelAbility(ability: Ability){
