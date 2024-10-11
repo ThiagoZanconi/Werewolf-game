@@ -32,7 +32,7 @@ class RoleFactoryImpl: RoleFactory {
 
     override fun getVillager(name: String): Player {
 
-        return when (Random.nextInt(VILLAGER_ROLES)) {
+        return when (2) {
             0 -> createVillager(name)
             1 -> createCleric(name)
             2 -> createPriest(name)

@@ -133,7 +133,7 @@ class GameControllerImpl(
         eventsSummary += player.fetchPlayerName()+" was revived\n"
         gameLogs += eventsSummary
         val playerRevived = gameStateModel.revivePlayer(player)
-        playerRevived.playerObservable.subscribe(playerObserver)
+        playerRevived?.playerObservable?.subscribe(playerObserver)
     }
 
     private fun finishRound(){
