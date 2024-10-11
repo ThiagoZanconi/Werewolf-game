@@ -21,8 +21,10 @@ interface Player{
     fun fetchAbilityState(): String
     /*
     * Returns ability used in game
+    * Null if player didn't use ability
+    * Ability delegated to abilityState contrary case
      */
-    fun fetchEndOfRoundAbility(): Ability?
+    fun useAbility(): Ability?
     /*
     * Returns ability used for logs
      */
@@ -31,17 +33,14 @@ interface Player{
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
     fun defineDefenseState(defenseState: DefenseState)
-    fun defineAbilityState(abilityState: AbilityState)
     fun defineTargetPlayers(targetPlayers: List<Player>)
     fun defineTargetPlayer(targetPlayer: Player?)
     fun turnSetUp()
     fun receiveDamage(deathCause: DeathCause)
     fun receiveAbility(ability: Ability)
     fun notifyKilledPlayer(deathCause: DeathCause)
-    fun resetAbilityState()
     fun resetDefenseState()
     fun cancelAbility()
-    fun signalEvent(event: PlayerEventEnum)
 }
 
 abstract class AbstractPlayer: Player{
@@ -51,7 +50,7 @@ abstract class AbstractPlayer: Player{
     protected open var abilityState: AbilityState = Neutral()
     protected lateinit var event: PlayerEventEnum
     protected lateinit var deathCause: DeathCause
-    protected open var ability: Ability? = null
+    protected open var usedAbility: Ability? = null
 
     protected var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayer: Player? = null
@@ -84,12 +83,15 @@ abstract class AbstractPlayer: Player{
         return abilityState.getAbilityState()
     }
 
-    override fun fetchEndOfRoundAbility(): Ability?{
-        return abilityState.useAbility(this)
+    override fun useAbility(): Ability?{
+        return if(targetPlayer!=null){
+            abilityState.useAbility(this)
+        } else
+            null
     }
 
     override fun fetchUsedAbility(): String? {
-        return ability?.fetchAbilityName()
+        return usedAbility?.fetchAbilityName()
     }
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
@@ -102,10 +104,6 @@ abstract class AbstractPlayer: Player{
 
     override fun defineDefenseState(defenseState: DefenseState) {
         this.defenseState = defenseState
-    }
-
-    override fun defineAbilityState(abilityState: AbilityState){
-        this.abilityState = abilityState
     }
 
     override fun defineTargetPlayers(targetPlayers: List<Player>) {
@@ -129,31 +127,31 @@ abstract class AbstractPlayer: Player{
         signalEvent(PlayerEventEnum.KilledPlayer)
     }
 
-    override fun resetAbilityState(){
-        abilityState.setAbilityState(this, Neutral())
-    }
-
     override fun resetDefenseState() {
         defenseState = NoDefense()
     }
 
     override fun cancelAbility() {
-        ability?.cancel()
-    }
-
-    override fun signalEvent(event: PlayerEventEnum) {
-        this.event = event
-        onActionSubject.notify(PlayerSignal(this))
+        usedAbility?.cancel()
     }
 
     override fun turnSetUp() {
         signalEvent(PlayerEventEnum.SetNoTargets)
     }
 
+    protected fun signalEvent(event: PlayerEventEnum) {
+        this.event = event
+        onActionSubject.notify(PlayerSignal(this))
+    }
+
     abstract fun resolveAbility(): Ability?
 
     open fun cooldownTimer(){
 
+    }
+
+    fun defineAbilityState(abilityState: AbilityState){
+        this.abilityState = abilityState
     }
 
     fun applyDamage(deathCause: DeathCause) {

@@ -20,9 +20,7 @@ class Witch(
     }
 
     override fun resolveAbility(): Ability? {
-        if(targetPlayer!=null){
-            ability = CancelPlayerAbility(targetPlayer!!)
-        }
-        return ability
+        usedAbility = CancelPlayerAbility(targetPlayer!!)
+        return usedAbility
     }
 }

@@ -154,7 +154,7 @@ class GameControllerImpl(
     private fun finishRound(){
         queueAbilities()
         resolveAbilities()
-        resetDefenseAndAbilityState()
+        resetDefenseState()
         checkIfGameEnded()
         if(!gameEnded){
             gameActivity.finishRound(eventsSummary, gameStateModel.getAlivePlayers())
@@ -163,7 +163,7 @@ class GameControllerImpl(
 
     private fun queueAbilities(){
         gameStateModel.getAlivePlayers().forEach {
-            val ability = it.fetchEndOfRoundAbility()
+            val ability = it.useAbility()
             if (ability != null) {
                 ability.playerObservable.subscribe(abilityObserver)
                 abilityPriorityQueue.add(ability)
@@ -180,9 +180,8 @@ class GameControllerImpl(
         }
     }
 
-    private fun resetDefenseAndAbilityState(){
+    private fun resetDefenseState(){
         gameStateModel.getAlivePlayers().forEach {
-            it.resetAbilityState()
             it.resetDefenseState()
         }
     }

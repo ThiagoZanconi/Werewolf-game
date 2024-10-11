@@ -1,8 +1,8 @@
 package werewolf.model.entities.villagers
 
+import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractPlayer
-import werewolf.model.entities.Ability
 import werewolf.model.entities.NoAbility
 import werewolf.view.R
 
@@ -17,6 +17,6 @@ class Villager(
     }
 
     override fun resolveAbility(): Ability? {
-        return ability
+        return usedAbility
     }
 }

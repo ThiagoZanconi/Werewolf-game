@@ -1,7 +1,7 @@
 package werewolf.model.entities.villagers
 
-import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Ability
+import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.ReviveSpell
@@ -13,13 +13,9 @@ class Priest(
     override val role: String = "Priest"
 
     override fun resolveAbility(): Ability? {
-        if (targetPlayer != null) {
-            abilityState = NoUsesLeft()
-            ability = ReviveSpell(targetPlayer!!)
-        } else {
-            ability = null
-        }
-        return ability
+        abilityState = NoUsesLeft()
+        usedAbility = ReviveSpell(targetPlayer!!)
+        return usedAbility
     }
 
     override fun fetchImageSrc(): Int {
