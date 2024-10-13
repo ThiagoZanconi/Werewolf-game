@@ -153,4 +153,5 @@ abstract class AbstractPlayer: Player{
     fun applyDamage(deathCause: DeathCause) {
         notifyKilledPlayer(deathCause)
     }
+
 }
