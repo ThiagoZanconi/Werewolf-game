@@ -83,7 +83,7 @@ class GameControllerImpl(
 
     private fun killedPlayer(player: Player){
         eventsSummary += player.fetchPlayerName()+" was "+player.fetchDeathCause()+"\n"
-        gameLogs += eventsSummary
+        gameLogs += player.fetchPlayerName()+" was "+player.fetchDeathCause()+"\n"
         val result = gameStateModel.getAliveWerewolves().find { it == player }
         if (result != null) {
             gameStateModel.killWerewolf(player)
@@ -114,7 +114,7 @@ class GameControllerImpl(
         playerRevived?.playerObservable?.subscribe(playerObserver)
         if(playerRevived!=null){
             eventsSummary += player.fetchPlayerName()+" was revived\n"
-            gameLogs += eventsSummary
+            gameLogs += player.fetchPlayerName()+" was revived\n"
         }
     }
 
