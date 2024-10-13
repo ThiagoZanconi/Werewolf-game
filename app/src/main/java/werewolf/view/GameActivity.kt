@@ -62,7 +62,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        
+
     }
 
     private fun initModule(){
