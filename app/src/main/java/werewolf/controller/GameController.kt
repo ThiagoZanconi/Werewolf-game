@@ -25,7 +25,7 @@ class GameControllerImpl(
 
     private val abilityPriorityQueue: PriorityQueue<Ability> = PriorityQueue<Ability>(compareBy { it.fetchPriority() })
     private var counter = 0
-    private var eventsSummary: String = ""
+    private var roundEventsSummary: String = ""
     private var gameLogs: String = ""
     private var gameEnded: Boolean = false
 
@@ -82,7 +82,7 @@ class GameControllerImpl(
     }
 
     private fun killedPlayer(player: Player){
-        eventsSummary += player.fetchPlayerName()+" was "+player.fetchDeathCause()+"\n"
+        roundEventsSummary += player.fetchPlayerName()+" was "+player.fetchDeathCause()+"\n"
         gameLogs += player.fetchPlayerName()+" was "+player.fetchDeathCause()+"\n"
         var result = gameStateModel.getAliveWerewolves().find { it == player }
         if (result != null) {
@@ -116,7 +116,7 @@ class GameControllerImpl(
         val playerRevived = gameStateModel.revivePlayer(player)
         playerRevived?.playerObservable?.subscribe(playerObserver)
         if(playerRevived!=null){
-            eventsSummary += player.fetchPlayerName()+" was revived\n"
+            roundEventsSummary += player.fetchPlayerName()+" was revived\n"
             gameLogs += player.fetchPlayerName()+" was revived\n"
         }
     }
@@ -160,7 +160,7 @@ class GameControllerImpl(
         resetDefenseState()
         checkIfGameEnded()
         if(!gameEnded){
-            gameActivity.finishRound(eventsSummary, gameStateModel.getAlivePlayers())
+            gameActivity.finishRound(roundEventsSummary, gameStateModel.getAlivePlayers())
         }
     }
 
@@ -207,7 +207,7 @@ class GameControllerImpl(
     }
 
     private fun startNextRound(){
-        eventsSummary = ""
+        roundEventsSummary = ""
         gameLogs += "------------------------\n"
         checkIfGameEnded()
         if(!gameEnded){

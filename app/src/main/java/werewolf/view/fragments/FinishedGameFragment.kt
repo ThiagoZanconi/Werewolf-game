@@ -1,6 +1,7 @@
 package werewolf.view.fragments
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -12,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.observer.Subject
 import werewolf.model.entities.Player
+import werewolf.view.GameActivityImpl
 import werewolf.view.GameUiEvent
 import werewolf.view.R
 
@@ -26,6 +28,7 @@ class FinishedGameFragment(
     private val gameLogs: String
 ):GridFragment(){
     private lateinit var gameLogsButton: Button
+    private lateinit var exitGameButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,12 +43,14 @@ class FinishedGameFragment(
     }
 
     override fun confirmAction() {
-        //onActionSubject.notify(GameUiEvent.GameFinished)
+        val intent = Intent(requireActivity().applicationContext, GameActivityImpl::class.java)
+        startActivity(intent)
     }
 
     override fun initComponents(view: View) {
         super.initComponents(view)
         gameLogsButton = view.findViewById(R.id.gameLogsButton)
+        exitGameButton = view.findViewById(R.id.exitButton)
 
         when(winnerTeam){
             WinnerTeam.DRAW -> draw()
@@ -58,6 +63,7 @@ class FinishedGameFragment(
     override fun initListeners() {
         super.initListeners()
         gameLogsButton.setOnClickListener { showGameLogsDialog() }
+        exitGameButton.setOnClickListener { requireActivity().finishAffinity() }
     }
 
     override fun initGridLayout() {
