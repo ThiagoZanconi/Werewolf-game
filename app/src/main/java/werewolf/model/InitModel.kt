@@ -22,8 +22,10 @@ class InitModelImpl: InitModel{
     }
 
     override fun addPlayer(name: String) {
-        players.add(name)
-        initActivity.addPlayer(name)
+        if(name !in players && name!=""){
+            players.add(name)
+            initActivity.addPlayer(name)
+        }
     }
 
     override fun removePlayer(index: Int) {

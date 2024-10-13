@@ -2,6 +2,7 @@ package werewolf.model
 
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Werewolf
+import werewolf.model.entities.werewolves.Witch
 
 interface GameState{
     fun initAlivePlayers()
@@ -15,8 +16,8 @@ interface GameState{
     fun killWerewolf(werewolf: Player)
     fun killVillager(villager: Player)
     fun ascendWerewolf(): Player
-    fun reviveVillager(villager: Player)
-    fun reviveWerewolf(werewolf: Player)
+    fun reviveVillager(villager: Player): Player
+    fun reviveWerewolf(werewolf: Player): Player
 }
 
 class GameStateImpl: GameState{
@@ -80,15 +81,19 @@ class GameStateImpl: GameState{
         return werewolf
     }
 
-    override fun reviveVillager(villager: Player) {
+    override fun reviveVillager(villager: Player): Player {
         deadVillagers.remove(villager)
         aliveVillagers.add(villager)
         alivePlayers.add(villager)
+        return villager
     }
 
-    override fun reviveWerewolf(werewolf: Player) {
+    override fun reviveWerewolf(werewolf: Player): Player {
         deadWerewolves.remove(werewolf)
-        aliveWerewolves.add(werewolf)
-        alivePlayers.add(werewolf)
+        val witch: Player = Witch(werewolf.fetchPlayerName())
+        witch.defineTargetPlayers(aliveVillagers)
+        aliveWerewolves.add(witch)
+        alivePlayers.add(witch)
+        return witch
     }
 }

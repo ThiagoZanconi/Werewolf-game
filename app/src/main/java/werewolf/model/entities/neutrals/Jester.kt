@@ -3,11 +3,10 @@ package werewolf.model.entities.neutrals
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
-import werewolf.model.entities.EndOfRoundAbility
-import werewolf.model.entities.EventSignal
+import werewolf.model.entities.Ability
 import werewolf.model.entities.NoAbility
-import werewolf.model.entities.NullAbility
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.model.entities.PlayerSignal
 import werewolf.view.R
 
 class Jester(
@@ -16,8 +15,8 @@ class Jester(
     override val role: String = "Jester"
     override var abilityState: AbilityState = NoAbility()
 
-    override fun resolveAbility(): EndOfRoundAbility {
-        return NullAbility()
+    override fun resolveAbility(): Ability? {
+        return null
     }
 
     override fun fetchImageSrc(): Int {
@@ -31,6 +30,6 @@ class Jester(
         } else{
             PlayerEventEnum.KilledPlayer
         }
-        onActionSubject.notify(EventSignal(this))
+        onActionSubject.notify(PlayerSignal(this))
     }
 }

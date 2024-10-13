@@ -1,11 +1,21 @@
 package werewolf.model.entities
 
 enum class PlayerEventEnum{
-    SetWerewolfTargets, KilledPlayer, SetAlivePlayersTarget, JesterWin, WerewolfKilled, SetDeadTargets, RevivedPlayer, SetNoTargets
+    SetWerewolfTargets, KilledPlayer, SetAlivePlayersTarget, JesterWin, WerewolfKilled, SetDeadTargets, SetNoTargets
 }
 
-class EventSignal(private val player: Player){
+enum class AbilityEventEnum{
+    CancelAbility, RevivePlayer
+}
+
+class PlayerSignal(private val player: Player){
     fun getPlayer(): Player{
         return player
+    }
+}
+
+class AbilitySignal(private val ability: Ability){
+    fun getAbility(): Ability{
+        return ability
     }
 }
