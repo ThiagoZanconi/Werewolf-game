@@ -13,8 +13,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.observer.Subject
 import werewolf.model.entities.Player
-import werewolf.view.GameActivityImpl
 import werewolf.view.GameUiEvent
+import werewolf.view.InitActivityImpl
 import werewolf.view.R
 
 enum class WinnerTeam{
@@ -28,7 +28,7 @@ class FinishedGameFragment(
     private val gameLogs: String
 ):GridFragment(){
     private lateinit var gameLogsButton: Button
-    private lateinit var exitGameButton: Button
+    private lateinit var playAgainButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,14 +43,13 @@ class FinishedGameFragment(
     }
 
     override fun confirmAction() {
-        val intent = Intent(requireActivity().applicationContext, GameActivityImpl::class.java)
-        startActivity(intent)
+        requireActivity().finishAffinity()
     }
 
     override fun initComponents(view: View) {
         super.initComponents(view)
         gameLogsButton = view.findViewById(R.id.gameLogsButton)
-        exitGameButton = view.findViewById(R.id.exitButton)
+        playAgainButton = view.findViewById(R.id.playAgainButton)
 
         when(winnerTeam){
             WinnerTeam.DRAW -> draw()
@@ -63,7 +62,7 @@ class FinishedGameFragment(
     override fun initListeners() {
         super.initListeners()
         gameLogsButton.setOnClickListener { showGameLogsDialog() }
-        exitGameButton.setOnClickListener { requireActivity().finishAffinity() }
+        playAgainButton.setOnClickListener { playAgain() }
     }
 
     override fun initGridLayout() {
@@ -119,6 +118,11 @@ class FinishedGameFragment(
     private fun jesterWin(){
         imageView.setImageResource(R.drawable.jester)
         titleLabel.text = "Jester Win"
+    }
+
+    private fun playAgain(){
+        val intent = Intent(requireActivity().applicationContext, InitActivityImpl::class.java)
+        startActivity(intent)
     }
 
 }
