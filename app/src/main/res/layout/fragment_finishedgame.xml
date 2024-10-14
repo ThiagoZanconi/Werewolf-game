@@ -12,7 +12,7 @@
         android:src="@drawable/dark_village" />
 
     <include
-        layout="@layout/textview_title" />
+        layout="@layout/textview_title2" />
 
     <LinearLayout
         android:layout_width="match_parent"
