@@ -24,8 +24,6 @@ interface InitActivity{
 }
 
 class InitActivityImpl : AppCompatActivity(), InitActivity {
-    private val ROW_SIZE = 3
-
     private val onActionSubject = Subject<InitUiEvent>()
 
     private lateinit var addPlayerButton: Button
@@ -40,7 +38,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     override fun addPlayer(text:String) {
         val container = createContainer(text)
-        adjustGridLayout()
         gridLayout.addView(container,gridLayout.childCount)
         nameEditText.setText("")
     }
@@ -81,8 +78,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         nameEditText = findViewById(R.id.termEditText)
         nameLabelTextView = findViewById(R.id.nameTextView)
         gridLayout = findViewById(R.id.gridLayout)
-        gridLayout.rowCount = 3
-        gridLayout.columnCount = ROW_SIZE
     }
 
     private fun initListeners(){
@@ -156,11 +151,5 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
             }
         }
         return button
-    }
-
-    private fun adjustGridLayout(){
-        if(gridLayout.rowCount*gridLayout.columnCount<=gridLayout.childCount){
-            gridLayout.rowCount = gridLayout.rowCount + 3
-        }
     }
 }
