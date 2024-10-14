@@ -150,7 +150,7 @@ abstract class AbstractPlayer: Player{
         this.abilityState = abilityState
     }
 
-    fun applyDamage(deathCause: DeathCause) {
+    open fun applyDamage(deathCause: DeathCause) {
         notifyKilledPlayer(deathCause)
     }
 

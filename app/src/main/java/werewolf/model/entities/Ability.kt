@@ -2,6 +2,7 @@ package werewolf.model.entities
 
 import com.example.observer.Observable
 import com.example.observer.Subject
+import werewolf.model.entities.villagers.Protector
 
 interface Ability{
     val playerObservable: Observable<AbilitySignal>
@@ -50,7 +51,6 @@ class WerewolfAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
     override fun fetchAbilityName(): String {
         return "Werewolf Attack"
     }
-
 }
 
 class CancelPlayerAbility(targetPlayer: Player): AbstractAbility(targetPlayer) {
@@ -109,5 +109,19 @@ class Shot(targetPlayer: Player): AbstractAbility(targetPlayer){
 
     override fun fetchPriority(): Int {
         return 2
+    }
+}
+
+class Protection(targetPlayer: Player, private val protector: Protector): AbstractAbility(targetPlayer){
+    override fun fetchAbilityName(): String {
+        return "Protection"
+    }
+
+    override fun fetchPriority(): Int {
+        return 3
+    }
+
+    override fun resolve() {
+        targetPlayer.defineDefenseState(Protected(protector))
     }
 }
