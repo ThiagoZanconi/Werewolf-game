@@ -27,7 +27,18 @@ class NoAbility: AbstractAbilityState() {
     }
 }
 
-class Cooldown: AbstractAbilityState(){
+class OffCooldown: AbstractAbilityState(){
+
+    override fun useAbility(player: AbstractPlayer):Ability? {
+        return player.resolveAbility()
+    }
+}
+
+class OneTurnCooldown: AbstractAbilityState(){
+    override fun useAbility(player: AbstractPlayer): Ability? {
+        player.defineAbilityState(OffCooldown())
+        return null
+    }
     override fun getAbilityState(): String {
         return "Ability on cooldown"
     }
