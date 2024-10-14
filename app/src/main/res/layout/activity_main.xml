@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/dark_village" />
+        android:src="@drawable/image_dark_village" />
 
     <Button
         android:id="@+id/startButton"
