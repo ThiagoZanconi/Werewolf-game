@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/dark_village" />
+        android:src="@drawable/image_dark_village" />
 
     <include
         layout="@layout/textview_title2" />
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="440dp"
         android:columnCount="3"
         android:padding="16dp">
     </GridLayout>
