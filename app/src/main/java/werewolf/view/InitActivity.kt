@@ -111,13 +111,14 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private fun createLinearLayout():LinearLayout{
         val linearLayout = LinearLayout(this).apply {
             layoutParams = GridLayout.LayoutParams().apply {
-                width = GridLayout.LayoutParams.WRAP_CONTENT
+                //width = GridLayout.LayoutParams.WRAP_CONTENT
+                width = (resources.displayMetrics.widthPixels / 3) - 25
                 height = GridLayout.LayoutParams.WRAP_CONTENT
                 setMargins(8, 8, 8, 8)
             }
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            setPadding(16, 16, 16, 16)
+            setPadding(5, 5, 5, 5)
             this.setBackgroundResource(R.drawable.textview_shape2)
         }
         return linearLayout
@@ -128,7 +129,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
             layoutParams = GridLayout.LayoutParams().apply {
                 width = GridLayout.LayoutParams.WRAP_CONTENT
                 height = GridLayout.LayoutParams.WRAP_CONTENT
-                setMargins(8, 8, 8, 8)
+                setMargins(4, 4, 4, 4)
             }
             this.text = text
             textSize = 18f

@@ -98,6 +98,7 @@ abstract class GridFragment: FragmentModel() {
             textSize = 18f
             setTextColor(Color.WHITE)
             gravity = Gravity.CENTER
+            setPadding(30,30,30,30)
 
             val scale = resources.displayMetrics.density
             minWidth = (100 * scale).toInt()
@@ -105,7 +106,7 @@ abstract class GridFragment: FragmentModel() {
 
             setOnClickListener {
                 if (this.background == null) {
-                    this.setBackgroundResource(R.drawable.textview_shape2)
+                    this.setBackgroundResource(R.drawable.imageview_shape)
                     markNotSelected(playerName)
                     setSelectedPlayer(playerName)
                 } else {

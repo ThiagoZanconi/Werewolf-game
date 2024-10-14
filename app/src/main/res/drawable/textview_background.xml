@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Capa 1: Imagen de fondo -->
+    <item>
+        <bitmap
+            android:src="@drawable/image_wood_textview_background"
+            android:gravity="center"
+            android:radius="20dp"/>
+    </item>
+
+    <!-- Capa 2: Borde -->
+    <item>
+        <shape>
+            <stroke
+                android:width="5dp"
+                android:color="#371515" />
+
+            <!-- Definir el radio de las esquinas redondeadas -->
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+</layer-list>

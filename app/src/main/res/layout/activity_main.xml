@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textColor="#FFFFFF"
         android:background="@drawable/button_shape"
         android:textAllCaps="false"/>
@@ -34,7 +34,7 @@
         android:layout_margin="30dp"
         android:gravity="center"
         android:text="Name:"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textColor="#FFFFFF"
         android:background="@drawable/textview_shape"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
         android:layout_height="50dp"
         android:layout_margin="30dp"
         android:text="Add"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textColor="#FFFFFF"
         android:background="@drawable/button_shape"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,16 +64,15 @@
         android:textAllCaps="false"/>
 
     <GridLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addButton"
         android:columnCount="3"
-        android:padding="16dp">
+        android:padding="10dp">
     </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
