@@ -7,6 +7,7 @@ import werewolf.model.entities.villagers.Priest
 import werewolf.model.entities.villagers.Protector
 import werewolf.model.entities.villagers.Vigilante
 import werewolf.model.entities.villagers.Villager
+import werewolf.model.entities.werewolves.Vampire
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
 import kotlin.random.Random
@@ -27,13 +28,12 @@ class RoleFactoryImpl: RoleFactory {
 
         return when (CREATED_WEREWOLVES) {
             0 -> createWerewolf(name)
-            else -> createWitch(name)
+            else -> createVampire(name)
         }
     }
 
     override fun getVillager(name: String): Player {
-    //Random.nextInt(VILLAGER_ROLES)
-        return when (4) {
+        return when (Random.nextInt(VILLAGER_ROLES)) {
             0 -> createVillager(name)
             1 -> createCleric(name)
             2 -> createPriest(name)
@@ -57,6 +57,10 @@ class RoleFactoryImpl: RoleFactory {
 
     private fun createWitch(name: String): Player {
         return Witch(name)
+    }
+
+    private fun createVampire(name: String): Player {
+        return Vampire(name)
     }
 
     private fun createVillager(name: String): Player{
