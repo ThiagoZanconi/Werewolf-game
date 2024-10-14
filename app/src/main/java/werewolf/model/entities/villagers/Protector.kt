@@ -1,10 +1,12 @@
 package werewolf.model.entities.villagers
 
 import werewolf.model.entities.Ability
+import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
+import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
-import werewolf.model.entities.Protection
+import werewolf.model.entities.Protected
 import werewolf.view.R
 
 class Protector(
@@ -33,5 +35,19 @@ class Protector(
 
     override fun turnSetUp() {
         signalEvent(PlayerEventEnum.SetOtherAlivePlayersTarget)
+    }
+}
+
+class Protection(targetPlayer: Player, private val protector: Protector): AbstractAbility(targetPlayer){
+    override fun fetchAbilityName(): String {
+        return "Protection"
+    }
+
+    override fun fetchPriority(): Int {
+        return 3
+    }
+
+    override fun resolve() {
+        targetPlayer.defineDefenseState(Protected(protector))
     }
 }

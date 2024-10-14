@@ -2,7 +2,6 @@ package werewolf.model.entities
 
 import com.example.observer.Observable
 import com.example.observer.Subject
-import werewolf.model.entities.villagers.Protector
 
 interface Ability{
     val playerObservable: Observable<AbilitySignal>
@@ -32,96 +31,5 @@ abstract class AbstractAbility(
     override fun cancel(){
         event = AbilityEventEnum.CancelAbility
         onActionSubject.notify(AbilitySignal(this))
-    }
-}
-
-class WerewolfAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
-    override fun resolve(){
-        targetPlayer.receiveDamage(DeathCause.MAULED)
-    }
-
-    override fun fetchPriority(): Int {
-        return 4
-    }
-
-    override fun cancel(){
-
-    }
-
-    override fun fetchAbilityName(): String {
-        return "Werewolf Attack"
-    }
-}
-
-class CancelPlayerAbility(targetPlayer: Player): AbstractAbility(targetPlayer) {
-    override fun resolve() {
-        targetPlayer.cancelAbility()
-    }
-
-    override fun fetchAbilityName(): String {
-        return "Null Player Ability"
-    }
-
-    override fun fetchPriority(): Int {
-        return 1
-    }
-}
-
-class Shield(targetPlayer: Player): AbstractAbility(targetPlayer) {
-    override fun resolve() {
-        targetPlayer.defineDefenseState(Immune())
-    }
-
-    override fun fetchAbilityName(): String {
-        return "Shield"
-    }
-
-    override fun fetchPriority(): Int {
-        return 2
-    }
-}
-
-class ReviveSpell(targetPlayer: Player): AbstractAbility(targetPlayer) {
-    override fun resolve() {
-        event = AbilityEventEnum.RevivePlayer
-        onActionSubject.notify(AbilitySignal(this))
-        targetPlayer.defineDefenseState(Immune())
-    }
-
-    override fun fetchAbilityName(): String {
-        return "Revive Spell"
-    }
-
-    override fun fetchPriority(): Int {
-        return 2
-    }
-}
-
-class Shot(targetPlayer: Player): AbstractAbility(targetPlayer){
-
-    override fun resolve() {
-        targetPlayer.receiveDamage(DeathCause.SHOT)
-    }
-
-    override fun fetchAbilityName(): String {
-        return "Shot"
-    }
-
-    override fun fetchPriority(): Int {
-        return 2
-    }
-}
-
-class Protection(targetPlayer: Player, private val protector: Protector): AbstractAbility(targetPlayer){
-    override fun fetchAbilityName(): String {
-        return "Protection"
-    }
-
-    override fun fetchPriority(): Int {
-        return 3
-    }
-
-    override fun resolve() {
-        targetPlayer.defineDefenseState(Protected(protector))
     }
 }

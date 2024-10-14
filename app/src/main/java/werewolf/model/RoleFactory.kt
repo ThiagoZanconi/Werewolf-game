@@ -19,16 +19,18 @@ interface RoleFactory{
 }
 
 class RoleFactoryImpl: RoleFactory {
-    private var CREATED_WEREWOLVES = 0
+    private var werewolfCreated = false
     private val WEREWOLF_ROLES = 2
     private val VILLAGER_ROLES = 5
     private val NEUTRAL_ROLES = 1
 
     override fun getWerewolf(name: String): Player {
-
-        return when (CREATED_WEREWOLVES) {
-            0 -> createWerewolf(name)
-            else -> createVampire(name)
+        return if (!werewolfCreated) {
+            werewolfCreated=true
+            createWerewolf(name)
+        }
+        else{
+            createRandomWerewolf(name)
         }
     }
 
@@ -51,8 +53,15 @@ class RoleFactoryImpl: RoleFactory {
     }
 
     private fun createWerewolf(name: String): Player {
-        CREATED_WEREWOLVES++
         return Werewolf(name)
+    }
+
+    private fun createRandomWerewolf(name: String): Player{
+        return when (Random.nextInt(WEREWOLF_ROLES)) {
+            0 -> createWitch(name)
+            1 -> createVampire(name)
+            else -> createVampire(name)
+        }
     }
 
     private fun createWitch(name: String): Player {

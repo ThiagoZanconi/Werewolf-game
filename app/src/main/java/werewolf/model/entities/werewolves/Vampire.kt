@@ -34,6 +34,7 @@ class Vampire(
     }
 
     override fun resolveAbility(): Ability? {
+        abilityState = OneTurnCooldown()
         usedAbility = VampireAttack(targetPlayer!!)
         return usedAbility
     }

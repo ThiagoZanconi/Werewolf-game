@@ -1,10 +1,11 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.entities.Ability
+import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
+import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
-import werewolf.model.entities.WerewolfAttack
 import werewolf.view.R
 
 class Werewolf(
@@ -28,5 +29,23 @@ class Werewolf(
     override fun notifyKilledPlayer(deathCause: DeathCause) {
         this.deathCause = deathCause
         signalEvent(PlayerEventEnum.WerewolfKilled)
+    }
+}
+
+class WerewolfAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
+    override fun resolve(){
+        targetPlayer.receiveDamage(DeathCause.MAULED)
+    }
+
+    override fun fetchPriority(): Int {
+        return 4
+    }
+
+    override fun cancel(){
+
+    }
+
+    override fun fetchAbilityName(): String {
+        return "Werewolf Attack"
     }
 }

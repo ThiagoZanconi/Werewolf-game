@@ -1,10 +1,12 @@
 package werewolf.model.entities.villagers
 
 import werewolf.model.entities.Ability
+import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
+import werewolf.model.entities.Immune
 import werewolf.model.entities.OneTurnCooldown
+import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
-import werewolf.model.entities.Shield
 import werewolf.view.R
 
 class Cleric(
@@ -33,5 +35,19 @@ class Cleric(
         abilityState = OneTurnCooldown()
         usedAbility = Shield(targetPlayer!!)
         return usedAbility
+    }
+}
+
+class Shield(targetPlayer: Player): AbstractAbility(targetPlayer) {
+    override fun resolve() {
+        targetPlayer.defineDefenseState(Immune())
+    }
+
+    override fun fetchAbilityName(): String {
+        return "Shield"
+    }
+
+    override fun fetchPriority(): Int {
+        return 2
     }
 }
