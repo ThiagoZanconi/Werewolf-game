@@ -12,6 +12,7 @@ interface GameStateModel{
     fun getDeadVillagers(): List<Player>
     fun getDeadWerewolves(): List<Player>
     fun getDeadPlayers(): List<Player>
+    fun getNeutrals(): List<Player>
     fun initGame(players: MutableList<String>)
     fun killVillager(player: Player)
     fun killWerewolf(player: Player)
@@ -37,7 +38,7 @@ class GameStateModelImpl: GameStateModel{
         for(i in cut until players.size-1){
             addVillager(roleFactory.getVillager(players[i]))
         }
-        addVillager(roleFactory.getNeutral(players[players.size-1]))
+        addNeutral(roleFactory.getNeutral(players[players.size-1]))
         gameState.initAlivePlayers()
     }
 
@@ -63,6 +64,10 @@ class GameStateModelImpl: GameStateModel{
 
     override fun getDeadPlayers(): List<Player> {
         return gameState.getDeadVillagers()+gameState.getDeadWerewolves()
+    }
+
+    override fun getNeutrals(): List<Player> {
+        return gameState.getNeutrals()
     }
 
     override fun killVillager(player: Player) {
@@ -95,5 +100,10 @@ class GameStateModelImpl: GameStateModel{
 
     private fun addVillager(player: Player) {
         gameState.addVillager(player)
+    }
+
+    private fun addNeutral(player: Player) {
+        gameState.addVillager(player)
+        gameState.addNeutral(player)
     }
 }

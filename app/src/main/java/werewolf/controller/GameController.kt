@@ -200,7 +200,8 @@ class GameControllerImpl(
                 gameEnded = true
             }
             gameStateModel.getAliveWerewolves().isEmpty() -> {
-                gameActivity.gameFinished(gameStateModel.getAliveVillagers() + gameStateModel.getDeadVillagers(), WinnerTeam.VILLAGERS, gameLogs)
+                gameActivity.gameFinished(gameStateModel.getAliveVillagers() + gameStateModel.getDeadVillagers() - gameStateModel.getNeutrals()
+                    .toSet(), WinnerTeam.VILLAGERS, gameLogs)
                 gameEnded = true
             }
         }
