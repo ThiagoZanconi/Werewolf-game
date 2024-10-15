@@ -111,7 +111,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private fun createLinearLayout():LinearLayout{
         val linearLayout = LinearLayout(this).apply {
             layoutParams = GridLayout.LayoutParams().apply {
-                //width = GridLayout.LayoutParams.WRAP_CONTENT
                 width = (resources.displayMetrics.widthPixels / 3) - 25
                 height = GridLayout.LayoutParams.WRAP_CONTENT
                 setMargins(8, 8, 8, 8)
