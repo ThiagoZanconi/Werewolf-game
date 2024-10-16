@@ -12,6 +12,10 @@ import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
 import kotlin.random.Random
 
+enum class Roles{
+    Werewolf, Witch, Vampire, Villager, Cleric, Priest, Vigilante, Protector, Jester
+}
+
 interface RoleFactory{
     fun getWerewolf(name: String): Player
     fun getVillager(name: String): Player

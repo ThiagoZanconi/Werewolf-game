@@ -10,8 +10,10 @@ import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
+import werewolf.view.fragments.SettingsFragment
 
 interface InitActivity{
     val uiEventObservable: Observable<InitUiEvent>
@@ -31,6 +33,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private lateinit var nameEditText: EditText
     private lateinit var nameLabelTextView: TextView
     private lateinit var gridLayout: GridLayout
+    private lateinit var settingsButton: Button
 
     override val uiEventObservable: Observable<InitUiEvent> = onActionSubject
 
@@ -78,11 +81,13 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         nameEditText = findViewById(R.id.termEditText)
         nameLabelTextView = findViewById(R.id.nameTextView)
         gridLayout = findViewById(R.id.gridLayout)
+        settingsButton = findViewById(R.id.settingsButton)
     }
 
     private fun initListeners(){
         addPlayerButton.setOnClickListener{ notifyAddPlayerAction() }
         startGameButton.setOnClickListener{ notifyStartGameAction() }
+        settingsButton.setOnClickListener { goToSettings() }
     }
 
     private fun notifyAddPlayerAction(){
@@ -95,6 +100,16 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     private fun notifyStartGameAction(){
         onActionSubject.notify(InitUiEvent.StartGame)
+    }
+
+    private fun goToSettings(){
+        initFragment(SettingsFragment(gridLayout.childCount))
+    }
+
+    private fun initFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.OptionFragment, fragment)
+            .commit()
     }
 
     private fun createContainer(text: String): LinearLayout {
