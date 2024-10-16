@@ -1,12 +1,15 @@
 package werewolf.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import werewolf.view.GameActivityImpl
 import werewolf.view.R
 import werewolf.view.settings.RoleProvider
 import werewolf.view.settings.SettingItemAdapter
@@ -14,8 +17,8 @@ import werewolf.view.settings.SettingItemAdapter
 class SettingsFragment(
     private val playerSize: Int
 ): Fragment(){
-    private val unsavedChanges: Boolean = false
     private lateinit var recyclerView: RecyclerView
+    private lateinit var doneButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +34,12 @@ class SettingsFragment(
 
     private fun initComponents(view: View) {
         initRecyclerView(view)
+        doneButton = view.findViewById(R.id.doneButton)
     }
 
-    private fun initListeners(){}
+    private fun initListeners(){
+        doneButton.setOnClickListener { startGame() }
+    }
 
     private fun initRecyclerView(view: View){
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -41,8 +47,8 @@ class SettingsFragment(
         recyclerView.adapter = SettingItemAdapter(RoleProvider.roleList(),playerSize)
     }
 
-    private fun saveSettings(){
-
+    private fun startGame(){
+        val intent = Intent(requireContext(), GameActivityImpl::class.java)
+        startActivity(intent)
     }
-
 }

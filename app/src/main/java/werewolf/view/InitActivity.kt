@@ -1,6 +1,5 @@
 package werewolf.view
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -14,12 +13,13 @@ import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
 import werewolf.view.fragments.SettingsFragment
+import java.io.File
 
 interface InitActivity{
     val uiEventObservable: Observable<InitUiEvent>
 
     fun addPlayer(text:String)
-    fun removePlayer(index: Int)
+    fun removePlayer(index: Int, name: String)
     fun startGame()
     fun getEditTextName(): String
     fun getPlayerToRemove(): String
@@ -33,7 +33,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private lateinit var nameEditText: EditText
     private lateinit var nameLabelTextView: TextView
     private lateinit var gridLayout: GridLayout
-    private lateinit var settingsButton: Button
 
     override val uiEventObservable: Observable<InitUiEvent> = onActionSubject
 
@@ -43,15 +42,16 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         val container = createContainer(text)
         gridLayout.addView(container,gridLayout.childCount)
         nameEditText.setText("")
+        addPlayerToSettings(text)
     }
 
-    override fun removePlayer(index:Int){
+    override fun removePlayer(index:Int, name: String){
+        deletePlayerFromSettings(name)
         gridLayout.removeViewAt(index)
     }
 
     override fun startGame() {
-        val intent = Intent(applicationContext, GameActivityImpl::class.java)
-        startActivity(intent)
+        initFragment(SettingsFragment(gridLayout.childCount))
     }
 
     override fun getEditTextName(): String {
@@ -69,6 +69,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         initModule()
         initComponents()
         initListeners()
+        initSettings()
     }
 
     private fun initModule() {
@@ -81,13 +82,11 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         nameEditText = findViewById(R.id.termEditText)
         nameLabelTextView = findViewById(R.id.nameTextView)
         gridLayout = findViewById(R.id.gridLayout)
-        settingsButton = findViewById(R.id.settingsButton)
     }
 
     private fun initListeners(){
         addPlayerButton.setOnClickListener{ notifyAddPlayerAction() }
         startGameButton.setOnClickListener{ notifyStartGameAction() }
-        settingsButton.setOnClickListener { goToSettings() }
     }
 
     private fun notifyAddPlayerAction(){
@@ -102,14 +101,45 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         onActionSubject.notify(InitUiEvent.StartGame)
     }
 
-    private fun goToSettings(){
-        initFragment(SettingsFragment(gridLayout.childCount))
-    }
-
     private fun initFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
             .replace(R.id.OptionFragment, fragment)
             .commit()
+    }
+
+    private fun initSettings(){
+        val file = File(cacheDir, "werewolfSettings.txt")
+        if (file.exists()) {
+            file.delete()
+        }
+        file.createNewFile()
+        file.writeText("")
+    }
+
+    private fun deleteSettings(){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        if (settings.exists()) {
+            settings.delete()
+        }
+    }
+
+    private fun addPlayerToSettings(name: String){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        val lines = settings.readLines().toMutableList()
+        if(lines.isEmpty()){
+            lines.add("$name ")
+        }
+        else{
+            lines[0] = lines[0]+name+" "
+        }
+        settings.writeText(lines.joinToString(""))
+    }
+
+    private fun deletePlayerFromSettings(name: String){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        val lines = settings.readLines().toMutableList()
+        lines[0] = lines[0].replace("$name ","")
+        settings.writeText(lines.joinToString(""))
     }
 
     private fun createContainer(text: String): LinearLayout {

@@ -25,6 +25,7 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
         }
         val adapter = ArrayAdapter(view.context, R.layout.item_spinner, options)
         spinner.adapter = adapter
+        spinner.setSelection(playersSize)
     }
 
 }

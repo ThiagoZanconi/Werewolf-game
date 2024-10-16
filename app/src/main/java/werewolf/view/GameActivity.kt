@@ -14,6 +14,7 @@ import werewolf.model.entities.Player
 import werewolf.view.fragments.FinishedGameFragment
 import werewolf.view.fragments.FinishedRoundFragment
 import werewolf.view.fragments.WinnerTeam
+import java.io.File
 
 interface GameActivity{
     val uiEventObservable: Observable<GameUiEvent>
@@ -63,6 +64,11 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        deleteSettings()
     }
 
     private fun initModule(){
@@ -122,5 +128,12 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
             }
         }
         transaction.commitNow()
+    }
+
+    private fun deleteSettings(){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        if (settings.exists()) {
+            settings.delete()
+        }
     }
 }
