@@ -23,18 +23,19 @@ class Cleric(
     }
 
     override fun useAbility(): Ability?{
+        return abilityState.useAbility(this)
+    }
+
+    override fun resolveAbility(): Ability? {
         return if(targetPlayer!=null){
-            abilityState.useAbility(this)
+            abilityState = OneTurnCooldown()
+            usedAbility = Shield(targetPlayer!!)
+            usedAbility
         } else{
             usedAbility = null
             usedAbility
         }
-    }
 
-    override fun resolveAbility(): Ability? {
-        abilityState = OneTurnCooldown()
-        usedAbility = Shield(targetPlayer!!)
-        return usedAbility
     }
 }
 
