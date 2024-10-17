@@ -51,6 +51,7 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
         val settings = File(view.context.cacheDir, "werewolfSettings.txt")
         val lines = settings.readLines().toMutableList()
         lines[getRoleIndex()] = spinner.selectedItem.toString()
+        settings.writeText(lines.joinToString("\n"))
     }
 
     private fun getRoleIndex(): Int{

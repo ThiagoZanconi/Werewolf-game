@@ -25,14 +25,16 @@ class GameStateModelImpl: GameStateModel{
     private lateinit var gameActivity: GameActivity
     private val gameState: GameState = GameStateImpl()
     private lateinit var roleFactory: RoleFactory
+    private lateinit var settings: File
 
     override fun setGameView(gameActivity: GameActivity, settings:File) {
         this.gameActivity = gameActivity
-        roleFactory = RoleFactoryImpl(settings)
+        this.settings = settings
     }
 
     override fun initGame(players: MutableList<String>) {
         players.shuffle()
+        roleFactory = RoleFactoryImpl(settings,players)
         val cut = floor(players.size / 3.0).toInt()
         for(i in 0 until cut){
             addWerewolf(roleFactory.getWerewolf(players[i]))

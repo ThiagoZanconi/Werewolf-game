@@ -136,7 +136,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
             lines[0] = lines[0]+name+" "
         }
         settings.writeText(lines.joinToString("\n"))
-        println("Add player: "+settings.readText())
     }
 
     private fun deletePlayerFromSettings(name: String){
