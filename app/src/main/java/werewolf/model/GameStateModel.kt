@@ -35,14 +35,15 @@ class GameStateModelImpl: GameStateModel{
     override fun initGame(players: MutableList<String>) {
         players.shuffle()
         roleFactory = RoleFactoryImpl(settings,players)
+        val playersAssigned = roleFactory.getPlayers()
         val cut = floor(players.size / 3.0).toInt()
         for(i in 0 until cut){
-            addWerewolf(roleFactory.getWerewolf(players[i]))
+            addWerewolf(playersAssigned[i])
         }
         for(i in cut until players.size-1){
-            addVillager(roleFactory.getVillager(players[i]))
+            addVillager(playersAssigned[i])
         }
-        addNeutral(roleFactory.getNeutral(players[players.size-1]))
+        addNeutral(playersAssigned[players.size-1])
         gameState.initAlivePlayers()
     }
 
