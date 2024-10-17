@@ -48,6 +48,10 @@ class RoleFactoryImpl(
         var created = false
         val lines = settings.readLines().toMutableList()
         while(!created){
+            if(werewolfRoles.isEmpty()){
+                toReturn = createWerewolf(player,Roles.Witch)
+                break
+            }
             val role = werewolfRoles.random()
             println("Role factory max amount: "+lines[role.ordinal].toInt())
             var roleMaxAmount = lines[role.ordinal].toInt()
@@ -60,10 +64,6 @@ class RoleFactoryImpl(
             }
             else{
                 werewolfRoles.remove(role)
-            }
-            if(werewolfRoles.isEmpty()){
-                toReturn = createWerewolf(player,Roles.Witch)
-                created = true
             }
         }
         return toReturn
@@ -82,8 +82,12 @@ class RoleFactoryImpl(
         var created = false
         val lines = settings.readLines().toMutableList()
         while(!created){
+            if(villagerRoles.isEmpty()){
+                println("Entre")
+                toReturn = createVillager(player,Roles.Villager)
+                break
+            }
             val role = villagerRoles.random()
-            println("Role factory max amount: "+lines[role.ordinal].toInt())
             var roleMaxAmount = lines[role.ordinal].toInt()
             if(roleMaxAmount>0){
                 created = true
@@ -94,10 +98,6 @@ class RoleFactoryImpl(
             }
             else{
                 villagerRoles.remove(role)
-            }
-            if(werewolfRoles.isEmpty()){
-                toReturn = createWerewolf(player,Roles.Witch)
-                created = true
             }
         }
         return toReturn
