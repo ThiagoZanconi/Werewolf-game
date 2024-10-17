@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
+import werewolf.model.Roles
 import werewolf.view.fragments.SettingsFragment
 import java.io.File
 
@@ -113,7 +114,9 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
             file.delete()
         }
         file.createNewFile()
-        file.writeText("")
+        for(i in 0 .. Roles.values().size){
+            file.appendText("\n -1")
+        }
     }
 
     private fun deleteSettings(){
@@ -132,7 +135,8 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         else{
             lines[0] = lines[0]+name+" "
         }
-        settings.writeText(lines.joinToString(""))
+        settings.writeText(lines.joinToString("\n"))
+        println("Add player: "+settings.readText())
     }
 
     private fun deletePlayerFromSettings(name: String){

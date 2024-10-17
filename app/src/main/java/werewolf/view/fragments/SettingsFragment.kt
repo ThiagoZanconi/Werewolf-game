@@ -9,9 +9,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import werewolf.model.Roles
 import werewolf.view.GameActivityImpl
 import werewolf.view.R
-import werewolf.view.settings.RoleProvider
 import werewolf.view.settings.SettingItemAdapter
 
 class SettingsFragment(
@@ -44,7 +44,7 @@ class SettingsFragment(
     private fun initRecyclerView(view: View){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = SettingItemAdapter(RoleProvider.roleList(),playerSize)
+        recyclerView.adapter = SettingItemAdapter(Roles.values(),playerSize)
     }
 
     private fun startGame(){
