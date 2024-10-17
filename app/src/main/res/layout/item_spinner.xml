@@ -7,5 +7,5 @@
     android:text="Option"
     android:textSize="15sp"
     android:textColor="#FFFFFF"
-    android:background="@drawable/textview_shape"
+    android:background="@drawable/textview_shape3"
     />
