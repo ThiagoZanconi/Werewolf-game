@@ -2,10 +2,11 @@ package werewolf.model
 
 import werewolf.model.entities.Player
 import werewolf.view.GameActivity
+import java.io.File
 import kotlin.math.floor
 
 interface GameStateModel{
-    fun setGameView(gameActivity: GameActivity)
+    fun setGameView(gameActivity: GameActivity, settings:File)
     fun getAlivePlayers(): List<Player>
     fun getAliveVillagers(): List<Player>
     fun getAliveWerewolves(): List<Player>
@@ -23,10 +24,11 @@ interface GameStateModel{
 class GameStateModelImpl: GameStateModel{
     private lateinit var gameActivity: GameActivity
     private val gameState: GameState = GameStateImpl()
-    private val roleFactory: RoleFactory = RoleFactoryImpl()
+    private lateinit var roleFactory: RoleFactory
 
-    override fun setGameView(gameActivity: GameActivity) {
+    override fun setGameView(gameActivity: GameActivity, settings:File) {
         this.gameActivity = gameActivity
+        roleFactory = RoleFactoryImpl(settings)
     }
 
     override fun initGame(players: MutableList<String>) {

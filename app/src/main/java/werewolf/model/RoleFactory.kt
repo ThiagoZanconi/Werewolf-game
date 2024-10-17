@@ -10,6 +10,7 @@ import werewolf.model.entities.villagers.Villager
 import werewolf.model.entities.werewolves.Vampire
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
+import java.io.File
 import kotlin.random.Random
 
 enum class Roles{
@@ -22,7 +23,7 @@ interface RoleFactory{
     fun getNeutral(name: String): Player
 }
 
-class RoleFactoryImpl: RoleFactory {
+class RoleFactoryImpl(private val settings: File): RoleFactory {
     private var werewolfCreated = false
     private val WEREWOLF_ROLES = 2
     private val VILLAGER_ROLES = 5

@@ -72,7 +72,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     }
 
     private fun initModule(){
-        ViewInjector.initGameActivity(this)
+        ViewInjector.initGameActivity(this,File(cacheDir, "werewolfSettings.txt"))
     }
 
     private fun initComponents(){
