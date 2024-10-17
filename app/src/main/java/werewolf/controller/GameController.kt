@@ -49,11 +49,13 @@ class GameControllerImpl(
             when (value.getPlayer().fetchEvent()){
                 PlayerEventEnum.SetWerewolfTargets -> setWerewolfTargets(value.getPlayer())
                 PlayerEventEnum.SetAlivePlayersTarget -> setAllPlayersTarget(value.getPlayer())
+                PlayerEventEnum.SetOtherAlivePlayersTarget -> setOtherAlivePlayersTarget(value.getPlayer())
                 PlayerEventEnum.SetNoTargets -> setNoTargets(value.getPlayer())
                 PlayerEventEnum.SetDeadTargets -> setDeadTargets(value.getPlayer())
                 PlayerEventEnum.KilledPlayer -> killedPlayer(value.getPlayer())
                 PlayerEventEnum.WerewolfKilled -> werewolfKilled(value.getPlayer())
                 PlayerEventEnum.JesterWin -> jesterWin(value.getPlayer())
+
             }
         }
 
@@ -71,6 +73,10 @@ class GameControllerImpl(
 
     private fun setAllPlayersTarget(player: Player){
         player.defineTargetPlayers(gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves())
+    }
+
+    private fun setOtherAlivePlayersTarget(player: Player){
+        player.defineTargetPlayers(gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()- listOf(player).toSet())
     }
 
     private fun setNoTargets(player: Player){
@@ -200,7 +206,8 @@ class GameControllerImpl(
                 gameEnded = true
             }
             gameStateModel.getAliveWerewolves().isEmpty() -> {
-                gameActivity.gameFinished(gameStateModel.getAliveVillagers() + gameStateModel.getDeadVillagers(), WinnerTeam.VILLAGERS, gameLogs)
+                gameActivity.gameFinished(gameStateModel.getAliveVillagers() + gameStateModel.getDeadVillagers() - gameStateModel.getNeutrals()
+                    .toSet(), WinnerTeam.VILLAGERS, gameLogs)
                 gameEnded = true
             }
         }

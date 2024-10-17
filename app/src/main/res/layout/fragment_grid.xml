@@ -9,10 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/dark_village" />
+        android:src="@drawable/image_dark_village" />
 
     <include
-        layout="@layout/textview_title" />
+        layout="@layout/textview_title2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,17 +34,8 @@
         </com.google.android.material.imageview.ShapeableImageView>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/abilityStateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="390dp"
-        android:text="Winners"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:background="@drawable/textview_shape2"
-    />
+    <include
+        layout="@layout/textview_description" />
 
     <GridLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -52,7 +43,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:columnCount="3"
         android:padding="16dp">
     </GridLayout>

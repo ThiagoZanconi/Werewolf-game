@@ -2,16 +2,18 @@ package werewolf.model
 
 import werewolf.model.entities.Player
 import werewolf.view.GameActivity
+import java.io.File
 import kotlin.math.floor
 
 interface GameStateModel{
-    fun setGameView(gameActivity: GameActivity)
+    fun setGameView(gameActivity: GameActivity, settings:File)
     fun getAlivePlayers(): List<Player>
     fun getAliveVillagers(): List<Player>
     fun getAliveWerewolves(): List<Player>
     fun getDeadVillagers(): List<Player>
     fun getDeadWerewolves(): List<Player>
     fun getDeadPlayers(): List<Player>
+    fun getNeutrals(): List<Player>
     fun initGame(players: MutableList<String>)
     fun killVillager(player: Player)
     fun killWerewolf(player: Player)
@@ -22,14 +24,17 @@ interface GameStateModel{
 class GameStateModelImpl: GameStateModel{
     private lateinit var gameActivity: GameActivity
     private val gameState: GameState = GameStateImpl()
-    private val roleFactory: RoleFactory = RoleFactoryImpl()
+    private lateinit var roleFactory: RoleFactory
+    private lateinit var settings: File
 
-    override fun setGameView(gameActivity: GameActivity) {
+    override fun setGameView(gameActivity: GameActivity, settings:File) {
         this.gameActivity = gameActivity
+        this.settings = settings
     }
 
     override fun initGame(players: MutableList<String>) {
         players.shuffle()
+        roleFactory = RoleFactoryImpl(settings,players)
         val cut = floor(players.size / 3.0).toInt()
         for(i in 0 until cut){
             addWerewolf(roleFactory.getWerewolf(players[i]))
@@ -37,7 +42,7 @@ class GameStateModelImpl: GameStateModel{
         for(i in cut until players.size-1){
             addVillager(roleFactory.getVillager(players[i]))
         }
-        addVillager(roleFactory.getNeutral(players[players.size-1]))
+        addNeutral(roleFactory.getNeutral(players[players.size-1]))
         gameState.initAlivePlayers()
     }
 
@@ -63,6 +68,10 @@ class GameStateModelImpl: GameStateModel{
 
     override fun getDeadPlayers(): List<Player> {
         return gameState.getDeadVillagers()+gameState.getDeadWerewolves()
+    }
+
+    override fun getNeutrals(): List<Player> {
+        return gameState.getNeutrals()
     }
 
     override fun killVillager(player: Player) {
@@ -95,5 +104,10 @@ class GameStateModelImpl: GameStateModel{
 
     private fun addVillager(player: Player) {
         gameState.addVillager(player)
+    }
+
+    private fun addNeutral(player: Player) {
+        gameState.addVillager(player)
+        gameState.addNeutral(player)
     }
 }

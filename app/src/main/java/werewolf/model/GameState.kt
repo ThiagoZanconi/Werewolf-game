@@ -11,8 +11,10 @@ interface GameState{
     fun getAliveVillagers(): List<Player>
     fun getDeadWerewolves(): List<Player>
     fun getDeadVillagers(): List<Player>
+    fun getNeutrals(): List<Player>
     fun addWerewolf(werewolf: Player)
     fun addVillager(villager: Player)
+    fun addNeutral(player: Player)
     fun killWerewolf(werewolf: Player)
     fun killVillager(villager: Player)
     fun ascendWerewolf(): Player
@@ -26,9 +28,10 @@ class GameStateImpl: GameState{
     private val deadWerewolves: MutableList<Player> = mutableListOf()
     private val aliveVillagers: MutableList<Player> = mutableListOf()
     private val deadVillagers: MutableList<Player> = mutableListOf()
+    private val neutrals: MutableList<Player> = mutableListOf()
 
     override fun initAlivePlayers() {
-        this.alivePlayers = (getAliveWerewolves() + getAliveVillagers()).toMutableList()
+        alivePlayers = (aliveWerewolves+aliveVillagers).toMutableList()
         alivePlayers.shuffle()
     }
 
@@ -52,12 +55,20 @@ class GameStateImpl: GameState{
         return deadVillagers
     }
 
+    override fun getNeutrals(): List<Player> {
+        return neutrals
+    }
+
     override fun addWerewolf(werewolf: Player) {
         aliveWerewolves.add(werewolf)
     }
 
     override fun addVillager(villager: Player) {
         aliveVillagers.add(villager)
+    }
+
+    override fun addNeutral(player: Player) {
+        neutrals.add(player)
     }
 
     override fun killWerewolf(werewolf: Player) {

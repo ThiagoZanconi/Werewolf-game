@@ -29,7 +29,7 @@ class InitModelImpl: InitModel{
     }
 
     override fun removePlayer(index: Int) {
-        players.removeAt(index)
-        initActivity.removePlayer(index)
+        val name = players.removeAt(index)
+        initActivity.removePlayer(index,name)
     }
 }

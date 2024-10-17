@@ -1,6 +1,5 @@
 package werewolf.view
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -10,22 +9,24 @@ import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
+import werewolf.model.Roles
+import werewolf.view.fragments.SettingsFragment
+import java.io.File
 
 interface InitActivity{
     val uiEventObservable: Observable<InitUiEvent>
 
     fun addPlayer(text:String)
-    fun removePlayer(index: Int)
+    fun removePlayer(index: Int, name: String)
     fun startGame()
     fun getEditTextName(): String
     fun getPlayerToRemove(): String
 }
 
 class InitActivityImpl : AppCompatActivity(), InitActivity {
-    private val ROW_SIZE = 3
-
     private val onActionSubject = Subject<InitUiEvent>()
 
     private lateinit var addPlayerButton: Button
@@ -40,18 +41,18 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     override fun addPlayer(text:String) {
         val container = createContainer(text)
-        adjustGridLayout()
         gridLayout.addView(container,gridLayout.childCount)
         nameEditText.setText("")
+        addPlayerToSettings(text)
     }
 
-    override fun removePlayer(index:Int){
+    override fun removePlayer(index:Int, name: String){
+        deletePlayerFromSettings(name)
         gridLayout.removeViewAt(index)
     }
 
     override fun startGame() {
-        val intent = Intent(applicationContext, GameActivityImpl::class.java)
-        startActivity(intent)
+        initFragment(SettingsFragment(gridLayout.childCount))
     }
 
     override fun getEditTextName(): String {
@@ -69,6 +70,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         initModule()
         initComponents()
         initListeners()
+        initSettings()
     }
 
     private fun initModule() {
@@ -81,8 +83,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         nameEditText = findViewById(R.id.termEditText)
         nameLabelTextView = findViewById(R.id.nameTextView)
         gridLayout = findViewById(R.id.gridLayout)
-        gridLayout.rowCount = 3
-        gridLayout.columnCount = ROW_SIZE
     }
 
     private fun initListeners(){
@@ -102,6 +102,49 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         onActionSubject.notify(InitUiEvent.StartGame)
     }
 
+    private fun initFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.OptionFragment, fragment)
+            .commit()
+    }
+
+    private fun initSettings(){
+        val file = File(cacheDir, "werewolfSettings.txt")
+        if (file.exists()) {
+            file.delete()
+        }
+        file.createNewFile()
+        for(i in 0 .. Roles.values().size){
+            file.appendText("\n -1")
+        }
+    }
+
+    private fun deleteSettings(){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        if (settings.exists()) {
+            settings.delete()
+        }
+    }
+
+    private fun addPlayerToSettings(name: String){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        val lines = settings.readLines().toMutableList()
+        if(lines.isEmpty()){
+            lines.add("$name ")
+        }
+        else{
+            lines[0] = lines[0]+name+" "
+        }
+        settings.writeText(lines.joinToString("\n"))
+    }
+
+    private fun deletePlayerFromSettings(name: String){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        val lines = settings.readLines().toMutableList()
+        lines[0] = lines[0].replace("$name ","")
+        settings.writeText(lines.joinToString(""))
+    }
+
     private fun createContainer(text: String): LinearLayout {
         val linearLayout = createLinearLayout()
         val textView = createTextView(text)
@@ -116,13 +159,13 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private fun createLinearLayout():LinearLayout{
         val linearLayout = LinearLayout(this).apply {
             layoutParams = GridLayout.LayoutParams().apply {
-                width = GridLayout.LayoutParams.WRAP_CONTENT
+                width = (resources.displayMetrics.widthPixels / 3) - 25
                 height = GridLayout.LayoutParams.WRAP_CONTENT
                 setMargins(8, 8, 8, 8)
             }
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            setPadding(16, 16, 16, 16)
+            setPadding(5, 5, 5, 5)
             this.setBackgroundResource(R.drawable.textview_shape2)
         }
         return linearLayout
@@ -133,7 +176,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
             layoutParams = GridLayout.LayoutParams().apply {
                 width = GridLayout.LayoutParams.WRAP_CONTENT
                 height = GridLayout.LayoutParams.WRAP_CONTENT
-                setMargins(8, 8, 8, 8)
+                setMargins(4, 4, 4, 4)
             }
             this.text = text
             textSize = 18f
@@ -156,11 +199,5 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
             }
         }
         return button
-    }
-
-    private fun adjustGridLayout(){
-        if(gridLayout.rowCount*gridLayout.columnCount<=gridLayout.childCount){
-            gridLayout.rowCount = gridLayout.rowCount + 3
-        }
     }
 }

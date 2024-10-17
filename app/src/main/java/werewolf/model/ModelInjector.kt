@@ -2,6 +2,7 @@ package werewolf.model
 
 import werewolf.view.GameActivity
 import werewolf.view.InitActivity
+import java.io.File
 
 object ModelInjector {
     private lateinit var initModel: InitModel
@@ -20,9 +21,9 @@ object ModelInjector {
         return gameStateModel
     }
 
-    fun setGameView(gameActivity: GameActivity){
+    fun setGameView(gameActivity: GameActivity, settings: File){
         gameStateModel = GameStateModelImpl()
-        gameStateModel.setGameView(gameActivity)
+        gameStateModel.setGameView(gameActivity,settings)
     }
 
 }
