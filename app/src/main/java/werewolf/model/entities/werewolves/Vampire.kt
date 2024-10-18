@@ -8,12 +8,13 @@ import werewolf.model.entities.DeathCause
 import werewolf.model.entities.OneTurnCooldown
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.view.MyApp
 import werewolf.view.R
 
 class Vampire(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = "Vampire"
+    override val role: String = MyApp.getAppContext().getString(R.string.vampire)
     override var abilityState: AbilityState = OneTurnCooldown()
 
     override fun fetchImageSrc(): Int {
@@ -42,7 +43,7 @@ class Vampire(
 
 class VampireAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
     override fun fetchAbilityName(): String {
-        return "Vampire Attack"
+        return MyApp.getAppContext().getString(R.string.vampire_attack)
     }
 
     override fun fetchPriority(): Int {

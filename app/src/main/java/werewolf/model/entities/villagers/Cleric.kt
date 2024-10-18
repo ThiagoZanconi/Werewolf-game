@@ -7,12 +7,13 @@ import werewolf.model.entities.Immune
 import werewolf.model.entities.OneTurnCooldown
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.view.MyApp
 import werewolf.view.R
 
 class Cleric(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = "Cleric"
+    override val role: String = MyApp.getAppContext().getString(R.string.cleric)
 
     override fun fetchImageSrc(): Int {
         return R.drawable.cleric
@@ -45,7 +46,7 @@ class Shield(targetPlayer: Player): AbstractAbility(targetPlayer) {
     }
 
     override fun fetchAbilityName(): String {
-        return "Shield"
+        return MyApp.getAppContext().getString(R.string.barrier)
     }
 
     override fun fetchPriority(): Int {

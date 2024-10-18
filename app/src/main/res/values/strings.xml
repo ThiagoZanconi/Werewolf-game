@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Werewolf</string>
+    <string name="start">Start</string>
+    <string name="name">Name</string>
+    <string name="add">Add</string>
+    <string name="how_to_play">How to Play</string>
+
+    <string name="cleric">Cleric</string>
+    <string name="villager">Villager</string>
+    <string name="protector">Protector</string>
+    <string name="vigilante">Vigilante</string>
+    <string name="priest">Priest</string>
+    <string name="jester">Jester</string>
+    <string name="werewolf">Werewolf</string>
+    <string name="witch">Witch</string>
+    <string name="vampire">Vampire</string>
+
+    <string name="cancel_player_ability">Cancel Player Ability</string>
+    <string name="werewolf_attack">Werewolf Attack</string>
+    <string name="vampire_attack">Vampire Attack</string>
+    <string name="shot">Shot</string>
+    <string name="protection">Protection</string>
+    <string name="barrier">Barrier</string>
+    <string name="revive_spell">Revive Spell</string>
 </resources>

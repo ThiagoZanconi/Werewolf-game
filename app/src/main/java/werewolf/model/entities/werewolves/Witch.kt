@@ -5,12 +5,13 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.view.MyApp
 import werewolf.view.R
 
 class Witch(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = "Witch"
+    override val role: String = MyApp.getAppContext().getString(R.string.witch)
 
     override fun fetchImageSrc(): Int {
         return R.drawable.witch
@@ -32,7 +33,7 @@ class CancelPlayerAbility(targetPlayer: Player): AbstractAbility(targetPlayer) {
     }
 
     override fun fetchAbilityName(): String {
-        return "Null Player Ability"
+        return MyApp.getAppContext().getString(R.string.cancel_player_ability)
     }
 
     override fun fetchPriority(): Int {

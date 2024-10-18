@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Werewolf</string>
+    <string name="start">Comenzar</string>
+    <string name="name">Nombre</string>
+    <string name="add">Agregar</string>
+    <string name="how_to_play">Como Jugar</string>
+
+    <string name="cleric">Clerigo</string>
+    <string name="villager">Aldeano</string>
+    <string name="protector">Protector</string>
+    <string name="vigilante">Forajido</string>
+    <string name="priest">Sacerdote</string>
+    <string name="jester">Bufon</string>
+    <string name="werewolf">Hombre Lobo</string>
+    <string name="witch">Bruja</string>
+    <string name="vampire">Vampiro</string>
+
+    <string name="cancel_player_ability">Cancelar habilidad de jugador</string>
+    <string name="werewolf_attack">Ataque hombre lobo</string>
+    <string name="vampire_attack">Ataque vampiro</string>
+    <string name="shot">Disparo</string>
+    <string name="protection">Proteccion</string>
+    <string name="barrier">Barrera</string>
+    <string name="revive_spell">Resucitar</string>
+</resources>

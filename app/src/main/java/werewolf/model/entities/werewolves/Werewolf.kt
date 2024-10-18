@@ -6,12 +6,13 @@ import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.view.MyApp
 import werewolf.view.R
 
 class Werewolf(
     override val playerName: String
 ) : AbstractPlayer(){
-    override val role: String = "Werewolf"
+    override val role: String = MyApp.getAppContext().getString(R.string.werewolf)
 
     override fun fetchImageSrc(): Int {
         return R.drawable.werewolf
@@ -46,6 +47,6 @@ class WerewolfAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
     }
 
     override fun fetchAbilityName(): String {
-        return "Werewolf Attack"
+        return MyApp.getAppContext().getString(R.string.werewolf_attack)
     }
 }

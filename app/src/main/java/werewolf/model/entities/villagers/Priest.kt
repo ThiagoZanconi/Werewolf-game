@@ -9,12 +9,13 @@ import werewolf.model.entities.Immune
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.view.MyApp
 import werewolf.view.R
 
 class Priest(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = "Priest"
+    override val role: String = MyApp.getAppContext().getString(R.string.priest)
 
     override fun resolveAbility(): Ability? {
         abilityState = NoUsesLeft()
@@ -39,7 +40,7 @@ class ReviveSpell(targetPlayer: Player): AbstractAbility(targetPlayer) {
     }
 
     override fun fetchAbilityName(): String {
-        return "Revive Spell"
+        return MyApp.getAppContext().getString(R.string.revive_spell)
     }
 
     override fun fetchPriority(): Int {

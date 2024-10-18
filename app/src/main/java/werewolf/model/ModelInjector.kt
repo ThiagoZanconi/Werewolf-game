@@ -25,5 +25,4 @@ object ModelInjector {
         gameStateModel = GameStateModelImpl()
         gameStateModel.setGameView(gameActivity,settings)
     }
-
 }
