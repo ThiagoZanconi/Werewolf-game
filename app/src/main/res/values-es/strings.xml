@@ -8,7 +8,7 @@
     <string name="role">Rol</string>
     <string name="max">Max</string>
     <string name="done">Hecho</string>
-    <string name="play_again">Jugar Denuevo</string>
+    <string name="play_again">Volver a Jugar</string>
     <string name="game_logs">Logs</string>
     <string name="exit_game">Salir</string>
     <string name="proceed">¿Proceder?</string>
