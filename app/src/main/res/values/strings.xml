@@ -4,6 +4,16 @@
     <string name="name">Name</string>
     <string name="add">Add</string>
     <string name="how_to_play">How to Play</string>
+    <string name="winners">Winners</string>
+    <string name="role">Role</string>
+    <string name="max">Max</string>
+    <string name="done">Done</string>
+    <string name="play_again">Play Again</string>
+    <string name="game_logs">Game Logs</string>
+    <string name="exit_game">Exit Game</string>
+    <string name="proceed">Proceed?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="cleric">Cleric</string>
     <string name="villager">Villager</string>

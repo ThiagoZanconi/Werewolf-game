@@ -12,7 +12,7 @@
         android:layout_margin="40dp"
         android:gravity="center"
         android:background="@drawable/textview_shape"
-        android:text="Role Name"
+        android:text="@string/role"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,9 +26,9 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/textview_shape"
         android:gravity="center"
-        android:text="Type of challenge"
+        android:text=""
         android:textColor="#FFFFFF"
-        android:textSize="15dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
