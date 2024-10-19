@@ -16,8 +16,8 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
     private val spinner = view.findViewById<Spinner>(R.id.spinnerOptions)
 
     fun render(role: Roles, playersSize: Int){
-        initSpinner(playersSize)
         this.role.text = role.toString()
+        initSpinner(playersSize)
     }
 
     private fun initSpinner(playersSize: Int){
@@ -28,7 +28,15 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
         val adapter = ArrayAdapter(view.context, R.layout.item_spinner, options)
         spinner.adapter = adapter
         spinner.setSelection(playersSize)
+        initMaxRoleRestriction(playersSize)
         initSpinnerListener()
+    }
+
+    private fun initMaxRoleRestriction(playersSize: Int){
+        val settings = File(view.context.cacheDir, "werewolfSettings.txt")
+        val lines = settings.readLines().toMutableList()
+        lines[getRoleIndex()] = playersSize.toString()
+        settings.writeText(lines.joinToString("\n"))
     }
 
     private fun initSpinnerListener() {
@@ -54,22 +62,13 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
     private fun addRoleRestriction(){
         val settings = File(view.context.cacheDir, "werewolfSettings.txt")
         val lines = settings.readLines().toMutableList()
-        lines[getRoleIndex()+1] = spinner.selectedItem.toString()
+        lines[getRoleIndex()] = spinner.selectedItem.toString()
         settings.writeText(lines.joinToString("\n"))
     }
 
     private fun getRoleIndex(): Int{
-        var encontre = false
-        var i = 0
-        while(!encontre){
-            if(role.text == Roles.values()[i].toString()){
-                encontre = true
-            }
-            else{
-                i++
-            }
-        }
-        return i
+        val role = Roles.valueOf(role.text.toString())
+        return role.ordinal+1
     }
 
 }

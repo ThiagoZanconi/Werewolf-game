@@ -50,5 +50,6 @@ class SettingsFragment(
     private fun startGame(){
         val intent = Intent(requireContext(), GameActivityImpl::class.java)
         startActivity(intent)
+        requireActivity().finish()
     }
 }
