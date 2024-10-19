@@ -58,6 +58,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        printSettings()
         initComponents()
         initListeners()
         initModule()
@@ -159,6 +160,13 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
         val settings = File(cacheDir, "werewolfSettings.txt")
         if (settings.exists()) {
             settings.delete()
+        }
+    }
+
+    private fun printSettings(){
+        val settings = File(cacheDir, "werewolfSettings.txt")
+        if (settings.exists()) {
+            println("Settings: "+settings.readText())
         }
     }
 }

@@ -47,10 +47,14 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
         }
     }
 
+    /*
+    *Writes the max amount of that role appearances that can be in that game
+    *Line[0] is reserved for player names
+     */
     private fun addRoleRestriction(){
         val settings = File(view.context.cacheDir, "werewolfSettings.txt")
         val lines = settings.readLines().toMutableList()
-        lines[getRoleIndex()] = spinner.selectedItem.toString()
+        lines[getRoleIndex()+1] = spinner.selectedItem.toString()
         settings.writeText(lines.joinToString("\n"))
     }
 

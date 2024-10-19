@@ -67,13 +67,18 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(null)
         setContentView(R.layout.activity_main)
 
         initModule()
         initComponents()
         initListeners()
         initSettings()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        deleteSettings()
     }
 
     private fun initModule() {

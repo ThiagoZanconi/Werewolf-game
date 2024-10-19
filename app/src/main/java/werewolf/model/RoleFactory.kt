@@ -53,8 +53,7 @@ class RoleFactoryImpl(
                 break
             }
             val role = werewolfRoles.random()
-            println("Role factory max amount: "+lines[role.ordinal].toInt())
-            var roleMaxAmount = lines[role.ordinal].toInt()
+            var roleMaxAmount = lines[role.ordinal+1].toInt()
             if(roleMaxAmount>0){
                 created = true
                 roleMaxAmount--
@@ -83,12 +82,11 @@ class RoleFactoryImpl(
         val lines = settings.readLines().toMutableList()
         while(!created){
             if(villagerRoles.isEmpty()){
-                println("Entre")
                 toReturn = createVillager(player,Roles.Villager)
                 break
             }
             val role = villagerRoles.random()
-            var roleMaxAmount = lines[role.ordinal].toInt()
+            var roleMaxAmount = lines[role.ordinal+1].toInt()
             if(roleMaxAmount>0){
                 created = true
                 roleMaxAmount--
