@@ -17,10 +17,10 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
 
     fun render(role: Roles, playersSize: Int){
         this.role.text = role.toString()
-        initSpinner(playersSize)
+        initSpinner(role,playersSize)
     }
 
-    private fun initSpinner(playersSize: Int){
+    private fun initSpinner(role: Roles,playersSize: Int){
         val options: MutableList<Int> = mutableListOf()
         for(i in 0 .. playersSize){
             options.add(i)
@@ -28,18 +28,18 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
         val adapter = ArrayAdapter(view.context, R.layout.item_spinner, options)
         spinner.adapter = adapter
         spinner.setSelection(playersSize)
-        initMaxRoleRestriction(playersSize)
-        initSpinnerListener()
+        initMaxRoleRestriction(role,playersSize)
+        initSpinnerListener(role)
     }
 
-    private fun initMaxRoleRestriction(playersSize: Int){
+    private fun initMaxRoleRestriction(role: Roles,playersSize: Int){
         val settings = File(view.context.cacheDir, "werewolfSettings.txt")
         val lines = settings.readLines().toMutableList()
-        lines[getRoleIndex()] = playersSize.toString()
+        lines[role.ordinal+1] = playersSize.toString()
         settings.writeText(lines.joinToString("\n"))
     }
 
-    private fun initSpinnerListener() {
+    private fun initSpinnerListener(role: Roles) {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -47,7 +47,7 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
                 position: Int,
                 id: Long
             ) {
-                addRoleRestriction()
+                addRoleRestriction(role)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -59,16 +59,11 @@ class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view
     *Writes the max amount of that role appearances that can be in that game
     *Line[0] is reserved for player names
      */
-    private fun addRoleRestriction(){
+    private fun addRoleRestriction(role:Roles){
         val settings = File(view.context.cacheDir, "werewolfSettings.txt")
         val lines = settings.readLines().toMutableList()
-        lines[getRoleIndex()] = spinner.selectedItem.toString()
+        lines[role.ordinal+1] = spinner.selectedItem.toString()
         settings.writeText(lines.joinToString("\n"))
-    }
-
-    private fun getRoleIndex(): Int{
-        val role = Roles.valueOf(role.text.toString())
-        return role.ordinal+1
     }
 
 }
