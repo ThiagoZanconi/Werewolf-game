@@ -10,13 +10,13 @@ import werewolf.model.Roles
 import werewolf.view.R
 import java.io.File
 
-class SettingItemViewHolder(private val view: View):RecyclerView.ViewHolder(view){
+class SettingsItemViewHolder(private val view: View):RecyclerView.ViewHolder(view){
 
     private val role = view.findViewById<TextView>(R.id.roleName)
     private val spinner = view.findViewById<Spinner>(R.id.spinnerOptions)
 
     fun render(role: Roles, playersSize: Int){
-        this.role.text = role.toString()
+        this.role.text = RoleNameProvider.getRoleName(role)
         initSpinner(role,playersSize)
     }
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import werewolf.model.Roles
 import werewolf.view.GameActivityImpl
 import werewolf.view.R
-import werewolf.view.settings.SettingAdapter
+import werewolf.view.settings.SettingsAdapter
 
 class SettingsFragment(
     private val playerSize: Int
@@ -44,7 +44,7 @@ class SettingsFragment(
     private fun initRecyclerView(view: View){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = SettingAdapter(Roles.values(),playerSize)
+        recyclerView.adapter = SettingsAdapter(Roles.values(),playerSize)
     }
 
     private fun startGame(){
