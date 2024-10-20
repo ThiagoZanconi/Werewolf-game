@@ -15,6 +15,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string name="unknown_role">Unknown Role</string>
     <string name="cleric">Cleric</string>
     <string name="villager">Villager</string>
     <string name="protector">Protector</string>

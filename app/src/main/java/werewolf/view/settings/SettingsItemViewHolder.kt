@@ -65,5 +65,4 @@ class SettingsItemViewHolder(private val view: View):RecyclerView.ViewHolder(vie
         lines[role.ordinal+1] = spinner.selectedItem.toString()
         settings.writeText(lines.joinToString("\n"))
     }
-
 }
