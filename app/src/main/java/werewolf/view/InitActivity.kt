@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
 import werewolf.model.Roles
+import werewolf.view.fragments.HowToPlayFragment
 import werewolf.view.fragments.SettingsFragment
 import java.io.File
 
@@ -36,6 +37,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private lateinit var nameEditText: EditText
     private lateinit var nameLabelTextView: TextView
     private lateinit var gridLayout: GridLayout
+    private lateinit var howToPlayButton: Button
 
     override val uiEventObservable: Observable<InitUiEvent> = onActionSubject
 
@@ -91,11 +93,13 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         nameEditText = findViewById(R.id.termEditText)
         nameLabelTextView = findViewById(R.id.nameTextView)
         gridLayout = findViewById(R.id.gridLayout)
+        howToPlayButton = findViewById(R.id.howToPlayButton)
     }
 
     private fun initListeners(){
         addPlayerButton.setOnClickListener{ notifyAddPlayerAction() }
         startGameButton.setOnClickListener{ notifyStartGameAction() }
+        howToPlayButton.setOnClickListener { goToHowPlay() }
     }
 
     private fun notifyAddPlayerAction(){
@@ -108,6 +112,10 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     private fun notifyStartGameAction(){
         onActionSubject.notify(InitUiEvent.StartGame)
+    }
+
+    private fun goToHowPlay(){
+        initFragment(HowToPlayFragment())
     }
 
     private fun initFragment(fragment: Fragment){

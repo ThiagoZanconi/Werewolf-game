@@ -1,8 +1,6 @@
-package werewolf.view.settings
+package werewolf.view
 
 import werewolf.model.Roles
-import werewolf.view.MyApp
-import werewolf.view.R
 
 object RoleNameProvider {
     fun getRoleName(role: Roles): String{

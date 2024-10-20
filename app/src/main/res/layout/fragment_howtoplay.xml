@@ -11,20 +11,74 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/image_dark_village" />
+            android:src="@drawable/image_dark_village"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/intro1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/textview_shape3"
+            android:textColor="@android:color/black"
+            android:text="@string/intro1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/intro2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/textview_shape3"
+            android:textColor="@android:color/black"
+            android:text="@string/intro2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/intro1"/>
 
+        <TextView
+            android:id="@+id/intro3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/textview_shape3"
+            android:textColor="@android:color/black"
+            android:text="@string/intro3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/intro2"/>
+
+        <TextView
+            android:id="@+id/intro4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/textview_shape3"
+            android:textColor="@android:color/black"
+            android:text="@string/intro4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/intro3"/>
+
+        <TextView
+            android:id="@+id/intro5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:background="@drawable/textview_shape3"
+            android:textColor="@android:color/black"
+            android:text="@string/intro5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/intro4"/>
 
         <Button
-            android:id="@+id/doneButton"
+            android:id="@+id/roleDescriptionButton"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_margin="20dp"

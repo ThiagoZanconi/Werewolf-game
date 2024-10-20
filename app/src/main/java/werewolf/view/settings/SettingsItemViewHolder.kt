@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import werewolf.model.Roles
 import werewolf.view.R
+import werewolf.view.howtoplay.RoleNameProvider
 import java.io.File
 
 class SettingsItemViewHolder(private val view: View):RecyclerView.ViewHolder(view){
