@@ -32,6 +32,11 @@ class HowToPlayFragment(
         rolesDescriptionButton.setOnClickListener { goToRolesDescription() }
     }
     private fun goToRolesDescription(){
-
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.OptionFragment, RolesDescriptionFragment())
+            .addToBackStack(null)
+            .commit()
     }
+
+
 }

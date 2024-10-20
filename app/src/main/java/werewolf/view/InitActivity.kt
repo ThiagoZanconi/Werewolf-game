@@ -121,6 +121,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private fun initFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
             .replace(R.id.OptionFragment, fragment)
+            .addToBackStack(null)
             .commit()
     }
 
