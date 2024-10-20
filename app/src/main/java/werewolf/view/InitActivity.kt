@@ -164,7 +164,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         val settings = File(cacheDir, "werewolfSettings.txt")
         val lines = settings.readLines().toMutableList()
         lines[0] = lines[0].replace("$name ","")
-        settings.writeText(lines.joinToString(""))
+        settings.writeText(lines.joinToString("\n"))
     }
 
     private fun createContainer(text: String): LinearLayout {
