@@ -6,6 +6,7 @@
     <string name="how_to_play">Como Jugar</string>
     <string name="winners">Ganadores</string>
     <string name="role">Rol</string>
+    <string name="roles">Roles</string>
     <string name="max">Max</string>
     <string name="done">Hecho</string>
     <string name="play_again">Volver a Jugar</string>
@@ -14,6 +15,11 @@
     <string name="proceed">¿Proceder?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="intro1">El juego consiste en dos equipos: el hombre lobo y sus seguidores, y los aldeanos (junto con el bufón, que será explicado más adelante). Para que un equipo gane, debe matar a todos los jugadores del equipo contrario. Cada equipo tiene diferentes roles, y cada uno de ellos tiene habilidades únicas que se pueden utilizar para lograr la victoria.</string>
+    <string name="intro2">El juego también consta de dos fases: noche y día. Durante la noche, los jugadores usarán sus habilidades para matar o sobrevivir a los ataques del equipo contrario. El equipo de los hombres lobo sabe quiénes son los aldeanos, y por lo tanto, quiénes son sus compañeros de equipo. En cambio, los aldeanos deben descubrir quiénes son los hombres lobo para poder matarlos.</string>
+    <string name="intro3">Durante el día, los jugadores tendrán tiempo (todo el que deseen, aunque se puede configurar un temporizador si se prefiere) para discutir quiénes podrían ser los hombres lobo (los hombres lobo deben fingir ser inocentes), y al final de la discusión, los jugadores podrán votar para poner a alguien en juicio. Después de su defensa (en la que solo se le permite hablar), el resto de los jugadores votará si desean colgarlo o no. Luego de eso, la ronda termina, cae la noche y comienza una nueva ronda.</string>
+    <string name="intro4">Hay un rol que juega solo: el bufón. El bufón gana solo si logra que lo cuelguen al final de la ronda.</string>
+    <string name="intro5">Cuando comienza el juego, a cada jugador se le asigna un rol en secreto y debe realizar sus acciones discretamente (sin mostrar la pantalla de su teléfono a los demás jugadores).</string>
 
     <string name="unknown_role">Rol Desconocido</string>
     <string name="cleric">Clerigo</string>

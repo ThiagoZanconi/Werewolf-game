@@ -6,6 +6,7 @@
     <string name="how_to_play">How to Play</string>
     <string name="winners">Winners</string>
     <string name="role">Role</string>
+    <string name="roles">Roles</string>
     <string name="max">Max</string>
     <string name="done">Done</string>
     <string name="play_again">Play Again</string>
@@ -14,6 +15,11 @@
     <string name="proceed">Proceed?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later). For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that can be used to achieve victory.</string>
+    <string name="intro2">The game also consists of two phases: night and day. At night, players will use their abilities to kill or survive attacks from the opposing team. The werewolf team knows who the villagers are, and therefore who their teammates are. In contrast, the villagers must figure out who the werewolves are in order to kill them.</string>
+    <string name="intro3">During the day, players will have time (as much as they want, although a timer can be set if desired) to discuss who the werewolves might be (werewolves should pretend to be innocent), and at the end of the discussion, players can vote for someone to be put on trial. After their defense (in which they are only allowed to speak), the rest of the players will vote on whether they want to hang them or not. After that, the round ends, night falls, and a new round begins.</string>
+    <string name="intro4">There is one role that plays solo: the jester. The jester wins only by getting themselves hanged at the end of the round.</string>
+    <string name="intro5">The game starts at night, each player is secretly assigned a role and should perform their actions discreetly (without showing their phone screen to the other players)."</string>
 
     <string name="unknown_role">Unknown Role</string>
     <string name="cleric">Cleric</string>
