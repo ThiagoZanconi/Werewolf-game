@@ -24,5 +24,4 @@ class SettingsAdapter(
     override fun onBindViewHolder(holder: SettingsItemViewHolder, position: Int) {
         holder.render(rolesList[position],playerSize)
     }
-
 }

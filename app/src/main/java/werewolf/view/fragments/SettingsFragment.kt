@@ -37,6 +37,7 @@ class SettingsFragment(
     private fun initComponents(view: View) {
         initRecyclerView(view)
         doneButton = view.findViewById(R.id.doneButton)
+        initRolesMaxQuantityRestrictions()
     }
 
     private fun initListeners(){
@@ -48,8 +49,11 @@ class SettingsFragment(
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         val adapter = SettingsAdapter(Roles.values(), playerSize,onActionSubject)
         recyclerView.adapter = adapter
-        for (i in 0 until Roles.values().size) {
-            adapter.notifyItemInserted(i)
+    }
+
+    private fun initRolesMaxQuantityRestrictions(){
+        Roles.values().forEach {
+            onActionSubject.notify(Pair(it,playerSize))
         }
     }
 

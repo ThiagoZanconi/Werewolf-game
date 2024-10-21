@@ -17,6 +17,7 @@ class SettingsItemViewHolder(private val view: View,private val onActionSubject:
     private val spinner = view.findViewById<Spinner>(R.id.spinnerOptions)
 
     fun render(role: Roles, playersSize: Int){
+        println("Role rendered: $role")
         this.role.text = RoleNameProvider.getRoleName(role)
         initSpinner(role,playersSize)
     }
@@ -29,7 +30,6 @@ class SettingsItemViewHolder(private val view: View,private val onActionSubject:
         val adapter = ArrayAdapter(view.context, R.layout.item_spinner, options)
         spinner.adapter = adapter
         spinner.setSelection(playersSize)
-        onActionSubject.notify(Pair(role, playersSize))
         initSpinnerListener(role)
     }
 
