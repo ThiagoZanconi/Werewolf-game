@@ -102,22 +102,22 @@ class FinishedGameFragment(
 
     private fun draw(){
         imageView.setImageResource(R.drawable.draw)
-        titleLabel.text = "Draw"
+        titleLabel.text = requireContext().getString(R.string.draw)
     }
 
     private fun villagersWin(){
         imageView.setImageResource(R.drawable.villagers)
-        titleLabel.text = "Villagers Win"
+        titleLabel.text = requireContext().getString(R.string.villagers_win)
     }
 
     private fun werewolvesWin(){
         imageView.setImageResource(R.drawable.werewolves)
-        titleLabel.text = "Werewolves Win"
+        titleLabel.text = requireContext().getString(R.string.werewolves_win)
     }
 
     private fun jesterWin(){
         imageView.setImageResource(R.drawable.jester)
-        titleLabel.text = "Jester Win"
+        titleLabel.text = requireContext().getString(R.string.jester_wins)
     }
 
     private fun playAgain(){

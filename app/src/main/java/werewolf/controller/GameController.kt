@@ -10,6 +10,8 @@ import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.PlayerSignal
 import werewolf.view.GameActivity
 import werewolf.view.GameUiEvent
+import werewolf.view.MyApp
+import werewolf.view.R
 import werewolf.view.fragments.WinnerTeam
 import java.util.PriorityQueue
 
@@ -55,7 +57,6 @@ class GameControllerImpl(
                 PlayerEventEnum.KilledPlayer -> killedPlayer(value.getPlayer())
                 PlayerEventEnum.WerewolfKilled -> werewolfKilled(value.getPlayer())
                 PlayerEventEnum.JesterWin -> jesterWin(value.getPlayer())
-
             }
         }
 
@@ -88,8 +89,8 @@ class GameControllerImpl(
     }
 
     private fun killedPlayer(player: Player){
-        roundEventsSummary += player.fetchPlayerName()+" was "+player.fetchDeathCause()+"\n"
-        gameLogs += player.fetchPlayerName()+" was "+player.fetchDeathCause()+"\n"
+        roundEventsSummary += player.fetchPlayerName()+" "+DeathCauseProvider.getDeathCause(player.fetchDeathCause())+"\n"
+        gameLogs += player.fetchPlayerName()+" "+DeathCauseProvider.getDeathCause(player.fetchDeathCause())+"\n"
         var result = gameStateModel.getAliveWerewolves().find { it == player }
         if (result != null) {
             gameStateModel.killWerewolf(player)
@@ -122,8 +123,8 @@ class GameControllerImpl(
         val playerRevived = gameStateModel.revivePlayer(player)
         playerRevived?.playerObservable?.subscribe(playerObserver)
         if(playerRevived!=null){
-            roundEventsSummary += player.fetchPlayerName()+" was revived\n"
-            gameLogs += player.fetchPlayerName()+" was revived\n"
+            roundEventsSummary += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
+            gameLogs += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
         }
     }
 
@@ -177,7 +178,7 @@ class GameControllerImpl(
                 ability.playerObservable.subscribe(abilityObserver)
                 abilityPriorityQueue.add(ability)
                 it.fetchTargetPlayer()?.receiveAbility(ability)
-                gameLogs+=it.fetchPlayerName()+" ("+it.fetchRole()+") used "+it.fetchUsedAbility()+" on "+ (it.fetchTargetPlayer()?.fetchPlayerName() ?: "no one") +"\n"
+                gameLogs+=it.fetchPlayerName()+" ("+it.fetchRole()+") "+MyApp.getAppContext().getString(R.string.used)+" "+it.fetchUsedAbility()+" -> "+ (it.fetchTargetPlayer()?.fetchPlayerName() ?: "") +"\n"
             }
         }
     }
@@ -215,7 +216,7 @@ class GameControllerImpl(
 
     private fun startNextRound(){
         roundEventsSummary = ""
-        gameLogs += "-------------------------------------------\n"
+        gameLogs += "---------------------------------------------------\n"
         checkIfGameEnded()
         if(!gameEnded){
             setCurrentPlayer()

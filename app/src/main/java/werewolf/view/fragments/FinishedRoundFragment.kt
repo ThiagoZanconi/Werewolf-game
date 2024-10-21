@@ -35,7 +35,7 @@ class FinishedRoundFragment(
 
     override fun initComponents(view: View) {
         super.initComponents(view)
-        titleLabel.text = "Round Finished"
+        titleLabel.text = requireContext().getString(R.string.round_finished)
         summaryTextView = view.findViewById(R.id.eventsSummaryLabel)
         summaryTextView.text = text
     }

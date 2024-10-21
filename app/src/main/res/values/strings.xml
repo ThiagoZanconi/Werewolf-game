@@ -15,11 +15,23 @@
     <string name="proceed">Proceed?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="round_finished">Round Finished</string>
+    <string name="used">Used</string>
+    <string name="was_revived">Was Revived</string>
+    <string name="was_shot">Was shot</string>
+    <string name="was_mauled">Was mauled</string>
+    <string name="was_hanged">Was hanged</string>
+
     <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later). For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that can be used to achieve victory.</string>
     <string name="intro2">The game also consists of two phases: night and day. At night, players will use their abilities to kill or survive attacks from the opposing team. The werewolf team knows who the villagers are, and therefore who their teammates are. In contrast, the villagers must figure out who the werewolves are in order to kill them. If the werewolf is not killed last, a teammate will take his place as the werewolf.</string>
     <string name="intro3">During the day, players will have time (as much as they want, although a timer can be set if desired) to discuss who the werewolves might be (werewolves should pretend to be innocent), and at the end of the discussion, players can vote for someone to be put on trial. After their defense (in which they are only allowed to speak), the rest of the players will vote on whether they want to hang them or not. After that, the round ends, night falls, and a new round begins.</string>
     <string name="intro4">There is one role that plays solo: the jester. The jester wins only by getting himself hanged at the end of the round.</string>
     <string name="intro5">The game starts at night, each player is secretly assigned a role and should perform their actions discreetly (without showing their phone screen to the other players)."</string>
+
+    <string name="werewolves_win">Werewolves Win</string>
+    <string name="villagers_win">Villagers Win</string>
+    <string name="draw">Draw</string>
+    <string name="jester_wins">Jester Wins</string>
 
     <string name="unknown_role">Unknown Role</string>
     <string name="cleric">Cleric</string>

@@ -54,7 +54,7 @@ abstract class FragmentModel: Fragment(){
         val buttonYes: Button = view.findViewById(R.id.button_yes)
         val buttonNo: Button = view.findViewById(R.id.button_no)
 
-        textView.text = "Confirm?"
+        textView.text = requireContext().getString(R.string.proceed)
 
         buttonYes.setOnClickListener {
             confirmAction()
