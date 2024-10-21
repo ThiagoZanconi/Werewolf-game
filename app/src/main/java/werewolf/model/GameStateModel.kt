@@ -2,11 +2,10 @@ package werewolf.model
 
 import werewolf.model.entities.Player
 import werewolf.view.GameActivity
-import java.io.File
 import kotlin.math.floor
 
 interface GameStateModel{
-    fun setGameView(gameActivity: GameActivity, settings:File)
+    fun setGameView(gameActivity: GameActivity)
     fun getAlivePlayers(): List<Player>
     fun getAliveVillagers(): List<Player>
     fun getAliveWerewolves(): List<Player>
@@ -21,28 +20,29 @@ interface GameStateModel{
     fun revivePlayer(player: Player): Player?
 }
 
-class GameStateModelImpl: GameStateModel{
+class GameStateModelImpl(
+    private val rolesQuantityRestrictions: RolesQuantityRestrictions
+): GameStateModel{
     private lateinit var gameActivity: GameActivity
     private val gameState: GameState = GameStateImpl()
     private lateinit var roleFactory: RoleFactory
-    private lateinit var settings: File
 
-    override fun setGameView(gameActivity: GameActivity, settings:File) {
+    override fun setGameView(gameActivity: GameActivity) {
         this.gameActivity = gameActivity
-        this.settings = settings
     }
 
     override fun initGame(players: MutableList<String>) {
         players.shuffle()
-        roleFactory = RoleFactoryImpl(settings,players)
+        roleFactory = RoleFactoryImpl(rolesQuantityRestrictions,players)
+        val playersAssigned = roleFactory.getPlayers()
         val cut = floor(players.size / 3.0).toInt()
         for(i in 0 until cut){
-            addWerewolf(roleFactory.getWerewolf(players[i]))
+            addWerewolf(playersAssigned[i])
         }
         for(i in cut until players.size-1){
-            addVillager(roleFactory.getVillager(players[i]))
+            addVillager(playersAssigned[i])
         }
-        addNeutral(roleFactory.getNeutral(players[players.size-1]))
+        addNeutral(playersAssigned[players.size-1])
         gameState.initAlivePlayers()
     }
 

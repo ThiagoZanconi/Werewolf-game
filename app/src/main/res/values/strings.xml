@@ -1,3 +1,53 @@
 <resources>
     <string name="app_name">Werewolf</string>
+    <string name="start">Start</string>
+    <string name="name">Name</string>
+    <string name="add">Add</string>
+    <string name="how_to_play">How to Play</string>
+    <string name="winners">Winners</string>
+    <string name="role">Role</string>
+    <string name="roles">Roles</string>
+    <string name="max">Max</string>
+    <string name="done">Done</string>
+    <string name="play_again">Play Again</string>
+    <string name="game_logs">Game Logs</string>
+    <string name="exit_game">Exit Game</string>
+    <string name="proceed">Proceed?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later). For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that can be used to achieve victory.</string>
+    <string name="intro2">The game also consists of two phases: night and day. At night, players will use their abilities to kill or survive attacks from the opposing team. The werewolf team knows who the villagers are, and therefore who their teammates are. In contrast, the villagers must figure out who the werewolves are in order to kill them. If the werewolf is not killed last, a teammate will take his place as the werewolf.</string>
+    <string name="intro3">During the day, players will have time (as much as they want, although a timer can be set if desired) to discuss who the werewolves might be (werewolves should pretend to be innocent), and at the end of the discussion, players can vote for someone to be put on trial. After their defense (in which they are only allowed to speak), the rest of the players will vote on whether they want to hang them or not. After that, the round ends, night falls, and a new round begins.</string>
+    <string name="intro4">There is one role that plays solo: the jester. The jester wins only by getting himself hanged at the end of the round.</string>
+    <string name="intro5">The game starts at night, each player is secretly assigned a role and should perform their actions discreetly (without showing their phone screen to the other players)."</string>
+
+    <string name="unknown_role">Unknown Role</string>
+    <string name="cleric">Cleric</string>
+    <string name="villager">Villager</string>
+    <string name="protector">Protector</string>
+    <string name="vigilante">Vigilante</string>
+    <string name="priest">Priest</string>
+    <string name="jester">Jester</string>
+    <string name="werewolf">Werewolf</string>
+    <string name="witch">Witch</string>
+    <string name="vampire">Vampire</string>
+
+    <string name="cancel_player_ability">Cancel Player Ability</string>
+    <string name="werewolf_attack">Werewolf Attack</string>
+    <string name="vampire_attack">Vampire Attack</string>
+    <string name="shot">Shot</string>
+    <string name="protection">Protection</string>
+    <string name="barrier">Barrier</string>
+    <string name="revive_spell">Revive Spell</string>
+
+    <string name="unknown_description">Description not found</string>
+    <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
+    <string name="witch_description">Belongs to the werewolves team. Every night can select a villager to cancel his/her ability</string>
+    <string name="vampire_description">Belongs to the werewolves team. Can select a villager to kill at night. Ability has 1 turn cooldown. Ability starts on cooldown</string>
+    <string name="villager_description">Belongs to the villagers team. Has no ability</string>
+    <string name="cleric_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn). Ability has 1 turn cooldown.</string>
+    <string name="priest_description">Belongs to the villagers team. Once a game can select a player to revive (werewolves included)</string>
+    <string name="vigilante_description">Belongs to the villagers team. Once a game can select a player to shot to kill(villagers included)</string>
+    <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect from all attacks received.</string>
+    <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 </resources>

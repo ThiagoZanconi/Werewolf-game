@@ -1,6 +1,7 @@
 package werewolf.view
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -14,7 +15,6 @@ import werewolf.model.entities.Player
 import werewolf.view.fragments.FinishedGameFragment
 import werewolf.view.fragments.FinishedRoundFragment
 import werewolf.view.fragments.WinnerTeam
-import java.io.File
 
 interface GameActivity{
     val uiEventObservable: Observable<GameUiEvent>
@@ -31,6 +31,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     private lateinit var timerTextView: TextView
     private lateinit var nameTextView: TextView
     private lateinit var startTurnButton: Button
+    private lateinit var mediaPlayer: MediaPlayer
 
     override val uiEventObservable: Observable<GameUiEvent> = onActionSubject
 
@@ -59,6 +60,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
         initComponents()
         initListeners()
         initModule()
+        initMediaPlayer()
     }
 
     @SuppressLint("MissingSuperCall")
@@ -68,11 +70,26 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
 
     override fun onDestroy() {
         super.onDestroy()
-        deleteSettings()
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+        }
+        mediaPlayer.release()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mediaPlayer.start()
     }
 
     private fun initModule(){
-        ViewInjector.initGameActivity(this,File(cacheDir, "werewolfSettings.txt"))
+        ViewInjector.initGameActivity(this)
     }
 
     private fun initComponents(){
@@ -83,6 +100,12 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
 
     private fun initListeners(){
         startTurnButton.setOnClickListener{ startTurnEvent() }
+    }
+
+    private fun initMediaPlayer(){
+        mediaPlayer = MediaPlayer.create(this, R.raw.haunted_forest_ambient_martias_muses)
+        mediaPlayer.isLooping = true
+        mediaPlayer.start()
     }
 
     private fun startTurnEvent(){
@@ -128,12 +151,5 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
             }
         }
         transaction.commitNow()
-    }
-
-    private fun deleteSettings(){
-        val settings = File(cacheDir, "werewolfSettings.txt")
-        if (settings.exists()) {
-            settings.delete()
-        }
     }
 }

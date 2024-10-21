@@ -123,6 +123,7 @@ class FinishedGameFragment(
     private fun playAgain(){
         val intent = Intent(requireActivity().applicationContext, InitActivityImpl::class.java)
         startActivity(intent)
+        requireActivity().finish()
     }
 
 }

@@ -9,13 +9,15 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.GameActivityImpl
 import werewolf.view.R
-import werewolf.view.settings.SettingItemAdapter
+import werewolf.view.settings.SettingsAdapter
 
 class SettingsFragment(
-    private val playerSize: Int
+    private val playerSize: Int,
+    private val onActionSubject: Subject<Pair<Roles,Int>>
 ): Fragment(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var doneButton: Button
@@ -44,11 +46,16 @@ class SettingsFragment(
     private fun initRecyclerView(view: View){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = SettingItemAdapter(Roles.values(),playerSize)
+        val adapter = SettingsAdapter(Roles.values(), playerSize,onActionSubject)
+        recyclerView.adapter = adapter
+        for (i in 0 until Roles.values().size) {
+            adapter.notifyItemInserted(i)
+        }
     }
 
     private fun startGame(){
         val intent = Intent(requireContext(), GameActivityImpl::class.java)
         startActivity(intent)
+        requireActivity().finish()
     }
 }

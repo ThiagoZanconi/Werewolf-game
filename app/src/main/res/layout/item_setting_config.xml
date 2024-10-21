@@ -7,11 +7,12 @@
 
     <TextView
         android:id="@+id/roleName"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_margin="20dp"
+        android:layout_margin="40dp"
         android:gravity="center"
-        android:text="Role Name"
+        android:background="@drawable/textview_shape"
+        android:text="@string/role"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,13 +22,13 @@
         android:id="@+id/spinnerOptions"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_margin="20dp"
+        android:layout_margin="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/textview_shape"
         android:gravity="center"
-        android:text="Type of challenge"
+        android:text=""
         android:textColor="#FFFFFF"
-        android:textSize="15dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

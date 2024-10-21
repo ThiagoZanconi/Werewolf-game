@@ -2,29 +2,72 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image_dark_village" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/doneButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_margin="20dp"
-        android:text="Done"
-        android:layout_gravity="bottom|center_horizontal"
-        />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_dark_village" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_margin="20dp">
+        <TextView
+            android:id="@+id/roleTextView"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="70dp"
+            android:background="@drawable/textview_shape"
+            android:text="@string/role"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </TextView>
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/maxAmountTextView"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="70dp"
+            android:background="@drawable/textview_shape"
+            android:text="@string/max"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="580dp"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/doneButton"
+            app:layout_constraintTop_toBottomOf="@id/roleTextView">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/doneButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:text="@string/done"
+            android:layout_gravity="bottom|center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

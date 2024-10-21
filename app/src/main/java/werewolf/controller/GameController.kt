@@ -215,7 +215,7 @@ class GameControllerImpl(
 
     private fun startNextRound(){
         roundEventsSummary = ""
-        gameLogs += "------------------------\n"
+        gameLogs += "-------------------------------------------\n"
         checkIfGameEnded()
         if(!gameEnded){
             setCurrentPlayer()

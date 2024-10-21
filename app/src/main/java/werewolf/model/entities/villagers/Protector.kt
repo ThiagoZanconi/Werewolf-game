@@ -7,12 +7,13 @@ import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.Protected
+import werewolf.view.MyApp
 import werewolf.view.R
 
 class Protector(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = "Protector"
+    override val role: String = MyApp.getAppContext().getString(R.string.protector)
     private var armored = true
 
     override fun resolveAbility(): Ability? {
@@ -40,7 +41,7 @@ class Protector(
 
 class Protection(targetPlayer: Player, private val protector: Protector): AbstractAbility(targetPlayer){
     override fun fetchAbilityName(): String {
-        return "Protection"
+        return MyApp.getAppContext().getString(R.string.protection)
     }
 
     override fun fetchPriority(): Int {

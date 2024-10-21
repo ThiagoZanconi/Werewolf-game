@@ -7,12 +7,13 @@ import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.view.MyApp
 import werewolf.view.R
 
 class Vigilante(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = "Vigilante"
+    override val role: String = MyApp.getAppContext().getString(R.string.vigilante)
 
     override fun resolveAbility(): Ability? {
         abilityState = NoUsesLeft()
@@ -36,7 +37,7 @@ class Shot(targetPlayer: Player): AbstractAbility(targetPlayer){
     }
 
     override fun fetchAbilityName(): String {
-        return "Shot"
+        return MyApp.getAppContext().getString(R.string.shot)
     }
 
     override fun fetchPriority(): Int {

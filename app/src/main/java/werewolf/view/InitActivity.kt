@@ -1,8 +1,10 @@
 package werewolf.view
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
@@ -13,11 +15,12 @@ import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
 import werewolf.model.Roles
+import werewolf.view.fragments.HowToPlayFragment
 import werewolf.view.fragments.SettingsFragment
-import java.io.File
 
 interface InitActivity{
     val uiEventObservable: Observable<InitUiEvent>
+    val roleRestrictionEventObservable: Observable<Pair<Roles,Int>>
 
     fun addPlayer(text:String)
     fun removePlayer(index: Int, name: String)
@@ -28,14 +31,17 @@ interface InitActivity{
 
 class InitActivityImpl : AppCompatActivity(), InitActivity {
     private val onActionSubject = Subject<InitUiEvent>()
+    private val roleRestrictionActionSubject = Subject<Pair<Roles,Int>>()
 
     private lateinit var addPlayerButton: Button
     private lateinit var startGameButton: Button
     private lateinit var nameEditText: EditText
     private lateinit var nameLabelTextView: TextView
     private lateinit var gridLayout: GridLayout
+    private lateinit var howToPlayButton: Button
 
     override val uiEventObservable: Observable<InitUiEvent> = onActionSubject
+    override val roleRestrictionEventObservable: Observable<Pair<Roles,Int>> = roleRestrictionActionSubject
 
     private var playerToRemove : String =""
 
@@ -43,16 +49,15 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         val container = createContainer(text)
         gridLayout.addView(container,gridLayout.childCount)
         nameEditText.setText("")
-        addPlayerToSettings(text)
     }
 
     override fun removePlayer(index:Int, name: String){
-        deletePlayerFromSettings(name)
         gridLayout.removeViewAt(index)
     }
 
     override fun startGame() {
-        initFragment(SettingsFragment(gridLayout.childCount))
+        hideKeyboard()
+        initSettingsFragment()
     }
 
     override fun getEditTextName(): String {
@@ -64,13 +69,12 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(null)
         setContentView(R.layout.activity_main)
 
         initModule()
         initComponents()
         initListeners()
-        initSettings()
     }
 
     private fun initModule() {
@@ -83,11 +87,13 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         nameEditText = findViewById(R.id.termEditText)
         nameLabelTextView = findViewById(R.id.nameTextView)
         gridLayout = findViewById(R.id.gridLayout)
+        howToPlayButton = findViewById(R.id.howToPlayButton)
     }
 
     private fun initListeners(){
         addPlayerButton.setOnClickListener{ notifyAddPlayerAction() }
         startGameButton.setOnClickListener{ notifyStartGameAction() }
+        howToPlayButton.setOnClickListener { goToHowPlay() }
     }
 
     private fun notifyAddPlayerAction(){
@@ -102,47 +108,27 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         onActionSubject.notify(InitUiEvent.StartGame)
     }
 
+    private fun goToHowPlay(){
+        initFragment(HowToPlayFragment())
+    }
+
     private fun initFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
             .replace(R.id.OptionFragment, fragment)
+            .addToBackStack(null)
             .commit()
     }
 
-    private fun initSettings(){
-        val file = File(cacheDir, "werewolfSettings.txt")
-        if (file.exists()) {
-            file.delete()
-        }
-        file.createNewFile()
-        for(i in 0 .. Roles.values().size){
-            file.appendText("\n -1")
-        }
+    private fun initSettingsFragment(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.OptionFragment, SettingsFragment(gridLayout.childCount,roleRestrictionActionSubject))
+            .addToBackStack(null)
+            .commit()
     }
 
-    private fun deleteSettings(){
-        val settings = File(cacheDir, "werewolfSettings.txt")
-        if (settings.exists()) {
-            settings.delete()
-        }
-    }
-
-    private fun addPlayerToSettings(name: String){
-        val settings = File(cacheDir, "werewolfSettings.txt")
-        val lines = settings.readLines().toMutableList()
-        if(lines.isEmpty()){
-            lines.add("$name ")
-        }
-        else{
-            lines[0] = lines[0]+name+" "
-        }
-        settings.writeText(lines.joinToString("\n"))
-    }
-
-    private fun deletePlayerFromSettings(name: String){
-        val settings = File(cacheDir, "werewolfSettings.txt")
-        val lines = settings.readLines().toMutableList()
-        lines[0] = lines[0].replace("$name ","")
-        settings.writeText(lines.joinToString(""))
+    private fun hideKeyboard(){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 
     private fun createContainer(text: String): LinearLayout {

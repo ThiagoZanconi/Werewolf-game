@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Werewolf</string>
+    <string name="start">Comenzar</string>
+    <string name="name">Nombre</string>
+    <string name="add">Agregar</string>
+    <string name="how_to_play">Como Jugar</string>
+    <string name="winners">Ganadores</string>
+    <string name="role">Rol</string>
+    <string name="roles">Roles</string>
+    <string name="max">Max</string>
+    <string name="done">Hecho</string>
+    <string name="play_again">Volver a Jugar</string>
+    <string name="game_logs">Logs</string>
+    <string name="exit_game">Salir</string>
+    <string name="proceed">¿Proceder?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="intro1">El juego consiste en dos equipos: el hombre lobo y sus seguidores, y los aldeanos (junto con el bufón, que será explicado más adelante). Para que un equipo gane, debe matar a todos los jugadores del equipo contrario. Cada equipo tiene diferentes roles, y cada uno de ellos tiene habilidades únicas que se pueden utilizar para lograr la victoria.</string>
+    <string name="intro2">El juego también consta de dos fases: noche y día. Durante la noche, los jugadores usarán sus habilidades para matar o sobrevivir a los ataques del equipo contrario. El equipo de los hombres lobo sabe quiénes son los aldeanos, y por lo tanto, quiénes son sus compañeros de equipo. En cambio, los aldeanos deben descubrir quiénes son los hombres lobo para poder matarlos. Si el hombre lobo no es el último en morir, uno de sus compañeros tomará su lugar como el hombre lobo.</string>
+    <string name="intro3">Durante el día, los jugadores tendrán tiempo (todo el que deseen, aunque se puede configurar un temporizador si se prefiere) para discutir quiénes podrían ser los hombres lobo (los hombres lobo deben fingir ser inocentes), y al final de la discusión, los jugadores podrán votar para poner a alguien en juicio. Después de su defensa (en la que solo se le permite hablar), el resto de los jugadores votará si desean colgarlo o no. Luego de eso, la ronda termina, cae la noche y comienza una nueva ronda.</string>
+    <string name="intro4">Hay un rol que juega solo: el bufón. El bufón gana solo si logra que lo cuelguen al final de la ronda.</string>
+    <string name="intro5">Cuando comienza el juego, a cada jugador se le asigna un rol en secreto y debe realizar sus acciones discretamente (sin mostrar la pantalla de su teléfono a los demás jugadores).</string>
+
+    <string name="unknown_role">Rol Desconocido</string>
+    <string name="cleric">Clerigo</string>
+    <string name="villager">Aldeano</string>
+    <string name="protector">Protector</string>
+    <string name="vigilante">Forajido</string>
+    <string name="priest">Sacerdote</string>
+    <string name="jester">Bufon</string>
+    <string name="werewolf">Hombre Lobo</string>
+    <string name="witch">Bruja</string>
+    <string name="vampire">Vampiro</string>
+
+    <string name="cancel_player_ability">Cancelar habilidad de jugador</string>
+    <string name="werewolf_attack">Ataque hombre lobo</string>
+    <string name="vampire_attack">Ataque vampiro</string>
+    <string name="shot">Disparo</string>
+    <string name="protection">Proteccion</string>
+    <string name="barrier">Barrera</string>
+    <string name="revive_spell">Resucitar</string>
+
+    <string name="unknown_description">Descripcion no encontrada</string>
+    <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para matar</string>
+    <string name="witch_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un aldeano para cancelar su habilidad</string>
+    <string name="vampire_description">Pertenece al equipo de los hombres lobo. A la noche puede seleccionar un jugador para matar. La habilidad tiene enfriamiento de un turno. La habilidad comienza en enfriamiento</string>
+    <string name="villager_description">Pertenece al equipo de los aldeanos. No tiene habilidad</string>
+    <string name="cleric_description">Pertenece al equipo de los aldeanos. A la noche puede seleccionar un jugador para lanzar una barrera protectora sobre el(protege de todos los ataques que este reciba). La habilidad tiene enfriamiento de un turno.</string>
+    <string name="priest_description">Pertenece al equipo de los aldeanos. Una vez por juego puede revivir a un jugador (hombres lobo incluidos)</string>
+    <string name="vigilante_description">Pertenece al equipo de los aldeanos. Una vez por juego puede matar a un jugador (aldeanos incluidos)</string>
+    <string name="protector_description">Pertenece al equipo de los aldeanos. Tiene dos vidas (si es colgado muere instantaneamente).Cada noche puede proteger a un jugador para recibir todos los atques dirigidos a este ultimo.</string>
+    <string name="jester_description">Juega solo. No tiene habilidad. Su objetivo es ser colgado al final del día.</string>
+</resources>
