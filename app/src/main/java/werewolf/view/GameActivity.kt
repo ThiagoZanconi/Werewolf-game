@@ -15,7 +15,6 @@ import werewolf.model.entities.Player
 import werewolf.view.fragments.FinishedGameFragment
 import werewolf.view.fragments.FinishedRoundFragment
 import werewolf.view.fragments.WinnerTeam
-import java.io.File
 
 interface GameActivity{
     val uiEventObservable: Observable<GameUiEvent>
@@ -58,7 +57,6 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        printSettings()
         initComponents()
         initListeners()
         initModule()
@@ -72,7 +70,6 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
 
     override fun onDestroy() {
         super.onDestroy()
-        deleteSettings()
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
         }
@@ -92,7 +89,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     }
 
     private fun initModule(){
-        ViewInjector.initGameActivity(this,File(cacheDir, "werewolfSettings.txt"))
+        ViewInjector.initGameActivity(this)
     }
 
     private fun initComponents(){
@@ -154,19 +151,5 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
             }
         }
         transaction.commitNow()
-    }
-
-    private fun deleteSettings(){
-        val settings = File(cacheDir, "werewolfSettings.txt")
-        if (settings.exists()) {
-            settings.delete()
-        }
-    }
-
-    private fun printSettings(){
-        val settings = File(cacheDir, "werewolfSettings.txt")
-        if (settings.exists()) {
-            println("Settings: "+settings.readText())
-        }
     }
 }

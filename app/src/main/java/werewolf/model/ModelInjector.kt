@@ -2,7 +2,6 @@ package werewolf.model
 
 import werewolf.view.GameActivity
 import werewolf.view.InitActivity
-import java.io.File
 
 object ModelInjector {
     private lateinit var initModel: InitModel
@@ -21,8 +20,8 @@ object ModelInjector {
         return gameStateModel
     }
 
-    fun setGameView(gameActivity: GameActivity, settings: File){
-        gameStateModel = GameStateModelImpl()
-        gameStateModel.setGameView(gameActivity,settings)
+    fun setGameView(gameActivity: GameActivity){
+        gameStateModel = GameStateModelImpl(initModel.getRolesQuantityRestrictions())
+        gameStateModel.setGameView(gameActivity)
     }
 }

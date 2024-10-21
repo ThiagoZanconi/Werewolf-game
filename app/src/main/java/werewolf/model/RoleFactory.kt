@@ -10,7 +10,6 @@ import werewolf.model.entities.villagers.Villager
 import werewolf.model.entities.werewolves.Vampire
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
-import java.io.File
 import kotlin.math.floor
 
 enum class Roles{
@@ -22,7 +21,7 @@ interface RoleFactory{
 }
 
 class RoleFactoryImpl(
-    private val settings: File,
+    private val rolesQuantityRestrictions: RolesQuantityRestrictions,
     private val players: MutableList<String>
 ): RoleFactory {
 
@@ -46,19 +45,16 @@ class RoleFactoryImpl(
     private fun getRandomWerewolf(player: String): Player{
         var toReturn: Player = Werewolf(player)
         var created = false
-        val lines = settings.readLines().toMutableList()
         while(!created){
             if(werewolfRoles.isEmpty()){
                 toReturn = createWerewolf(player,Roles.Witch)
                 break
             }
             val role = werewolfRoles.random()
-            var roleMaxAmount = lines[role.ordinal+1].toInt()
+            val roleMaxAmount = rolesQuantityRestrictions.getRoleRestriction(role)
             if(roleMaxAmount>0){
                 created = true
-                roleMaxAmount--
-                lines[role.ordinal] = roleMaxAmount.toString()
-                settings.writeText(lines.joinToString("\n"))
+                rolesQuantityRestrictions.roleRestrictionSubtraction(role)
                 toReturn = createWerewolf(player, role)
             }
             else{
@@ -79,19 +75,16 @@ class RoleFactoryImpl(
     private fun getRandomVillager(player: String): Player{
         var toReturn: Player = Villager(player)
         var created = false
-        val lines = settings.readLines().toMutableList()
         while(!created){
             if(villagerRoles.isEmpty()){
                 toReturn = createVillager(player,Roles.Villager)
                 break
             }
             val role = villagerRoles.random()
-            var roleMaxAmount = lines[role.ordinal+1].toInt()
+            val roleMaxAmount = rolesQuantityRestrictions.getRoleRestriction(role)
             if(roleMaxAmount>0){
                 created = true
-                roleMaxAmount--
-                lines[role.ordinal] = roleMaxAmount.toString()
-                settings.writeText(lines.joinToString("\n"))
+                rolesQuantityRestrictions.roleRestrictionSubtraction(role)
                 toReturn = createVillager(player, role)
             }
             else{
