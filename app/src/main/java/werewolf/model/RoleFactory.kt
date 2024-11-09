@@ -38,7 +38,12 @@ class RoleFactoryImpl(
         for(i in cut until players.size-1){
             toReturn.add(getRandomVillager(players[i]))
         }
-        toReturn.add(Jester(players[players.size-1]))
+        if(rolesQuantityRestrictions.getRoleRestriction(Roles.Jester)==0){
+            toReturn.add(getRandomVillager(players[players.size-1]))
+        }
+        else{
+            toReturn.add(Jester(players[players.size-1]))
+        }
         return toReturn
     }
 
