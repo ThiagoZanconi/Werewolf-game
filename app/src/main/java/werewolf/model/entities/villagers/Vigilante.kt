@@ -41,6 +41,6 @@ class Shot(targetPlayer: Player): AbstractAbility(targetPlayer){
     }
 
     override fun fetchPriority(): Int {
-        return 2
+        return 4
     }
 }
