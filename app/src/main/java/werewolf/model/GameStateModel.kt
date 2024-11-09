@@ -1,6 +1,7 @@
 package werewolf.model
 
 import werewolf.model.entities.Player
+import werewolf.model.entities.neutrals.Jester
 import werewolf.view.GameActivity
 import kotlin.math.floor
 
@@ -42,7 +43,12 @@ class GameStateModelImpl(
         for(i in cut until players.size-1){
             addVillager(playersAssigned[i])
         }
-        addNeutral(playersAssigned[players.size-1])
+        if(rolesQuantityRestrictions.getRoleRestriction(Roles.Jester)==0){
+            addVillager(playersAssigned[players.size-1])
+        }
+        else{
+            addNeutral(playersAssigned[players.size-1])
+        }
         gameState.initAlivePlayers()
     }
 
