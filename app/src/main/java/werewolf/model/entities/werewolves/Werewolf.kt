@@ -1,5 +1,6 @@
 package werewolf.model.entities.werewolves
 
+import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
@@ -12,7 +13,7 @@ import werewolf.view.R
 class Werewolf(
     override val playerName: String
 ) : AbstractPlayer(){
-    override val role: String = MyApp.getAppContext().getString(R.string.werewolf)
+    override val role: Roles = Roles.Werewolf
 
     override fun fetchImageSrc(): Int {
         return R.drawable.werewolf

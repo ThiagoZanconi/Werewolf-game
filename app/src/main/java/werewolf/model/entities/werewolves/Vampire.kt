@@ -1,5 +1,6 @@
 package werewolf.model.entities.werewolves
 
+import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractAbility
@@ -14,7 +15,7 @@ import werewolf.view.R
 class Vampire(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = MyApp.getAppContext().getString(R.string.vampire)
+    override val role: Roles = Roles.Vampire
     override var abilityState: AbilityState = OneTurnCooldown()
 
     override fun fetchImageSrc(): Int {

@@ -37,6 +37,17 @@
     <include
         layout="@layout/textview_description" />
 
+    <ImageButton
+        android:id="@+id/roleDescriptionButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/role_description"
+        android:src="@drawable/image_questionmark"
+        android:scaleType="fitXY" />
+
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
@@ -48,6 +59,23 @@
         android:columnCount="3"
         android:padding="16dp">
     </GridLayout>
+
+    <TextView
+        android:id="@+id/roleDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="70dp"
+        android:layout_marginTop="0dp"
+        android:padding="35dp"
+        android:background="@drawable/textview_shape3"
+        android:textColor="@android:color/black"
+        android:text="@string/werewolf_description"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/roleName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
         android:id="@+id/confirmButton"

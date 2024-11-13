@@ -1,5 +1,6 @@
 package werewolf.model.entities.villagers
 
+import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityEventEnum
 import werewolf.model.entities.AbilitySignal
@@ -15,7 +16,7 @@ import werewolf.view.R
 class Priest(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = MyApp.getAppContext().getString(R.string.priest)
+    override val role: Roles = Roles.Priest
 
     override fun resolveAbility(): Ability? {
         abilityState = NoUsesLeft()

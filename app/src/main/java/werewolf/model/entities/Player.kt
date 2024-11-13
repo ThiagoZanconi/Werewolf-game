@@ -3,6 +3,7 @@ package werewolf.model.entities
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
+import werewolf.model.Roles
 import werewolf.view.GameUiEvent
 import werewolf.view.fragments.PlayerGridFragment
 
@@ -14,7 +15,7 @@ interface Player{
     val playerObservable: Observable<PlayerSignal>
 
     fun fetchPlayerName(): String
-    fun fetchRole(): String
+    fun fetchRole(): Roles
     fun fetchTargetPlayers(): List<Player>
     fun fetchTargetPlayer(): Player?
     fun fetchEvent(): PlayerEventEnum
@@ -45,7 +46,7 @@ interface Player{
 
 abstract class AbstractPlayer: Player{
     protected abstract val playerName: String
-    protected abstract val role: String
+    protected abstract val role: Roles
     protected open var defenseState: DefenseState = NoDefense()
     protected open var abilityState: AbilityState = Neutral()
     protected lateinit var event: PlayerEventEnum
@@ -63,7 +64,7 @@ abstract class AbstractPlayer: Player{
         return playerName
     }
 
-    override fun fetchRole(): String{
+    override fun fetchRole(): Roles {
         return role
     }
 

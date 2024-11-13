@@ -1,5 +1,6 @@
 package werewolf.model.entities.villagers
 
+import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
@@ -13,7 +14,7 @@ import werewolf.view.R
 class Vigilante(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = MyApp.getAppContext().getString(R.string.vigilante)
+    override val role: Roles = Roles.Vigilante
 
     override fun resolveAbility(): Ability? {
         abilityState = NoUsesLeft()

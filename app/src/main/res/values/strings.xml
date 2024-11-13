@@ -21,6 +21,7 @@
     <string name="was_shot">Was shot</string>
     <string name="was_mauled">Was mauled</string>
     <string name="was_hanged">Was hanged</string>
+    <string name="role_description">Role Description</string>
 
     <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later). For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that can be used to achieve victory.</string>
     <string name="intro2">The game also consists of two phases: night and day. At night, players will use their abilities to kill or survive attacks from the opposing team. The werewolf team knows who the villagers are, and therefore who their teammates are. In contrast, the villagers must figure out who the werewolves are in order to kill them. If the werewolf is not killed last, a teammate will take his place as the werewolf.</string>

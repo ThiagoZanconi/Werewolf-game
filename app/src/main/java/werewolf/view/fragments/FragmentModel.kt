@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.GridLayout
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -17,6 +18,7 @@ import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
 import werewolf.view.R
+import werewolf.view.howtoplay.RoleDescriptionProvider
 
 abstract class FragmentModel: Fragment(){
 
@@ -133,6 +135,8 @@ class PlayerGridFragment(
     private val player: Player
 ): GridFragment(){
     private lateinit var abilityStateLabel: TextView
+    private lateinit var roleDescriptionButton: ImageButton
+    private lateinit var roleDescriptionLabel: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -150,8 +154,16 @@ class PlayerGridFragment(
         super.initComponents(view)
         abilityStateLabel = view.findViewById(R.id.abilityStateLabel)
         abilityStateLabel.text = player.fetchAbilityState()
-        titleLabel.text = player.fetchRole()
+        roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
+        roleDescriptionLabel = view.findViewById(R.id.roleDescription)
+        roleDescriptionLabel.text = RoleDescriptionProvider.getRoleDescription(player.fetchRole())
+        titleLabel.text = player.fetchRole().toString()
         imageView.setImageResource(player.fetchImageSrc())
+    }
+
+    override fun initListeners() {
+        super.initListeners()
+        roleDescriptionButton.setOnClickListener{ showRoleDescription() }
     }
 
     override fun confirmAction(){
@@ -167,5 +179,14 @@ class PlayerGridFragment(
 
     override fun setSelectedPlayer(playerName: String){
         selectedPlayer = player.fetchTargetPlayers().find { it.fetchPlayerName() == playerName }
+    }
+
+    private fun showRoleDescription(){
+        if(roleDescriptionLabel.visibility==View.VISIBLE){
+            roleDescriptionLabel.visibility=View.GONE
+        }
+        else{
+            roleDescriptionLabel.visibility=View.VISIBLE
+        }
     }
 }

@@ -1,5 +1,6 @@
 package werewolf.model.entities.villagers
 
+import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractPlayer
@@ -10,7 +11,7 @@ import werewolf.view.R
 class Villager(
     override val playerName: String
 ): AbstractPlayer() {
-    override val role: String = MyApp.getAppContext().getString(R.string.villager)
+    override val role: Roles = Roles.Villager
     override var abilityState: AbilityState = NoAbility()
 
     override fun fetchImageSrc(): Int {

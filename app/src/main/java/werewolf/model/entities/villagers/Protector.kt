@@ -1,5 +1,6 @@
 package werewolf.model.entities.villagers
 
+import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
@@ -13,7 +14,7 @@ import werewolf.view.R
 class Protector(
     override val playerName: String
 ): AbstractPlayer(){
-    override val role: String = MyApp.getAppContext().getString(R.string.protector)
+    override val role: Roles = Roles.Protector
     private var armored = true
 
     override fun resolveAbility(): Ability? {
