@@ -1,7 +1,9 @@
 package werewolf.model
 
+import android.content.Context
 import werewolf.model.entities.Player
-import werewolf.model.entities.neutrals.Jester
+import werewolf.model.repository.Repository
+import werewolf.model.repository.RepositoryImpl
 import werewolf.view.GameActivity
 import kotlin.math.floor
 
@@ -22,17 +24,20 @@ interface GameStateModel{
 }
 
 class GameStateModelImpl(
-    private val rolesQuantityRestrictions: RolesQuantityRestrictions
+    private val rolesQuantityRestrictions: RolesQuantityRestrictions, context: Context
 ): GameStateModel{
-    private lateinit var gameActivity: GameActivity
+
+    private val repository: Repository = RepositoryImpl(context)
     private val gameState: GameState = GameStateImpl()
     private lateinit var roleFactory: RoleFactory
+    private lateinit var gameActivity: GameActivity
 
     override fun setGameView(gameActivity: GameActivity) {
         this.gameActivity = gameActivity
     }
 
     override fun initGame(players: MutableList<String>) {
+        createProfiles(players)
         players.shuffle()
         roleFactory = RoleFactoryImpl(rolesQuantityRestrictions,players)
         val playersAssigned = roleFactory.getPlayers()
@@ -50,6 +55,7 @@ class GameStateModelImpl(
             addNeutral(playersAssigned[players.size-1])
         }
         gameState.initAlivePlayers()
+        printProfiles()
     }
 
     override fun getAlivePlayers(): List<Player> {
@@ -115,5 +121,17 @@ class GameStateModelImpl(
     private fun addNeutral(player: Player) {
         gameState.addVillager(player)
         gameState.addNeutral(player)
+    }
+
+    private fun createProfiles(players: List<String>){
+        players.forEach {
+            repository.createProfile(it)
+        }
+    }
+
+    private fun printProfiles(){
+        repository.getProfiles().forEach {
+            println("Name: "+it.name+", Jester Wins: "+it.jesterWins+", Werewolf Wins: "+it.werewolfWins+", Villager Wins: "+it.villagerWins)
+        }
     }
 }

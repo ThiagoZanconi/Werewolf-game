@@ -1,5 +1,6 @@
 package werewolf.model
 
+import android.content.Context
 import werewolf.view.GameActivity
 import werewolf.view.InitActivity
 
@@ -21,7 +22,7 @@ object ModelInjector {
     }
 
     fun setGameView(gameActivity: GameActivity){
-        gameStateModel = GameStateModelImpl(initModel.getRolesQuantityRestrictions())
+        gameStateModel = GameStateModelImpl(initModel.getRolesQuantityRestrictions(),gameActivity as Context)
         gameStateModel.setGameView(gameActivity)
     }
 }
