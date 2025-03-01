@@ -40,11 +40,13 @@
     <string name="protector">Protector</string>
     <string name="vigilante">Vigilante</string>
     <string name="priest">Priest</string>
+    <string name="veteran">Veteran</string>
     <string name="jester">Jester</string>
     <string name="werewolf">Werewolf</string>
     <string name="witch">Witch</string>
     <string name="vampire">Vampire</string>
-    <string name="veteran">Veteran</string>
+    <string name="necromancer">Necromancer</string>
+    <string name="zombie">Zombie</string>
 
     <string name="cancel_player_ability">Cancel Player Ability</string>
     <string name="werewolf_attack">Werewolf Attack</string>
@@ -59,6 +61,8 @@
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
     <string name="witch_description">Belongs to the werewolves team. Every night can select a villager to cancel his/her ability</string>
     <string name="vampire_description">Belongs to the werewolves team. Can select a villager to kill at night. Ability has 1 turn cooldown. Ability starts on cooldown</string>
+    <string name="necromancer_description">Belongs to the werewolves team. Can select a dead player to revive it as a zombie</string>
+    <string name="zombie_description">Belongs to the werewolves team. Has no ability, but can vote at the end of the round (only appears when revived by necromancer).</string>
     <string name="villager_description">Belongs to the villagers team. Has no ability</string>
     <string name="cleric_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn). Ability has 1 turn cooldown.</string>
     <string name="priest_description">Belongs to the villagers team. Once a game can select a player to revive (werewolves included)</string>

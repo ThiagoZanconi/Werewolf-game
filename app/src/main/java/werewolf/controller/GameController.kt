@@ -65,6 +65,7 @@ class GameControllerImpl(
             when (value.getAbility().fetchEvent()){
                 AbilityEventEnum.CancelAbility -> cancelAbility(value.getAbility())
                 AbilityEventEnum.RevivePlayer -> revivePlayer(value.getAbility().fetchTargetPlayer())
+                AbilityEventEnum.RevivePlayerZombie -> revivePlayerZombie(value.getAbility().fetchTargetPlayer())
             }
         }
 
@@ -126,6 +127,13 @@ class GameControllerImpl(
             roundEventsSummary += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
             gameLogs += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
         }
+    }
+
+    private fun revivePlayerZombie(player: Player){
+        val playerRevived = gameStateModel.revivePlayerZombie(player)
+        playerRevived.playerObservable.subscribe(playerObserver)
+        roundEventsSummary += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
+        gameLogs += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
     }
 
     private fun cancelAbility(ability: Ability){

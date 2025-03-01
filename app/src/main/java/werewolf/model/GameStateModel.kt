@@ -2,6 +2,7 @@ package werewolf.model
 
 import android.content.Context
 import werewolf.model.entities.Player
+import werewolf.model.entities.werewolves.Zombie
 import werewolf.model.repository.Repository
 import werewolf.model.repository.RepositoryImpl
 import werewolf.view.GameActivity
@@ -21,6 +22,7 @@ interface GameStateModel{
     fun killWerewolf(player: Player)
     fun ascendWerewolf(): Player
     fun revivePlayer(player: Player): Player?
+    fun revivePlayerZombie(player: Player): Player
 }
 
 class GameStateModelImpl(
@@ -108,6 +110,13 @@ class GameStateModelImpl(
             return gameState.reviveWerewolf(player)
         }
         return null
+    }
+
+    override fun revivePlayerZombie(player: Player): Player {
+        val zombiePlayer = Zombie(player.fetchPlayerName())
+        gameState.addWerewolf(zombiePlayer)
+        gameState.removePlayer(player)
+        return zombiePlayer
     }
 
     private fun addWerewolf(player: Player) {

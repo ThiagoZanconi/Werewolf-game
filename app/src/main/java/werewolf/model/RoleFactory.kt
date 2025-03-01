@@ -8,13 +8,14 @@ import werewolf.model.entities.villagers.Protector
 import werewolf.model.entities.villagers.Veteran
 import werewolf.model.entities.villagers.Vigilante
 import werewolf.model.entities.villagers.Villager
+import werewolf.model.entities.werewolves.Necromancer
 import werewolf.model.entities.werewolves.Vampire
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
 import kotlin.math.floor
 
 enum class Roles{
-    Werewolf, Witch, Vampire, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Jester
+    Werewolf, Witch, Vampire, Necromancer, Zombie, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Jester
 }
 
 interface RoleFactory{
@@ -27,7 +28,7 @@ class RoleFactoryImpl(
 ): RoleFactory {
 
     private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric, Roles.Villager, Roles.Veteran)
-    private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch)
+    private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch, Roles.Necromancer)
 
     override fun getPlayers(): List<Player> {
         val toReturn = mutableListOf<Player>()
@@ -74,6 +75,7 @@ class RoleFactoryImpl(
         return when(role){
             Roles.Witch -> Witch(name)
             Roles.Vampire -> Vampire(name)
+            Roles.Necromancer -> Necromancer(name)
             else -> Witch(name)
         }
     }

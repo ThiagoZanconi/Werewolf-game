@@ -5,7 +5,7 @@ enum class PlayerEventEnum{
 }
 
 enum class AbilityEventEnum{
-    CancelAbility, RevivePlayer
+    CancelAbility, RevivePlayer, RevivePlayerZombie
 }
 
 class PlayerSignal(private val player: Player){
