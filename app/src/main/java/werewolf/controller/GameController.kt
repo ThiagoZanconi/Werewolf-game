@@ -131,9 +131,11 @@ class GameControllerImpl(
 
     private fun revivePlayerZombie(player: Player){
         val playerRevived = gameStateModel.revivePlayerZombie(player)
-        playerRevived.playerObservable.subscribe(playerObserver)
-        roundEventsSummary += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
-        gameLogs += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
+        playerRevived?.playerObservable?.subscribe(playerObserver)
+        if(playerRevived!=null){
+            roundEventsSummary += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
+            gameLogs += player.fetchPlayerName()+" "+MyApp.getAppContext().getString(R.string.was_revived)+"\n"
+        }
     }
 
     private fun cancelAbility(ability: Ability){

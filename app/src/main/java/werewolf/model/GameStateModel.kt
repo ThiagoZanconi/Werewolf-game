@@ -22,7 +22,7 @@ interface GameStateModel{
     fun killWerewolf(player: Player)
     fun ascendWerewolf(): Player
     fun revivePlayer(player: Player): Player?
-    fun revivePlayerZombie(player: Player): Player
+    fun revivePlayerZombie(player: Player): Player?
 }
 
 class GameStateModelImpl(
@@ -112,11 +112,17 @@ class GameStateModelImpl(
         return null
     }
 
-    override fun revivePlayerZombie(player: Player): Player {
-        val zombiePlayer = Zombie(player.fetchPlayerName())
-        gameState.addWerewolf(zombiePlayer)
-        gameState.removePlayer(player)
-        return zombiePlayer
+    override fun revivePlayerZombie(player: Player): Player? {
+        val playerRemoved = gameState.removePlayer(player)
+        if(playerRemoved){
+            val zombiePlayer = Zombie(player.fetchPlayerName())
+            gameState.addWerewolf(zombiePlayer)
+            return zombiePlayer
+        }
+        else{
+            return null
+        }
+
     }
 
     private fun addWerewolf(player: Player) {

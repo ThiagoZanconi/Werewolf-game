@@ -20,7 +20,7 @@ interface GameState{
     fun ascendWerewolf(): Player
     fun reviveVillager(villager: Player): Player
     fun reviveWerewolf(werewolf: Player): Player
-    fun removePlayer(player: Player)
+    fun removePlayer(player: Player): Boolean
 }
 
 class GameStateImpl: GameState{
@@ -110,8 +110,9 @@ class GameStateImpl: GameState{
         return witch
     }
 
-    override fun removePlayer(player: Player) {
-        deadWerewolves.remove(player)
-        deadVillagers.remove(player)
+    override fun removePlayer(player: Player): Boolean {
+        val werewolfRemoved = deadWerewolves.remove(player)
+        val villagerRemoved = deadVillagers.remove(player)
+        return werewolfRemoved || villagerRemoved
     }
 }
