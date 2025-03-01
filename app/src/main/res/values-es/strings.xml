@@ -44,6 +44,7 @@
     <string name="werewolf">Hombre Lobo</string>
     <string name="witch">Bruja</string>
     <string name="vampire">Vampiro</string>
+    <string name="veteran">Veterano</string>
 
     <string name="cancel_player_ability">Cancelar habilidad de jugador</string>
     <string name="werewolf_attack">Ataque hombre lobo</string>
@@ -52,6 +53,7 @@
     <string name="protection">Proteccion</string>
     <string name="barrier">Barrera</string>
     <string name="revive_spell">Resucitar</string>
+    <string name="alert">Alerta</string>
 
     <string name="unknown_description">Descripcion no encontrada</string>
     <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para matar</string>
@@ -61,6 +63,7 @@
     <string name="cleric_description">Pertenece al equipo de los aldeanos. A la noche puede seleccionar un jugador para lanzar una barrera protectora sobre el(protege de todos los ataques que este reciba). La habilidad tiene enfriamiento de un turno.</string>
     <string name="priest_description">Pertenece al equipo de los aldeanos. Una vez por juego puede revivir a un jugador (hombres lobo incluidos)</string>
     <string name="vigilante_description">Pertenece al equipo de los aldeanos. Una vez por juego puede matar a un jugador (aldeanos incluidos)</string>
+    <string name="veteran_description">Pertenece al equipo de los aldeanos. Una vez por juego puede mantenerse alerta (Todos los jugadores que lo visiten seran disparados).</string>
     <string name="protector_description">Pertenece al equipo de los aldeanos. Tiene dos vidas (si es colgado muere instantaneamente).Cada noche puede proteger a un jugador para recibir todos los atques dirigidos a este ultimo.</string>
     <string name="jester_description">Juega solo. No tiene habilidad. Su objetivo es ser colgado al final del día.</string>
 </resources>

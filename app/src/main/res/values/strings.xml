@@ -44,6 +44,7 @@
     <string name="werewolf">Werewolf</string>
     <string name="witch">Witch</string>
     <string name="vampire">Vampire</string>
+    <string name="veteran">Veteran</string>
 
     <string name="cancel_player_ability">Cancel Player Ability</string>
     <string name="werewolf_attack">Werewolf Attack</string>
@@ -52,6 +53,7 @@
     <string name="protection">Protection</string>
     <string name="barrier">Barrier</string>
     <string name="revive_spell">Revive Spell</string>
+    <string name="alert">Alert</string>
 
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
@@ -61,6 +63,7 @@
     <string name="cleric_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn). Ability has 1 turn cooldown.</string>
     <string name="priest_description">Belongs to the villagers team. Once a game can select a player to revive (werewolves included)</string>
     <string name="vigilante_description">Belongs to the villagers team. Once a game can select a player to shot to kill(villagers included)</string>
+    <string name="veteran_description">Belongs to the villagers team. Once a game can stay alert at night (Every player that visits him, will get shot).</string>
     <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect from all attacks received.</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 </resources>

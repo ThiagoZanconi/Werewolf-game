@@ -31,6 +31,6 @@ class RolesDescriptionFragment(
     private fun initRecyclerView(view: View){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = RolesDescriptionAdapter(Roles.values())
+        recyclerView.adapter = RolesDescriptionAdapter(Roles.entries.toTypedArray())
     }
 }

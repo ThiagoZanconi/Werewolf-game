@@ -36,6 +36,8 @@ interface Player{
     fun defineDefenseState(defenseState: DefenseState)
     fun defineTargetPlayers(targetPlayers: List<Player>)
     fun defineTargetPlayer(targetPlayer: Player?)
+    fun getVisitedBy(visitor: Player)
+    fun resetVisitors()
     fun turnSetUp()
     fun receiveDamage(deathCause: DeathCause)
     fun receiveAbility(ability: Ability)
@@ -52,8 +54,8 @@ abstract class AbstractPlayer: Player{
     protected lateinit var event: PlayerEventEnum
     protected lateinit var deathCause: DeathCause
     protected open var usedAbility: Ability? = null
-
-    protected var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
+    protected var visitors: MutableList<Player> = mutableListOf()
+    private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayer: Player? = null
     private lateinit var targetPlayers: List<Player>
 
@@ -112,7 +114,16 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun defineTargetPlayer(targetPlayer: Player?) {
+        targetPlayer?.getVisitedBy(this)
         this.targetPlayer = targetPlayer
+    }
+
+    override fun getVisitedBy(visitor: Player) {
+        visitors.add(visitor)
+    }
+
+    override fun resetVisitors() {
+        visitors = mutableListOf()
     }
 
     override fun receiveDamage(deathCause: DeathCause) {
@@ -154,5 +165,4 @@ abstract class AbstractPlayer: Player{
     open fun applyDamage(deathCause: DeathCause) {
         notifyKilledPlayer(deathCause)
     }
-
 }

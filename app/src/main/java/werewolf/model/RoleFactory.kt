@@ -5,6 +5,7 @@ import werewolf.model.entities.neutrals.Jester
 import werewolf.model.entities.villagers.Cleric
 import werewolf.model.entities.villagers.Priest
 import werewolf.model.entities.villagers.Protector
+import werewolf.model.entities.villagers.Veteran
 import werewolf.model.entities.villagers.Vigilante
 import werewolf.model.entities.villagers.Villager
 import werewolf.model.entities.werewolves.Vampire
@@ -13,7 +14,7 @@ import werewolf.model.entities.werewolves.Witch
 import kotlin.math.floor
 
 enum class Roles{
-    Werewolf, Witch, Vampire, Villager, Cleric, Priest, Vigilante, Protector, Jester
+    Werewolf, Witch, Vampire, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Jester
 }
 
 interface RoleFactory{
@@ -25,7 +26,7 @@ class RoleFactoryImpl(
     private val players: MutableList<String>
 ): RoleFactory {
 
-    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric, Roles.Villager)
+    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric, Roles.Villager, Roles.Veteran)
     private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch)
 
     override fun getPlayers(): List<Player> {
@@ -106,6 +107,7 @@ class RoleFactoryImpl(
             Roles.Priest -> Priest(name)
             Roles.Vigilante -> Vigilante(name)
             Roles.Protector -> Protector(name)
+            Roles.Veteran -> Veteran(name)
             else -> Villager(name)
         }
     }

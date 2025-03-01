@@ -165,6 +165,7 @@ class GameControllerImpl(
         queueAbilities()
         resolveAbilities()
         resetDefenseState()
+        resetVisitors()
         checkIfGameEnded()
         if(!gameEnded){
             gameActivity.finishRound(roundEventsSummary, gameStateModel.getAlivePlayers())
@@ -193,6 +194,15 @@ class GameControllerImpl(
     private fun resetDefenseState(){
         gameStateModel.getAlivePlayers().forEach {
             it.resetDefenseState()
+        }
+    }
+
+    private fun resetVisitors(){
+        gameStateModel.getAlivePlayers().forEach {
+            it.resetVisitors()
+        }
+        gameStateModel.getDeadPlayers().forEach {
+            it.resetVisitors()
         }
     }
 
