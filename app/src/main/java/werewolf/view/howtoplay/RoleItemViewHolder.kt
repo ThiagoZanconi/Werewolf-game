@@ -7,7 +7,7 @@ import werewolf.model.Roles
 import werewolf.view.R
 import werewolf.view.RoleNameProvider
 
-class RoleItemViewHolder(private val view: View):RecyclerView.ViewHolder(view){
+class RoleItemViewHolder(view: View):RecyclerView.ViewHolder(view){
 
     private val role = view.findViewById<TextView>(R.id.roleName)
     private val description = view.findViewById<TextView>(R.id.roleDescription)

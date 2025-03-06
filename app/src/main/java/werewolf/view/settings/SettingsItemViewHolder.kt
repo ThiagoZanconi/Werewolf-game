@@ -6,7 +6,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.R
 import werewolf.view.RoleNameProvider

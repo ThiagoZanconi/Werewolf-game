@@ -11,8 +11,7 @@ import werewolf.model.Roles
 import werewolf.view.R
 import werewolf.view.howtoplay.RolesDescriptionAdapter
 
-class RolesDescriptionFragment(
-): Fragment(){
+class RolesDescriptionFragment: Fragment(){
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(

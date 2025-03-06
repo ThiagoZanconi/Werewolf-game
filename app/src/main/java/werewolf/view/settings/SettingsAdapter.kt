@@ -2,9 +2,7 @@ package werewolf.view.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.Size
 import androidx.recyclerview.widget.RecyclerView
-import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.R
 

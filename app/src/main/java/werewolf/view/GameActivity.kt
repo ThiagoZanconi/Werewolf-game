@@ -15,6 +15,7 @@ import werewolf.model.entities.Player
 import werewolf.view.fragments.FinishedGameFragment
 import werewolf.view.fragments.FinishedRoundFragment
 import werewolf.view.fragments.WinnerTeam
+import java.util.Locale
 
 interface GameActivity{
     val uiEventObservable: Observable<GameUiEvent>
@@ -64,6 +65,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     }
 
     @SuppressLint("MissingSuperCall")
+    @Deprecated("Deprecated")
     override fun onBackPressed() {
 
     }
@@ -115,7 +117,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     private fun startTimer(fragment: Fragment) {
         object : CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                timerTextView.text = (millisUntilFinished / 1000).toString()
+                timerTextView.text = String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
