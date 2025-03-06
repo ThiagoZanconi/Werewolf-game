@@ -3,13 +3,14 @@ package werewolf.model
 import android.content.Context
 import werewolf.view.GameActivity
 import werewolf.view.InitActivity
+import werewolf.view.settings.RoleQuantitySettings
 
 object ModelInjector {
     private lateinit var initModel: InitModel
     private lateinit var gameStateModel: GameStateModel
 
-    fun initModel(initActivity: InitActivity) {
-        initModel = InitModelImpl()
+    fun initModel(initActivity: InitActivity,roleQuantitySettings: RoleQuantitySettings) {
+        initModel = InitModelImpl(roleQuantitySettings)
         initModel.setInitView(initActivity)
     }
 

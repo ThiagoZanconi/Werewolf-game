@@ -13,11 +13,14 @@ import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.GameActivityImpl
 import werewolf.view.R
+import werewolf.view.settings.RoleQuantitySettings
+import werewolf.view.settings.RoleQuantitySettingsImpl
 import werewolf.view.settings.SettingsAdapter
 
 class SettingsFragment(
     private val playerSize: Int,
-    private val onActionSubject: Subject<Pair<Roles,Int>>
+    private val onActionSubject: Subject<Pair<Roles,Int>>,
+    private val roleQuantitySettings: RoleQuantitySettings
 ): Fragment(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var doneButton: Button
@@ -35,7 +38,7 @@ class SettingsFragment(
     }
 
     private fun initComponents(view: View) {
-        initRecyclerView(view)
+        initRecyclerView(view,roleQuantitySettings)
         doneButton = view.findViewById(R.id.doneButton)
         initRolesMaxQuantityRestrictions()
     }
@@ -44,15 +47,15 @@ class SettingsFragment(
         doneButton.setOnClickListener { startGame() }
     }
 
-    private fun initRecyclerView(view: View){
+    private fun initRecyclerView(view: View,roleQuantitySettings: RoleQuantitySettings){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        val adapter = SettingsAdapter(Roles.values(), playerSize,onActionSubject)
+        val adapter = SettingsAdapter(Roles.entries.toTypedArray(),playerSize, roleQuantitySettings ,onActionSubject)
         recyclerView.adapter = adapter
     }
 
     private fun initRolesMaxQuantityRestrictions(){
-        Roles.values().forEach {
+        Roles.entries.forEach {
             onActionSubject.notify(Pair(it,playerSize))
         }
     }

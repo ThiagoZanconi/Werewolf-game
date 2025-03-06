@@ -17,6 +17,8 @@ import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.fragments.HowToPlayFragment
 import werewolf.view.fragments.SettingsFragment
+import werewolf.view.settings.RoleQuantitySettings
+import werewolf.view.settings.RoleQuantitySettingsImpl
 
 interface InitActivity{
     val uiEventObservable: Observable<InitUiEvent>
@@ -32,6 +34,7 @@ interface InitActivity{
 class InitActivityImpl : AppCompatActivity(), InitActivity {
     private val onActionSubject = Subject<InitUiEvent>()
     private val roleRestrictionActionSubject = Subject<Pair<Roles,Int>>()
+    private val roleQuantitySettings: RoleQuantitySettings = RoleQuantitySettingsImpl()
 
     private lateinit var addPlayerButton: Button
     private lateinit var startGameButton: Button
@@ -57,6 +60,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     override fun startGame() {
         hideKeyboard()
+        roleQuantitySettings.init(gridLayout.childCount)
         initSettingsFragment()
     }
 
@@ -78,7 +82,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     }
 
     private fun initModule() {
-        ViewInjector.init(this)
+        ViewInjector.init(this,roleQuantitySettings)
     }
 
     private fun initComponents(){
@@ -121,7 +125,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     private fun initSettingsFragment(){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.OptionFragment, SettingsFragment(gridLayout.childCount,roleRestrictionActionSubject))
+            .replace(R.id.OptionFragment, SettingsFragment(gridLayout.childCount,roleRestrictionActionSubject,roleQuantitySettings))
             .addToBackStack(null)
             .commit()
     }

@@ -1,6 +1,7 @@
 package werewolf.model
 
 import werewolf.view.InitActivity
+import werewolf.view.settings.RoleQuantitySettings
 
 interface InitModel{
     fun setInitView(initActivity: InitActivity)
@@ -11,7 +12,7 @@ interface InitModel{
     fun getRolesQuantityRestrictions(): RolesQuantityRestrictions
 }
 
-class InitModelImpl: InitModel{
+class InitModelImpl(private val roleQuantitySettings: RoleQuantitySettings): InitModel{
     private lateinit var initActivity: InitActivity
     private val players: MutableList<String> = mutableListOf()
     private val rolesQuantityRestrictions: RolesQuantityRestrictions = RolesQuantityRestrictionsImpl()

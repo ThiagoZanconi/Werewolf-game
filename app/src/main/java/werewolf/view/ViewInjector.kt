@@ -2,11 +2,12 @@ package werewolf.view
 
 import werewolf.controller.ControllerInjector
 import werewolf.model.ModelInjector
+import werewolf.view.settings.RoleQuantitySettings
 
 object ViewInjector {
 
-    fun init(initActivity: InitActivity) {
-        ModelInjector.initModel(initActivity)
+    fun init(initActivity: InitActivity,roleQuantitySettings: RoleQuantitySettings) {
+        ModelInjector.initModel(initActivity, roleQuantitySettings)
         ControllerInjector.onViewStarted(initActivity)
     }
 

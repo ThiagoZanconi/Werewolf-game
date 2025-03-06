@@ -2,6 +2,7 @@ package werewolf.view.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.Size
 import androidx.recyclerview.widget.RecyclerView
 import com.example.observer.Subject
 import werewolf.model.Roles
@@ -10,11 +11,12 @@ import werewolf.view.R
 class SettingsAdapter(
     private val rolesList: Array<Roles>,
     private val playerSize: Int,
+    private val roleQuantitySettings: RoleQuantitySettings,
     private val onActionSubject: Subject<Pair<Roles,Int>>
 ): RecyclerView.Adapter<SettingsItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return SettingsItemViewHolder(layoutInflater.inflate(R.layout.item_setting_config,parent,false),onActionSubject)
+        return SettingsItemViewHolder(layoutInflater.inflate(R.layout.item_setting_config,parent,false),onActionSubject,roleQuantitySettings)
     }
 
     override fun getItemCount(): Int {
