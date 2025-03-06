@@ -19,7 +19,6 @@ import werewolf.view.settings.SettingsAdapter
 
 class SettingsFragment(
     private val playerSize: Int,
-    private val onActionSubject: Subject<Pair<Roles,Int>>,
     private val roleQuantitySettings: RoleQuantitySettings
 ): Fragment(){
     private lateinit var recyclerView: RecyclerView
@@ -40,7 +39,6 @@ class SettingsFragment(
     private fun initComponents(view: View) {
         initRecyclerView(view,roleQuantitySettings)
         doneButton = view.findViewById(R.id.doneButton)
-        initRolesMaxQuantityRestrictions()
     }
 
     private fun initListeners(){
@@ -50,14 +48,8 @@ class SettingsFragment(
     private fun initRecyclerView(view: View,roleQuantitySettings: RoleQuantitySettings){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        val adapter = SettingsAdapter(Roles.entries.toTypedArray(),playerSize, roleQuantitySettings ,onActionSubject)
+        val adapter = SettingsAdapter(Roles.entries.toTypedArray(),playerSize, roleQuantitySettings)
         recyclerView.adapter = adapter
-    }
-
-    private fun initRolesMaxQuantityRestrictions(){
-        Roles.entries.forEach {
-            onActionSubject.notify(Pair(it,playerSize))
-        }
     }
 
     private fun startGame(){

@@ -11,12 +11,11 @@ import werewolf.view.R
 class SettingsAdapter(
     private val rolesList: Array<Roles>,
     private val playerSize: Int,
-    private val roleQuantitySettings: RoleQuantitySettings,
-    private val onActionSubject: Subject<Pair<Roles,Int>>
+    private val roleQuantitySettings: RoleQuantitySettings
 ): RecyclerView.Adapter<SettingsItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return SettingsItemViewHolder(layoutInflater.inflate(R.layout.item_setting_config,parent,false),onActionSubject,roleQuantitySettings)
+        return SettingsItemViewHolder(layoutInflater.inflate(R.layout.item_setting_config,parent,false),roleQuantitySettings)
     }
 
     override fun getItemCount(): Int {

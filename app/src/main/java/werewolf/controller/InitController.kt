@@ -2,7 +2,6 @@ package werewolf.controller
 
 import com.example.observer.Observer
 import werewolf.model.InitModel
-import werewolf.model.Roles
 import werewolf.view.InitActivity
 import werewolf.view.InitUiEvent
 
@@ -18,7 +17,6 @@ class InitControllerImpl(
     override fun setInitView(initActivity: InitActivity) {
         this.initActivity = initActivity
         initActivity.uiEventObservable.subscribe(observer)
-        initActivity.roleRestrictionEventObservable.subscribe(roleRestrictionObserver)
     }
 
     private val observer: Observer<InitUiEvent> =
@@ -28,11 +26,6 @@ class InitControllerImpl(
                 InitUiEvent.RemovePlayer -> removePlayer()
                 InitUiEvent.StartGame -> startGame()
             }
-        }
-
-    private val roleRestrictionObserver: Observer<Pair<Roles,Int>> =
-        Observer {
-                value -> initModel.addRoleQuantityRestriction(value.first,value.second)
         }
 
     private fun addPlayer() {

@@ -23,7 +23,7 @@ object ModelInjector {
     }
 
     fun setGameView(gameActivity: GameActivity){
-        gameStateModel = GameStateModelImpl(initModel.getRolesQuantityRestrictions(),gameActivity as Context)
+        gameStateModel = GameStateModelImpl(initModel.getRoleQuantitySetting(),gameActivity as Context)
         gameStateModel.setGameView(gameActivity)
     }
 }

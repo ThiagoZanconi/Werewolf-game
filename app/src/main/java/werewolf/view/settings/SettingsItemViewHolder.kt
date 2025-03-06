@@ -11,7 +11,7 @@ import werewolf.model.Roles
 import werewolf.view.R
 import werewolf.view.RoleNameProvider
 
-class SettingsItemViewHolder(private val view: View,private val onActionSubject: Subject<Pair<Roles,Int>>,private val roleQuantitySettings: RoleQuantitySettings):RecyclerView.ViewHolder(view){
+class SettingsItemViewHolder(private val view: View, private val roleQuantitySettings: RoleQuantitySettings):RecyclerView.ViewHolder(view){
 
     private val role = view.findViewById<TextView>(R.id.roleName)
     private val spinner = view.findViewById<Spinner>(R.id.spinnerOptions)
@@ -41,7 +41,6 @@ class SettingsItemViewHolder(private val view: View,private val onActionSubject:
                 position: Int,
                 id: Long
             ) {
-                onActionSubject.notify(Pair(role, spinner.selectedItem.toString().toInt()))
                 roleQuantitySettings.setRoleQuantity(role, spinner.selectedItem.toString().toInt())
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {

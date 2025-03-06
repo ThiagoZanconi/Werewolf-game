@@ -6,7 +6,7 @@ interface RoleQuantitySettings{
     fun init(playerSize: Int)
     fun setRoleQuantity(role: Roles, size: Int)
     fun getRoleQuantity(role:Roles): Int
-    fun roleRestrictionSubtraction(role: Roles)
+    fun subtractRoleQuantity(role: Roles)
 }
 
 class RoleQuantitySettingsImpl: RoleQuantitySettings{
@@ -26,7 +26,7 @@ class RoleQuantitySettingsImpl: RoleQuantitySettings{
         return rolesQuantityMap[role]!!
     }
 
-    override fun roleRestrictionSubtraction(role: Roles) {
+    override fun subtractRoleQuantity(role: Roles) {
         rolesQuantityMap[role] = rolesQuantityMap[role]!!-1
     }
 }

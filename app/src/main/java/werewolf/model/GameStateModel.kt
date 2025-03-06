@@ -6,6 +6,7 @@ import werewolf.model.entities.werewolves.Zombie
 import werewolf.model.repository.Repository
 import werewolf.model.repository.RepositoryImpl
 import werewolf.view.GameActivity
+import werewolf.view.settings.RoleQuantitySettings
 import kotlin.math.floor
 
 interface GameStateModel{
@@ -26,7 +27,7 @@ interface GameStateModel{
 }
 
 class GameStateModelImpl(
-    private val rolesQuantityRestrictions: RolesQuantityRestrictions, context: Context
+    private val roleQuantitySettings: RoleQuantitySettings, context: Context
 ): GameStateModel{
 
     private val repository: Repository = RepositoryImpl(context)
@@ -41,7 +42,7 @@ class GameStateModelImpl(
     override fun initGame(players: MutableList<String>) {
         createProfiles(players)
         players.shuffle()
-        roleFactory = RoleFactoryImpl(rolesQuantityRestrictions,players)
+        roleFactory = RoleFactoryImpl(roleQuantitySettings,players)
         val playersAssigned = roleFactory.getPlayers()
         val cut = floor(players.size / 3.0).toInt()
         for(i in 0 until cut){
@@ -50,7 +51,7 @@ class GameStateModelImpl(
         for(i in cut until players.size-1){
             addVillager(playersAssigned[i])
         }
-        if(rolesQuantityRestrictions.getRoleRestriction(Roles.Jester)==0){
+        if(roleQuantitySettings.getRoleQuantity(Roles.Jester)==0){
             addVillager(playersAssigned[players.size-1])
         }
         else{

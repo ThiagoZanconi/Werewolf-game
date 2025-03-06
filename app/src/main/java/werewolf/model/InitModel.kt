@@ -8,14 +8,12 @@ interface InitModel{
     fun players(): MutableList<String>
     fun addPlayer(name: String)
     fun removePlayer(index: Int)
-    fun addRoleQuantityRestriction(role: Roles, int: Int)
-    fun getRolesQuantityRestrictions(): RolesQuantityRestrictions
+    fun getRoleQuantitySetting(): RoleQuantitySettings
 }
 
 class InitModelImpl(private val roleQuantitySettings: RoleQuantitySettings): InitModel{
     private lateinit var initActivity: InitActivity
     private val players: MutableList<String> = mutableListOf()
-    private val rolesQuantityRestrictions: RolesQuantityRestrictions = RolesQuantityRestrictionsImpl()
 
     override fun setInitView(initActivity: InitActivity) {
         this.initActivity = initActivity
@@ -37,11 +35,7 @@ class InitModelImpl(private val roleQuantitySettings: RoleQuantitySettings): Ini
         initActivity.removePlayer(index,name)
     }
 
-    override fun addRoleQuantityRestriction(role: Roles, int: Int) {
-        rolesQuantityRestrictions.addRoleRestriction(role,int)
-    }
-
-    override fun getRolesQuantityRestrictions(): RolesQuantityRestrictions {
-        return rolesQuantityRestrictions
+    override fun getRoleQuantitySetting(): RoleQuantitySettings {
+        return roleQuantitySettings
     }
 }

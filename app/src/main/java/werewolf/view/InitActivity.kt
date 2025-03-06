@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
-import werewolf.model.Roles
 import werewolf.view.fragments.HowToPlayFragment
 import werewolf.view.fragments.SettingsFragment
 import werewolf.view.settings.RoleQuantitySettings
@@ -22,7 +21,6 @@ import werewolf.view.settings.RoleQuantitySettingsImpl
 
 interface InitActivity{
     val uiEventObservable: Observable<InitUiEvent>
-    val roleRestrictionEventObservable: Observable<Pair<Roles,Int>>
 
     fun addPlayer(text:String)
     fun removePlayer(index: Int, name: String)
@@ -33,7 +31,6 @@ interface InitActivity{
 
 class InitActivityImpl : AppCompatActivity(), InitActivity {
     private val onActionSubject = Subject<InitUiEvent>()
-    private val roleRestrictionActionSubject = Subject<Pair<Roles,Int>>()
     private val roleQuantitySettings: RoleQuantitySettings = RoleQuantitySettingsImpl()
 
     private lateinit var addPlayerButton: Button
@@ -44,7 +41,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private lateinit var howToPlayButton: Button
 
     override val uiEventObservable: Observable<InitUiEvent> = onActionSubject
-    override val roleRestrictionEventObservable: Observable<Pair<Roles,Int>> = roleRestrictionActionSubject
 
     private var playerToRemove : String =""
 
@@ -125,7 +121,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     private fun initSettingsFragment(){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.OptionFragment, SettingsFragment(gridLayout.childCount,roleRestrictionActionSubject,roleQuantitySettings))
+            .replace(R.id.OptionFragment, SettingsFragment(gridLayout.childCount,roleQuantitySettings))
             .addToBackStack(null)
             .commit()
     }
