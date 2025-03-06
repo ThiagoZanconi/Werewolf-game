@@ -10,6 +10,7 @@ import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.model.entities.werewolves.Werewolf
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
@@ -39,7 +40,7 @@ class Veteran(
     }
 }
 
-class Alert(private val targetPlayers: MutableList<Player>): AbstractAbility(targetPlayers.first()){
+class Alert(private val targetPlayers: MutableList<Player>): AbstractAbility(Werewolf("Dummy Target")){
 
     override fun resolve() {
         targetPlayers.forEach{
