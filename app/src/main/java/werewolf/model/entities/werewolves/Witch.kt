@@ -3,15 +3,15 @@ package werewolf.model.entities.werewolves
 import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
-import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
 
 class Witch(
     override val playerName: String
-): AbstractPlayer(){
+): WerewolfTeamPlayer(){
     override val role: Roles = Roles.Witch
 
     override fun fetchImageSrc(): Int {
@@ -19,6 +19,7 @@ class Witch(
     }
 
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetWerewolfTargets)
     }
 

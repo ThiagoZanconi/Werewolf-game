@@ -6,6 +6,7 @@ import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.GameUiEvent
 import werewolf.view.fragments.PlayerGridFragment
+import werewolf.view.fragments.WerewolfTeamFragment
 
 enum class DeathCause{
     HANGED, MAULED, SHOT
@@ -16,6 +17,7 @@ interface Player{
 
     fun fetchPlayerName(): String
     fun fetchRole(): Roles
+    fun fetchTeammates(): List<Player>
     fun fetchTargetPlayers(): List<Player>
     fun fetchTargetPlayer(): Player?
     fun fetchEvent(): PlayerEventEnum
@@ -34,6 +36,7 @@ interface Player{
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
     fun defineDefenseState(defenseState: DefenseState)
+    fun defineTeammates(team: List<Player>)
     fun defineTargetPlayers(targetPlayers: List<Player>)
     fun defineTargetPlayer(targetPlayer: Player?)
     fun getVisitedBy(visitor: Player)
@@ -58,6 +61,7 @@ abstract class AbstractPlayer: Player{
     private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayer: Player? = null
     private lateinit var targetPlayers: List<Player>
+    protected lateinit var teammates: List<Player>
 
     protected val onActionSubject = Subject<PlayerSignal>()
     override val playerObservable: Observable<PlayerSignal> = onActionSubject
@@ -68,6 +72,10 @@ abstract class AbstractPlayer: Player{
 
     override fun fetchRole(): Roles {
         return role
+    }
+
+    override fun fetchTeammates(): List<Player> {
+        return teammates
     }
 
     override fun fetchTargetPlayers(): List<Player> {
@@ -107,6 +115,10 @@ abstract class AbstractPlayer: Player{
 
     override fun defineDefenseState(defenseState: DefenseState) {
         this.defenseState = defenseState
+    }
+
+    override fun defineTeammates(team: List<Player>) {
+        teammates = team
     }
 
     override fun defineTargetPlayers(targetPlayers: List<Player>) {
@@ -164,5 +176,15 @@ abstract class AbstractPlayer: Player{
 
     open fun applyDamage(deathCause: DeathCause) {
         notifyKilledPlayer(deathCause)
+    }
+}
+
+abstract class WerewolfTeamPlayer: AbstractPlayer(){
+    override fun turnSetUp() {
+        signalEvent(PlayerEventEnum.SetWerewolfTeammates)
+    }
+
+    override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
+        return WerewolfTeamFragment(onActionSubject,this)
     }
 }

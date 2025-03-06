@@ -54,6 +54,7 @@ class GameControllerImpl(
                 PlayerEventEnum.SetOtherAlivePlayersTarget -> setOtherAlivePlayersTarget(value.getPlayer())
                 PlayerEventEnum.SetNoTargets -> setNoTargets(value.getPlayer())
                 PlayerEventEnum.SetDeadTargets -> setDeadTargets(value.getPlayer())
+                PlayerEventEnum.SetWerewolfTeammates ->  setWerewolfTeammates(value.getPlayer())
                 PlayerEventEnum.KilledPlayer -> killedPlayer(value.getPlayer())
                 PlayerEventEnum.WerewolfKilled -> werewolfKilled(value.getPlayer())
                 PlayerEventEnum.JesterWin -> jesterWin(value.getPlayer())
@@ -87,6 +88,10 @@ class GameControllerImpl(
 
     private fun setDeadTargets(player: Player){
         player.defineTargetPlayers(gameStateModel.getDeadPlayers())
+    }
+
+    private fun setWerewolfTeammates(player: Player){
+        player.defineTeammates(gameStateModel.getAliveWerewolves())
     }
 
     private fun killedPlayer(player: Player){

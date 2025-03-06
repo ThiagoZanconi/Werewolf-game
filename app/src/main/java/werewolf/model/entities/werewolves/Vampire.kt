@@ -4,17 +4,17 @@ import werewolf.model.Roles
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractAbility
-import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.OneTurnCooldown
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
 
 class Vampire(
     override val playerName: String
-): AbstractPlayer(){
+): WerewolfTeamPlayer(){
     override val role: Roles = Roles.Vampire
     override var abilityState: AbilityState = OneTurnCooldown()
 
@@ -23,6 +23,7 @@ class Vampire(
     }
 
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetWerewolfTargets)
     }
 

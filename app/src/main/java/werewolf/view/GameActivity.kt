@@ -43,6 +43,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     }
 
     override fun startTurn(player: Player) {
+        startTurnButton.isEnabled = false
         startTimer(player.fetchView(onActionSubject))
     }
 
@@ -123,6 +124,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
             override fun onFinish() {
                 initFragment(fragment)
                 turnOffCover()
+                startTurnButton.isEnabled = true
             }
         }.start()
     }

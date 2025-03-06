@@ -22,6 +22,7 @@
     <string name="was_mauled">Fue descuartizado</string>
     <string name="was_hanged">Fue colgado</string>
     <string name="role_description">Descripcion de Rol</string>
+    <string name="team">Equipo:</string>
 
     <string name="intro1">El juego consiste en dos equipos: el hombre lobo y sus seguidores, y los aldeanos (junto con el bufón, que será explicado más adelante). Para que un equipo gane, debe matar a todos los jugadores del equipo contrario. Cada equipo tiene diferentes roles, y cada uno de ellos tiene habilidades únicas que se pueden utilizar para lograr la victoria.</string>
     <string name="intro2">El juego también consta de dos fases: noche y día. Durante la noche, los jugadores usarán sus habilidades para matar o sobrevivir a los ataques del equipo contrario. El equipo de los hombres lobo sabe quiénes son los aldeanos, y por lo tanto, quiénes son sus compañeros de equipo. En cambio, los aldeanos deben descubrir quiénes son los hombres lobo para poder matarlos. Si el hombre lobo no es el último en morir, uno de sus compañeros tomará su lugar como el hombre lobo.</string>

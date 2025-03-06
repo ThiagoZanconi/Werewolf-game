@@ -1,7 +1,9 @@
 package werewolf.model.entities
 
 enum class PlayerEventEnum{
-    SetWerewolfTargets, KilledPlayer, SetAlivePlayersTarget, JesterWin, WerewolfKilled, SetDeadTargets, SetNoTargets, SetOtherAlivePlayersTarget
+    SetWerewolfTargets, KilledPlayer, SetAlivePlayersTarget, JesterWin,
+    WerewolfKilled, SetDeadTargets, SetNoTargets, SetOtherAlivePlayersTarget,
+    SetWerewolfTeammates
 }
 
 enum class AbilityEventEnum{

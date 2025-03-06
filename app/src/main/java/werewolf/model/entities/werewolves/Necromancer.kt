@@ -5,17 +5,17 @@ import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityEventEnum
 import werewolf.model.entities.AbilitySignal
 import werewolf.model.entities.AbstractAbility
-import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Immune
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
 
 class Necromancer(
     override val playerName: String
-): AbstractPlayer(){
+): WerewolfTeamPlayer(){
     override val role: Roles = Roles.Necromancer
 
     override fun resolveAbility(): Ability? {
@@ -29,6 +29,7 @@ class Necromancer(
     }
 
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetDeadTargets)
     }
 }
