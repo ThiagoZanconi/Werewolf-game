@@ -8,7 +8,6 @@ import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoAbility
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.PlayerSignal
-import werewolf.view.MyApp
 import werewolf.view.R
 
 class Jester(

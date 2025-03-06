@@ -7,8 +7,7 @@ interface CursorToProfileMapper{
     fun getProfile(cursor: Cursor): Profile
 }
 
-class CursorToProfileMapperImpl(
-): CursorToProfileMapper{
+class CursorToProfileMapperImpl: CursorToProfileMapper{
     override fun getProfile(cursor: Cursor): Profile {
         return Profile(
             cursor.getString(0),
