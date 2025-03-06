@@ -17,7 +17,6 @@ class SettingsItemViewHolder(private val view: View, private val roleQuantitySet
     private val spinner = view.findViewById<Spinner>(R.id.spinnerOptions)
 
     fun render(role: Roles, playersSize: Int){
-        println("Role rendered: $role")
         this.role.text = RoleNameProvider.getRoleName(role)
         initSpinner(role,playersSize)
     }

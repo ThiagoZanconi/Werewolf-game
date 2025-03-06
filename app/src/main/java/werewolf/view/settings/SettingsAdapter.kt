@@ -10,7 +10,6 @@ import werewolf.view.R
 
 class SettingsAdapter(
     private val rolesList: Array<Roles>,
-    private val playerSize: Int,
     private val roleQuantitySettings: RoleQuantitySettings
 ): RecyclerView.Adapter<SettingsItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsItemViewHolder {
@@ -23,6 +22,6 @@ class SettingsAdapter(
     }
 
     override fun onBindViewHolder(holder: SettingsItemViewHolder, position: Int) {
-        holder.render(rolesList[position],playerSize)
+        holder.render(rolesList[position],roleQuantitySettings.getRoleMaxQuantity(rolesList[position]))
     }
 }

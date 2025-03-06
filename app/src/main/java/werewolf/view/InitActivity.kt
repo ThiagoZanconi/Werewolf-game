@@ -121,7 +121,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     private fun initSettingsFragment(){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.OptionFragment, SettingsFragment(gridLayout.childCount,roleQuantitySettings))
+            .replace(R.id.OptionFragment, SettingsFragment(roleQuantitySettings))
             .addToBackStack(null)
             .commit()
     }

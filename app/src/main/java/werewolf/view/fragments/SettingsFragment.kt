@@ -9,16 +9,13 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.GameActivityImpl
 import werewolf.view.R
 import werewolf.view.settings.RoleQuantitySettings
-import werewolf.view.settings.RoleQuantitySettingsImpl
 import werewolf.view.settings.SettingsAdapter
 
 class SettingsFragment(
-    private val playerSize: Int,
     private val roleQuantitySettings: RoleQuantitySettings
 ): Fragment(){
     private lateinit var recyclerView: RecyclerView
@@ -48,7 +45,7 @@ class SettingsFragment(
     private fun initRecyclerView(view: View,roleQuantitySettings: RoleQuantitySettings){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        val adapter = SettingsAdapter(Roles.entries.toTypedArray(),playerSize, roleQuantitySettings)
+        val adapter = SettingsAdapter(Roles.entries.filter { it != Roles.Werewolf }.toTypedArray(), roleQuantitySettings)
         recyclerView.adapter = adapter
     }
 
