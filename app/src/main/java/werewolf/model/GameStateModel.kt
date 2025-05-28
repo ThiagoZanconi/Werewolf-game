@@ -40,7 +40,11 @@ class GameStateModelImpl(
     }
 
     override fun initGame(players: MutableList<String>) {
-        createProfiles(players)
+        //createProfiles(players)
+        val playerPositionMap: MutableMap<String, Int> = mutableMapOf()
+        for(index in 0 until players.size){
+            playerPositionMap[players[index]] = index
+        }
         players.shuffle()
         roleFactory = RoleFactoryImpl(roleQuantitySettings,players)
         val playersAssigned = roleFactory.getPlayers()
@@ -57,8 +61,8 @@ class GameStateModelImpl(
         else{
             addNeutral(playersAssigned[players.size-1])
         }
-        gameState.initAlivePlayers()
-        printProfiles()
+        gameState.initAlivePlayers(playerPositionMap)
+        //printProfiles()
     }
 
     override fun getAlivePlayers(): List<Player> {

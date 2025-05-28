@@ -5,7 +5,7 @@ import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
 
 interface GameState{
-    fun initAlivePlayers()
+    fun initAlivePlayers( playerPositionMap: MutableMap<String, Int>)
     fun getAlivePlayers(): List<Player>
     fun getAliveWerewolves(): List<Player>
     fun getAliveVillagers(): List<Player>
@@ -31,8 +31,8 @@ class GameStateImpl: GameState{
     private val deadVillagers: MutableList<Player> = mutableListOf()
     private val neutrals: MutableList<Player> = mutableListOf()
 
-    override fun initAlivePlayers() {
-        alivePlayers.shuffle()
+    override fun initAlivePlayers(playerPositionMap: MutableMap<String, Int>) {
+        alivePlayers.sortBy { playerPositionMap[it.fetchPlayerName()] ?: Int.MAX_VALUE }
     }
 
     override fun getAlivePlayers(): List<Player> {
