@@ -73,18 +73,27 @@
         android:src="@drawable/image_questionmark"
         android:scaleType="fitXY" />
 
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewDescription"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:columnCount="3"
-        android:padding="16dp">
-    </GridLayout>
+        app:layout_constraintBottom_toTopOf="@id/teamTextView">
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:columnCount="3"
+            android:padding="16dp">
+        </GridLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/roleDescription"
@@ -105,7 +114,7 @@
     <TextView
         android:id="@+id/teamTextView"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/confirmButton"
         android:layout_marginBottom="10dp"
@@ -117,21 +126,26 @@
         android:textColor="#FFFFFF"
         android:background="@drawable/textview_shape" />
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toEndOf="@id/teamTextView"
-        app:layout_constraintBottom_toTopOf="@id/confirmButton"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="10dp">
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/teamTextView"
+        app:layout_constraintBottom_toBottomOf="@id/teamTextView">
         <GridLayout
             android:id="@+id/teammatesGridLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:columnCount="3"
-            android:padding="16dp" />
-    </FrameLayout>
+            android:padding="16dp">
+        </GridLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/confirmButton"

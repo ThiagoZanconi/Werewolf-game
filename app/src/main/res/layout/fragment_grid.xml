@@ -73,18 +73,26 @@
         android:src="@drawable/image_questionmark"
         android:scaleType="fitXY" />
 
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewDescription"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:columnCount="3"
-        android:padding="16dp">
-    </GridLayout>
+        app:layout_constraintBottom_toTopOf="@id/confirmButton">
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:columnCount="3"
+            android:padding="16dp">
+        </GridLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/roleDescription"
