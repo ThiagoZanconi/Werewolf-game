@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -11,15 +12,26 @@
         android:scaleType="centerCrop"
         android:src="@drawable/image_dark_village" />
 
-    <include
-        layout="@layout/textview_title2" />
+    <LinearLayout
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/textview_title" />
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/roleImageLabelLayout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
         android:background="@drawable/imageview_shape">
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/roleImageLabel"
@@ -34,18 +46,45 @@
         </com.google.android.material.imageview.ShapeableImageView>
     </LinearLayout>
 
-    <include
-        layout="@layout/textview_description" />
-
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="440dp"
-        android:columnCount="3"
-        android:padding="16dp">
-    </GridLayout>
+    <FrameLayout
+        android:id="@+id/selectionsFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roleImageLabelLayout"
+        app:layout_constraintBottom_toTopOf="@id/gameLogsButton">
+        <include
+            android:elevation="0dp"
+            layout="@layout/imageview_background" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+            app:layout_constraintBottom_toTopOf="@id/confirmButton"
+            android:elevation="1dp">
+            <GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:columnCount="3"
+                android:padding="16dp">
+            </GridLayout>
+        </ScrollView>
+    </FrameLayout>
 
     <Button
         android:id="@+id/gameLogsButton"
@@ -53,13 +92,14 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="90dp"
         android:background="@drawable/button_shape"
         android:text="@string/game_logs"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/confirmButton"/>
 
     <Button
         android:id="@+id/playAgainButton"
@@ -67,14 +107,16 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:layout_gravity="bottom|start"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="50dp"
         android:background="@drawable/button_shape"
         android:text="@string/play_again"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/confirmButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
         android:id="@+id/confirmButton"
@@ -82,13 +124,17 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:layout_gravity="bottom|end"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/button_shape"
         android:text="@string/exit_game"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/playAgainButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-</FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/textview_title2" />
+        <include layout="@layout/textview_title" />
     </LinearLayout>
 
     <LinearLayout
