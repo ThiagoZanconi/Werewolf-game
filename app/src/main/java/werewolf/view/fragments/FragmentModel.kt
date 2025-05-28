@@ -152,7 +152,7 @@ open class PlayerGridFragment(
 
     override fun initComponents(view: View) {
         super.initComponents(view)
-        abilityStateLabel = view.findViewById(R.id.abilityStateLabel)
+        abilityStateLabel = view.findViewById(R.id.descriptionLabel)
         abilityStateLabel.text = player.fetchAbilityState()
         roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
         roleDescriptionLabel = view.findViewById(R.id.roleDescription)

@@ -85,7 +85,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         addPlayerButton = findViewById(R.id.addButton)
         startGameButton = findViewById(R.id.startButton)
         nameEditText = findViewById(R.id.termEditText)
-        nameLabelTextView = findViewById(R.id.nameTextView)
+        nameLabelTextView = findViewById(R.id.teamTextView)
         gridLayout = findViewById(R.id.gridLayout)
         howToPlayButton = findViewById(R.id.howToPlayButton)
     }
