@@ -1,7 +1,6 @@
 package werewolf.model.entities.neutrals
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
@@ -15,10 +14,6 @@ class Jester(
 ): AbstractPlayer(){
     override val role: Roles = Roles.Jester
     override var abilityState: AbilityState = NoAbility()
-
-    override fun resolveAbility(): Ability? {
-        return null
-    }
 
     override fun fetchImageSrc(): Int {
         return R.drawable.jester

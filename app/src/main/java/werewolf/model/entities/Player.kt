@@ -168,10 +168,12 @@ abstract class AbstractPlayer: Player{
         onActionSubject.notify(PlayerSignal(this))
     }
 
-    abstract fun resolveAbility(): Ability?
-
     fun defineAbilityState(abilityState: AbilityState){
         this.abilityState = abilityState
+    }
+
+    open fun resolveAbility(): Ability?{
+        return usedAbility
     }
 
     open fun applyDamage(deathCause: DeathCause) {

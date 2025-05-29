@@ -14,7 +14,6 @@ import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.fragments.ArsonistFragment
-import werewolf.view.fragments.VeteranFragment
 
 class Arsonist(
     override val playerName: String

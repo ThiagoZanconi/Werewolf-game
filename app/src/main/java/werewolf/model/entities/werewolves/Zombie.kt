@@ -1,7 +1,6 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.NoAbility
@@ -15,9 +14,5 @@ class Zombie(
 
     override fun fetchImageSrc(): Int {
         return R.drawable.zombie
-    }
-
-    override fun resolveAbility(): Ability? {
-        return usedAbility
     }
 }
