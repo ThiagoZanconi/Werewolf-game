@@ -63,6 +63,7 @@ class Ignite(private val targetPlayers: MutableList<Player>): AbstractAbility(We
         targetPlayers.forEach{
             it.receiveDamage(DeathCause.BURNT)
         }
+        targetPlayers.clear()
     }
 
     override fun fetchAbilityName(): String {

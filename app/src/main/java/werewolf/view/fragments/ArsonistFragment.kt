@@ -18,6 +18,7 @@ class ArsonistFragment(
     private val player: Arsonist
 ) : PlayerGridFragment(onActionSubject,player){
     private lateinit var igniteTextView: TextView
+    private lateinit var igniteSelectedTextView: TextView
     private var ignite: Boolean = false
 
     override fun onCreateView(
@@ -35,6 +36,7 @@ class ArsonistFragment(
     override fun initComponents(view: View) {
         super.initComponents(view)
         initIgniteTextView(view)
+        initIgniteSelectedTextView(view)
     }
 
     override fun confirmAction(){
@@ -63,7 +65,7 @@ class ArsonistFragment(
                 if (this.background == null) {
                     this.setBackgroundResource(R.drawable.imageview_shape)
                     markNotSelected(playerName)
-                    setIgniteButtonNotSelected()
+                    igniteSelectedTextViewOnClickListener()
                     setSelectedPlayer(playerName)
                 } else {
                     this.background = null
@@ -77,24 +79,25 @@ class ArsonistFragment(
     private fun initIgniteTextView(view: View){
         igniteTextView = view.findViewById(R.id.igniteTextView)
         igniteTextView.setOnClickListener { igniteTextViewOnClickListener() }
+
+    }
+
+    private fun initIgniteSelectedTextView(view: View){
+        igniteSelectedTextView = view.findViewById(R.id.igniteSelectedTextView)
+        igniteSelectedTextView.setOnClickListener { igniteSelectedTextViewOnClickListener() }
     }
 
     private fun igniteTextViewOnClickListener(){
-        ignite = !ignite
-        if(ignite){
-            markNotSelected("")
-            setIgniteButtonSelected()
-        }
-        else{
-            setIgniteButtonNotSelected()
-        }
+        ignite = true
+        markNotSelected("")
+        igniteTextView.visibility=View.GONE
+        igniteSelectedTextView.visibility=View.VISIBLE
     }
 
-    private fun setIgniteButtonSelected(){
-        igniteTextView.setBackgroundResource(R.drawable.text_view_shape_ignite_selected)
-    }
+    private fun igniteSelectedTextViewOnClickListener(){
+        ignite = false
+        igniteSelectedTextView.visibility=View.GONE
+        igniteTextView.visibility=View.VISIBLE
 
-    private fun setIgniteButtonNotSelected(){
-        igniteTextView.setBackgroundResource(R.drawable.text_view_shape_ignite)
     }
 }
