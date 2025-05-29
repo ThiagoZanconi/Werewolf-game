@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
-            android:src="@drawable/werewolf"
+            android:src="@drawable/draw"
             android:scaleType="fitXY"
             android:background="@drawable/imageview_shape"
             app:shapeAppearanceOverlay="@style/CustomShapeAppearance"

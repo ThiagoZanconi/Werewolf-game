@@ -37,7 +37,6 @@ class Cleric(
             usedAbility = null
             usedAbility
         }
-
     }
 }
 

@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
-            android:src="@drawable/werewolf"
+            android:src="@drawable/arsonist"
             android:scaleType="fitXY"
             android:background="@drawable/imageview_shape"
             app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
@@ -182,13 +182,29 @@
         </ScrollView>
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/igniteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp"
+        android:background="@drawable/text_view_shape_ignite"
+        android:fontFamily="@font/font_old_english_five"
+        android:textColor="#000000"
+        android:text="@string/ignite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/confirmButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
+    />
+
     <Button
         android:id="@+id/confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/igniteTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="15dp"

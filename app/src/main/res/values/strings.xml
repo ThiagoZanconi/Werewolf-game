@@ -21,6 +21,7 @@
     <string name="was_shot">Was shot</string>
     <string name="was_mauled">Was mauled</string>
     <string name="was_hanged">Was hanged</string>
+    <string name="was_burnt">Was burnt</string>
     <string name="role_description">Role Description</string>
     <string name="team">Team:</string>
 
@@ -48,6 +49,7 @@
     <string name="vampire">Vampire</string>
     <string name="necromancer">Necromancer</string>
     <string name="zombie">Zombie</string>
+    <string name="arsonist">Arsonist</string>
 
     <string name="cancel_player_ability">Cancel Player Ability</string>
     <string name="werewolf_attack">Werewolf Attack</string>
@@ -57,6 +59,8 @@
     <string name="barrier">Barrier</string>
     <string name="revive_spell">Revive Spell</string>
     <string name="alert">Alert</string>
+    <string name="ignite">Ignite</string>
+    <string name="oil_spill">Oil Spill</string>
 
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
@@ -64,6 +68,7 @@
     <string name="vampire_description">Belongs to the werewolves team. Can select a villager to kill at night. Ability has 1 turn cooldown. Ability starts on cooldown</string>
     <string name="necromancer_description">Belongs to the werewolves team. Can select a dead player to revive it as a zombie</string>
     <string name="zombie_description">Belongs to the werewolves team. Has no ability, but can vote at the end of the round (only appears when revived by necromancer).</string>
+    <string name="arsonist_description">Belongs to the werewolves team. At night can spill oil on a player or ignite. Ignite kills all the players with oil. Can ignite only one time</string>
     <string name="villager_description">Belongs to the villagers team. Has no ability</string>
     <string name="cleric_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn). Ability has 1 turn cooldown.</string>
     <string name="priest_description">Belongs to the villagers team. Once a game can select a player to revive (werewolves included)</string>
@@ -71,4 +76,5 @@
     <string name="veteran_description">Belongs to the villagers team. Once a game can stay alert at night (Every player that visits him, will get shot).</string>
     <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect from all attacks received.</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
+
 </resources>

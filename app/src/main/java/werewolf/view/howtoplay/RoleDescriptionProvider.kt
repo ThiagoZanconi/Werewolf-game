@@ -12,6 +12,7 @@ object RoleDescriptionProvider {
             Roles.Vampire to R.string.vampire_description,
             Roles.Necromancer to R.string.necromancer_description,
             Roles.Zombie to R.string.zombie_description,
+            Roles.Arsonist to R.string.arsonist_description,
             Roles.Villager to R.string.villager_description,
             Roles.Protector to R.string.protector_description,
             Roles.Vigilante to R.string.vigilante_description,

@@ -22,7 +22,7 @@ import werewolf.view.howtoplay.RoleDescriptionProvider
 
 abstract class FragmentModel: Fragment(){
 
-    private lateinit var confirmButton: Button
+    protected lateinit var confirmButton: Button
     protected lateinit var imageView: ImageView
     protected lateinit var titleLabel: TextView
 
@@ -120,7 +120,7 @@ abstract class GridFragment: FragmentModel() {
         return textView
     }
 
-    private fun markNotSelected(playerName: String) {
+    protected fun markNotSelected(playerName: String) {
         for (i in 0 until gridLayout.childCount) {
             val child = gridLayout.getChildAt(i) as TextView
             if (child.text != playerName) {

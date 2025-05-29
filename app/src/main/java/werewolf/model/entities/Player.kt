@@ -9,7 +9,7 @@ import werewolf.view.fragments.PlayerGridFragment
 import werewolf.view.fragments.WerewolfTeamFragment
 
 enum class DeathCause{
-    HANGED, MAULED, SHOT
+    HANGED, MAULED, SHOT, BURNT
 }
 
 interface Player{

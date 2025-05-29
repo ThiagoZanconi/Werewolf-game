@@ -10,6 +10,7 @@ object RoleNameProvider {
             Roles.Vampire to R.string.vampire,
             Roles.Necromancer to R.string.necromancer,
             Roles.Zombie to R.string.zombie,
+            Roles.Arsonist to R.string.arsonist,
             Roles.Villager to R.string.villager,
             Roles.Protector to R.string.protector,
             Roles.Vigilante to R.string.vigilante,

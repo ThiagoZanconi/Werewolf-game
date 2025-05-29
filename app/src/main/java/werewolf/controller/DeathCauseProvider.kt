@@ -10,6 +10,7 @@ object DeathCauseProvider {
             DeathCause.HANGED -> MyApp.getAppContext().getString(R.string.was_hanged)
             DeathCause.MAULED -> MyApp.getAppContext().getString(R.string.was_mauled)
             DeathCause.SHOT -> MyApp.getAppContext().getString(R.string.was_shot)
+            DeathCause.BURNT -> MyApp.getAppContext().getString(R.string.was_burnt)
         }
     }
 }

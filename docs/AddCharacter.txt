@@ -1,0 +1,9 @@
+Add player general steps:
+
+-Crear Clase y habilidad
+-Crear archivos de strings para nombre, descripción y habilidad/es
+-Agregar role a RoleFactory. Agregar creacion de role.
+-Agregar máxima cantidad en RoleQuantitySettings
+-Agregar descripción a RoleDescriptionProvider
+-Agregar nombre a RoleNameProvider
+-Agregar Imagen

@@ -22,6 +22,7 @@ class RoleQuantitySettingsImpl: RoleQuantitySettings{
         rolesMaxQuantityMap[Roles.Necromancer] = playerSize/3 -1
         rolesMaxQuantityMap[Roles.Vampire] = playerSize/3 -1
         rolesMaxQuantityMap[Roles.Witch] = playerSize/3 -1
+        rolesMaxQuantityMap[Roles.Arsonist] = playerSize/3 -1
         rolesMaxQuantityMap.keys.forEach{
             rolesQuantityMap[it] = rolesMaxQuantityMap[it]!!
         }
