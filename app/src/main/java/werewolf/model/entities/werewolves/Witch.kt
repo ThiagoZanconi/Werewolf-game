@@ -1,7 +1,6 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
@@ -23,9 +22,8 @@ class Witch(
         signalEvent(PlayerEventEnum.SetWerewolfTargets)
     }
 
-    override fun resolveAbility(): Ability? {
-        usedAbility = CancelPlayerAbility(targetPlayer!!)
-        return usedAbility
+    override fun addUsedAbility() {
+        usedAbilities.add(CancelPlayerAbility(targetPlayer!!))
     }
 }
 

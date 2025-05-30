@@ -167,7 +167,9 @@ open class PlayerGridFragment(
     }
 
     override fun confirmAction(){
-        player.defineTargetPlayer(selectedPlayer)
+        if(selectedPlayer!=null){
+            player.notifyAbilityUsed(selectedPlayer)
+        }
         onActionSubject.notify(GameUiEvent.ConfirmAction)
     }
 

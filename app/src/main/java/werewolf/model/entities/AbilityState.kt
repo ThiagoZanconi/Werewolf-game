@@ -1,7 +1,7 @@
 package werewolf.model.entities
 
 interface AbilityState{
-    fun useAbility(player: AbstractPlayer): Ability?
+    fun useAbility(player: AbstractPlayer)
     fun getAbilityState(): String
 }
 
@@ -10,16 +10,12 @@ abstract class AbstractAbilityState: AbilityState{
         return "Select player"
     }
 
-    override fun useAbility(player: AbstractPlayer): Ability? {
-        return null
+    override fun useAbility(player: AbstractPlayer) {
+        player.addUsedAbility()
     }
 }
 
-class Neutral: AbstractAbilityState() {
-    override fun useAbility(player: AbstractPlayer):Ability? {
-        return player.resolveAbility()
-    }
-}
+class Neutral: AbstractAbilityState()
 
 class NoAbility: AbstractAbilityState() {
     override fun getAbilityState(): String {
@@ -29,15 +25,14 @@ class NoAbility: AbstractAbilityState() {
 
 class OffCooldown: AbstractAbilityState(){
 
-    override fun useAbility(player: AbstractPlayer):Ability? {
-        return player.resolveAbility()
+    override fun useAbility(player: AbstractPlayer) {
+        player.addUsedAbility()
     }
 }
 
 class OneTurnCooldown: AbstractAbilityState(){
-    override fun useAbility(player: AbstractPlayer): Ability? {
+    override fun useAbility(player: AbstractPlayer){
         player.defineAbilityState(OffCooldown())
-        return null
     }
     override fun getAbilityState(): String {
         return "Ability on cooldown"

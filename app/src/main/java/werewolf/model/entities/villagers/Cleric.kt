@@ -1,7 +1,6 @@
 package werewolf.model.entities.villagers
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Immune
@@ -25,19 +24,9 @@ class Cleric(
         signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
     }
 
-    override fun useAbility(): Ability?{
-        return abilityState.useAbility(this)
-    }
-
-    override fun resolveAbility(): Ability? {
-        return if(targetPlayer!=null){
-            abilityState = OneTurnCooldown()
-            usedAbility = Shield(targetPlayer!!)
-            usedAbility
-        } else{
-            usedAbility = null
-            usedAbility
-        }
+    override fun addUsedAbility() {
+        abilityState = OneTurnCooldown()
+        usedAbilities.add(Shield(targetPlayer!!))
     }
 }
 

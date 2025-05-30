@@ -9,6 +9,7 @@ interface Ability{
     fun fetchPriority(): Int
     fun fetchTargetPlayer(): Player
     fun fetchEvent(): AbilityEventEnum
+    fun defineTargetPlayer(player: Player)
     fun resolve()
     fun cancel()
 }
@@ -26,6 +27,10 @@ abstract class AbstractAbility(
 
     override fun fetchEvent(): AbilityEventEnum {
         return event
+    }
+
+    override fun defineTargetPlayer(player: Player){
+        targetPlayer = player
     }
 
     override fun cancel(){

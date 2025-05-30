@@ -1,7 +1,6 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
@@ -27,19 +26,9 @@ class Vampire(
         signalEvent(PlayerEventEnum.SetWerewolfTargets)
     }
 
-    override fun useAbility(): Ability?{
-        return abilityState.useAbility(this)
-    }
-
-    override fun resolveAbility(): Ability? {
-        return if(targetPlayer!=null){
-            abilityState = OneTurnCooldown()
-            usedAbility = VampireAttack(targetPlayer!!)
-            usedAbility
-        } else{
-            usedAbility = null
-            usedAbility
-        }
+    override fun addUsedAbility() {
+        abilityState = OneTurnCooldown()
+        usedAbilities.add(VampireAttack(targetPlayer!!))
     }
 }
 

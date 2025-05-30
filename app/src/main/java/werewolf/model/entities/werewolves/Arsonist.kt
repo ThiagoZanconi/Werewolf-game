@@ -3,7 +3,6 @@ package werewolf.model.entities.werewolves
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
@@ -39,21 +38,13 @@ class Arsonist(
         return ArsonistFragment(onActionSubject,this)
     }
 
-    override fun useAbility(): Ability?{
-        return if(targetPlayer!=null || ignite){
-            abilityState.useAbility(this)
-        } else
-            null
-    }
-
-    override fun resolveAbility(): Ability? {
-        usedAbility = if(targetPlayer==null){
+    override fun addUsedAbility(){
+        if(targetPlayer==null){
             abilityState = NoUsesLeft()
-            Ignite(targetPlayers)
+            usedAbilities.add(Ignite(targetPlayers))
         } else{
-            OilSpill(targetPlayer!!,targetPlayers)
+            usedAbilities.add(OilSpill(targetPlayer!!,targetPlayers))
         }
-        return usedAbility
     }
 }
 

@@ -1,7 +1,6 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
@@ -24,9 +23,8 @@ class Werewolf(
         signalEvent(PlayerEventEnum.SetWerewolfTargets)
     }
 
-    override fun resolveAbility(): Ability? {
-        usedAbility = WerewolfAttack(targetPlayer!!)
-        return usedAbility
+    override fun addUsedAbility(){
+        usedAbilities.add(WerewolfAttack(targetPlayer!!))
     }
 
     override fun notifyKilledPlayer(deathCause: DeathCause) {

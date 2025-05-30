@@ -1,7 +1,6 @@
 package werewolf.model.entities.villagers
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
@@ -17,9 +16,8 @@ class Protector(
     override val role: Roles = Roles.Protector
     private var armored = true
 
-    override fun resolveAbility(): Ability? {
-        usedAbility = Protection(targetPlayer!!,this)
-        return usedAbility
+    override fun addUsedAbility() {
+        usedAbilities.add(Protection(targetPlayer!!,this))
     }
 
     override fun applyDamage(deathCause: DeathCause) {

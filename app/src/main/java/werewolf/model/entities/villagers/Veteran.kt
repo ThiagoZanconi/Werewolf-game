@@ -3,7 +3,6 @@ package werewolf.model.entities.villagers
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
@@ -20,10 +19,9 @@ class Veteran(
 ): AbstractPlayer(){
     override val role: Roles = Roles.Veteran
 
-    override fun resolveAbility(): Ability? {
+    override fun addUsedAbility() {
         abilityState = NoUsesLeft()
-        usedAbility = Alert(visitors)
-        return usedAbility
+        usedAbilities.add(Alert(visitors))
     }
 
     override fun fetchImageSrc(): Int {

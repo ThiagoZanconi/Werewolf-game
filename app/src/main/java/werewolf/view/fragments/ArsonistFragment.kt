@@ -41,6 +41,9 @@ class ArsonistFragment(
 
     override fun confirmAction(){
         player.setIgnite(ignite)
+        if(ignite){
+            player.notifyAbilityUsed(null)
+        }
         super.confirmAction()
     }
 

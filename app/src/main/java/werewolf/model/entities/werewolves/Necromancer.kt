@@ -1,7 +1,6 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityEventEnum
 import werewolf.model.entities.AbilitySignal
 import werewolf.model.entities.AbstractAbility
@@ -18,10 +17,9 @@ class Necromancer(
 ): WerewolfTeamPlayer(){
     override val role: Roles = Roles.Necromancer
 
-    override fun resolveAbility(): Ability? {
+    override fun addUsedAbility(){
         abilityState = NoUsesLeft()
-        usedAbility = ZombieSpell(targetPlayer!!)
-        return usedAbility
+        usedAbilities.add(ZombieSpell(targetPlayer!!))
     }
 
     override fun fetchImageSrc(): Int {

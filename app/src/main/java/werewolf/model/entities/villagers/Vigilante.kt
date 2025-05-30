@@ -1,7 +1,6 @@
 package werewolf.model.entities.villagers
 
 import werewolf.model.Roles
-import werewolf.model.entities.Ability
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
@@ -16,10 +15,9 @@ class Vigilante(
 ): AbstractPlayer(){
     override val role: Roles = Roles.Vigilante
 
-    override fun resolveAbility(): Ability? {
+    override fun addUsedAbility() {
         abilityState = NoUsesLeft()
-        usedAbility = Shot(targetPlayer!!)
-        return usedAbility
+        usedAbilities.add(Shot(targetPlayer!!))
     }
 
     override fun fetchImageSrc(): Int {

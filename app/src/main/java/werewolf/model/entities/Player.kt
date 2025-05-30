@@ -22,16 +22,11 @@ interface Player{
     fun fetchTargetPlayer(): Player?
     fun fetchEvent(): PlayerEventEnum
     fun fetchAbilityState(): String
-    /*
-    * Returns ability used in game
-    * Null if player didn't use ability
-    * Ability delegated to abilityState contrary case
-     */
-    fun useAbility(): Ability?
-    /*
-    * Returns ability used for logs
-     */
-    fun fetchUsedAbility(): String?
+    fun fetchAbilitiesUsedOnMe(): List<Ability>
+    fun fetchUsedAbilities(): List<Ability>
+
+    //Returns ability used for logs
+    fun fetchUsedAbility(index: Int): String?
     fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
@@ -39,7 +34,10 @@ interface Player{
     fun defineTeammates(team: List<Player>)
     fun defineTargetPlayers(targetPlayers: List<Player>)
     fun defineTargetPlayer(targetPlayer: Player?)
-    fun getVisitedBy(visitor: Player)
+
+    //Ability delegated to abilityState contrary case
+    fun notifyAbilityUsed(targetPlayer: Player?)
+    fun visitedBy(visitor: Player)
     fun resetVisitors()
     fun turnSetUp()
     fun receiveDamage(deathCause: DeathCause)
@@ -56,7 +54,7 @@ abstract class AbstractPlayer: Player{
     protected open var abilityState: AbilityState = Neutral()
     protected lateinit var event: PlayerEventEnum
     protected lateinit var deathCause: DeathCause
-    protected open var usedAbility: Ability? = null
+    protected open var usedAbilities: MutableList<Ability> = mutableListOf()
     protected var visitors: MutableList<Player> = mutableListOf()
     private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayer: Player? = null
@@ -93,16 +91,24 @@ abstract class AbstractPlayer: Player{
     override fun fetchAbilityState(): String{
         return abilityState.getAbilityState()
     }
-
-    override fun useAbility(): Ability?{
-        return if(targetPlayer!=null){
-            abilityState.useAbility(this)
-        } else
-            null
+    override fun fetchAbilitiesUsedOnMe(): List<Ability>{
+        return abilitiesUsedOnMe
     }
 
-    override fun fetchUsedAbility(): String? {
-        return usedAbility?.fetchAbilityName()
+    override fun fetchUsedAbilities(): List<Ability>{
+        return usedAbilities
+    }
+
+    override fun notifyAbilityUsed(targetPlayer: Player?){
+        this.targetPlayer = targetPlayer
+        abilityState.useAbility(this)
+    }
+
+    override fun fetchUsedAbility(index: Int): String? {
+        return if (usedAbilities.isNotEmpty())
+            usedAbilities[index].fetchAbilityName()
+        else
+            null
     }
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
@@ -126,11 +132,11 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun defineTargetPlayer(targetPlayer: Player?) {
-        targetPlayer?.getVisitedBy(this)
+        targetPlayer?.visitedBy(this)
         this.targetPlayer = targetPlayer
     }
 
-    override fun getVisitedBy(visitor: Player) {
+    override fun visitedBy(visitor: Player) {
         visitors.add(visitor)
     }
 
@@ -156,7 +162,9 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun cancelAbility() {
-        usedAbility?.cancel()
+        usedAbilities.forEach{
+            it.cancel()
+        }
     }
 
     override fun turnSetUp() {
@@ -172,9 +180,7 @@ abstract class AbstractPlayer: Player{
         this.abilityState = abilityState
     }
 
-    open fun resolveAbility(): Ability?{
-        return usedAbility
-    }
+    open fun addUsedAbility(){}
 
     open fun applyDamage(deathCause: DeathCause) {
         notifyKilledPlayer(deathCause)

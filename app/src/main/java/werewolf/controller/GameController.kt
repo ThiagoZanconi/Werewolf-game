@@ -183,12 +183,12 @@ class GameControllerImpl(
     }
 
     private fun queueAbilities(){
-        gameStateModel.getAlivePlayers().forEach {
-            val ability = it.useAbility()
-            if (ability != null) {
+        gameStateModel.getAlivePlayers().forEach { player ->
+            val usedAbilities = player.fetchUsedAbilities()
+            usedAbilities.forEachIndexed { index, ability ->
                 ability.playerObservable.subscribe(abilityObserver)
                 abilityPriorityQueue.add(ability)
-                gameLogs+=it.fetchPlayerName()+" ("+it.fetchRole()+") "+MyApp.getAppContext().getString(R.string.used)+" "+it.fetchUsedAbility()+" -> "+ (it.fetchTargetPlayer()?.fetchPlayerName() ?: "") +"\n"
+                gameLogs+=player.fetchPlayerName()+" ("+player.fetchRole()+") "+MyApp.getAppContext().getString(R.string.used)+" "+player.fetchUsedAbility(index)+" -> "+ (player.fetchTargetPlayer()?.fetchPlayerName() ?: "") +"\n"
             }
         }
     }
