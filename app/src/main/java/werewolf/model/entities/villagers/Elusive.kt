@@ -24,7 +24,8 @@ class Elusive(
     }
 
     override fun turnSetUp() {
-        signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
+        super.turnSetUp()
+        signalEvent(PlayerEventEnum.SetOtherAlivePlayersTarget)
     }
 }
 

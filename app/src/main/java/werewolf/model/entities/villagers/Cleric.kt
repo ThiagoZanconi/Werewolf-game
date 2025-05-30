@@ -21,6 +21,7 @@ class Cleric(
     }
 
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
     }
 

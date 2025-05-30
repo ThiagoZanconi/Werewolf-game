@@ -27,6 +27,7 @@ class Vigilante(
     }
 
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
     }
 }

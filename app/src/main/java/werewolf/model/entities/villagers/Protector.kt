@@ -36,6 +36,7 @@ class Protector(
     }
 
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetOtherAlivePlayersTarget)
     }
 }

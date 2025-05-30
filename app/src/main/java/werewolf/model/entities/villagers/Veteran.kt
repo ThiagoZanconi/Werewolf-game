@@ -9,7 +9,6 @@ import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
-import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
@@ -33,10 +32,6 @@ class Veteran(
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
         return VeteranFragment(onActionSubject,this)
-    }
-
-    override fun turnSetUp() {
-        signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
     }
 }
 

@@ -29,6 +29,7 @@ class Priest(
     }
 
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetDeadTargets)
     }
 }
