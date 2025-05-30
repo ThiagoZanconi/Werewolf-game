@@ -43,6 +43,7 @@
     <string name="vigilante">Forajido</string>
     <string name="priest">Sacerdote</string>
     <string name="veteran">Veterano</string>
+    <string name="elusive">Escurridizo</string>
     <string name="jester">Bufon</string>
     <string name="werewolf">Hombre Lobo</string>
     <string name="witch">Bruja</string>
@@ -61,6 +62,8 @@
     <string name="alert">Alerta</string>
     <string name="ignite">Ignicion</string>
     <string name="oil_spill">Derramar Aceite</string>
+    <string name="hide">Ocultarse</string>
+    <string name="hidden">Oculto</string>
 
     <string name="unknown_description">Descripcion no encontrada</string>
     <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para matar</string>
@@ -75,5 +78,6 @@
     <string name="vigilante_description">Pertenece al equipo de los aldeanos. Una vez por juego puede matar a un jugador (aldeanos incluidos)</string>
     <string name="veteran_description">Pertenece al equipo de los aldeanos. Una vez por juego puede mantenerse alerta (Todos los jugadores que lo visiten seran disparados).</string>
     <string name="protector_description">Pertenece al equipo de los aldeanos. Tiene dos vidas (si es colgado muere instantaneamente).Cada noche puede proteger a un jugador para recibir todos los atques dirigidos a este último.</string>
+    <string name="elusive_description">Pertenece al equipo de los aldeanos. A la noche puede esconderse en la casa de un jugador. Todas las habilidades dirigidas directamente a el no tienen efecto. Tanto el como su hospedador reciben las habilidades dirigidas al hospedador. Si se esconde en la casa del lobo es atacado.</string>
     <string name="jester_description">Juega solo. No tiene habilidad. Su objetivo es ser colgado al final del día.</string>
 </resources>

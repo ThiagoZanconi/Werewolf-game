@@ -17,6 +17,7 @@ object RoleNameProvider {
             Roles.Priest to R.string.priest,
             Roles.Cleric to R.string.cleric,
             Roles.Veteran to R.string.veteran,
+            Roles.Elusive to R.string.elusive,
             Roles.Jester to R.string.jester
         )
 

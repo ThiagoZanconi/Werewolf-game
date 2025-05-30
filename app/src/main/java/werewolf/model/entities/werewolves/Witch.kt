@@ -37,6 +37,6 @@ class CancelPlayerAbility(targetPlayer: Player): AbstractAbility(targetPlayer) {
     }
 
     override fun fetchPriority(): Int {
-        return 1
+        return 0
     }
 }

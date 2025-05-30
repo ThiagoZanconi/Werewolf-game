@@ -17,7 +17,7 @@ class Elusive(
 
     override fun addUsedAbility() {
         usedAbilities.add(Hidden(this,targetPlayer!!))
-        usedAbilities.add(Hide(this))
+        usedAbilities.add(Hide(this,visitors))
     }
 
     override fun fetchImageSrc(): Int {
@@ -34,7 +34,7 @@ class Hidden(private val hiddenPlayer: Player,targetPlayer: Player): AbstractAbi
 
     override fun resolve() {
         if(targetPlayer is Werewolf){
-            hiddenPlayer.receiveDamage(deathCause = DeathCause.MAULED)
+            hiddenPlayer.receiveDamage(DeathCause.MAULED)
         }
         targetPlayer.fetchAbilitiesUsedOnMe().forEach{
             it.defineTargetPlayer(hiddenPlayer)
@@ -43,7 +43,7 @@ class Hidden(private val hiddenPlayer: Player,targetPlayer: Player): AbstractAbi
     }
 
     override fun fetchAbilityName(): String {
-        return MyApp.getAppContext().getString(R.string.shot)
+        return MyApp.getAppContext().getString(R.string.hidden)
     }
 
     override fun fetchPriority(): Int {
@@ -51,14 +51,20 @@ class Hidden(private val hiddenPlayer: Player,targetPlayer: Player): AbstractAbi
     }
 }
 
-class Hide(private val hiddenPlayer: Player): AbstractAbility(Werewolf("Dummy target")){
+class Hide(private val hiddenPlayer: Elusive, private val visitors: List<Player>): AbstractAbility(Werewolf("Dummy target")){
 
     override fun resolve() {
-        //hiddenPlayer.set
+        visitors.forEach { visitor ->
+            visitor.fetchUsedAbilities().forEach { ability ->
+                if(ability.fetchTargetPlayer() === hiddenPlayer){
+                    visitor.cancelAbility()
+                }
+            }
+        }
     }
 
     override fun fetchAbilityName(): String {
-        return MyApp.getAppContext().getString(R.string.shot)
+        return MyApp.getAppContext().getString(R.string.hide)
     }
 
     override fun fetchPriority(): Int {

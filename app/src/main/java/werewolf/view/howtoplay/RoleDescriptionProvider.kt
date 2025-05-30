@@ -19,7 +19,8 @@ object RoleDescriptionProvider {
             Roles.Priest to R.string.priest_description,
             Roles.Cleric to R.string.cleric_description,
             Roles.Jester to R.string.jester_description,
-            Roles.Veteran to R.string.veteran_description
+            Roles.Veteran to R.string.veteran_description,
+            Roles.Elusive to R.string.elusive_description
         )
 
         return MyApp.getAppContext().getString(roleDescriptionMap[role] ?: R.string.unknown_description)

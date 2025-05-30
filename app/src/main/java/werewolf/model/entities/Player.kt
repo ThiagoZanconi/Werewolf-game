@@ -33,7 +33,6 @@ interface Player{
     fun defineDefenseState(defenseState: DefenseState)
     fun defineTeammates(team: List<Player>)
     fun defineTargetPlayers(targetPlayers: List<Player>)
-    fun defineTargetPlayer(targetPlayer: Player?)
 
     //Ability delegated to abilityState contrary case
     fun notifyAbilityUsed(targetPlayer: Player?)
@@ -41,7 +40,6 @@ interface Player{
     fun resetVisitors()
     fun turnSetUp()
     fun receiveDamage(deathCause: DeathCause)
-    fun receiveAbility(ability: Ability)
     fun notifyKilledPlayer(deathCause: DeathCause)
     fun resetDefenseState()
     fun cancelAbility()
@@ -101,6 +99,7 @@ abstract class AbstractPlayer: Player{
 
     override fun notifyAbilityUsed(targetPlayer: Player?){
         this.targetPlayer = targetPlayer
+        targetPlayer?.visitedBy(this)
         abilityState.useAbility(this)
     }
 
@@ -131,11 +130,6 @@ abstract class AbstractPlayer: Player{
         this.targetPlayers = targetPlayers
     }
 
-    override fun defineTargetPlayer(targetPlayer: Player?) {
-        targetPlayer?.visitedBy(this)
-        this.targetPlayer = targetPlayer
-    }
-
     override fun visitedBy(visitor: Player) {
         visitors.add(visitor)
     }
@@ -146,10 +140,6 @@ abstract class AbstractPlayer: Player{
 
     override fun receiveDamage(deathCause: DeathCause) {
         defenseState.receiveDamage(this,deathCause)
-    }
-
-    override fun receiveAbility(ability: Ability) {
-        abilitiesUsedOnMe.add(ability)
     }
 
     override fun notifyKilledPlayer(deathCause: DeathCause) {
@@ -169,9 +159,10 @@ abstract class AbstractPlayer: Player{
 
     override fun turnSetUp() {
         abilitiesUsedOnMe = mutableListOf()
+        usedAbilities = mutableListOf()
     }
 
-    protected fun signalEvent(event: PlayerEventEnum) {
+    fun signalEvent(event: PlayerEventEnum) {
         this.event = event
         onActionSubject.notify(PlayerSignal(this))
     }

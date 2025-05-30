@@ -43,6 +43,7 @@
     <string name="vigilante">Vigilante</string>
     <string name="priest">Priest</string>
     <string name="veteran">Veteran</string>
+    <string name="elusive">Elusive</string>
     <string name="jester">Jester</string>
     <string name="werewolf">Werewolf</string>
     <string name="witch">Witch</string>
@@ -61,6 +62,8 @@
     <string name="alert">Alert</string>
     <string name="ignite">Ignite</string>
     <string name="oil_spill">Oil Spill</string>
+    <string name="hide">Hide</string>
+    <string name="hidden">Hidden</string>
 
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
@@ -75,6 +78,7 @@
     <string name="vigilante_description">Belongs to the villagers team. Once a game can select a player to shot to kill(villagers included)</string>
     <string name="veteran_description">Belongs to the villagers team. Once a game can stay alert at night (Every player that visits him, will get shot).</string>
     <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect from all attacks received.</string>
+    <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All abilities that target him directly have no effect. Both he and the host receive the abilities targeted to he host. If hi hiddes in the house of werewolf he is attacked.</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 
 </resources>
