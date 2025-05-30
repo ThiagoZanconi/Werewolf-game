@@ -36,6 +36,7 @@ interface Player{
 
     //Ability delegated to abilityState contrary case
     fun notifyAbilityUsed(targetPlayer: Player?)
+    fun receiveAbility(ability: Ability)
     fun visitedBy(visitor: Player)
     fun resetVisitors()
     fun turnSetUp()
@@ -97,12 +98,6 @@ abstract class AbstractPlayer: Player{
         return usedAbilities
     }
 
-    override fun notifyAbilityUsed(targetPlayer: Player?){
-        this.targetPlayer = targetPlayer
-        targetPlayer?.visitedBy(this)
-        abilityState.useAbility(this)
-    }
-
     override fun fetchUsedAbility(index: Int): String? {
         return if (usedAbilities.isNotEmpty())
             usedAbilities[index].fetchAbilityName()
@@ -128,6 +123,16 @@ abstract class AbstractPlayer: Player{
 
     override fun defineTargetPlayers(targetPlayers: List<Player>) {
         this.targetPlayers = targetPlayers
+    }
+
+    override fun notifyAbilityUsed(targetPlayer: Player?){
+        this.targetPlayer = targetPlayer
+        targetPlayer?.visitedBy(this)
+        abilityState.useAbility(this)
+    }
+
+    override fun receiveAbility(ability: Ability) {
+        abilitiesUsedOnMe.add(ability)
     }
 
     override fun visitedBy(visitor: Player) {

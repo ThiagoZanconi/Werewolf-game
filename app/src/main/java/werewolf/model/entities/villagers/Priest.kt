@@ -34,6 +34,7 @@ class Priest(
 
 class ReviveSpell(targetPlayer: Player): AbstractAbility(targetPlayer) {
     override fun resolve() {
+        super.resolve()
         event = AbilityEventEnum.RevivePlayer
         onActionSubject.notify(AbilitySignal(this))
         targetPlayer.defineDefenseState(Immune())

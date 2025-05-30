@@ -49,6 +49,7 @@ class Protection(targetPlayer: Player, private val protector: Protector): Abstra
     }
 
     override fun resolve() {
+        super.resolve()
         targetPlayer.defineDefenseState(Protected(protector))
     }
 }

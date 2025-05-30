@@ -29,6 +29,7 @@ class Witch(
 
 class CancelPlayerAbility(targetPlayer: Player): AbstractAbility(targetPlayer) {
     override fun resolve() {
+        super.resolve()
         targetPlayer.cancelAbility()
     }
 

@@ -35,6 +35,7 @@ class Werewolf(
 
 class WerewolfAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
     override fun resolve(){
+        super.resolve()
         targetPlayer.receiveDamage(DeathCause.MAULED)
     }
 

@@ -37,4 +37,8 @@ abstract class AbstractAbility(
         event = AbilityEventEnum.CancelAbility
         onActionSubject.notify(AbilitySignal(this))
     }
+
+    override fun resolve(){
+        targetPlayer.receiveAbility(this)
+    }
 }

@@ -33,6 +33,7 @@ class Vigilante(
 class Shot(targetPlayer: Player): AbstractAbility(targetPlayer){
 
     override fun resolve() {
+        super.resolve()
         targetPlayer.receiveDamage(DeathCause.SHOT)
     }
 

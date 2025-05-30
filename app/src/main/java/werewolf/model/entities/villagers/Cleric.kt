@@ -32,6 +32,7 @@ class Cleric(
 
 class Shield(targetPlayer: Player): AbstractAbility(targetPlayer) {
     override fun resolve() {
+        super.resolve()
         targetPlayer.defineDefenseState(Immune())
     }
 

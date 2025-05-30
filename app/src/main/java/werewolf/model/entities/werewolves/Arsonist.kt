@@ -67,6 +67,7 @@ class Ignite(private val targetPlayers: MutableList<Player>): AbstractAbility(We
 
 class OilSpill(targetPlayer: Player,private val targetPlayers: MutableList<Player>): AbstractAbility(targetPlayer) {
     override fun resolve() {
+        super.resolve()
         targetPlayers.add(targetPlayer)
     }
 

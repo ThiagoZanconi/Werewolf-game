@@ -34,6 +34,7 @@ class Necromancer(
 
 class ZombieSpell(targetPlayer: Player): AbstractAbility(targetPlayer) {
     override fun resolve() {
+        super.resolve()
         event = AbilityEventEnum.RevivePlayerZombie
         onActionSubject.notify(AbilitySignal(this))
         targetPlayer.defineDefenseState(Immune())
