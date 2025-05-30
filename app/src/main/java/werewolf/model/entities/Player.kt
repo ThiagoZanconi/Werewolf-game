@@ -60,8 +60,8 @@ abstract class AbstractPlayer: Player{
     protected var visitors: MutableList<Player> = mutableListOf()
     private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayer: Player? = null
-    private lateinit var targetPlayers: List<Player>
-    protected lateinit var teammates: List<Player>
+    private var targetPlayers: List<Player> = listOf()
+    private lateinit var teammates: List<Player>
 
     protected val onActionSubject = Subject<PlayerSignal>()
     override val playerObservable: Observable<PlayerSignal> = onActionSubject
@@ -160,7 +160,7 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun turnSetUp() {
-        signalEvent(PlayerEventEnum.SetNoTargets)
+        abilitiesUsedOnMe = mutableListOf()
     }
 
     protected fun signalEvent(event: PlayerEventEnum) {
@@ -183,6 +183,7 @@ abstract class AbstractPlayer: Player{
 
 abstract class WerewolfTeamPlayer: AbstractPlayer(){
     override fun turnSetUp() {
+        super.turnSetUp()
         signalEvent(PlayerEventEnum.SetWerewolfTeammates)
     }
 

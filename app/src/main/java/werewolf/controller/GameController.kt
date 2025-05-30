@@ -52,7 +52,6 @@ class GameControllerImpl(
                 PlayerEventEnum.SetWerewolfTargets -> setWerewolfTargets(value.getPlayer())
                 PlayerEventEnum.SetAlivePlayersTarget -> setAllPlayersTarget(value.getPlayer())
                 PlayerEventEnum.SetOtherAlivePlayersTarget -> setOtherAlivePlayersTarget(value.getPlayer())
-                PlayerEventEnum.SetNoTargets -> setNoTargets(value.getPlayer())
                 PlayerEventEnum.SetDeadTargets -> setDeadTargets(value.getPlayer())
                 PlayerEventEnum.SetWerewolfTeammates ->  setWerewolfTeammates(value.getPlayer())
                 PlayerEventEnum.KilledPlayer -> killedPlayer(value.getPlayer())
@@ -80,10 +79,6 @@ class GameControllerImpl(
 
     private fun setOtherAlivePlayersTarget(player: Player){
         player.defineTargetPlayers(gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()- listOf(player).toSet())
-    }
-
-    private fun setNoTargets(player: Player){
-        player.defineTargetPlayers(listOf())
     }
 
     private fun setDeadTargets(player: Player){
@@ -193,7 +188,6 @@ class GameControllerImpl(
             if (ability != null) {
                 ability.playerObservable.subscribe(abilityObserver)
                 abilityPriorityQueue.add(ability)
-                it.fetchTargetPlayer()?.receiveAbility(ability)
                 gameLogs+=it.fetchPlayerName()+" ("+it.fetchRole()+") "+MyApp.getAppContext().getString(R.string.used)+" "+it.fetchUsedAbility()+" -> "+ (it.fetchTargetPlayer()?.fetchPlayerName() ?: "") +"\n"
             }
         }

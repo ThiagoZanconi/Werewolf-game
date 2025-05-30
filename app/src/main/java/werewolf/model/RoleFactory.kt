@@ -17,7 +17,7 @@ import werewolf.view.settings.RoleQuantitySettings
 import kotlin.math.floor
 
 enum class Roles{
-    Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Jester
+    Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Jester
 }
 
 interface RoleFactory{
