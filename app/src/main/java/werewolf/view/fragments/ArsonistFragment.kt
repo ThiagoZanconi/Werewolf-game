@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.example.observer.Subject
 import werewolf.model.entities.werewolves.Arsonist
 import werewolf.view.GameUiEvent
@@ -54,9 +55,10 @@ class ArsonistFragment(
                 height = GridLayout.LayoutParams.WRAP_CONTENT
                 setMargins(8, 8, 8, 8)
             }
-            this.text = playerName
+            text = playerName
             textSize = 18f
-            setTextColor(Color.WHITE)
+            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
+            setTextColor(Color.BLACK)
             gravity = Gravity.CENTER
             setPadding(30,30,30,30)
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
@@ -50,9 +51,10 @@ class WerewolfTeamFragment(
                 height = GridLayout.LayoutParams.WRAP_CONTENT
                 setMargins(8, 8, 8, 8)
             }
-            this.text = playerName
+            text = playerName
             textSize = 18f
-            setTextColor(Color.RED)
+            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
+            setTextColor(Color.parseColor("#990000"))
             gravity = Gravity.CENTER
             setPadding(30,30,30,30)
 

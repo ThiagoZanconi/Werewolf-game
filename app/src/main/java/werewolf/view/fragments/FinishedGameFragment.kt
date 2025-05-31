@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
@@ -77,9 +78,10 @@ class FinishedGameFragment(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            this.text = playerName
+            text = playerName
             textSize = 18f
-            setTextColor(Color.WHITE)
+            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
+            setTextColor(Color.BLACK)
             gravity = Gravity.CENTER
 
             val scale = resources.displayMetrics.density

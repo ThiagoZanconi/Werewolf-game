@@ -13,6 +13,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.entities.Player
@@ -96,9 +97,10 @@ abstract class GridFragment: FragmentModel() {
                 height = GridLayout.LayoutParams.WRAP_CONTENT
                 setMargins(8, 8, 8, 8)
             }
-            this.text = playerName
+            text = playerName
             textSize = 18f
-            setTextColor(Color.WHITE)
+            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
+            setTextColor(Color.BLACK)
             gravity = Gravity.CENTER
             setPadding(30,30,30,30)
 
