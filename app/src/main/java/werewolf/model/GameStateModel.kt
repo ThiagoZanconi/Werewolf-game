@@ -118,7 +118,7 @@ class GameStateModelImpl(
     }
 
     override fun revivePlayerZombie(player: Player): Player? {
-        val playerRemoved = gameState.removePlayer(player)
+        val playerRemoved = gameState.removeDeadPlayer(player)
         if(playerRemoved){
             val zombiePlayer = Zombie(player.fetchPlayerName())
             gameState.addWerewolf(zombiePlayer)
@@ -127,7 +127,6 @@ class GameStateModelImpl(
         else{
             return null
         }
-
     }
 
     private fun addWerewolf(player: Player) {

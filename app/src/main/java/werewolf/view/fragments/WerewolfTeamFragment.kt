@@ -61,7 +61,6 @@ class WerewolfTeamFragment(
             val scale = resources.displayMetrics.density
             minWidth = (100 * scale).toInt()
             minHeight = (50 * scale).toInt()
-
         }
         return textView
     }

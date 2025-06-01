@@ -32,4 +32,5 @@ class RolesDescriptionFragment: Fragment(){
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = RolesDescriptionAdapter(Roles.entries.toTypedArray())
     }
+
 }

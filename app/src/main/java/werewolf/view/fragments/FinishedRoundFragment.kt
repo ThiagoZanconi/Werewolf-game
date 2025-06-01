@@ -26,10 +26,8 @@ class FinishedRoundFragment(
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_finishedround, container, false)
-
         initComponents(view)
         initListeners()
-
         return view
     }
 
@@ -57,4 +55,5 @@ class FinishedRoundFragment(
     override fun setSelectedPlayer(playerName: String){
         selectedPlayer = alivePlayers.find { it.fetchPlayerName() == playerName }
     }
+
 }

@@ -72,24 +72,7 @@ class FinishedGameFragment(
         }
     }
 
-    override fun createTextView(playerName: String): TextView {
-        val textView = TextView(requireContext()).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            text = playerName
-            textSize = 18f
-            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
-            setTextColor(Color.BLACK)
-            gravity = Gravity.CENTER
-
-            val scale = resources.displayMetrics.density
-            minWidth = (100 * scale).toInt()
-            minHeight = (50 * scale).toInt()
-        }
-        return textView
-    }
+    override fun onPlayerClick(textView: TextView, playerName: String) {}
 
     override fun setSelectedPlayer(playerName: String) {}
 

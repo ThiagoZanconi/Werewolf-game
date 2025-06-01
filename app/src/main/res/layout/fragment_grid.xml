@@ -144,6 +144,6 @@
         android:text="@string/done"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:textSize="18sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,8 @@ import werewolf.view.GameActivity
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
+import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.WinnerTeam
 import java.util.PriorityQueue
 
@@ -43,6 +45,17 @@ class GameControllerImpl(
                 GameUiEvent.ConfirmAction -> confirmAction()
                 GameUiEvent.StartTurn -> startTurn()
                 GameUiEvent.StartNextRound -> startNextRound()
+            }
+        }
+
+    private val fragmentTargetPlayersObserver: Observer<TargetPlayersSignal> =
+        Observer { value ->
+            when (value.getTargetPlayersEnum()) {
+                TargetPlayersEnum.SetWerewolfTeammates -> value.targetPlayers = gameStateModel.getAliveVillagers()
+                TargetPlayersEnum.SetAlivePlayersTarget -> startTurn()
+                TargetPlayersEnum.SetDeadTargets -> startNextRound()
+                TargetPlayersEnum.SetWerewolfTargets -> value.targetPlayers = gameStateModel.getAliveVillagers()
+                TargetPlayersEnum.SetOtherAlivePlayersTarget -> value.targetPlayers = gameStateModel.getAliveVillagers()
             }
         }
 

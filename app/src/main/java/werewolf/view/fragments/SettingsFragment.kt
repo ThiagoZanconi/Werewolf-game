@@ -54,4 +54,5 @@ class SettingsFragment(
         startActivity(intent)
         requireActivity().finish()
     }
+
 }

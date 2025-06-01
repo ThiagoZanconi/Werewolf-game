@@ -3,6 +3,7 @@ package werewolf.model
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
+import werewolf.model.entities.werewolves.Zombie
 
 interface GameState{
     fun initAlivePlayers( playerPositionMap: MutableMap<String, Int>)
@@ -20,7 +21,7 @@ interface GameState{
     fun ascendWerewolf(): Player
     fun reviveVillager(villager: Player): Player
     fun reviveWerewolf(werewolf: Player): Player
-    fun removePlayer(player: Player): Boolean
+    fun removeDeadPlayer(player: Player): Boolean
 }
 
 class GameStateImpl: GameState{
@@ -110,7 +111,7 @@ class GameStateImpl: GameState{
         return witch
     }
 
-    override fun removePlayer(player: Player): Boolean {
+    override fun removeDeadPlayer(player: Player): Boolean {
         val werewolfRemoved = deadWerewolves.remove(player)
         val villagerRemoved = deadVillagers.remove(player)
         return werewolfRemoved || villagerRemoved

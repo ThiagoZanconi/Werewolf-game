@@ -48,48 +48,26 @@ class ArsonistFragment(
         super.confirmAction()
     }
 
-    override fun createTextView(playerName: String): TextView {
-        val textView = TextView(requireContext()).apply {
-            layoutParams = GridLayout.LayoutParams().apply {
-                width = GridLayout.LayoutParams.WRAP_CONTENT
-                height = GridLayout.LayoutParams.WRAP_CONTENT
-                setMargins(8, 8, 8, 8)
-            }
-            text = playerName
-            textSize = 18f
-            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
-            setTextColor(Color.BLACK)
-            gravity = Gravity.CENTER
-            setPadding(30,30,30,30)
-
-            val scale = resources.displayMetrics.density
-            minWidth = (100 * scale).toInt()
-            minHeight = (50 * scale).toInt()
-
-            setOnClickListener {
-                if (this.background == null) {
-                    this.setBackgroundResource(R.drawable.imageview_shape)
-                    markNotSelected(playerName)
-                    igniteSelectedTextViewOnClickListener()
-                    setSelectedPlayer(playerName)
-                } else {
-                    this.background = null
-                    selectedPlayer = null
-                }
-            }
+    override fun onPlayerClick(textView: TextView, playerName: String) {
+        if (textView.background == null) {
+            textView.setBackgroundResource(R.drawable.imageview_shape)
+            markNotSelected(playerName)
+            igniteSelectedTextViewOnClickListener()
+            setSelectedPlayer(playerName)
+        } else {
+            textView.background = null
+            selectedPlayer = null
         }
-        return textView
     }
 
     private fun initIgniteTextView(view: View){
         igniteTextView = view.findViewById(R.id.igniteTextView)
-        igniteTextView.setOnClickListener { igniteTextViewOnClickListener() }
-
+        igniteTextView.setOnClickListener{ igniteTextViewOnClickListener() }
     }
 
     private fun initIgniteSelectedTextView(view: View){
         igniteSelectedTextView = view.findViewById(R.id.igniteSelectedTextView)
-        igniteSelectedTextView.setOnClickListener { igniteSelectedTextViewOnClickListener() }
+        igniteSelectedTextView.setOnClickListener{ igniteSelectedTextViewOnClickListener() }
     }
 
     private fun igniteTextViewOnClickListener(){
@@ -103,6 +81,5 @@ class ArsonistFragment(
         ignite = false
         igniteSelectedTextView.visibility=View.GONE
         igniteTextView.visibility=View.VISIBLE
-
     }
 }

@@ -109,17 +109,21 @@ abstract class GridFragment: FragmentModel() {
             minHeight = (50 * scale).toInt()
 
             setOnClickListener {
-                if (this.background == null) {
-                    this.setBackgroundResource(R.drawable.imageview_shape)
-                    markNotSelected(playerName)
-                    setSelectedPlayer(playerName)
-                } else {
-                    this.background = null
-                    selectedPlayer = null
-                }
+                onPlayerClick(this, playerName)
             }
         }
         return textView
+    }
+
+    protected open fun onPlayerClick(textView: TextView, playerName: String) {
+        if (textView.background == null) {
+            textView.setBackgroundResource(R.drawable.imageview_shape)
+            markNotSelected(playerName)
+            setSelectedPlayer(playerName)
+        } else {
+            textView.background = null
+            selectedPlayer = null
+        }
     }
 
     protected fun markNotSelected(playerName: String) {

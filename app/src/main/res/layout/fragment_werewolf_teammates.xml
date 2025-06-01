@@ -142,7 +142,7 @@
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:text="@string/team"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="#FFFFFF"
         android:background="@drawable/textview_shape" />
 
@@ -196,6 +196,6 @@
         android:text="@string/done"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:textSize="18sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
