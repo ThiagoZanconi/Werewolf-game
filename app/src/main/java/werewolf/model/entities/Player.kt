@@ -5,6 +5,8 @@ import com.example.observer.Observable
 import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.view.GameUiEvent
+import werewolf.view.TargetPlayersEnum
+import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.PlayerGridFragment
 import werewolf.view.fragments.WerewolfTeamFragment
 
@@ -17,8 +19,8 @@ interface Player{
 
     fun fetchPlayerName(): String
     fun fetchRole(): Roles
-    fun fetchTeammates(): List<Player>
-    fun fetchTargetPlayers(): List<Player>
+    fun fetchTeammates(): TargetPlayersEnum
+    fun fetchTargetPlayers(): TargetPlayersEnum
     fun fetchTargetPlayer(): Player?
     fun fetchEvent(): PlayerEventEnum
     fun fetchAbilityState(): String
@@ -27,12 +29,10 @@ interface Player{
 
     //Returns ability used for logs
     fun fetchUsedAbility(index: Int): String?
-    fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment
+    fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
     fun defineDefenseState(defenseState: DefenseState)
-    fun defineTeammates(team: List<Player>)
-    fun defineTargetPlayers(targetPlayers: List<Player>)
 
     //Ability delegated to abilityState contrary case
     fun notifyAbilityUsed(targetPlayer: Player?)
@@ -57,8 +57,6 @@ abstract class AbstractPlayer: Player{
     protected var visitors: MutableList<Player> = mutableListOf()
     private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayer: Player? = null
-    private var targetPlayers: List<Player> = listOf()
-    private lateinit var teammates: List<Player>
 
     protected val onActionSubject = Subject<PlayerSignal>()
     override val playerObservable: Observable<PlayerSignal> = onActionSubject
@@ -71,12 +69,12 @@ abstract class AbstractPlayer: Player{
         return role
     }
 
-    override fun fetchTeammates(): List<Player> {
-        return teammates
+    override fun fetchTeammates(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetNoTargetPlayers
     }
 
-    override fun fetchTargetPlayers(): List<Player> {
-        return targetPlayers
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetNoTargetPlayers
     }
 
     override fun fetchTargetPlayer(): Player? {
@@ -105,8 +103,8 @@ abstract class AbstractPlayer: Player{
             null
     }
 
-    override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
-        return PlayerGridFragment(onActionSubject,this)
+    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return PlayerGridFragment(onActionSubject,this,targetPlayersOnActionSubject)
     }
 
     override fun fetchDeathCause(): DeathCause {
@@ -115,14 +113,6 @@ abstract class AbstractPlayer: Player{
 
     override fun defineDefenseState(defenseState: DefenseState) {
         this.defenseState = defenseState
-    }
-
-    override fun defineTeammates(team: List<Player>) {
-        teammates = team
-    }
-
-    override fun defineTargetPlayers(targetPlayers: List<Player>) {
-        this.targetPlayers = targetPlayers
     }
 
     override fun notifyAbilityUsed(targetPlayer: Player?){
@@ -181,15 +171,13 @@ abstract class AbstractPlayer: Player{
     open fun applyDamage(deathCause: DeathCause) {
         notifyKilledPlayer(deathCause)
     }
+
 }
 
 abstract class WerewolfTeamPlayer: AbstractPlayer(){
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetWerewolfTeammates)
+
+    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return WerewolfTeamFragment(onActionSubject,this,targetPlayersOnActionSubject)
     }
 
-    override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
-        return WerewolfTeamFragment(onActionSubject,this)
-    }
 }

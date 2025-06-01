@@ -36,6 +36,7 @@ class GameControllerImpl(
     override fun setGameView(gameActivity: GameActivity) {
         this.gameActivity = gameActivity
         gameActivity.uiEventObservable.subscribe(observer)
+        gameActivity.targetPlayersObservable.subscribe(fragmentTargetPlayersObserver)
         initGame()
     }
 
@@ -51,22 +52,18 @@ class GameControllerImpl(
     private val fragmentTargetPlayersObserver: Observer<TargetPlayersSignal> =
         Observer { value ->
             when (value.getTargetPlayersEnum()) {
-                TargetPlayersEnum.SetWerewolfTeammates -> value.targetPlayers = gameStateModel.getAliveVillagers()
-                TargetPlayersEnum.SetAlivePlayersTarget -> startTurn()
-                TargetPlayersEnum.SetDeadTargets -> startNextRound()
-                TargetPlayersEnum.SetWerewolfTargets -> value.targetPlayers = gameStateModel.getAliveVillagers()
-                TargetPlayersEnum.SetOtherAlivePlayersTarget -> value.targetPlayers = gameStateModel.getAliveVillagers()
+                TargetPlayersEnum.SetNoTargetPlayers -> setNoTargetPlayers(value)
+                TargetPlayersEnum.SetWerewolfTeammates -> setWerewolfTeammates(value)
+                TargetPlayersEnum.SetAlivePlayersTarget -> setAlivePlayersTarget(value)
+                TargetPlayersEnum.SetDeadTargets -> setDeadTargets(value)
+                TargetPlayersEnum.SetWerewolfTargets -> setWerewolfTargets(value)
+                TargetPlayersEnum.SetOtherAlivePlayersTarget -> setOtherAlivePlayersTarget(value)
             }
         }
 
     private val playerObserver: Observer<PlayerSignal> =
         Observer { value ->
             when (value.getPlayer().fetchEvent()){
-                PlayerEventEnum.SetWerewolfTargets -> setWerewolfTargets(value.getPlayer())
-                PlayerEventEnum.SetAlivePlayersTarget -> setAllPlayersTarget(value.getPlayer())
-                PlayerEventEnum.SetOtherAlivePlayersTarget -> setOtherAlivePlayersTarget(value.getPlayer())
-                PlayerEventEnum.SetDeadTargets -> setDeadTargets(value.getPlayer())
-                PlayerEventEnum.SetWerewolfTeammates ->  setWerewolfTeammates(value.getPlayer())
                 PlayerEventEnum.KilledPlayer -> killedPlayer(value.getPlayer())
                 PlayerEventEnum.WerewolfKilled -> werewolfKilled(value.getPlayer())
                 PlayerEventEnum.JesterWin -> jesterWin(value.getPlayer())
@@ -82,24 +79,28 @@ class GameControllerImpl(
             }
         }
 
-    private fun setWerewolfTargets(player: Player){
-        player.defineTargetPlayers(gameStateModel.getAliveVillagers())
+    private fun setNoTargetPlayers(targetPlayersSignal: TargetPlayersSignal){
+        targetPlayersSignal.targetPlayers = listOf()
     }
 
-    private fun setAllPlayersTarget(player: Player){
-        player.defineTargetPlayers(gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves())
+    private fun setWerewolfTargets(targetPlayersSignal: TargetPlayersSignal){
+        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers()
     }
 
-    private fun setOtherAlivePlayersTarget(player: Player){
-        player.defineTargetPlayers(gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()- listOf(player).toSet())
+    private fun setAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
+        targetPlayersSignal.targetPlayers =gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()
     }
 
-    private fun setDeadTargets(player: Player){
-        player.defineTargetPlayers(gameStateModel.getDeadPlayers())
+    private fun setOtherAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
+        //targetPlayersSignal.targetPlayers =gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()-listOf(player).toSet()
     }
 
-    private fun setWerewolfTeammates(player: Player){
-        player.defineTeammates(gameStateModel.getAliveWerewolves())
+    private fun setDeadTargets(targetPlayersSignal: TargetPlayersSignal){
+        targetPlayersSignal.targetPlayers = gameStateModel.getDeadPlayers()
+    }
+
+    private fun setWerewolfTeammates(targetPlayersSignal: TargetPlayersSignal){
+        targetPlayersSignal.targetPlayers = gameStateModel.getAliveWerewolves()
     }
 
     private fun killedPlayer(player: Player){

@@ -10,6 +10,7 @@ import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
 
 class Vampire(
     override val playerName: String
@@ -21,9 +22,8 @@ class Vampire(
         return R.drawable.vampire
     }
 
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetWerewolfTargets)
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetWerewolfTargets
     }
 
     override fun addUsedAbility() {

@@ -9,6 +9,7 @@ import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
 
 class Cleric(
     override val playerName: String
@@ -19,9 +20,8 @@ class Cleric(
         return R.drawable.cleric
     }
 
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetAlivePlayersTarget
     }
 
     override fun addUsedAbility() {

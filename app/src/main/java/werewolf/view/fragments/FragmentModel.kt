@@ -19,6 +19,7 @@ import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
 import werewolf.view.R
+import werewolf.view.TargetPlayersSignal
 import werewolf.view.howtoplay.RoleDescriptionProvider
 
 abstract class FragmentModel: Fragment(){
@@ -138,11 +139,13 @@ abstract class GridFragment: FragmentModel() {
 
 open class PlayerGridFragment(
     protected val onActionSubject: Subject<GameUiEvent>,
-    private val player: Player
+    private val player: Player,
+    protected val targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
 ): GridFragment(){
     private lateinit var abilityStateLabel: TextView
     private lateinit var roleDescriptionButton: ImageButton
     private lateinit var roleDescriptionLabel: TextView
+    protected val targetPlayersSignal: TargetPlayersSignal = TargetPlayersSignal(player.fetchTargetPlayers())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -152,7 +155,7 @@ open class PlayerGridFragment(
         val view = inflater.inflate(R.layout.fragment_grid, container, false)
         initComponents(view)
         initListeners()
-
+        targetPlayersOnActionSubject.notify(targetPlayersSignal)
         return view
     }
 
@@ -180,13 +183,13 @@ open class PlayerGridFragment(
     }
 
     override fun initGridLayout(){
-        player.fetchTargetPlayers().forEach{
+        targetPlayersSignal.targetPlayers.forEach{
                 player -> gridLayout.addView(createTextView(player.fetchPlayerName()),gridLayout.childCount)
         }
     }
 
     override fun setSelectedPlayer(playerName: String){
-        selectedPlayer = player.fetchTargetPlayers().find { it.fetchPlayerName() == playerName }
+        selectedPlayer = targetPlayersSignal.targetPlayers.find { it.fetchPlayerName() == playerName }
     }
 
     private fun showRoleDescription(){

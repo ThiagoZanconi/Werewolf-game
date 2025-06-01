@@ -11,6 +11,7 @@ import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
 
 class Necromancer(
     override val playerName: String
@@ -26,9 +27,8 @@ class Necromancer(
         return R.drawable.necromancer
     }
 
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetDeadTargets)
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetDeadTargets
     }
 }
 

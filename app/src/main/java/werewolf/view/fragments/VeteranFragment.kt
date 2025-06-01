@@ -6,11 +6,13 @@ import werewolf.model.entities.werewolves.Werewolf
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersSignal
 
 class VeteranFragment(
     onActionSubject: Subject<GameUiEvent>,
-    player: Player
-) : PlayerGridFragment(onActionSubject,player){
+    player: Player,
+    targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
+) : PlayerGridFragment(onActionSubject,player,targetPlayersOnActionSubject){
 
     override fun initGridLayout(){
         gridLayout.addView(createTextView(MyApp.getAppContext().getString(R.string.alert)),gridLayout.childCount)

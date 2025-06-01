@@ -1,23 +1,21 @@
 package werewolf.view.fragments
 
-import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import com.example.observer.Subject
 import werewolf.model.entities.werewolves.Arsonist
 import werewolf.view.GameUiEvent
 import werewolf.view.R
+import werewolf.view.TargetPlayersSignal
 
 class ArsonistFragment(
     onActionSubject: Subject<GameUiEvent>,
-    private val player: Arsonist
-) : PlayerGridFragment(onActionSubject,player){
+    private val player: Arsonist,
+    targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
+) : PlayerGridFragment(onActionSubject,player,targetPlayersOnActionSubject){
     private lateinit var igniteTextView: TextView
     private lateinit var igniteSelectedTextView: TextView
     private var ignite: Boolean = false

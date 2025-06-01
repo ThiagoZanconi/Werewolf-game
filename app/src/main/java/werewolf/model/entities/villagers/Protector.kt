@@ -9,6 +9,7 @@ import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.Protected
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
 
 class Protector(
     override val playerName: String
@@ -33,9 +34,8 @@ class Protector(
         return R.drawable.protector
     }
 
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetOtherAlivePlayersTarget)
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetAlivePlayersTarget
     }
 }
 

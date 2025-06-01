@@ -9,6 +9,7 @@ import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
 
 class Vigilante(
     override val playerName: String
@@ -24,9 +25,8 @@ class Vigilante(
         return R.drawable.vigilante
     }
 
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetAlivePlayersTarget)
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetAlivePlayersTarget
     }
 }
 

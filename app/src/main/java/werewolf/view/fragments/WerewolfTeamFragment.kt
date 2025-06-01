@@ -13,11 +13,14 @@ import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
+import werewolf.view.TargetPlayersSignal
 
 class WerewolfTeamFragment(
     onActionSubject: Subject<GameUiEvent>,
-    private val player: Player
-) : PlayerGridFragment(onActionSubject,player){
+    player: Player,
+    targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
+) : PlayerGridFragment(onActionSubject,player,targetPlayersOnActionSubject){
     private lateinit var teammatesGridLayout: GridLayout
 
     override fun onCreateView(
@@ -39,7 +42,9 @@ class WerewolfTeamFragment(
     }
 
     private fun initTeammatesGridLayout(){
-        player.fetchTeammates().forEach{
+        val teammatesPlayerSignal = TargetPlayersSignal(TargetPlayersEnum.SetWerewolfTeammates)
+        targetPlayersOnActionSubject.notify(teammatesPlayerSignal)
+        teammatesPlayerSignal.targetPlayers.forEach{
                 player -> teammatesGridLayout.addView(createTeammatesTextView(player.fetchPlayerName()),teammatesGridLayout.childCount)
         }
     }

@@ -12,6 +12,7 @@ import werewolf.model.entities.werewolves.Werewolf
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.VeteranFragment
 
 class Veteran(
@@ -28,8 +29,8 @@ class Veteran(
         return R.drawable.veteran
     }
 
-    override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
-        return VeteranFragment(onActionSubject,this)
+    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return VeteranFragment(onActionSubject,this, targetPlayersOnActionSubject)
     }
 }
 

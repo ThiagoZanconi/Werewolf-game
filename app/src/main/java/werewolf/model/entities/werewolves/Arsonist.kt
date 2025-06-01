@@ -12,6 +12,8 @@ import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
+import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.ArsonistFragment
 
 class Arsonist(
@@ -29,13 +31,12 @@ class Arsonist(
         return R.drawable.arsonist
     }
 
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetWerewolfTargets)
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetWerewolfTargets
     }
 
-    override fun fetchView(onActionSubject: Subject<GameUiEvent>): Fragment {
-        return ArsonistFragment(onActionSubject,this)
+    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return ArsonistFragment(onActionSubject,this, targetPlayersOnActionSubject)
     }
 
     override fun addUsedAbility(){

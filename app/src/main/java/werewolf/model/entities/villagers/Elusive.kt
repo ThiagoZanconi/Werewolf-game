@@ -9,6 +9,7 @@ import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersEnum
 
 class Elusive(
     override val playerName: String
@@ -24,9 +25,8 @@ class Elusive(
         return R.drawable.elusive
     }
 
-    override fun turnSetUp() {
-        super.turnSetUp()
-        signalEvent(PlayerEventEnum.SetOtherAlivePlayersTarget)
+    override fun fetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.SetAlivePlayersTarget
     }
 }
 

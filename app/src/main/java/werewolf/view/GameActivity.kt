@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
+import com.example.observer.Observer
 import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.fragments.FinishedGameFragment
@@ -19,6 +20,7 @@ import java.util.Locale
 
 interface GameActivity{
     val uiEventObservable: Observable<GameUiEvent>
+    val targetPlayersObservable: Observable<TargetPlayersSignal>
 
     fun setCurrentPlayer(player: String)
     fun startTurn(player: Player)
@@ -27,14 +29,16 @@ interface GameActivity{
 }
 
 class GameActivityImpl: AppCompatActivity(), GameActivity{
-    private val onActionSubject = Subject<GameUiEvent>()
-
     private lateinit var timerTextView: TextView
     private lateinit var nameTextView: TextView
     private lateinit var startTurnButton: Button
     private lateinit var mediaPlayer: MediaPlayer
 
+    private val onActionSubject = Subject<GameUiEvent>()
     override val uiEventObservable: Observable<GameUiEvent> = onActionSubject
+
+    private val targetPlayersOnActionSubject = Subject<TargetPlayersSignal>()
+    override val targetPlayersObservable: Observable<TargetPlayersSignal> = targetPlayersOnActionSubject
 
     override fun setCurrentPlayer(player: String) {
         turnOnCover()
@@ -44,7 +48,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
 
     override fun startTurn(player: Player) {
         startTurnButton.isEnabled = false
-        startTimer(player.fetchView(onActionSubject))
+        startTimer(player.fetchView(onActionSubject, targetPlayersOnActionSubject))
     }
 
     override fun finishRound(text: String, alivePlayers: List<Player>) {

@@ -89,7 +89,6 @@ class GameStateImpl: GameState{
     override fun ascendWerewolf(): Player {
         val index = alivePlayers.indexOf(aliveWerewolves[0])
         val werewolf: Player = Werewolf(aliveWerewolves[0].fetchPlayerName())
-        werewolf.defineTargetPlayers(aliveVillagers)
         aliveWerewolves[0] = werewolf
         alivePlayers[index] = werewolf
         return werewolf
@@ -105,7 +104,6 @@ class GameStateImpl: GameState{
     override fun reviveWerewolf(werewolf: Player): Player {
         deadWerewolves.remove(werewolf)
         val witch: Player = Witch(werewolf.fetchPlayerName())
-        witch.defineTargetPlayers(aliveVillagers)
         aliveWerewolves.add(witch)
         alivePlayers.add(witch)
         return witch
