@@ -155,6 +155,7 @@ abstract class AbstractPlayer: Player{
     override fun turnSetUp() {
         abilitiesUsedOnMe = mutableListOf()
         usedAbilities = mutableListOf()
+        abilityState.turnSetUp(this)
     }
 
     fun signalEvent(event: PlayerEventEnum) {

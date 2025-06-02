@@ -5,6 +5,7 @@ import werewolf.view.TargetPlayersEnum
 interface AbilityState{
     fun useAbility(player: AbstractPlayer)
     fun getAbilityState(): String
+    fun turnSetUp(player: AbstractPlayer)
     fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum
 }
 
@@ -16,6 +17,8 @@ open class Neutral: AbilityState{
     override fun useAbility(player: AbstractPlayer) {
         player.addUsedAbility()
     }
+
+    override fun turnSetUp(player: AbstractPlayer){}
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
         return player.resolveFetchTargetPlayers()
@@ -34,12 +37,33 @@ class NoAbility: Neutral() {
     }
 }
 
-class OneTurnCooldown: Neutral(){
-    override fun useAbility(player: AbstractPlayer){
-        player.defineAbilityState(Neutral())
-    }
+class OffCooldown: Neutral(){
+
+    override fun useAbility(player: AbstractPlayer){}
+
     override fun getAbilityState(): String {
         return "Ability on cooldown"
+    }
+
+    override fun turnSetUp(player: AbstractPlayer){
+        player.defineAbilityState(Neutral())
+    }
+
+    override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
+        return TargetPlayersEnum.SetNoTargetPlayers
+    }
+}
+
+class OneTurnCooldown: Neutral(){
+
+    override fun useAbility(player: AbstractPlayer){}
+
+    override fun getAbilityState(): String {
+        return "Ability on cooldown"
+    }
+
+    override fun turnSetUp(player: AbstractPlayer){
+        player.defineAbilityState(OffCooldown())
     }
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
@@ -48,6 +72,8 @@ class OneTurnCooldown: Neutral(){
 }
 
 class NoUsesLeft: Neutral(){
+    override fun useAbility(player: AbstractPlayer){}
+
     override fun getAbilityState(): String {
         return "No uses left"
     }

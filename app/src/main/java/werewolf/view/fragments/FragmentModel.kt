@@ -154,15 +154,9 @@ open class PlayerGridFragment(
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_grid, container, false)
-        initTargetPlayersSignal()
         initComponents(view)
         initListeners()
         return view
-    }
-
-    private fun initTargetPlayersSignal(){
-        targetPlayersSignal = TargetPlayersSignal(player.fetchTargetPlayers())
-        targetPlayersOnActionSubject.notify(targetPlayersSignal)
     }
 
     override fun initComponents(view: View) {
@@ -189,6 +183,8 @@ open class PlayerGridFragment(
     }
 
     override fun initGridLayout(){
+        targetPlayersSignal = TargetPlayersSignal(player.fetchTargetPlayers())
+        targetPlayersOnActionSubject.notify(targetPlayersSignal)
         targetPlayersSignal.targetPlayers.forEach{
                 player -> gridLayout.addView(createTextView(player.fetchPlayerName()),gridLayout.childCount)
         }
