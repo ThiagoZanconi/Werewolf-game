@@ -12,6 +12,7 @@ import werewolf.view.GameActivity
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.RoleNameProvider
 import werewolf.view.TargetPlayersEnum
 import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.WinnerTeam
@@ -201,7 +202,7 @@ class GameControllerImpl(
             usedAbilities.forEachIndexed { index, ability ->
                 ability.playerObservable.subscribe(abilityObserver)
                 abilityPriorityQueue.add(ability)
-                gameLogs+=player.fetchPlayerName()+" ("+player.fetchRole()+") "+MyApp.getAppContext().getString(R.string.used)+" "+player.fetchUsedAbility(index)+" -> "+ (player.fetchTargetPlayer()?.fetchPlayerName() ?: "") +"\n"
+                gameLogs+=player.fetchPlayerName()+" ("+ RoleNameProvider.getRoleName(player.fetchRole())+") "+MyApp.getAppContext().getString(R.string.used)+" "+player.fetchUsedAbility(index)+" -> "+ (player.fetchTargetPlayer()?.fetchPlayerName() ?: "") +"\n"
             }
         }
     }

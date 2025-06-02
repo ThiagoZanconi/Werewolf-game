@@ -22,6 +22,7 @@
     <string name="was_mauled">Was mauled</string>
     <string name="was_hanged">Was hanged</string>
     <string name="was_burnt">Was burnt</string>
+    <string name="exploded">Exploded</string>
     <string name="role_description">Role Description</string>
     <string name="team">Team:</string>
 
@@ -36,6 +37,12 @@
     <string name="draw">Draw</string>
     <string name="jester_wins">Jester Wins</string>
 
+    <string name="unknown_ability_state">Unknown Ability State</string>
+    <string name="no_uses_left">No Uses Left</string>
+    <string name="on_cooldown">On Cooldown</string>
+    <string name="select_player">Select Player</string>
+    <string name="no_ability">No Ability</string>
+
     <string name="unknown_role">Unknown Role</string>
     <string name="cleric">Cleric</string>
     <string name="villager">Villager</string>
@@ -44,6 +51,7 @@
     <string name="priest">Priest</string>
     <string name="veteran">Veteran</string>
     <string name="elusive">Elusive</string>
+    <string name="detonator">Detonator</string>
     <string name="jester">Jester</string>
     <string name="werewolf">Werewolf</string>
     <string name="witch">Witch</string>
@@ -64,6 +72,8 @@
     <string name="oil_spill">Oil Spill</string>
     <string name="hide">Hide</string>
     <string name="hidden">Hidden</string>
+    <string name="place_bomb">Place Bomb</string>
+    <string name="remove_bomb">Remove Bomb</string>
 
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
@@ -78,7 +88,8 @@
     <string name="vigilante_description">Belongs to the villagers team. Once a game can select a player to shot to kill(villagers included)</string>
     <string name="veteran_description">Belongs to the villagers team. Once a game can stay alert at night (Every player that visits him, will get shot).</string>
     <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect from all attacks received.</string>
-    <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All abilities that target him directly have no effect. Both he and the host receive the abilities targeted to he host. If hi hiddes in the house of werewolf he is attacked.</string>
+    <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All abilities that target him directly have no effect. Both he and the host receive the abilities targeted to he host. If hi hides in the house of werewolf he is attacked.</string>
+    <string name="detonator_description">Belongs to the villagers team. At night cab set the bomb in a player\'s house . When detonator dies, the bomb explodes, striking target player. Detonator may change the bomb to other location. If he dies when setting the bomb, ability has no effect.</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 
 </resources>

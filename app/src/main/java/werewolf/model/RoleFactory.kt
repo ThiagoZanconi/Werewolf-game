@@ -3,6 +3,7 @@ package werewolf.model
 import werewolf.model.entities.Player
 import werewolf.model.entities.neutrals.Jester
 import werewolf.model.entities.villagers.Cleric
+import werewolf.model.entities.villagers.Detonator
 import werewolf.model.entities.villagers.Elusive
 import werewolf.model.entities.villagers.Priest
 import werewolf.model.entities.villagers.Protector
@@ -18,7 +19,7 @@ import werewolf.view.settings.RoleQuantitySettings
 import kotlin.math.floor
 
 enum class Roles{
-    Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Jester
+    Jester, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Detonator, Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie
 }
 
 interface RoleFactory{
@@ -30,7 +31,7 @@ class RoleFactoryImpl(
     private val players: MutableList<String>
 ): RoleFactory {
 
-    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric, Roles.Villager, Roles.Veteran, Roles.Elusive)
+    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric, Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator)
     private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch, Roles.Necromancer, Roles.Arsonist)
 
     override fun getPlayers(): List<Player> {
@@ -115,6 +116,7 @@ class RoleFactoryImpl(
             Roles.Protector -> Protector(name)
             Roles.Veteran -> Veteran(name)
             Roles.Elusive -> Elusive(name)
+            Roles.Detonator -> Detonator(name)
             else -> Villager(name)
         }
     }

@@ -18,8 +18,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.entities.Player
+import werewolf.view.AbilityStateProvider
 import werewolf.view.GameUiEvent
 import werewolf.view.R
+import werewolf.view.RoleNameProvider
 import werewolf.view.TargetPlayersSignal
 import werewolf.view.howtoplay.RoleDescriptionProvider
 
@@ -162,11 +164,11 @@ open class PlayerGridFragment(
     override fun initComponents(view: View) {
         super.initComponents(view)
         abilityStateLabel = view.findViewById(R.id.descriptionLabel)
-        abilityStateLabel.text = player.fetchAbilityState()
+        abilityStateLabel.text = AbilityStateProvider.getAbilityState(player.fetchAbilityState())
         roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
         roleDescriptionLabel = view.findViewById(R.id.roleDescription)
         roleDescriptionLabel.text = RoleDescriptionProvider.getRoleDescription(player.fetchRole())
-        titleLabel.text = player.fetchRole().toString()
+        titleLabel.text = RoleNameProvider.getRoleName(player.fetchRole())
         imageView.setImageResource(player.fetchImageSrc())
     }
 

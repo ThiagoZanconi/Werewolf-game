@@ -21,7 +21,7 @@ class Protector(
     }
 
     override fun applyDamage(deathCause: DeathCause) {
-        if(armored){
+        if(armored && deathCause!=DeathCause.HANGED){
             armored = false
         }
         else{

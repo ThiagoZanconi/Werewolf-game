@@ -42,7 +42,7 @@ class FinishedRoundFragment(
     }
 
     override fun confirmAction(){
-        selectedPlayer?.notifyKilledPlayer(DeathCause.HANGED)
+        selectedPlayer?.receiveDamage(DeathCause.HANGED)
         onActionSubject.notify(GameUiEvent.StartNextRound)
     }
 

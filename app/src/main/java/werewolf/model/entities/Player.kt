@@ -11,7 +11,7 @@ import werewolf.view.fragments.PlayerGridFragment
 import werewolf.view.fragments.WerewolfTeamFragment
 
 enum class DeathCause{
-    HANGED, MAULED, SHOT, BURNT
+    HANGED, MAULED, SHOT, BURNT, EXPLODED
 }
 
 interface Player{
@@ -23,7 +23,7 @@ interface Player{
     fun fetchTargetPlayers(): TargetPlayersEnum
     fun fetchTargetPlayer(): Player?
     fun fetchEvent(): PlayerEventEnum
-    fun fetchAbilityState(): String
+    fun fetchAbilityState(): AbilityStateEnum
     fun fetchAbilitiesUsedOnMe(): List<Ability>
     fun fetchUsedAbilities(): List<Ability>
 
@@ -86,7 +86,7 @@ abstract class AbstractPlayer: Player{
         return event
     }
 
-    override fun fetchAbilityState(): String{
+    override fun fetchAbilityState(): AbilityStateEnum{
         return abilityState.getAbilityState()
     }
     override fun fetchAbilitiesUsedOnMe(): List<Ability>{

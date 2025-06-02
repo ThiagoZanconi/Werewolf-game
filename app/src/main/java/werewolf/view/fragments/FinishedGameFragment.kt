@@ -2,16 +2,12 @@ package werewolf.view.fragments
 
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
@@ -101,7 +97,7 @@ class FinishedGameFragment(
     }
 
     private fun jesterWin(){
-        imageView.setImageResource(R.drawable.jester)
+        imageView.setImageResource(R.drawable.jester_2)
         titleLabel.text = requireContext().getString(R.string.jester_wins)
     }
 

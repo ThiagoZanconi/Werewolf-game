@@ -2,16 +2,20 @@ package werewolf.model.entities
 
 import werewolf.view.TargetPlayersEnum
 
+enum class AbilityStateEnum{
+    NEUTRAL, NOABILITY, ONCOOLDOWN, NOUSESLEFT
+}
+
 interface AbilityState{
     fun useAbility(player: AbstractPlayer)
-    fun getAbilityState(): String
+    fun getAbilityState(): AbilityStateEnum
     fun turnSetUp(player: AbstractPlayer)
     fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum
 }
 
 open class Neutral: AbilityState{
-    override fun getAbilityState(): String {
-        return "Select player"
+    override fun getAbilityState(): AbilityStateEnum{
+        return AbilityStateEnum.NEUTRAL
     }
 
     override fun useAbility(player: AbstractPlayer) {
@@ -26,8 +30,8 @@ open class Neutral: AbilityState{
 }
 
 class NoAbility: Neutral() {
-    override fun getAbilityState(): String {
-        return "No Ability"
+    override fun getAbilityState(): AbilityStateEnum{
+        return AbilityStateEnum.NOABILITY
     }
 
     override fun useAbility(player: AbstractPlayer) {}
@@ -41,8 +45,8 @@ class OffCooldown: Neutral(){
 
     override fun useAbility(player: AbstractPlayer){}
 
-    override fun getAbilityState(): String {
-        return "Ability on cooldown"
+    override fun getAbilityState(): AbilityStateEnum{
+        return AbilityStateEnum.ONCOOLDOWN
     }
 
     override fun turnSetUp(player: AbstractPlayer){
@@ -58,8 +62,8 @@ class OneTurnCooldown: Neutral(){
 
     override fun useAbility(player: AbstractPlayer){}
 
-    override fun getAbilityState(): String {
-        return "Ability on cooldown"
+    override fun getAbilityState(): AbilityStateEnum{
+        return AbilityStateEnum.ONCOOLDOWN
     }
 
     override fun turnSetUp(player: AbstractPlayer){
@@ -74,8 +78,8 @@ class OneTurnCooldown: Neutral(){
 class NoUsesLeft: Neutral(){
     override fun useAbility(player: AbstractPlayer){}
 
-    override fun getAbilityState(): String {
-        return "No uses left"
+    override fun getAbilityState(): AbilityStateEnum{
+        return AbilityStateEnum.NOUSESLEFT
     }
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {

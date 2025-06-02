@@ -22,6 +22,7 @@
     <string name="was_mauled">Fue descuartizado</string>
     <string name="was_hanged">Fue colgado</string>
     <string name="was_burnt">Fue quemado</string>
+    <string name="exploded">Explotó</string>
     <string name="role_description">Descripcion de Rol</string>
     <string name="team">Equipo:</string>
 
@@ -36,6 +37,12 @@
     <string name="draw">Empate</string>
     <string name="jester_wins">Gana el Bufon</string>
 
+    <string name="unknown_ability_state">Estado Desconocido</string>
+    <string name="no_uses_left">Sin Usos</string>
+    <string name="on_cooldown">En Enfriamiento</string>
+    <string name="select_player">Selecciona Jugador</string>
+    <string name="no_ability">Sin Habilidad</string>
+
     <string name="unknown_role">Rol Desconocido</string>
     <string name="cleric">Clerigo</string>
     <string name="villager">Aldeano</string>
@@ -44,6 +51,7 @@
     <string name="priest">Sacerdote</string>
     <string name="veteran">Veterano</string>
     <string name="elusive">Escurridizo</string>
+    <string name="detonator">Detonador</string>
     <string name="jester">Bufon</string>
     <string name="werewolf">Hombre Lobo</string>
     <string name="witch">Bruja</string>
@@ -64,6 +72,8 @@
     <string name="oil_spill">Derramar Aceite</string>
     <string name="hide">Ocultarse</string>
     <string name="hidden">Oculto</string>
+    <string name="place_bomb">Depositar Bomba</string>
+    <string name="remove_bomb">Remover Bomba</string>
 
     <string name="unknown_description">Descripcion no encontrada</string>
     <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para matar</string>
@@ -79,5 +89,6 @@
     <string name="veteran_description">Pertenece al equipo de los aldeanos. Una vez por juego puede mantenerse alerta (Todos los jugadores que lo visiten seran disparados).</string>
     <string name="protector_description">Pertenece al equipo de los aldeanos. Tiene dos vidas (si es colgado muere instantaneamente).Cada noche puede proteger a un jugador para recibir todos los atques dirigidos a este último.</string>
     <string name="elusive_description">Pertenece al equipo de los aldeanos. A la noche puede esconderse en la casa de un jugador. Todas las habilidades dirigidas directamente a el no tienen efecto. Tanto el como su hospedador reciben las habilidades dirigidas al hospedador. Si se esconde en la casa del lobo es atacado.</string>
+    <string name="detonator_description">Pertenece al equipo de los aldeanos. A la noche puede depositar la bomba a otro jugador. Cuando el detonador muere, explota la bomba, atacando al jugador objetivo. El detonador puede cambiar la bomba de lugar. Si muere cuando pone/cambia la bomba, la habilidad no tiene efecto.</string>
     <string name="jester_description">Juega solo. No tiene habilidad. Su objetivo es ser colgado al final del día.</string>
 </resources>
