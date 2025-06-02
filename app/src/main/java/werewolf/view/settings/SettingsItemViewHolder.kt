@@ -27,7 +27,7 @@ class SettingsItemViewHolder(private val view: View, private val roleQuantitySet
         }
         val adapter = ArrayAdapter(view.context, R.layout.item_spinner, options)
         spinner.adapter = adapter
-        spinner.setSelection(roleQuantitySettings.getRoleQuantity(role))
+        spinner.setSelection(roleQuantitySettings.fetchRoleQuantity(role))
         initSpinnerListener(role)
     }
 

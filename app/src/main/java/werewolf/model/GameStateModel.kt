@@ -55,7 +55,7 @@ class GameStateModelImpl(
         for(i in cut until players.size-1){
             addVillager(playersAssigned[i])
         }
-        if(roleQuantitySettings.getRoleQuantity(Roles.Jester)==0){
+        if(roleQuantitySettings.fetchRoleQuantity(Roles.Jester)==0){
             addVillager(playersAssigned[players.size-1])
         }
         else{

@@ -43,7 +43,7 @@ class RoleFactoryImpl(
         for(i in cut until players.size-1){
             toReturn.add(getRandomVillager(players[i]))
         }
-        if(roleQuantitySettings.getRoleQuantity(Roles.Jester)==0){
+        if(roleQuantitySettings.fetchRoleQuantity(Roles.Jester)==0){
             toReturn.add(getRandomVillager(players[players.size-1]))
         }
         else{
@@ -61,7 +61,7 @@ class RoleFactoryImpl(
                 break
             }
             val role = werewolfRoles.random()
-            val roleMaxAmount = roleQuantitySettings.getRoleQuantity(role)
+            val roleMaxAmount = roleQuantitySettings.fetchRoleQuantity(role)
             if(roleMaxAmount>0){
                 created = true
                 roleQuantitySettings.subtractRoleQuantity(role)
@@ -93,7 +93,7 @@ class RoleFactoryImpl(
                 break
             }
             val role = villagerRoles.random()
-            val roleMaxAmount = roleQuantitySettings.getRoleQuantity(role)
+            val roleMaxAmount = roleQuantitySettings.fetchRoleQuantity(role)
             if(roleMaxAmount>0){
                 created = true
                 roleQuantitySettings.subtractRoleQuantity(role)

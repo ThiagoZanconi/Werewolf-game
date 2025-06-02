@@ -45,7 +45,7 @@ class SettingsFragment(
     private fun initRecyclerView(view: View,roleQuantitySettings: RoleQuantitySettings){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        val adapter = SettingsAdapter(Roles.entries.filter { it != Roles.Werewolf }.toTypedArray(), roleQuantitySettings)
+        val adapter = SettingsAdapter(roleQuantitySettings)
         recyclerView.adapter = adapter
     }
 

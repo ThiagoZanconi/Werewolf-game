@@ -4,9 +4,11 @@ import werewolf.model.Roles
 
 interface RoleQuantitySettings{
     fun init(playerSize: Int)
-    fun getRoleMaxQuantity(role: Roles): Int
+    fun size(): Int
+    fun indexOf(index: Int): Roles
+    fun fetchRoleMaxQuantity(role: Roles): Int
+    fun fetchRoleQuantity(role: Roles): Int
     fun setRoleQuantity(role: Roles, size: Int)
-    fun getRoleQuantity(role:Roles): Int
     fun subtractRoleQuantity(role: Roles)
 }
 
@@ -18,6 +20,8 @@ class RoleQuantitySettingsImpl: RoleQuantitySettings{
         Roles.entries.forEach{
             rolesMaxQuantityMap[it] = playerSize - playerSize/3
         }
+        rolesMaxQuantityMap.remove(Roles.Werewolf)
+        rolesMaxQuantityMap.remove(Roles.Zombie)
         rolesMaxQuantityMap[Roles.Jester] = 1
         rolesMaxQuantityMap[Roles.Necromancer] = playerSize/3 -1
         rolesMaxQuantityMap[Roles.Vampire] = playerSize/3 -1
@@ -28,16 +32,24 @@ class RoleQuantitySettingsImpl: RoleQuantitySettings{
         }
     }
 
-    override fun getRoleMaxQuantity(role: Roles):Int {
+    override fun size(): Int {
+        return rolesMaxQuantityMap.size
+    }
+
+    override fun indexOf(index: Int): Roles {
+        return rolesMaxQuantityMap.keys.elementAt(index)
+    }
+
+    override fun fetchRoleMaxQuantity(role: Roles):Int {
         return rolesMaxQuantityMap[role]!!
+    }
+
+    override fun fetchRoleQuantity(role:Roles): Int{
+        return rolesQuantityMap[role]!!
     }
 
     override fun setRoleQuantity(role: Roles, size: Int){
         rolesQuantityMap[role] = size
-    }
-
-    override fun getRoleQuantity(role:Roles): Int{
-        return rolesQuantityMap[role]!!
     }
 
     override fun subtractRoleQuantity(role: Roles) {
