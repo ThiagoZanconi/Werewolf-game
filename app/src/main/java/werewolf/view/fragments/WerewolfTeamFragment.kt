@@ -61,7 +61,7 @@ class WerewolfTeamFragment(
             typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
             setTextColor(Color.parseColor("#990000"))
             gravity = Gravity.CENTER
-            setPadding(30,30,30,30)
+            setPadding(15,15,15,15)
 
             val scale = resources.displayMetrics.density
             minWidth = (100 * scale).toInt()

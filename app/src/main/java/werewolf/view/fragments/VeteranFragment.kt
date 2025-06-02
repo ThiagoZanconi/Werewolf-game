@@ -19,7 +19,7 @@ class VeteranFragment(
     }
 
     override fun setSelectedPlayer(playerName: String){
-        selectedPlayer = Werewolf("Dummy Target")     //Dummy target
+        selectedPlayer = Werewolf("Dummy Target")
     }
 
 }
