@@ -16,7 +16,7 @@ class ArsonistFragment(
     onActionSubject: Subject<GameUiEvent>,
     private val player: Arsonist,
     targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
-) : PlayerGridFragment(onActionSubject,player,targetPlayersOnActionSubject){
+) : WerewolfTeamFragment(onActionSubject,player,targetPlayersOnActionSubject){
     private lateinit var igniteTextView: TextView
     private lateinit var igniteSelectedTextView: TextView
     private var ignite: Boolean = false

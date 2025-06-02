@@ -16,7 +16,7 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 import werewolf.view.TargetPlayersSignal
 
-class WerewolfTeamFragment(
+open class WerewolfTeamFragment(
     onActionSubject: Subject<GameUiEvent>,
     player: Player,
     targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
