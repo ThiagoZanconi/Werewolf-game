@@ -24,7 +24,7 @@ class Vigilante(
         return R.drawable.vigilante
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetAlivePlayersTarget
     }
 }

@@ -6,7 +6,6 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.OneTurnCooldown
 import werewolf.model.entities.Player
-import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
@@ -22,7 +21,7 @@ class Vampire(
         return R.drawable.vampire
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetWerewolfTargets
     }
 

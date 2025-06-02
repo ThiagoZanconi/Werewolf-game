@@ -7,7 +7,6 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
-import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
@@ -31,7 +30,7 @@ class Arsonist(
         return R.drawable.arsonist
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetWerewolfTargets
     }
 

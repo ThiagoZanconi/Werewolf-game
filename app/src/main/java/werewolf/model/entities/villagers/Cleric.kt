@@ -6,7 +6,6 @@ import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Immune
 import werewolf.model.entities.OneTurnCooldown
 import werewolf.model.entities.Player
-import werewolf.model.entities.PlayerEventEnum
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
@@ -20,7 +19,7 @@ class Cleric(
         return R.drawable.cleric
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetAlivePlayersTarget
     }
 

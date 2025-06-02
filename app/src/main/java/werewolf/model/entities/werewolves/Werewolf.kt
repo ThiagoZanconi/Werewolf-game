@@ -19,7 +19,7 @@ class Werewolf(
         return R.drawable.werewolf
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetWerewolfTargets
     }
 

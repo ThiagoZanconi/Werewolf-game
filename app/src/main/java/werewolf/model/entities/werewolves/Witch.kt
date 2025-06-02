@@ -3,7 +3,6 @@ package werewolf.model.entities.werewolves
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.Player
-import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
@@ -18,7 +17,7 @@ class Witch(
         return R.drawable.witch
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetWerewolfTargets
     }
 

@@ -1,11 +1,14 @@
 package werewolf.model.entities
 
+import werewolf.view.TargetPlayersEnum
+
 interface AbilityState{
     fun useAbility(player: AbstractPlayer)
     fun getAbilityState(): String
+    fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum
 }
 
-abstract class AbstractAbilityState: AbilityState{
+open class Neutral: AbilityState{
     override fun getAbilityState(): String {
         return "Select player"
     }
@@ -13,34 +16,43 @@ abstract class AbstractAbilityState: AbilityState{
     override fun useAbility(player: AbstractPlayer) {
         player.addUsedAbility()
     }
+
+    override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
+        return player.resolveFetchTargetPlayers()
+    }
 }
 
-class Neutral: AbstractAbilityState()
-
-class NoAbility: AbstractAbilityState() {
+class NoAbility: Neutral() {
     override fun getAbilityState(): String {
         return "No Ability"
     }
-}
 
-class OffCooldown: AbstractAbilityState(){
+    override fun useAbility(player: AbstractPlayer) {}
 
-    override fun useAbility(player: AbstractPlayer) {
-        player.addUsedAbility()
+    override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
+        return TargetPlayersEnum.SetNoTargetPlayers
     }
 }
 
-class OneTurnCooldown: AbstractAbilityState(){
+class OneTurnCooldown: Neutral(){
     override fun useAbility(player: AbstractPlayer){
-        player.defineAbilityState(OffCooldown())
+        player.defineAbilityState(Neutral())
     }
     override fun getAbilityState(): String {
         return "Ability on cooldown"
     }
+
+    override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
+        return TargetPlayersEnum.SetNoTargetPlayers
+    }
 }
 
-class NoUsesLeft: AbstractAbilityState(){
+class NoUsesLeft: Neutral(){
     override fun getAbilityState(): String {
         return "No uses left"
+    }
+
+    override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
+        return TargetPlayersEnum.SetNoTargetPlayers
     }
 }

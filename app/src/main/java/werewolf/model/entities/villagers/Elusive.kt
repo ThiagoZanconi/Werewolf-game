@@ -25,7 +25,7 @@ class Elusive(
         return R.drawable.elusive
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetAlivePlayersTarget
     }
 }

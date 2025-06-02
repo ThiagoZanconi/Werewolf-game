@@ -5,7 +5,6 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
-import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.Protected
 import werewolf.view.MyApp
 import werewolf.view.R
@@ -34,7 +33,7 @@ class Protector(
         return R.drawable.protector
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetAlivePlayersTarget
     }
 }

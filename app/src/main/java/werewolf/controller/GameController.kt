@@ -88,7 +88,7 @@ class GameControllerImpl(
     }
 
     private fun setAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers =gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()
+        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()
     }
 
     private fun setOtherAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){

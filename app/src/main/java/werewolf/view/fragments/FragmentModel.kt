@@ -3,6 +3,7 @@ package werewolf.view.fragments
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -103,7 +104,7 @@ abstract class GridFragment: FragmentModel() {
             typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
             setTextColor(Color.BLACK)
             gravity = Gravity.CENTER
-            setPadding(30,30,30,30)
+            setPadding(15,15,15,15)
 
             val scale = resources.displayMetrics.density
             minWidth = (100 * scale).toInt()
@@ -145,7 +146,7 @@ open class PlayerGridFragment(
     private lateinit var abilityStateLabel: TextView
     private lateinit var roleDescriptionButton: ImageButton
     private lateinit var roleDescriptionLabel: TextView
-    protected val targetPlayersSignal: TargetPlayersSignal = TargetPlayersSignal(player.fetchTargetPlayers())
+    private lateinit var targetPlayersSignal: TargetPlayersSignal
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -153,10 +154,15 @@ open class PlayerGridFragment(
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_grid, container, false)
+        initTargetPlayersSignal()
         initComponents(view)
         initListeners()
-        targetPlayersOnActionSubject.notify(targetPlayersSignal)
         return view
+    }
+
+    private fun initTargetPlayersSignal(){
+        targetPlayersSignal = TargetPlayersSignal(player.fetchTargetPlayers())
+        targetPlayersOnActionSubject.notify(targetPlayersSignal)
     }
 
     override fun initComponents(view: View) {

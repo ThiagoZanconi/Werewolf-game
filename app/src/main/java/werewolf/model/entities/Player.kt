@@ -74,7 +74,7 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun fetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetNoTargetPlayers
+        return abilityState.fetchTargetPlayers(this)
     }
 
     override fun fetchTargetPlayer(): Player? {
@@ -164,6 +164,10 @@ abstract class AbstractPlayer: Player{
 
     fun defineAbilityState(abilityState: AbilityState){
         this.abilityState = abilityState
+    }
+
+    open fun resolveFetchTargetPlayers(): TargetPlayersEnum{
+        return TargetPlayersEnum.SetNoTargetPlayers
     }
 
     open fun addUsedAbility(){}

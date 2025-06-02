@@ -8,7 +8,6 @@ import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Immune
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
-import werewolf.model.entities.PlayerEventEnum
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
@@ -27,7 +26,7 @@ class Priest(
         return R.drawable.priest
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.SetDeadTargets
     }
 }
