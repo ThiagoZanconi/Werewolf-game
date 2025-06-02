@@ -33,6 +33,7 @@ interface Player{
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
     fun defineDefenseState(defenseState: DefenseState)
+    fun defineTargetPlayer(targetPlayer: Player)
 
     //Ability delegated to abilityState contrary case
     fun notifyAbilityUsed(targetPlayer: Player?)
@@ -113,6 +114,10 @@ abstract class AbstractPlayer: Player{
 
     override fun defineDefenseState(defenseState: DefenseState) {
         this.defenseState = defenseState
+    }
+
+    override fun defineTargetPlayer(targetPlayer: Player){
+        this.targetPlayer = targetPlayer
     }
 
     override fun notifyAbilityUsed(targetPlayer: Player?){

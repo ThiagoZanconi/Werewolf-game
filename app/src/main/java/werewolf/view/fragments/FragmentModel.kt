@@ -146,7 +146,7 @@ open class PlayerGridFragment(
     private lateinit var abilityStateLabel: TextView
     private lateinit var roleDescriptionButton: ImageButton
     private lateinit var roleDescriptionLabel: TextView
-    private lateinit var targetPlayersSignal: TargetPlayersSignal
+    protected lateinit var targetPlayersSignal: TargetPlayersSignal
 
     override fun onCreateView(
         inflater: LayoutInflater,

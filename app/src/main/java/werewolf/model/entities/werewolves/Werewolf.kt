@@ -43,10 +43,6 @@ class WerewolfAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
         return 4
     }
 
-    override fun cancel(){
-
-    }
-
     override fun fetchAbilityName(): String {
         return MyApp.getAppContext().getString(R.string.werewolf_attack)
     }

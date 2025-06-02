@@ -19,7 +19,8 @@ class Arsonist(
     override val playerName: String
 ): WerewolfTeamPlayer(){
     override val role: Roles = Roles.Arsonist
-    private val targetPlayers: MutableList<Player> = mutableListOf()
+    private var oilTargets: List<Player> = listOf()
+    private val oiledPlayers: MutableList<Player> = mutableListOf(this)
     private var ignite: Boolean = false
 
     fun setIgnite(ignite: Boolean){
@@ -38,13 +39,28 @@ class Arsonist(
         return ArsonistFragment(onActionSubject,this, targetPlayersOnActionSubject)
     }
 
-    override fun addUsedAbility(){
-        if(targetPlayer==null){
-            abilityState = NoUsesLeft()
-            usedAbilities.add(Ignite(targetPlayers))
-        } else{
-            usedAbilities.add(OilSpill(targetPlayer!!,targetPlayers))
+    override fun notifyAbilityUsed(targetPlayer: Player?){
+        oilTargets.forEach {
+            it.visitedBy(this)
         }
+        abilityState.useAbility(this)
+    }
+
+    override fun addUsedAbility(){
+        if(oilTargets.isEmpty()){
+            abilityState = NoUsesLeft()
+            usedAbilities.add(Ignite(oiledPlayers))
+        }
+        else{
+            oilTargets.forEach {
+                usedAbilities.add(OilSpill(it,oiledPlayers))
+            }
+        }
+        oilTargets = listOf()
+    }
+
+    fun setOilTargets(oilTargets: List<Player>){
+        this.oilTargets = oilTargets
     }
 }
 
@@ -65,10 +81,10 @@ class Ignite(private val targetPlayers: MutableList<Player>): AbstractAbility(We
     }
 }
 
-class OilSpill(targetPlayer: Player,private val targetPlayers: MutableList<Player>): AbstractAbility(targetPlayer) {
+class OilSpill(targetPlayer: Player,private val oiledPlayers: MutableList<Player>): AbstractAbility(targetPlayer) {
     override fun resolve() {
         super.resolve()
-        targetPlayers.add(targetPlayer)
+        oiledPlayers.add(targetPlayer)
     }
 
     override fun fetchAbilityName(): String {

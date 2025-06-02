@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.observer.Subject
+import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Arsonist
 import werewolf.view.GameUiEvent
 import werewolf.view.R
@@ -19,6 +20,7 @@ class ArsonistFragment(
     private lateinit var igniteTextView: TextView
     private lateinit var igniteSelectedTextView: TextView
     private var ignite: Boolean = false
+    private val oilTargets: LinkedHashMap<Player,TextView> = LinkedHashMap()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,18 +45,29 @@ class ArsonistFragment(
         if(ignite){
             player.notifyAbilityUsed(null)
         }
-        super.confirmAction()
+        else if(oilTargets.keys.isNotEmpty()){
+            player.setOilTargets(oilTargets.keys.toList())
+            player.notifyAbilityUsed(selectedPlayer)
+        }
+        onActionSubject.notify(GameUiEvent.ConfirmAction)
     }
 
     override fun onPlayerClick(textView: TextView, playerName: String) {
+        igniteSelectedTextViewOnClickListener()
         if (textView.background == null) {
-            textView.setBackgroundResource(R.drawable.imageview_shape)
-            markNotSelected(playerName)
-            igniteSelectedTextViewOnClickListener()
-            setSelectedPlayer(playerName)
+            if(oilTargets.size==2){
+                val deleted = oilTargets.remove(oilTargets.keys.first())
+                deleted!!.background=null
+                textView.setBackgroundResource(R.drawable.imageview_shape)
+                oilTargets[getPlayer(playerName)] = textView
+            }
+            else{
+                textView.setBackgroundResource(R.drawable.imageview_shape)
+                oilTargets[getPlayer(playerName)] = textView
+            }
         } else {
             textView.background = null
-            selectedPlayer = null
+            oilTargets.remove(getPlayer(playerName))
         }
     }
 
@@ -71,6 +84,7 @@ class ArsonistFragment(
     private fun igniteTextViewOnClickListener(){
         ignite = true
         markNotSelected("")
+        oilTargets.clear()
         igniteTextView.visibility=View.GONE
         igniteSelectedTextView.visibility=View.VISIBLE
     }
@@ -79,5 +93,9 @@ class ArsonistFragment(
         ignite = false
         igniteSelectedTextView.visibility=View.GONE
         igniteTextView.visibility=View.VISIBLE
+    }
+
+    private fun getPlayer(name: String): Player{
+        return targetPlayersSignal.targetPlayers.find { it.fetchPlayerName() == name }!!
     }
 }

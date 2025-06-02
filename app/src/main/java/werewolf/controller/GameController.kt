@@ -57,7 +57,6 @@ class GameControllerImpl(
                 TargetPlayersEnum.SetAlivePlayersTarget -> setAlivePlayersTarget(value)
                 TargetPlayersEnum.SetDeadTargets -> setDeadTargets(value)
                 TargetPlayersEnum.SetWerewolfTargets -> setWerewolfTargets(value)
-                TargetPlayersEnum.SetOtherAlivePlayersTarget -> setOtherAlivePlayersTarget(value)
             }
         }
 
@@ -84,11 +83,11 @@ class GameControllerImpl(
     }
 
     private fun setWerewolfTargets(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers()
+        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers().shuffled()
     }
 
     private fun setAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()
+        targetPlayersSignal.targetPlayers = (gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()).shuffled()
     }
 
     private fun setOtherAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
@@ -96,11 +95,11 @@ class GameControllerImpl(
     }
 
     private fun setDeadTargets(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getDeadPlayers()
+        targetPlayersSignal.targetPlayers = gameStateModel.getDeadPlayers().shuffled()
     }
 
     private fun setWerewolfTeammates(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getAliveWerewolves()
+        targetPlayersSignal.targetPlayers = gameStateModel.getAliveWerewolves().shuffled()
     }
 
     private fun killedPlayer(player: Player){
