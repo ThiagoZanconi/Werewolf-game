@@ -97,7 +97,7 @@ class FinishedGameFragment(
     }
 
     private fun jesterWin(){
-        imageView.setImageResource(R.drawable.jester_2)
+        imageView.setImageResource(R.drawable.jester)
         titleLabel.text = requireContext().getString(R.string.jester_wins)
     }
 
