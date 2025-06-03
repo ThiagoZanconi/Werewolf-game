@@ -3,8 +3,6 @@ package werewolf.model.entities
 interface PersistentEffect{
     fun fetchTargetPlayer(): Player
     fun setTargetPlayer(player: Player)
-    fun resolve()
-
 }
 
 abstract class AbstractPersistentEffect(
@@ -20,8 +18,4 @@ abstract class AbstractPersistentEffect(
     }
 }
 
-class Bomb(target: Player): AbstractPersistentEffect(target){
-    override fun resolve() {
-        TODO("Not yet implemented")
-    }
-}
+class Bomb(target: Player): AbstractPersistentEffect(target)
