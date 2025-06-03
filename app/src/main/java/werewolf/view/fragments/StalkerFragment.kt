@@ -16,7 +16,6 @@ class StalkerFragment(
     private val stalker: Stalker,
     targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
 ) : PlayerGridFragment(onActionSubject,stalker,targetPlayersOnActionSubject){
-    private lateinit var teamTextView: TextView
     private lateinit var stalkedTextView: TextView
 
     override fun onCreateView(
@@ -33,12 +32,11 @@ class StalkerFragment(
 
     override fun initComponents(view: View) {
         super.initComponents(view)
-        teamTextView = view.findViewById(R.id.teamTextView)
         val stalkedPair = stalker.fetchStalkedPair()
-        teamTextView.text = stalkedPair?.first?.fetchPlayerName() ?: ""
+        val text = stalkedPair?.first?.fetchPlayerName() ?: ""
         stalkedTextView = view.findViewById(R.id.textViewStalked)
         if (stalkedPair != null) {
-            stalkedTextView.text = "Visited/Was visited by "+stalkedPair.second
+            stalkedTextView.text = getString(R.string.saw, text, stalkedPair.second)
         }
     }
 

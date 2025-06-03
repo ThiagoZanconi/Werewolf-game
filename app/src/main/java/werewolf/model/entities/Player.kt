@@ -122,12 +122,22 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun defineTargetPlayer(targetPlayer: Player){
-        targetPlayers[0] = targetPlayer
+        if(targetPlayers.isEmpty()){
+            targetPlayers.add(targetPlayer)
+        }
+        else{
+            targetPlayers[0] = targetPlayer
+        }
     }
 
     override fun notifyAbilityUsed(targetPlayer: Player?){
         if(targetPlayer!=null){
-            targetPlayers[0] = targetPlayer
+            if(targetPlayers.isEmpty()){
+                targetPlayers.add(targetPlayer)
+            }
+            else{
+                targetPlayers[0] = targetPlayer
+            }
         }
         targetPlayer?.visitedBy(this)
         abilityState.useAbility(this)

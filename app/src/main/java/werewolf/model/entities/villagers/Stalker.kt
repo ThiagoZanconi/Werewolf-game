@@ -1,12 +1,18 @@
 package werewolf.model.entities.villagers
 
+import androidx.fragment.app.Fragment
+import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
+import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
+import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
+import werewolf.view.TargetPlayersSignal
+import werewolf.view.fragments.StalkerFragment
 
 class Stalker(
     override val playerName: String
@@ -15,6 +21,7 @@ class Stalker(
     private var stalkedPair: Pair<Player,String>? = null
 
     override fun addUsedAbility() {
+        abilityState = NoUsesLeft()
         usedAbilities.add(Stalk(targetPlayers[0],this))
     }
 
@@ -23,7 +30,11 @@ class Stalker(
     }
 
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetDeadTargets
+        return TargetPlayersEnum.SetAlivePlayersTarget
+    }
+
+    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return StalkerFragment(onActionSubject,this, targetPlayersOnActionSubject)
     }
 
     fun setStalkedPlayer(playerName: String){
@@ -33,6 +44,7 @@ class Stalker(
     fun fetchStalkedPair(): Pair<Player,String>?{
         return stalkedPair
     }
+
 }
 
 class Stalk(targetPlayer: Player, private val stalker: Stalker): AbstractAbility(targetPlayer) {
