@@ -22,7 +22,7 @@ object RoleDescriptionProvider {
             Roles.Veteran to R.string.veteran_description,
             Roles.Elusive to R.string.elusive_description,
             Roles.Detonator to R.string.detonator_description,
-            Roles.Stalker to R.string.stalker
+            Roles.Stalker to R.string.stalker_description
         )
 
         return MyApp.getAppContext().getString(roleDescriptionMap[role] ?: R.string.unknown_description)
