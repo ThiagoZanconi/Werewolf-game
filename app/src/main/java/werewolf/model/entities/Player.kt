@@ -27,6 +27,7 @@ interface Player{
     fun fetchAbilitiesUsedOnMe(): List<Ability>
     fun fetchUsedAbilities(): List<Ability>
     fun fetchVisitors(): List<Player>
+    fun fetchPersistentEffects(): MutableList<PersistentEffect>
 
     //Returns ability used for logs
     fun fetchUsedAbility(index: Int): String?
@@ -35,6 +36,9 @@ interface Player{
     fun fetchImageSrc(): Int
     fun defineDefenseState(defenseState: DefenseState)
     fun defineTargetPlayer(targetPlayer: Player)
+    fun definePersistentEffects(effects: MutableList<PersistentEffect>)
+    fun addPersistentEffect(effect: PersistentEffect)
+    fun removePersistentEffect(effect: PersistentEffect)
 
     //Ability delegated to abilityState contrary case
     fun notifyAbilityUsed(targetPlayer: Player?)
@@ -53,12 +57,14 @@ abstract class AbstractPlayer: Player{
     protected abstract val role: Roles
     protected open var defenseState: DefenseState = NoDefense()
     protected open var abilityState: AbilityState = Neutral()
+    protected open var usedAbilities: MutableList<Ability> = mutableListOf()
     protected lateinit var event: PlayerEventEnum
     protected lateinit var deathCause: DeathCause
-    protected open var usedAbilities: MutableList<Ability> = mutableListOf()
     protected var visitors: MutableList<Player> = mutableListOf()
-    private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     protected var targetPlayers: MutableList<Player> = mutableListOf()
+    private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
+    private var persistentEffects: MutableList<PersistentEffect> = mutableListOf()
+
 
     protected val onActionSubject = Subject<PlayerSignal>()
     override val playerObservable: Observable<PlayerSignal> = onActionSubject
@@ -117,6 +123,10 @@ abstract class AbstractPlayer: Player{
         return deathCause
     }
 
+    override fun fetchPersistentEffects(): MutableList<PersistentEffect>{
+        return persistentEffects
+    }
+
     override fun defineDefenseState(defenseState: DefenseState) {
         this.defenseState = defenseState
     }
@@ -128,6 +138,18 @@ abstract class AbstractPlayer: Player{
         else{
             targetPlayers[0] = targetPlayer
         }
+    }
+
+    override fun definePersistentEffects(effects: MutableList<PersistentEffect>) {
+        persistentEffects = effects
+    }
+
+    override fun addPersistentEffect(effect: PersistentEffect) {
+        persistentEffects.add(effect)
+    }
+
+    override fun removePersistentEffect(effect: PersistentEffect) {
+        persistentEffects.remove(effect)
     }
 
     override fun notifyAbilityUsed(targetPlayer: Player?){

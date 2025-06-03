@@ -3,6 +3,7 @@ package werewolf.model.entities.villagers
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
+import werewolf.model.entities.Bomb
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.view.MyApp
@@ -13,7 +14,7 @@ class Detonator(
     override val playerName: String
 ): AbstractPlayer(){
     override val role: Roles = Roles.Detonator
-    private var bombTarget: Player? = null
+    private var bomb: Bomb? = null
 
     override fun fetchImageSrc(): Int {
         return R.drawable.detonator
@@ -25,32 +26,36 @@ class Detonator(
 
     override fun addUsedAbility() {
         usedAbilities.add(PlaceBomb(targetPlayers[0],this))
-        if(bombTarget!=null){
-            usedAbilities.add(RemoveBomb(bombTarget!!,this))
+        if(bomb!=null){
+            usedAbilities.add(RemoveBomb(bomb!!.fetchTargetPlayer(),this))
         }
     }
 
     override fun applyDamage(deathCause: DeathCause) {
-        println("Apply Damage")
         if(usedAbilities.isNotEmpty()){
             usedAbilities[0].cancel()
         }
-        if(bombTarget!=null){
-            println("Bomb Target")
-            bombTarget!!.receiveDamage(DeathCause.EXPLODED)
+        if(bomb!=null){
+            bomb!!.fetchTargetPlayer().receiveDamage(DeathCause.EXPLODED)
         }
         notifyKilledPlayer(deathCause)
     }
 
-    fun setBombTarget(targetPlayer: Player?){
-        bombTarget = targetPlayer
+    fun setBombTarget(targetPlayer: Player): Bomb{
+        bomb = Bomb(targetPlayer)
+        return bomb!!
+    }
+
+    fun removeBomb(){
+        bomb = null
     }
 }
 
 class PlaceBomb(targetPlayer: Player, private val detonator: Detonator): AbstractAbility(targetPlayer) {
     override fun resolve() {
         super.resolve()
-        detonator.setBombTarget(targetPlayer)
+        val bomb = detonator.setBombTarget(targetPlayer)
+        targetPlayer.addPersistentEffect(bomb)
     }
 
     override fun fetchAbilityName(): String {
@@ -65,7 +70,7 @@ class PlaceBomb(targetPlayer: Player, private val detonator: Detonator): Abstrac
 class RemoveBomb(targetPlayer: Player, private val detonator: Detonator): AbstractAbility(targetPlayer) {
     override fun resolve() {
         super.resolve()
-        detonator.setBombTarget(null)
+        detonator.removeBomb()
     }
 
     override fun fetchAbilityName(): String {

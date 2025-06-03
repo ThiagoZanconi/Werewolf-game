@@ -3,7 +3,6 @@ package werewolf.model
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
-import werewolf.model.entities.werewolves.Zombie
 
 interface GameState{
     fun initAlivePlayers( playerPositionMap: MutableMap<String, Int>)
@@ -88,9 +87,14 @@ class GameStateImpl: GameState{
 
     override fun ascendWerewolf(): Player {
         val index = alivePlayers.indexOf(aliveWerewolves[0])
+        val persistentEffects = aliveWerewolves[0].fetchPersistentEffects()
         val werewolf: Player = Werewolf(aliveWerewolves[0].fetchPlayerName())
         aliveWerewolves[0] = werewolf
         alivePlayers[index] = werewolf
+        persistentEffects.forEach{
+            it.setTargetPlayer(werewolf)
+        }
+        werewolf.definePersistentEffects(persistentEffects)
         return werewolf
     }
 
