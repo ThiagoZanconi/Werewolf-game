@@ -27,7 +27,7 @@ class Vampire(
 
     override fun addUsedAbility() {
         abilityState = OneTurnCooldown()
-        usedAbilities.add(VampireAttack(targetPlayer!!))
+        usedAbilities.add(VampireAttack(targetPlayers[0]))
     }
 }
 

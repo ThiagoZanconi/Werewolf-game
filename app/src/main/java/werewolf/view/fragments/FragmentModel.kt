@@ -3,7 +3,6 @@ package werewolf.view.fragments
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -185,7 +184,7 @@ open class PlayerGridFragment(
     }
 
     override fun initGridLayout(){
-        targetPlayersSignal = TargetPlayersSignal(player.fetchTargetPlayers())
+        targetPlayersSignal = TargetPlayersSignal(player.fetchTargetPlayersOptions())
         targetPlayersOnActionSubject.notify(targetPlayersSignal)
         targetPlayersSignal.targetPlayers.forEach{
                 player -> gridLayout.addView(createTextView(player.fetchPlayerName()),gridLayout.childCount)

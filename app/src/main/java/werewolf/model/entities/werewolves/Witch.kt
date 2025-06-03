@@ -22,7 +22,7 @@ class Witch(
     }
 
     override fun addUsedAbility() {
-        usedAbilities.add(CancelPlayerAbility(targetPlayer!!))
+        usedAbilities.add(CancelPlayerAbility(targetPlayers[0]))
     }
 }
 

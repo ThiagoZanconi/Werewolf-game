@@ -59,6 +59,7 @@
     <string name="necromancer">Necromancer</string>
     <string name="zombie">Zombie</string>
     <string name="arsonist">Arsonist</string>
+    <string name="stalker">Stalker</string>
 
     <string name="cancel_player_ability">Cancel Player Ability</string>
     <string name="werewolf_attack">Werewolf Attack</string>
@@ -74,6 +75,7 @@
     <string name="hidden">Hidden</string>
     <string name="place_bomb">Place Bomb</string>
     <string name="remove_bomb">Remove Bomb</string>
+    <string name="stalk">Stalk</string>
 
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
@@ -90,6 +92,7 @@
     <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect from all attacks received.</string>
     <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All abilities that target him directly have no effect. Both he and the host receive the abilities targeted to he host. If hi hides in the house of werewolf he is attacked.</string>
     <string name="detonator_description">Belongs to the villagers team. At night cab set the bomb in a player\'s house . When detonator dies, the bomb explodes, striking target player. Detonator may change the bomb to other location. If he dies when setting the bomb, ability has no effect.</string>
+    <string name="stalker_description">Belongs to the villagers team. At night can stalk a player, next round will be revealed to him ONE player that visited or was visited by target player (if there was any).</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 
 </resources>

@@ -19,7 +19,6 @@ class Arsonist(
     override val playerName: String
 ): WerewolfTeamPlayer(){
     override val role: Roles = Roles.Arsonist
-    private var oilTargets: List<Player> = listOf()
     private val oiledPlayers: MutableList<Player> = mutableListOf(this)
     private var ignite: Boolean = false
 
@@ -40,27 +39,27 @@ class Arsonist(
     }
 
     override fun notifyAbilityUsed(targetPlayer: Player?){
-        oilTargets.forEach {
+        targetPlayers.forEach {
             it.visitedBy(this)
         }
         abilityState.useAbility(this)
     }
 
     override fun addUsedAbility(){
-        if(oilTargets.isEmpty()){
+        if(targetPlayers.isEmpty()){
             abilityState = NoUsesLeft()
             usedAbilities.add(Ignite(oiledPlayers))
         }
         else{
-            oilTargets.forEach {
+            targetPlayers.forEach {
                 usedAbilities.add(OilSpill(it,oiledPlayers))
             }
         }
-        oilTargets = listOf()
+        targetPlayers.clear()
     }
 
     fun setOilTargets(oilTargets: List<Player>){
-        this.oilTargets = oilTargets
+        this.targetPlayers = oilTargets.toMutableList()
     }
 }
 

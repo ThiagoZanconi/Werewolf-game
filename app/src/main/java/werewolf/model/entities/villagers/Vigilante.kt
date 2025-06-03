@@ -17,7 +17,7 @@ class Vigilante(
 
     override fun addUsedAbility() {
         abilityState = NoUsesLeft()
-        usedAbilities.add(Shot(targetPlayer!!))
+        usedAbilities.add(Shot(targetPlayers[0]))
     }
 
     override fun fetchImageSrc(): Int {

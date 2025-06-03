@@ -25,7 +25,7 @@ class Cleric(
 
     override fun addUsedAbility() {
         abilityState = OneTurnCooldown()
-        usedAbilities.add(Shield(targetPlayer!!))
+        usedAbilities.add(Shield(targetPlayers[0]))
     }
 }
 

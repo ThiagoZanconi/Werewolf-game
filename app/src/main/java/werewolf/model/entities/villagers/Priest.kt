@@ -19,7 +19,7 @@ class Priest(
 
     override fun addUsedAbility() {
         abilityState = NoUsesLeft()
-        usedAbilities.add(ReviveSpell(targetPlayer!!))
+        usedAbilities.add(ReviveSpell(targetPlayers[0]))
     }
 
     override fun fetchImageSrc(): Int {

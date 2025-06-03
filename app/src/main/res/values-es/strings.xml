@@ -59,6 +59,7 @@
     <string name="necromancer">Nigromante</string>
     <string name="zombie">Zombie</string>
     <string name="arsonist">Incendiario</string>
+    <string name="stalker">Chusma</string>
 
     <string name="cancel_player_ability">Cancelar habilidad de jugador</string>
     <string name="werewolf_attack">Ataque hombre lobo</string>
@@ -74,6 +75,7 @@
     <string name="hidden">Oculto</string>
     <string name="place_bomb">Depositar Bomba</string>
     <string name="remove_bomb">Remover Bomba</string>
+    <string name="stalk">Acechar</string>
 
     <string name="unknown_description">Descripcion no encontrada</string>
     <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para matar</string>
@@ -90,5 +92,6 @@
     <string name="protector_description">Pertenece al equipo de los aldeanos. Tiene dos vidas (si es colgado muere instantaneamente).Cada noche puede proteger a un jugador para recibir todos los atques dirigidos a este último.</string>
     <string name="elusive_description">Pertenece al equipo de los aldeanos. A la noche puede esconderse en la casa de un jugador. Todas las habilidades dirigidas directamente a el no tienen efecto. Tanto el como su hospedador reciben las habilidades dirigidas al hospedador. Si se esconde en la casa del lobo es atacado.</string>
     <string name="detonator_description">Pertenece al equipo de los aldeanos. A la noche puede depositar la bomba a otro jugador. Cuando el detonador muere, explota la bomba, atacando al jugador objetivo. El detonador puede cambiar la bomba de lugar. Si muere cuando pone/cambia la bomba, la habilidad no tiene efecto.</string>
+    <string name="stalker_description">Pertenece al equipo de los aldeanos. A la noche puede acechar a un jugador, la ronda siguiente se le revelara un jugador que lo haya visitado o haya sido visitado por el. Ninguno si no hay.</string>
     <string name="jester_description">Juega solo. No tiene habilidad. Su objetivo es ser colgado al final del día.</string>
 </resources>

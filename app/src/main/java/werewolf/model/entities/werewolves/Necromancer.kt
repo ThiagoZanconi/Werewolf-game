@@ -19,7 +19,7 @@ class Necromancer(
 
     override fun addUsedAbility(){
         abilityState = NoUsesLeft()
-        usedAbilities.add(ZombieSpell(targetPlayer!!))
+        usedAbilities.add(ZombieSpell(targetPlayers[0]))
     }
 
     override fun fetchImageSrc(): Int {

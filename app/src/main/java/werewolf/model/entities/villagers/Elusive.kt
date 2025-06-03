@@ -16,7 +16,7 @@ class Elusive(
     override val role: Roles = Roles.Elusive
 
     override fun addUsedAbility() {
-        usedAbilities.add(Hidden(this,targetPlayer!!))
+        usedAbilities.add(Hidden(this,targetPlayers[0]))
         usedAbilities.add(Hide(this,visitors))
     }
 

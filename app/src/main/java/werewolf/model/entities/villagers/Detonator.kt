@@ -24,7 +24,7 @@ class Detonator(
     }
 
     override fun addUsedAbility() {
-        usedAbilities.add(PlaceBomb(targetPlayer!!,this))
+        usedAbilities.add(PlaceBomb(targetPlayers[0],this))
         if(bombTarget!=null){
             usedAbilities.add(RemoveBomb(bombTarget!!,this))
         }

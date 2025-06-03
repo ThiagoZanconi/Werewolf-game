@@ -24,7 +24,7 @@ class Werewolf(
     }
 
     override fun addUsedAbility(){
-        usedAbilities.add(WerewolfAttack(targetPlayer!!))
+        usedAbilities.add(WerewolfAttack(targetPlayers[0]))
     }
 
     override fun notifyKilledPlayer(deathCause: DeathCause) {

@@ -20,12 +20,13 @@ interface Player{
     fun fetchPlayerName(): String
     fun fetchRole(): Roles
     fun fetchTeammates(): TargetPlayersEnum
-    fun fetchTargetPlayers(): TargetPlayersEnum
-    fun fetchTargetPlayer(): Player?
+    fun fetchTargetPlayersOptions(): TargetPlayersEnum
+    fun fetchTargetPlayers(): List<Player>
     fun fetchEvent(): PlayerEventEnum
     fun fetchAbilityState(): AbilityStateEnum
     fun fetchAbilitiesUsedOnMe(): List<Ability>
     fun fetchUsedAbilities(): List<Ability>
+    fun fetchVisitors(): List<Player>
 
     //Returns ability used for logs
     fun fetchUsedAbility(index: Int): String?
@@ -57,7 +58,7 @@ abstract class AbstractPlayer: Player{
     protected open var usedAbilities: MutableList<Ability> = mutableListOf()
     protected var visitors: MutableList<Player> = mutableListOf()
     private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
-    protected var targetPlayer: Player? = null
+    protected var targetPlayers: MutableList<Player> = mutableListOf()
 
     protected val onActionSubject = Subject<PlayerSignal>()
     override val playerObservable: Observable<PlayerSignal> = onActionSubject
@@ -74,12 +75,12 @@ abstract class AbstractPlayer: Player{
         return TargetPlayersEnum.SetNoTargetPlayers
     }
 
-    override fun fetchTargetPlayers(): TargetPlayersEnum {
+    override fun fetchTargetPlayersOptions(): TargetPlayersEnum {
         return abilityState.fetchTargetPlayers(this)
     }
 
-    override fun fetchTargetPlayer(): Player? {
-        return targetPlayer
+    override fun fetchTargetPlayers(): List<Player>{
+        return targetPlayers
     }
 
     override fun fetchEvent(): PlayerEventEnum {
@@ -104,6 +105,10 @@ abstract class AbstractPlayer: Player{
             null
     }
 
+    override fun fetchVisitors(): List<Player>{
+        return visitors
+    }
+
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
         return PlayerGridFragment(onActionSubject,this,targetPlayersOnActionSubject)
     }
@@ -117,11 +122,13 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun defineTargetPlayer(targetPlayer: Player){
-        this.targetPlayer = targetPlayer
+        targetPlayers[0] = targetPlayer
     }
 
     override fun notifyAbilityUsed(targetPlayer: Player?){
-        this.targetPlayer = targetPlayer
+        if(targetPlayer!=null){
+            targetPlayers[0] = targetPlayer
+        }
         targetPlayer?.visitedBy(this)
         abilityState.useAbility(this)
     }
@@ -160,6 +167,7 @@ abstract class AbstractPlayer: Player{
     override fun turnSetUp() {
         abilitiesUsedOnMe = mutableListOf()
         usedAbilities = mutableListOf()
+        targetPlayers.clear()
         abilityState.turnSetUp(this)
     }
 

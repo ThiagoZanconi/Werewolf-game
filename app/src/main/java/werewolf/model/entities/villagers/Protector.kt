@@ -17,7 +17,7 @@ class Protector(
     private var armored = true
 
     override fun addUsedAbility() {
-        usedAbilities.add(Protection(targetPlayer!!,this))
+        usedAbilities.add(Protection(targetPlayers[0],this))
     }
 
     override fun applyDamage(deathCause: DeathCause) {
