@@ -14,7 +14,7 @@ import werewolf.view.TargetPlayersSignal
 
 class ArsonistFragment(
     onActionSubject: Subject<GameUiEvent>,
-    private val player: Arsonist,
+    override val player: Arsonist,
     targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
 ) : WerewolfTeamFragment(onActionSubject,player,targetPlayersOnActionSubject){
     private lateinit var igniteTextView: TextView

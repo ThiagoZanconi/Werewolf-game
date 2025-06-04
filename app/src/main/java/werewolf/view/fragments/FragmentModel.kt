@@ -141,7 +141,7 @@ abstract class GridFragment: FragmentModel() {
 
 open class PlayerGridFragment(
     protected val onActionSubject: Subject<GameUiEvent>,
-    private val player: Player,
+    protected open val player: Player,
     protected val targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
 ): GridFragment(){
     private lateinit var abilityStateLabel: TextView
