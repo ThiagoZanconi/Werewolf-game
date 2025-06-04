@@ -4,6 +4,7 @@ import werewolf.model.Roles
 import werewolf.model.entities.AbilityState
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.NoAbility
+import werewolf.model.entities.WerewolfAttackAbility
 import werewolf.view.R
 
 class Zombie(
@@ -14,5 +15,9 @@ class Zombie(
 
     override fun fetchImageSrc(): Int {
         return R.drawable.zombie
+    }
+
+    override fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility) {
+
     }
 }

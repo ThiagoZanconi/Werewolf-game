@@ -1,11 +1,14 @@
 package werewolf.model.entities.villagers
 
+import com.example.observer.Observable
 import werewolf.model.Roles
+import werewolf.model.entities.AbilitySignal
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
+import werewolf.model.entities.VillagerAttackAbility
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
@@ -29,11 +32,12 @@ class Vigilante(
     }
 }
 
-class Shot(targetPlayer: Player): AbstractAbility(targetPlayer){
+class Shot(targetPlayer: Player): VillagerAttackAbility(targetPlayer){
+    override val deathCause = DeathCause.SHOT
 
     override fun resolve() {
         super.resolve()
-        targetPlayer.receiveDamage(DeathCause.SHOT)
+        targetPlayer.receiveAttack(this)
     }
 
     override fun fetchAbilityName(): String {

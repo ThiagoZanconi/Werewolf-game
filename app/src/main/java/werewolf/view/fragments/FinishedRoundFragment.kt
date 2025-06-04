@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.observer.Subject
 import werewolf.model.entities.DeathCause
+import werewolf.model.entities.Hang
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
 import werewolf.view.R
@@ -42,7 +43,7 @@ class FinishedRoundFragment(
     }
 
     override fun confirmAction(){
-        selectedPlayer?.receiveDamage(DeathCause.HANGED)
+        selectedPlayer?.receiveAttack(Hang(selectedPlayer!!))
         onActionSubject.notify(GameUiEvent.StartNextRound)
     }
 

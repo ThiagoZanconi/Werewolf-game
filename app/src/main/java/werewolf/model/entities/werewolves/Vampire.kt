@@ -6,6 +6,7 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.OneTurnCooldown
 import werewolf.model.entities.Player
+import werewolf.model.entities.WerewolfAttackAbility
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
@@ -31,7 +32,9 @@ class Vampire(
     }
 }
 
-class VampireAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
+class VampireAttack(targetPlayer: Player): WerewolfAttackAbility(targetPlayer) {
+    override val deathCause: DeathCause = DeathCause.MAULED
+
     override fun fetchAbilityName(): String {
         return MyApp.getAppContext().getString(R.string.vampire_attack)
     }
@@ -42,7 +45,7 @@ class VampireAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
 
     override fun resolve() {
         super.resolve()
-        targetPlayer.receiveDamage(DeathCause.MAULED)
+        targetPlayer.receiveAttack(this)
     }
 
     override fun cancel(){

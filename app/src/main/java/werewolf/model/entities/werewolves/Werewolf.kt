@@ -5,6 +5,7 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
+import werewolf.model.entities.WerewolfAttackAbility
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
@@ -33,10 +34,12 @@ class Werewolf(
     }
 }
 
-class WerewolfAttack(targetPlayer: Player): AbstractAbility(targetPlayer) {
+class WerewolfAttack(targetPlayer: Player): WerewolfAttackAbility(targetPlayer) {
+    override val deathCause: DeathCause = DeathCause.MAULED
+
     override fun resolve(){
         super.resolve()
-        targetPlayer.receiveDamage(DeathCause.MAULED)
+        targetPlayer.receiveAttack(this)
     }
 
     override fun fetchPriority(): Int {

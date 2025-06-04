@@ -87,14 +87,14 @@ class GameStateImpl: GameState{
 
     override fun ascendWerewolf(): Player {
         val index = alivePlayers.indexOf(aliveWerewolves[0])
-        val persistentEffects = aliveWerewolves[0].fetchPersistentEffects()
+        val persistentAbilities = aliveWerewolves[0].fetchPersistentAbilities()
         val werewolf: Player = Werewolf(aliveWerewolves[0].fetchPlayerName())
         aliveWerewolves[0] = werewolf
         alivePlayers[index] = werewolf
-        persistentEffects.forEach{
-            it.setTargetPlayer(werewolf)
+        persistentAbilities.forEach{
+            it.defineTargetPlayer(werewolf)
         }
-        werewolf.definePersistentEffects(persistentEffects)
+        werewolf.definePersistentAbilities(persistentAbilities)
         return werewolf
     }
 

@@ -27,7 +27,7 @@ interface Player{
     fun fetchAbilitiesUsedOnMe(): List<Ability>
     fun fetchUsedAbilities(): List<Ability>
     fun fetchVisitors(): List<Player>
-    fun fetchPersistentEffects(): MutableList<PersistentEffect>
+    fun fetchPersistentAbilities(): MutableList<Ability>
 
     //Returns ability used for logs
     fun fetchUsedAbility(index: Int): String?
@@ -36,9 +36,9 @@ interface Player{
     fun fetchImageSrc(): Int
     fun defineDefenseState(defenseState: DefenseState)
     fun defineTargetPlayer(targetPlayer: Player)
-    fun definePersistentEffects(effects: MutableList<PersistentEffect>)
-    fun addPersistentEffect(effect: PersistentEffect)
-    fun removePersistentEffect(effect: PersistentEffect)
+    fun definePersistentAbilities(abilities: MutableList<Ability>)
+    fun addPersistentAbility(ability: Ability)
+    fun removePersistentAbility(ability: Ability)
 
     //Ability delegated to abilityState contrary case
     fun notifyAbilityUsed(targetPlayer: Player?)
@@ -46,7 +46,8 @@ interface Player{
     fun visitedBy(visitor: Player)
     fun resetVisitors()
     fun turnSetUp()
-    fun receiveDamage(deathCause: DeathCause)
+    fun receiveAttack(villagerAttackAbility: VillagerAttackAbility)
+    fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility)
     fun notifyKilledPlayer(deathCause: DeathCause)
     fun resetDefenseState()
     fun cancelAbility()
@@ -63,7 +64,7 @@ abstract class AbstractPlayer: Player{
     protected var visitors: MutableList<Player> = mutableListOf()
     protected var targetPlayers: MutableList<Player> = mutableListOf()
     private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
-    private var persistentEffects: MutableList<PersistentEffect> = mutableListOf()
+    private var persistentAbilities: MutableList<Ability> = mutableListOf()
 
 
     protected val onActionSubject = Subject<PlayerSignal>()
@@ -123,8 +124,8 @@ abstract class AbstractPlayer: Player{
         return deathCause
     }
 
-    override fun fetchPersistentEffects(): MutableList<PersistentEffect>{
-        return persistentEffects
+    override fun fetchPersistentAbilities(): MutableList<Ability>{
+        return persistentAbilities
     }
 
     override fun defineDefenseState(defenseState: DefenseState) {
@@ -140,16 +141,16 @@ abstract class AbstractPlayer: Player{
         }
     }
 
-    override fun definePersistentEffects(effects: MutableList<PersistentEffect>) {
-        persistentEffects = effects
+    override fun definePersistentAbilities(abilities: MutableList<Ability>) {
+        persistentAbilities = abilities
     }
 
-    override fun addPersistentEffect(effect: PersistentEffect) {
-        persistentEffects.add(effect)
+    override fun addPersistentAbility(ability: Ability) {
+        persistentAbilities.add(ability)
     }
 
-    override fun removePersistentEffect(effect: PersistentEffect) {
-        persistentEffects.remove(effect)
+    override fun removePersistentAbility(ability: Ability) {
+        persistentAbilities.remove(ability)
     }
 
     override fun notifyAbilityUsed(targetPlayer: Player?){
@@ -177,8 +178,12 @@ abstract class AbstractPlayer: Player{
         visitors = mutableListOf()
     }
 
-    override fun receiveDamage(deathCause: DeathCause) {
-        defenseState.receiveDamage(this,deathCause)
+    override fun receiveAttack(villagerAttackAbility: VillagerAttackAbility) {
+        defenseState.receiveDamage(this,villagerAttackAbility)
+    }
+
+    override fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility) {
+        defenseState.receiveDamage(this,werewolfAttackAbility)
     }
 
     override fun notifyKilledPlayer(deathCause: DeathCause) {
@@ -228,6 +233,10 @@ abstract class WerewolfTeamPlayer: AbstractPlayer(){
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
         return WerewolfTeamFragment(onActionSubject,this,targetPlayersOnActionSubject)
+    }
+
+    override fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility) {
+
     }
 
 }

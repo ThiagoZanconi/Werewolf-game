@@ -3,9 +3,9 @@ package werewolf.model.entities.villagers
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
-import werewolf.model.entities.Bomb
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
+import werewolf.model.entities.VillagerAttackAbility
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
@@ -36,7 +36,7 @@ class Detonator(
             usedAbilities[0].cancel()
         }
         if(bomb!=null){
-            bomb!!.fetchTargetPlayer().receiveDamage(DeathCause.EXPLODED)
+            bomb!!.fetchTargetPlayer().receiveAttack(bomb!!)
         }
         notifyKilledPlayer(deathCause)
     }
@@ -55,7 +55,7 @@ class PlaceBomb(targetPlayer: Player, private val detonator: Detonator): Abstrac
     override fun resolve() {
         super.resolve()
         val bomb = detonator.setBombTarget(targetPlayer)
-        targetPlayer.addPersistentEffect(bomb)
+        targetPlayer.addPersistentAbility(bomb)
     }
 
     override fun fetchAbilityName(): String {
@@ -75,6 +75,18 @@ class RemoveBomb(targetPlayer: Player, private val detonator: Detonator): Abstra
 
     override fun fetchAbilityName(): String {
         return MyApp.getAppContext().getString(R.string.remove_bomb)
+    }
+
+    override fun fetchPriority(): Int {
+        return 3
+    }
+}
+
+class Bomb(target: Player): VillagerAttackAbility(target){
+    override val deathCause: DeathCause = DeathCause.EXPLODED
+
+    override fun fetchAbilityName(): String {
+        return MyApp.getAppContext().getString(R.string.place_bomb)
     }
 
     override fun fetchPriority(): Int {

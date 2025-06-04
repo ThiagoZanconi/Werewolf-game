@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
-import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
 import werewolf.model.entities.WerewolfTeamPlayer
+import werewolf.model.entities.villagers.Bomb
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
@@ -66,7 +66,7 @@ class Arsonist(
 class Ignite(private val targetPlayers: MutableList<Player>): AbstractAbility(Werewolf("Dummy Target")) {
     override fun resolve() {
         targetPlayers.forEach{
-            it.receiveDamage(DeathCause.EXPLODED)
+            it.receiveAttack(Bomb(it))
         }
         targetPlayers.clear()
     }

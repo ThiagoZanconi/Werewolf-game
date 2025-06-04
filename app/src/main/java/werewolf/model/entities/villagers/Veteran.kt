@@ -38,7 +38,7 @@ class Alert(private val targetPlayers: MutableList<Player>): AbstractAbility(Wer
 
     override fun resolve() {
         targetPlayers.forEach{
-            it.receiveDamage(DeathCause.SHOT)
+            it.receiveAttack(Shot(it))
         }
     }
 

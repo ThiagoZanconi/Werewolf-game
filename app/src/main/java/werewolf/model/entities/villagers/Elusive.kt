@@ -6,6 +6,7 @@ import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Werewolf
+import werewolf.model.entities.werewolves.WerewolfAttack
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
@@ -33,7 +34,7 @@ class Hidden(private val hiddenPlayer: Player,targetPlayer: Player): AbstractAbi
 
     override fun resolve() {
         if(targetPlayer is Werewolf){
-            hiddenPlayer.receiveDamage(DeathCause.MAULED)
+            hiddenPlayer.receiveAttack(WerewolfAttack(hiddenPlayer))
         }
         targetPlayer.fetchAbilitiesUsedOnMe().forEach{
             it.defineTargetPlayer(hiddenPlayer)

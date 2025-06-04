@@ -2,6 +2,8 @@ package werewolf.model.entities
 
 import com.example.observer.Observable
 import com.example.observer.Subject
+import werewolf.view.MyApp
+import werewolf.view.R
 
 interface Ability{
     val playerObservable: Observable<AbilitySignal>
@@ -42,3 +44,27 @@ abstract class AbstractAbility(
         targetPlayer.receiveAbility(this)
     }
 }
+
+abstract class AttackAbility(targetPlayer: Player): AbstractAbility(targetPlayer){
+    abstract val deathCause: DeathCause
+
+    fun fetchDeathCause(): DeathCause{
+        return deathCause
+    }
+}
+
+abstract class VillagerAttackAbility(targetPlayer: Player): AttackAbility(targetPlayer)
+
+abstract class WerewolfAttackAbility(targetPlayer: Player): AttackAbility(targetPlayer)
+
+class Hang(targetPlayer: Player): VillagerAttackAbility(targetPlayer){
+    override val deathCause: DeathCause = DeathCause.HANGED
+    override fun fetchAbilityName(): String {
+        return MyApp.getAppContext().getString(R.string.was_hanged)
+    }
+
+    override fun fetchPriority(): Int {
+        return 0
+    }
+}
+
