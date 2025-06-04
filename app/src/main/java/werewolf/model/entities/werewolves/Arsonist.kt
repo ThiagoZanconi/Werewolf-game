@@ -66,7 +66,7 @@ class Arsonist(
 class Ignite(private val targetPlayers: MutableList<Player>): AbstractAbility(Werewolf("Dummy Target")) {
     override fun resolve() {
         targetPlayers.forEach{
-            it.receiveDamage(DeathCause.BURNT)
+            it.receiveDamage(DeathCause.EXPLODED)
         }
         targetPlayers.clear()
     }
