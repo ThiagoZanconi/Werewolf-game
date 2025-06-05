@@ -86,7 +86,7 @@
     <string name="vampire_description">Pertenece al equipo de los hombres lobo. A la noche puede seleccionar un jugador para matar. La habilidad tiene enfriamiento de un turno. La habilidad comienza en enfriamiento</string>
     <string name="necromancer_description">Pertenece al equipo de los hombres lobo. Una vez por juego puede revivir a un jugador como zombie.</string>
     <string name="zombie_description">Pertenece al equipo de los hombres lobo. No tiene habilidad, pero puede votar al final de cada ronda. Solo aparece si es revivido por un nigromante.</string>
-    <string name="arsonist_description">Pertenece al equipo de los hombres lobo. A la noche puede derramar aceite sobre un jugador o usar ignicion. Ignicion mata a todos los jugadores con aceite. Puede utilizar ignicion una sola vez por juego.</string>
+    <string name="arsonist_description">Pertenece al equipo de los hombres lobo. A la noche puede derramar aceite sobre hasta 2 jugadores o usar ignicion. Ignicion mata a todos los jugadores con aceite, incluyendo al incendiario.</string>
     <string name="villager_description">Pertenece al equipo de los aldeanos. No tiene habilidad</string>
     <string name="cleric_description">Pertenece al equipo de los aldeanos. A la noche puede seleccionar un jugador para lanzar una barrera protectora sobre el(protege de todos los ataques que este reciba). La habilidad tiene enfriamiento de un turno.</string>
     <string name="priest_description">Pertenece al equipo de los aldeanos. Una vez por juego puede revivir a un jugador (hombres lobo incluidos)</string>
