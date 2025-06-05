@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/titleTextViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/textview_title" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/roleImageLabelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextViewLayout"
+        android:background="@drawable/imageview_shape">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/roleImageLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:src="@drawable/villager"
+            android:scaleType="fitXY"
+            android:background="@drawable/imageview_shape"
+            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+            >
+        </com.google.android.material.imageview.ShapeableImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/textViewDescriptionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roleImageLabelLayout">
+        <include
+            layout="@layout/textview_description" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/roleDescriptionButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textViewDescriptionLayout"
+        app:layout_constraintTop_toTopOf="@id/textViewDescriptionLayout"
+        app:layout_constraintBottom_toBottomOf="@id/textViewDescriptionLayout"
+        android:contentDescription="@string/role_description"
+        android:src="@drawable/image_questionmark"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/roleDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:padding="35dp"
+        android:background="@drawable/textview_shape3"
+        android:textColor="@android:color/black"
+        android:text="@string/werewolf_description"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

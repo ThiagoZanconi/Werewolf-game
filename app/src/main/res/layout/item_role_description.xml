@@ -20,7 +20,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/roleDescription"
+        android:id="@+id/roleDescriptionTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

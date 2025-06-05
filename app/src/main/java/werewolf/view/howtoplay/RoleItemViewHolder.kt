@@ -10,7 +10,7 @@ import werewolf.view.RoleNameProvider
 class RoleItemViewHolder(view: View):RecyclerView.ViewHolder(view){
 
     private val role = view.findViewById<TextView>(R.id.roleName)
-    private val description = view.findViewById<TextView>(R.id.roleDescription)
+    private val description = view.findViewById<TextView>(R.id.roleDescriptionTextView)
 
     fun render(role: Roles){
         this.role.text = RoleNameProvider.getRoleName(role)

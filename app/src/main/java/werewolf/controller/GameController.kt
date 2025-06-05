@@ -202,7 +202,7 @@ class GameControllerImpl(
             usedAbilities.forEachIndexed { index, ability ->
                 ability.playerObservable.subscribe(abilityObserver)
                 abilityPriorityQueue.add(ability)
-                gameLogs+=player.fetchPlayerName()+" ("+ RoleNameProvider.getRoleName(player.fetchRole())+") "+MyApp.getAppContext().getString(R.string.used)+" "+player.fetchUsedAbility(index)+" -> "+ (player.fetchTargetPlayers().firstOrNull()?.fetchPlayerName() ?: "") +"\n"
+                gameLogs+=player.fetchPlayerName()+" ("+ RoleNameProvider.getRoleName(player.fetchRole())+") "+MyApp.getAppContext().getString(R.string.used)+" "+player.fetchUsedAbilityName(index)+" -> "+ (player.fetchTargetPlayers().firstOrNull()?.fetchPlayerName() ?: "") +"\n"
             }
         }
     }

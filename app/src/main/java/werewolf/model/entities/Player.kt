@@ -1,5 +1,6 @@
 package werewolf.model.entities
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
@@ -28,28 +29,32 @@ interface Player{
     fun fetchUsedAbilities(): List<Ability>
     fun fetchVisitors(): List<Player>
     fun fetchPersistentAbilities(): MutableList<Ability>
-
-    //Returns ability used for logs
-    fun fetchUsedAbility(index: Int): String?
+    fun fetchUsedAbilityName(index: Int): String?
     fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
+
     fun defineDefenseState(defenseState: DefenseState)
     fun defineTargetPlayer(targetPlayer: Player)
     fun definePersistentAbilities(abilities: MutableList<Ability>)
+
     fun addPersistentAbility(ability: Ability)
+
     fun removePersistentAbility(ability: Ability)
 
     //Ability delegated to abilityState contrary case
     fun notifyAbilityUsed(targetPlayer: Player?)
-    fun receiveAbility(ability: Ability)
-    fun visitedBy(visitor: Player)
+    fun notifyKilledPlayer(deathCause: DeathCause)
+
     fun resetVisitors()
-    fun turnSetUp()
+    fun resetDefenseState()
+
+    fun receiveAbility(ability: Ability)
     fun receiveAttack(villagerAttackAbility: VillagerAttackAbility)
     fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility)
-    fun notifyKilledPlayer(deathCause: DeathCause)
-    fun resetDefenseState()
+
+    fun visitedBy(visitor: Player)
+    fun turnSetUp()
     fun cancelAbility()
 }
 
@@ -105,7 +110,7 @@ abstract class AbstractPlayer: Player{
         return usedAbilities
     }
 
-    override fun fetchUsedAbility(index: Int): String? {
+    override fun fetchUsedAbilityName(index: Int): String? {
         return if (usedAbilities.isNotEmpty())
             usedAbilities[index].fetchAbilityName()
         else
@@ -166,16 +171,13 @@ abstract class AbstractPlayer: Player{
         abilityState.useAbility(this)
     }
 
+    override fun notifyKilledPlayer(deathCause: DeathCause) {
+        this.deathCause = deathCause
+        signalEvent(PlayerEventEnum.KilledPlayer)
+    }
+
     override fun receiveAbility(ability: Ability) {
         abilitiesUsedOnMe.add(ability)
-    }
-
-    override fun visitedBy(visitor: Player) {
-        visitors.add(visitor)
-    }
-
-    override fun resetVisitors() {
-        visitors = mutableListOf()
     }
 
     override fun receiveAttack(villagerAttackAbility: VillagerAttackAbility) {
@@ -186,13 +188,16 @@ abstract class AbstractPlayer: Player{
         defenseState.receiveDamage(this,werewolfAttackAbility)
     }
 
-    override fun notifyKilledPlayer(deathCause: DeathCause) {
-        this.deathCause = deathCause
-        signalEvent(PlayerEventEnum.KilledPlayer)
-    }
-
     override fun resetDefenseState() {
         defenseState = NoDefense()
+    }
+
+    override fun resetVisitors() {
+        visitors = mutableListOf()
+    }
+
+    override fun visitedBy(visitor: Player) {
+        visitors.add(visitor)
     }
 
     override fun cancelAbility() {
@@ -215,6 +220,10 @@ abstract class AbstractPlayer: Player{
 
     fun defineAbilityState(abilityState: AbilityState){
         this.abilityState = abilityState
+    }
+
+    open fun resolveFetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return PlayerGridFragment(onActionSubject,this,targetPlayersOnActionSubject)
     }
 
     open fun resolveFetchTargetPlayers(): TargetPlayersEnum{

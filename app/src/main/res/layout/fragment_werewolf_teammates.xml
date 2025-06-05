@@ -13,7 +13,7 @@
         android:src="@drawable/image_dark_village" />
 
     <LinearLayout
-        android:id="@+id/titleTextView"
+        android:id="@+id/titleTextViewLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@id/titleTextViewLayout"
         android:background="@drawable/imageview_shape">
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/roleImageLabel"
@@ -47,7 +47,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/textViewDescription"
+        android:id="@+id/textViewDescriptionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="70dp"
@@ -66,7 +66,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textViewDescription"
+        app:layout_constraintStart_toEndOf="@id/textViewDescriptionLayout"
         app:layout_constraintTop_toBottomOf="@id/roleImageLabelLayout"
         app:layout_constraintBottom_toTopOf="@id/selectionsFrameLayout"
         android:layout_marginTop="10dp"
@@ -85,18 +85,18 @@
         android:layout_marginBottom="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+        app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
         app:layout_constraintBottom_toTopOf="@id/teamTextView">
         <include
             android:elevation="0dp"
-            layout="@layout/imageview_background" />
+            layout="@layout/imageview_textview_background" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
             app:layout_constraintBottom_toTopOf="@id/confirmButton"
             android:elevation="1dp">
             <GridLayout
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:columnCount="3"
@@ -115,7 +115,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/roleDescription"
+        android:id="@+id/roleDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="70dp"
@@ -160,7 +160,7 @@
         app:layout_constraintBottom_toBottomOf="@id/teamTextView">
         <include
             android:elevation="0dp"
-            layout="@layout/imageview_background" />
+            layout="@layout/imageview_textview_background" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:columnCount="3">

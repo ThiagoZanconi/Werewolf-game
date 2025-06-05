@@ -78,6 +78,24 @@ abstract class FragmentModel: Fragment(){
     protected abstract fun confirmAction()
 }
 
+class PlayerFragment(private val onActionSubject: Subject<GameUiEvent>, private val player: Player): FragmentModel() {
+    override fun confirmAction() {
+        onActionSubject.notify(GameUiEvent.ConfirmAction)
+    }
+
+    override fun initComponents(view: View) {
+        super.initComponents(view)
+        abilityStateLabel = view.findViewById(R.id.descriptionLabel)
+        abilityStateLabel.text = AbilityStateProvider.getAbilityState(player.fetchAbilityState())
+        roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
+        roleDescriptionLabel = view.findViewById(R.id.roleDescriptionTextView)
+        roleDescriptionLabel.text = RoleDescriptionProvider.getRoleDescription(player.fetchRole())
+        titleLabel.text = RoleNameProvider.getRoleName(player.fetchRole())
+        imageView.setImageResource(player.fetchImageSrc())
+    }
+
+}
+
 abstract class GridFragment: FragmentModel() {
 
     protected lateinit var gridLayout: GridLayout
@@ -165,7 +183,7 @@ open class PlayerGridFragment(
         abilityStateLabel = view.findViewById(R.id.descriptionLabel)
         abilityStateLabel.text = AbilityStateProvider.getAbilityState(player.fetchAbilityState())
         roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
-        roleDescriptionLabel = view.findViewById(R.id.roleDescription)
+        roleDescriptionLabel = view.findViewById(R.id.roleDescriptionTextView)
         roleDescriptionLabel.text = RoleDescriptionProvider.getRoleDescription(player.fetchRole())
         titleLabel.text = RoleNameProvider.getRoleName(player.fetchRole())
         imageView.setImageResource(player.fetchImageSrc())
