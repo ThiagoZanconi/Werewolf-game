@@ -3,6 +3,7 @@ package werewolf.model
 import werewolf.model.entities.Player
 import werewolf.model.entities.neutrals.Jester
 import werewolf.model.entities.villagers.Cleric
+import werewolf.model.entities.villagers.Detective
 import werewolf.model.entities.villagers.Detonator
 import werewolf.model.entities.villagers.Elusive
 import werewolf.model.entities.villagers.Priest
@@ -20,7 +21,7 @@ import werewolf.view.settings.RoleQuantitySettings
 import kotlin.math.floor
 
 enum class Roles{
-    Jester, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie
+    Jester, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Detective, Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie
 }
 
 interface RoleFactory{
@@ -31,14 +32,18 @@ class RoleFactoryImpl(
     private val roleQuantitySettings: RoleQuantitySettings,
     private val players: MutableList<String>
 ): RoleFactory {
+    private val createdVillagers: MutableList<Player> = mutableListOf()
+    private val createdWerewolves: MutableList<Player> = mutableListOf()
 
-    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric, Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker)
+    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric,
+        Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker, Roles.Detective)
     private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch, Roles.Necromancer, Roles.Arsonist)
 
     override fun getPlayers(): List<Player> {
         val toReturn = mutableListOf<Player>()
         val cut = floor(players.size / 3.0).toInt()
         toReturn.add(Werewolf(players[0]))
+        createdWerewolves.add(toReturn.last())
         for(i in 1 until cut){
             toReturn.add(getRandomWerewolf(players[i]))
         }
@@ -50,6 +55,7 @@ class RoleFactoryImpl(
         }
         else{
             toReturn.add(Jester(players[players.size-1]))
+            createdVillagers.add(toReturn.last())
         }
         return toReturn
     }
@@ -73,6 +79,7 @@ class RoleFactoryImpl(
                 werewolfRoles.remove(role)
             }
         }
+        createdWerewolves.add(toReturn)
         return toReturn
     }
 
@@ -105,6 +112,7 @@ class RoleFactoryImpl(
                 villagerRoles.remove(role)
             }
         }
+        createdVillagers.add(toReturn)
         return toReturn
     }
 
@@ -119,6 +127,7 @@ class RoleFactoryImpl(
             Roles.Elusive -> Elusive(name)
             Roles.Detonator -> Detonator(name)
             Roles.Stalker -> Stalker(name)
+            Roles.Detective -> Detective(name,createdWerewolves,createdVillagers)
             else -> Villager(name)
         }
     }

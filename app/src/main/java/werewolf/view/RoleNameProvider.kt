@@ -20,7 +20,8 @@ object RoleNameProvider {
             Roles.Elusive to R.string.elusive,
             Roles.Jester to R.string.jester,
             Roles.Detonator to R.string.detonator,
-            Roles.Stalker to R.string.stalker
+            Roles.Stalker to R.string.stalker,
+            Roles.Detective to R.string.detective
         )
 
         return MyApp.getAppContext().getString(roleMap[role] ?: R.string.unknown_role)

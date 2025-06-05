@@ -2,7 +2,6 @@ package werewolf.model.entities.werewolves
 
 import werewolf.model.Roles
 import werewolf.model.entities.AbilityState
-import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.OneTurnCooldown
 import werewolf.model.entities.Player
