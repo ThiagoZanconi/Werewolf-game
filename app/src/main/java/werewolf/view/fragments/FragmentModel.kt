@@ -85,11 +85,13 @@ class PlayerFragment(private val onActionSubject: Subject<GameUiEvent>, private 
 
     override fun initComponents(view: View) {
         super.initComponents(view)
+        /*
         abilityStateLabel = view.findViewById(R.id.descriptionLabel)
         abilityStateLabel.text = AbilityStateProvider.getAbilityState(player.fetchAbilityState())
         roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
         roleDescriptionLabel = view.findViewById(R.id.roleDescriptionTextView)
         roleDescriptionLabel.text = RoleDescriptionProvider.getRoleDescription(player.fetchRole())
+         */
         titleLabel.text = RoleNameProvider.getRoleName(player.fetchRole())
         imageView.setImageResource(player.fetchImageSrc())
     }
@@ -172,7 +174,7 @@ open class PlayerGridFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_grid, container, false)
+        val view = inflater.inflate(R.layout.fragment_player_grid, container, false)
         initComponents(view)
         initListeners()
         return view

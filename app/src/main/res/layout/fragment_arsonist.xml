@@ -5,130 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/backgroundImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image_dark_village" />
-
-    <LinearLayout
-        android:id="@+id/titleTextViewLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include layout="@layout/textview_title" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/roleImageLabelLayout"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextViewLayout"
-        android:background="@drawable/imageview_shape">
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/roleImageLabel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:src="@drawable/arsonist"
-            android:scaleType="fitXY"
-            android:background="@drawable/imageview_shape"
-            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
-            >
-        </com.google.android.material.imageview.ShapeableImageView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/textViewDescriptionLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="70dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/roleImageLabelLayout">
-        <include
-            layout="@layout/textview_description" />
-
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/roleDescriptionButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textViewDescriptionLayout"
-        app:layout_constraintTop_toBottomOf="@id/roleImageLabelLayout"
-        app:layout_constraintBottom_toTopOf="@id/selectionsFrameLayout"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:contentDescription="@string/role_description"
-        android:src="@drawable/image_questionmark"
-        android:scaleType="fitXY" />
+    <include
+        layout="@layout/imageview_background" />
 
     <FrameLayout
-        android:id="@+id/selectionsFrameLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/playerHeader"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
-        app:layout_constraintBottom_toTopOf="@id/teamTextView">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_half">
         <include
-            android:elevation="0dp"
-            layout="@layout/imageview_textview_background" />
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="15dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
-            app:layout_constraintBottom_toTopOf="@id/confirmButton"
-            android:elevation="1dp">
-            <GridLayout
-                android:id="@+id/gridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:columnCount="3"
-                android:padding="16dp">
-            </GridLayout>
-        </ScrollView>
+            layout="@layout/fragment_player_shared" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/roleDescriptionTextView"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_half"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <LinearLayout
+        android:id="@+id/playerGridLayoutContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="70dp"
-        android:layout_marginStart="70dp"
-        android:padding="35dp"
-        android:background="@drawable/textview_shape3"
-        android:textColor="@android:color/black"
-        android:text="@string/werewolf_description"
-        android:visibility="gone"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/playerHeader"
+        app:layout_constraintBottom_toTopOf="@id/teamTextView">
+        <include
+            layout="@layout/gridlayout_wood_shared" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/teamTextView"
