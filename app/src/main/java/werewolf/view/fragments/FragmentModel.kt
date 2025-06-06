@@ -78,22 +78,78 @@ abstract class FragmentModel: Fragment(){
     protected abstract fun confirmAction()
 }
 
-class PlayerFragment(private val onActionSubject: Subject<GameUiEvent>, private val player: Player): FragmentModel() {
+open class PlayerFragment(private val onActionSubject: Subject<GameUiEvent>, private val player: Player): FragmentModel() {
+
+    private lateinit var abilityStateLabel: TextView
+    private lateinit var roleDescriptionButton: ImageButton
+    private lateinit var roleDescriptionLabel: TextView
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_player, container, false)
+        initComponents(view)
+        initListeners()
+        return view
+    }
+
     override fun confirmAction() {
         onActionSubject.notify(GameUiEvent.ConfirmAction)
     }
 
     override fun initComponents(view: View) {
         super.initComponents(view)
-        /*
         abilityStateLabel = view.findViewById(R.id.descriptionLabel)
         abilityStateLabel.text = AbilityStateProvider.getAbilityState(player.fetchAbilityState())
         roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
         roleDescriptionLabel = view.findViewById(R.id.roleDescriptionTextView)
         roleDescriptionLabel.text = RoleDescriptionProvider.getRoleDescription(player.fetchRole())
-         */
         titleLabel.text = RoleNameProvider.getRoleName(player.fetchRole())
         imageView.setImageResource(player.fetchImageSrc())
+    }
+
+}
+
+open class AbilityPlayerFragment(onActionSubject: Subject<GameUiEvent>, private val player: Player): PlayerFragment(onActionSubject,player){
+    protected lateinit var abilityButton: TextView
+    protected lateinit var abilitySelectedButton: TextView
+    private var abilityUsed: Boolean = false
+
+    override fun confirmAction(){
+        if(abilityUsed){
+            player.notifyAbilityUsed(null)
+        }
+        super.confirmAction()
+    }
+
+    override fun initComponents(view: View) {
+        super.initComponents(view)
+        initAbilityButton(view)
+        initAbilitySelectedButton(view)
+    }
+
+    protected open fun initAbilityButton(view: View){
+        abilityButton = view.findViewById(R.id.abilityTextView)
+        abilityButton.setOnClickListener{ abilityButtonOnClickListener() }
+    }
+
+    protected open fun initAbilitySelectedButton(view: View){
+        abilitySelectedButton = view.findViewById(R.id.abilitySelectedTextView)
+        abilitySelectedButton.setOnClickListener{ abilitySelectedButtonOnClickListener() }
+    }
+
+    private fun abilityButtonOnClickListener(){
+        abilityUsed = true
+        abilityButton.visibility = View.GONE
+        abilitySelectedButton.visibility = View.VISIBLE
+    }
+
+    private fun abilitySelectedButtonOnClickListener(){
+        abilityUsed = false
+        abilitySelectedButton.visibility = View.GONE
+        abilityButton.visibility = View.VISIBLE
     }
 
 }

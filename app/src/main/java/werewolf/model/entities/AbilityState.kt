@@ -1,11 +1,11 @@
 package werewolf.model.entities
 
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.view.GameUiEvent
 import werewolf.view.TargetPlayersEnum
 import werewolf.view.TargetPlayersSignal
+import werewolf.view.fragments.PlayerFragment
 
 enum class AbilityStateEnum{
     NEUTRAL, NOABILITY, ONCOOLDOWN, NOUSESLEFT
@@ -49,6 +49,10 @@ class NoAbility: Neutral() {
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
         return TargetPlayersEnum.SetNoTargetPlayers
     }
+
+    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return PlayerFragment(onActionSubject,player)
+    }
 }
 
 class OffCooldown: Neutral(){
@@ -65,6 +69,10 @@ class OffCooldown: Neutral(){
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
         return TargetPlayersEnum.SetNoTargetPlayers
+    }
+
+    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return PlayerFragment(onActionSubject,player)
     }
 }
 
@@ -83,6 +91,10 @@ class OneTurnCooldown: Neutral(){
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
         return TargetPlayersEnum.SetNoTargetPlayers
     }
+
+    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return PlayerFragment(onActionSubject,player)
+    }
 }
 
 class NoUsesLeft: Neutral(){
@@ -94,9 +106,5 @@ class NoUsesLeft: Neutral(){
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
         return TargetPlayersEnum.SetNoTargetPlayers
-    }
-
-    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return player.resolveFetchView(onActionSubject,targetPlayersOnActionSubject)
     }
 }

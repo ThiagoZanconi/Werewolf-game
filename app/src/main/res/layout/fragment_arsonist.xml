@@ -12,137 +12,36 @@
         android:id="@+id/playerHeader"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_half">
+        app:layout_constraintBottom_toTopOf="@id/confirmButtonLayout">
         <include
-            layout="@layout/fragment_player_shared" />
+            layout="@layout/shared_werewolf_grid_teammates_header" />
     </FrameLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_half"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
 
     <LinearLayout
-        android:id="@+id/playerGridLayoutContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/buttonAbilityLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/playerHeader"
-        app:layout_constraintBottom_toTopOf="@id/teamTextView">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/confirmButtonLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
         <include
-            layout="@layout/gridlayout_wood_shared" />
+            layout="@layout/button_ability" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/teamTextView"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/confirmButton"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:gravity="center"
-        android:text="@string/team"
-        android:textSize="15sp"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/textview_shape" />
-
-    <FrameLayout
-        android:id="@+id/teammatesFrameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintStart_toEndOf="@id/teamTextView"
+    <LinearLayout
+        android:id="@+id/confirmButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/playerHeader"
+        app:layout_constraintStart_toEndOf="@id/buttonAbilityLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/teamTextView"
-        app:layout_constraintBottom_toBottomOf="@id/teamTextView">
+        app:layout_constraintBottom_toBottomOf="parent">
         <include
-            android:elevation="0dp"
-            layout="@layout/imageview_textview_background" />
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toEndOf="@id/teamTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/teamTextView"
-            app:layout_constraintBottom_toBottomOf="@id/teamTextView">
-            <GridLayout
-                android:id="@+id/teammatesGridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:columnCount="3"
-                android:padding="3dp">
-            </GridLayout>
-        </ScrollView>
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/igniteLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/confirmButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
-        <TextView
-            android:id="@+id/igniteTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/text_view_shape_ignite"
-            android:fontFamily="@font/font_old_english_five"
-            android:textColor="#000000"
-            android:text="@string/ignite"
-            android:textSize="16sp"
-            />
-
-        <TextView
-            android:id="@+id/igniteSelectedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/text_view_shape_ignite_selected"
-            android:visibility="gone"
-            android:fontFamily="@font/font_old_english_five"
-            android:textColor="#000000"
-            android:text="@string/ignite"
-            android:textSize="16sp"
-            />
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/confirmButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintStart_toEndOf="@id/igniteLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/button_shape"
-        android:text="@string/done"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+            layout="@layout/button_confirm" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

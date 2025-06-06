@@ -38,7 +38,7 @@ class Detective(
     }
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return DetectiveFragment(onActionSubject,this, targetPlayersOnActionSubject)
+        return DetectiveFragment(onActionSubject,this)
     }
 
     fun fetchInvestigatedPlayers(): String{

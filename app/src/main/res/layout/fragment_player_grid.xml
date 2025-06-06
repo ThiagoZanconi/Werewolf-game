@@ -12,35 +12,13 @@
         android:id="@+id/playerHeader"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_half">
-        <include
-            layout="@layout/fragment_player_shared" />
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_half"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-
-    <LinearLayout
-        android:id="@+id/playerGridLayoutContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playerHeader"
         app:layout_constraintBottom_toTopOf="@id/confirmButtonLayout">
         <include
-            layout="@layout/gridlayout_wood_shared" />
-    </LinearLayout>
+            layout="@layout/shared_player_grid_header" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/confirmButtonLayout"

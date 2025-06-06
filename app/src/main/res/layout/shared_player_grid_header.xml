@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <include
-        layout="@layout/imageview_background" />
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:id="@+id/playerHeader"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,14 +26,15 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <LinearLayout
-        android:id="@+id/confirmButtonLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/playerGridLayoutContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerHeader"
         app:layout_constraintBottom_toBottomOf="parent">
         <include
-            layout="@layout/button_confirm" />
+            layout="@layout/gridlayout_wood_shared" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

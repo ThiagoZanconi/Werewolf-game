@@ -72,12 +72,12 @@ class ArsonistFragment(
     }
 
     private fun initIgniteTextView(view: View){
-        igniteTextView = view.findViewById(R.id.igniteTextView)
+        igniteTextView = view.findViewById(R.id.abilityTextView)
         igniteTextView.setOnClickListener{ igniteTextViewOnClickListener() }
     }
 
     private fun initIgniteSelectedTextView(view: View){
-        igniteSelectedTextView = view.findViewById(R.id.igniteSelectedTextView)
+        igniteSelectedTextView = view.findViewById(R.id.abilitySelectedTextView)
         igniteSelectedTextView.setOnClickListener{ igniteSelectedTextViewOnClickListener() }
     }
 
