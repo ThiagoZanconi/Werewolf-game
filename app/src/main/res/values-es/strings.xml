@@ -62,6 +62,7 @@
     <string name="arsonist">Incendiario</string>
     <string name="stalker">Chusma</string>
     <string name="detective">Detective</string>
+    <string name="disguiser">Disfrazador</string>
 
     <string name="cancel_player_ability">Cancelar habilidad de jugador</string>
     <string name="werewolf_attack">Ataque hombre lobo</string>
@@ -97,5 +98,6 @@
     <string name="detonator_description">Pertenece al equipo de los aldeanos. A la noche puede depositar la bomba a otro jugador. Cuando el detonador muere, explota la bomba, atacando al jugador objetivo. El detonador puede cambiar la bomba de lugar. Si muere cuando pone/cambia la bomba, la habilidad no tiene efecto.</string>
     <string name="stalker_description">Pertenece al equipo de los aldeanos. A la noche puede acechar a un jugador, la ronda siguiente se le revelara un jugador que lo haya visitado o haya sido visitado por el. Ninguno si no hay.</string>
     <string name="detective_description">Pertenece al equipo de los aldeanos. A la noche puede investigar. Al día siguiente se le revelaran 3 jugadores, al menos uno de ellos es un lobo.</string>
+    <string name="disguiser_description">Pertenece al equipo de los aldeanos. Figura como equipo de los lobos secretamente. Si un lobo utiliza una habilidad sobre un jugador de su equipo, esta no tendra efecto.</string>
     <string name="jester_description">Juega solo. No tiene habilidad. Su objetivo es ser colgado al final del día.</string>
 </resources>

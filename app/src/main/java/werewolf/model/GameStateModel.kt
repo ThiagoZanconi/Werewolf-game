@@ -18,6 +18,7 @@ interface GameStateModel{
     fun getDeadWerewolves(): List<Player>
     fun getDeadPlayers(): List<Player>
     fun getNeutrals(): List<Player>
+    fun getDisguisers(): List<Player>
     fun initGame(players: MutableList<String>)
     fun killVillager(player: Player)
     fun killWerewolf(player: Player)
@@ -91,6 +92,10 @@ class GameStateModelImpl(
 
     override fun getNeutrals(): List<Player> {
         return gameState.getNeutrals()
+    }
+
+    override fun getDisguisers(): List<Player> {
+        return roleFactory.getDisguisers()
     }
 
     override fun killVillager(player: Player) {

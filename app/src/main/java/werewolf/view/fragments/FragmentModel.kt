@@ -110,6 +110,20 @@ open class PlayerFragment(private val onActionSubject: Subject<GameUiEvent>, pri
         imageView.setImageResource(player.fetchImageSrc())
     }
 
+    override fun initListeners() {
+        super.initListeners()
+        roleDescriptionButton.setOnClickListener{ showRoleDescription() }
+    }
+
+    private fun showRoleDescription(){
+        if(roleDescriptionLabel.visibility==View.VISIBLE){
+            roleDescriptionLabel.visibility=View.GONE
+        }
+        else{
+            roleDescriptionLabel.visibility=View.VISIBLE
+        }
+    }
+
 }
 
 open class AbilityPlayerFragment(onActionSubject: Subject<GameUiEvent>, private val player: Player): PlayerFragment(onActionSubject,player){
@@ -205,7 +219,7 @@ abstract class GridFragment: FragmentModel() {
         }
     }
 
-    protected fun markNotSelected(playerName: String) {
+    protected open fun markNotSelected(playerName: String) {
         for (i in 0 until gridLayout.childCount) {
             val child = gridLayout.getChildAt(i) as TextView
             if (child.text != playerName) {

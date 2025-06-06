@@ -1,6 +1,7 @@
 package werewolf.model
 
 import werewolf.model.entities.Player
+import werewolf.model.entities.villagers.Disguiser
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
 

@@ -1,6 +1,5 @@
 package werewolf.model.entities
 
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
@@ -9,7 +8,7 @@ import werewolf.view.GameUiEvent
 import werewolf.view.TargetPlayersEnum
 import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.PlayerGridFragment
-import werewolf.view.fragments.WerewolfTeamFragment
+import werewolf.view.fragments.WerewolfPlayerFragment
 
 enum class DeathCause{
     HANGED, MAULED, SHOT, EXPLODED
@@ -241,7 +240,7 @@ abstract class AbstractPlayer: Player{
 abstract class WerewolfTeamPlayer: AbstractPlayer(){
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return WerewolfTeamFragment(onActionSubject,this,targetPlayersOnActionSubject)
+        return WerewolfPlayerFragment(onActionSubject,this,targetPlayersOnActionSubject)
     }
 
     override fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility) {

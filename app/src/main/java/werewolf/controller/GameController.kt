@@ -84,7 +84,7 @@ class GameControllerImpl(
     }
 
     private fun setWerewolfTargets(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers().shuffled()
+        targetPlayersSignal.targetPlayers = (gameStateModel.getAliveVillagers()-gameStateModel.getDisguisers().toSet()).shuffled()
     }
 
     private fun setAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
@@ -100,7 +100,7 @@ class GameControllerImpl(
     }
 
     private fun setWerewolfTeammates(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getAliveWerewolves().shuffled()
+        targetPlayersSignal.targetPlayers = (gameStateModel.getAliveWerewolves()+gameStateModel.getDisguisers()).shuffled()
     }
 
     private fun killedPlayer(player: Player){

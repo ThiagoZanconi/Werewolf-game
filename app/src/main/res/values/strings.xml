@@ -62,7 +62,7 @@
     <string name="arsonist">Arsonist</string>
     <string name="stalker">Stalker</string>
     <string name="detective">Detective</string>
-    <string name="investigate">Investigate</string>
+    <string name="disguiser">Disguiser</string>
 
     <string name="cancel_player_ability">Cancel Player Ability</string>
     <string name="werewolf_attack">Werewolf Attack</string>
@@ -79,6 +79,7 @@
     <string name="place_bomb">Place Bomb</string>
     <string name="remove_bomb">Remove Bomb</string>
     <string name="stalk">Stalk</string>
+    <string name="investigate">Investigate</string>
 
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
@@ -97,6 +98,7 @@
     <string name="detonator_description">Belongs to the villagers team. At night cab set the bomb in a player\'s house . When detonator dies, the bomb explodes, striking target player. Detonator may change the bomb to other location. If he dies when setting the bomb, ability has no effect.</string>
     <string name="stalker_description">Belongs to the villagers team. At night can stalk a player, next round will be revealed to him ONE player that visited or was visited by target player (if there was any).</string>
     <string name="detective_description">Belongs to the villagers team. At night can investigate. Next day 3 players will be revealed to him. At least one of them is a werewolf</string>
+    <string name="disguiser_description">Belongs to the villagers team. Appears as a werewolf teammate secretly. If a werewolf uses an ability over a teammate, it will have no effect.</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 
 </resources>

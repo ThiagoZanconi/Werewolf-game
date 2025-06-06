@@ -16,7 +16,7 @@ class ArsonistFragment(
     onActionSubject: Subject<GameUiEvent>,
     override val player: Arsonist,
     targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
-) : WerewolfTeamFragment(onActionSubject,player,targetPlayersOnActionSubject){
+) : WerewolfPlayerFragment(onActionSubject,player,targetPlayersOnActionSubject){
     private lateinit var igniteTextView: TextView
     private lateinit var igniteSelectedTextView: TextView
     private var ignite: Boolean = false
@@ -96,6 +96,7 @@ class ArsonistFragment(
     }
 
     private fun getPlayer(name: String): Player{
-        return targetPlayersSignal.targetPlayers.find { it.fetchPlayerName() == name }!!
+        val playerTargets = targetPlayersSignal.targetPlayers + teammates
+        return playerTargets.find { it.fetchPlayerName() == name }!!
     }
 }

@@ -11,17 +11,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/teamTextView">
+        app:layout_constraintBottom_toTopOf="@id/guideline_half">
         <include
             layout="@layout/shared_player_grid_header" />
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_half"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
 
     <TextView
         android:id="@+id/teamTextView"
         android:layout_width="100dp"
         android:layout_height="70dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/stalkedFrameLayout"
+        app:layout_constraintTop_toTopOf="@id/stalkedFrameLayout"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/font_old_english_five"
         android:layout_marginRight="10dp"
@@ -42,8 +50,8 @@
         android:layout_marginBottom="5dp"
         app:layout_constraintStart_toEndOf="@id/teamTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/teamTextView"
-        app:layout_constraintBottom_toBottomOf="@id/teamTextView">
+        app:layout_constraintTop_toBottomOf="@id/playerHeader"
+        app:layout_constraintBottom_toBottomOf="parent">
         <include
             android:elevation="0dp"
             layout="@layout/imageview_textview_background" />

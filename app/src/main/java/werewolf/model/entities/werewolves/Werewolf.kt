@@ -1,7 +1,6 @@
 package werewolf.model.entities.werewolves
 
 import werewolf.model.Roles
-import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum

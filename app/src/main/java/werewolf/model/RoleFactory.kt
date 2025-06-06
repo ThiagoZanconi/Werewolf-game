@@ -5,6 +5,7 @@ import werewolf.model.entities.neutrals.Jester
 import werewolf.model.entities.villagers.Cleric
 import werewolf.model.entities.villagers.Detective
 import werewolf.model.entities.villagers.Detonator
+import werewolf.model.entities.villagers.Disguiser
 import werewolf.model.entities.villagers.Elusive
 import werewolf.model.entities.villagers.Priest
 import werewolf.model.entities.villagers.Protector
@@ -21,11 +22,12 @@ import werewolf.view.settings.RoleQuantitySettings
 import kotlin.math.floor
 
 enum class Roles{
-    Jester, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Detective, Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie
+    Jester, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Detective, Disguiser, Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie
 }
 
 interface RoleFactory{
     fun getPlayers(): List<Player>
+    fun getDisguisers(): List<Disguiser>
 }
 
 class RoleFactoryImpl(
@@ -34,9 +36,10 @@ class RoleFactoryImpl(
 ): RoleFactory {
     private val createdVillagers: MutableList<Player> = mutableListOf()
     private val createdWerewolves: MutableList<Player> = mutableListOf()
+    private val createdDisguisers: MutableList<Disguiser> = mutableListOf()
 
     private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric,
-        Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker, Roles.Detective)
+        Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker, Roles.Detective, Roles.Disguiser)
     private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch, Roles.Necromancer, Roles.Arsonist)
 
     override fun getPlayers(): List<Player> {
@@ -58,6 +61,10 @@ class RoleFactoryImpl(
             createdVillagers.add(toReturn.last())
         }
         return toReturn
+    }
+
+    override fun getDisguisers(): List<Disguiser> {
+        return createdDisguisers
     }
 
     private fun getRandomWerewolf(player: String): Player{
@@ -128,7 +135,14 @@ class RoleFactoryImpl(
             Roles.Detonator -> Detonator(name)
             Roles.Stalker -> Stalker(name)
             Roles.Detective -> Detective(name,createdWerewolves,createdVillagers)
+            Roles.Disguiser -> createDisguiser(name)
             else -> Villager(name)
         }
+    }
+
+    private fun createDisguiser(name: String): Player{
+        val disguiser = Disguiser(name)
+        createdDisguisers.add(disguiser)
+        return disguiser
     }
 }
