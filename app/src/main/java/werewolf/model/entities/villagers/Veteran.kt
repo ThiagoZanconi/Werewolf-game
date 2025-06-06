@@ -5,7 +5,6 @@ import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
-import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Werewolf
@@ -29,8 +28,8 @@ class Veteran(
         return R.drawable.veteran
     }
 
-    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return VeteranFragment(onActionSubject,this, targetPlayersOnActionSubject)
+    override fun resolveFetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return VeteranFragment(onActionSubject,this)
     }
 }
 

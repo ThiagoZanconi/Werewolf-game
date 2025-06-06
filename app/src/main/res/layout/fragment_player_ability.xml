@@ -15,10 +15,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonAbilityLayout">
+        app:layout_constraintBottom_toTopOf="@id/guideline_half">
         <include
             layout="@layout/shared_player_header" />
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_half"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
     <LinearLayout
         android:id="@+id/buttonAbilityLayout"
@@ -27,24 +34,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playerHeader"
-        app:layout_constraintBottom_toTopOf="@id/stalkedFrameLayout">
+        app:layout_constraintBottom_toTopOf="@id/confirmButtonLayout">
         <include
             layout="@layout/button_ability" />
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/stalkedFrameLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonAbilityLayout"
-        app:layout_constraintBottom_toTopOf="@id/confirmButtonLayout">
-        <include layout="@layout/textview_stalked" />
-    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/confirmButtonLayout"

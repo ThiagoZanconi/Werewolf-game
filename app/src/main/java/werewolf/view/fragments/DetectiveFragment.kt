@@ -10,29 +10,23 @@ import werewolf.model.entities.villagers.Detective
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
+import werewolf.view.TargetPlayersSignal
 
 class DetectiveFragment(
     onActionSubject: Subject<GameUiEvent>,
-    private val detective: Detective
+    detective: Detective
 ) : AbilityPlayerFragment(onActionSubject,detective){
-    private lateinit var stalkedTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_detective, container, false)
+        val view = inflater.inflate(R.layout.fragment_player_ability, container, false)
         initComponents(view)
         initListeners()
 
         return view
-    }
-
-    override fun initComponents(view: View) {
-        super.initComponents(view)
-        stalkedTextView = view.findViewById(R.id.textViewStalked)
-        stalkedTextView.text = detective.fetchInvestigatedPlayers()
     }
 
     override fun initAbilityButton(view: View){
@@ -45,4 +39,20 @@ class DetectiveFragment(
         abilitySelectedButton.text = MyApp.getAppContext().getString(R.string.investigate)
     }
 
+}
+
+class DetectiveGridFragment(
+    onActionSubject: Subject<GameUiEvent>,
+    private val detective: Detective,
+    targetPlayersOnActionSubject: Subject<TargetPlayersSignal>
+): PlayerGridFragment(onActionSubject,detective,targetPlayersOnActionSubject){
+    override fun initGridLayout(){
+        detective.fetchInvestigatedPlayers().forEach {
+            gridLayout.addView(createTextView(it.fetchPlayerName()),gridLayout.childCount)
+        }
+    }
+
+    override fun onPlayerClick(textView: TextView, playerName: String) {
+
+    }
 }

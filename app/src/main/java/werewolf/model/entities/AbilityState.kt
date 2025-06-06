@@ -107,4 +107,8 @@ class NoUsesLeft: Neutral(){
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
         return TargetPlayersEnum.SetNoTargetPlayers
     }
+
+    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
+        return PlayerFragment(onActionSubject,player)
+    }
 }

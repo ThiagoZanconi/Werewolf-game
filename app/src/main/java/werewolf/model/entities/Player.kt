@@ -122,7 +122,7 @@ abstract class AbstractPlayer: Player{
     }
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return PlayerGridFragment(onActionSubject,this,targetPlayersOnActionSubject)
+        return abilityState.fetchView(this, onActionSubject,targetPlayersOnActionSubject)
     }
 
     override fun fetchDeathCause(): DeathCause {

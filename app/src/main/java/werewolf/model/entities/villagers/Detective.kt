@@ -14,6 +14,7 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.DetectiveFragment
+import werewolf.view.fragments.DetectiveGridFragment
 
 class Detective(
     override val playerName: String,
@@ -21,7 +22,7 @@ class Detective(
     private val villagers: MutableList<Player>,
 ): AbstractPlayer(){
     override val role: Roles = Roles.Detective
-    private var investigatedPlayers: String = ""
+    private var investigatedPlayers: List<Player>? = null
 
     override fun fetchImageSrc(): Int {
         return R.drawable.detective
@@ -32,20 +33,25 @@ class Detective(
     }
 
     override fun addUsedAbility() {
+        investigatedPlayers = listOf()
         abilityState = NoUsesLeft()
         val werewolf = werewolves.random()
         usedAbilities.add(Investigate(this, werewolf,(werewolves + villagers - listOf(this).toSet() - listOf(werewolf).toSet()).shuffled()))
     }
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return DetectiveFragment(onActionSubject,this)
+        return if(investigatedPlayers==null){
+            DetectiveFragment(onActionSubject,this)
+        } else{
+            DetectiveGridFragment(onActionSubject,this,targetPlayersOnActionSubject)
+        }
     }
 
-    fun fetchInvestigatedPlayers(): String{
-        return investigatedPlayers
+    fun fetchInvestigatedPlayers(): List<Player>{
+        return investigatedPlayers!!
     }
 
-    fun defineInvestigatedPlayers(investigatedPlayers: String){
+    fun defineInvestigatedPlayers(investigatedPlayers: List<Player>){
         this.investigatedPlayers = investigatedPlayers
     }
 
@@ -57,12 +63,7 @@ class Investigate(private val detective: Detective, private val werewolf: Player
         val investigatedPlayersList: MutableList<Player> =  mutableListOf(werewolf)
         investigatedPlayersList.add(playerList[0])
         investigatedPlayersList.add(playerList[1])
-        investigatedPlayersList.shuffle()
-        var investigatedPlayers = ""
-        investigatedPlayersList.forEach {
-            investigatedPlayers += it.fetchPlayerName()+", "
-        }
-        detective.defineInvestigatedPlayers(investigatedPlayers)
+        detective.defineInvestigatedPlayers(investigatedPlayersList.shuffled())
     }
 
     override fun fetchAbilityName(): String {
