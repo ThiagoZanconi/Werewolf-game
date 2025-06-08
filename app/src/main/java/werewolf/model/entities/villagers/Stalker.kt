@@ -15,9 +15,8 @@ import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.StalkerFragment
 
 class Stalker(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Stalker
+    playerName: String
+): AbstractPlayer(playerName){
     private var stalkedPair: Pair<Player,String>? = null
 
     override fun addUsedAbility() {
@@ -29,8 +28,12 @@ class Stalker(
         return R.drawable.stalker
     }
 
+    override fun fetchRole(): Roles {
+        return Roles.Stalker
+    }
+
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetAlivePlayersTarget
+        return TargetPlayersEnum.AlivePlayersTarget
     }
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {

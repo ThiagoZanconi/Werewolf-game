@@ -13,21 +13,24 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 
 class Necromancer(
-    override val playerName: String
-): WerewolfTeamPlayer(){
-    override val role: Roles = Roles.Necromancer
+    playerName: String
+): WerewolfTeamPlayer(playerName){
+
+    override fun fetchImageSrc(): Int {
+        return R.drawable.necromancer
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Necromancer
+    }
 
     override fun addUsedAbility(){
         abilityState = NoUsesLeft()
         usedAbilities.add(ZombieSpell(targetPlayers[0]))
     }
 
-    override fun fetchImageSrc(): Int {
-        return R.drawable.necromancer
-    }
-
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetDeadTargets
+        return TargetPlayersEnum.DeadTargets
     }
 }
 

@@ -13,21 +13,24 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 
 class Priest(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Priest
+    playerName: String
+): AbstractPlayer(playerName){
+
+    override fun fetchImageSrc(): Int {
+        return R.drawable.priest
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Priest
+    }
 
     override fun addUsedAbility() {
         abilityState = NoUsesLeft()
         usedAbilities.add(ReviveSpell(targetPlayers[0]))
     }
 
-    override fun fetchImageSrc(): Int {
-        return R.drawable.priest
-    }
-
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetDeadTargets
+        return TargetPlayersEnum.DeadTargets
     }
 }
 

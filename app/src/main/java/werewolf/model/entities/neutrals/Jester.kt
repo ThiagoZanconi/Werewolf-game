@@ -10,9 +10,8 @@ import werewolf.model.entities.PlayerSignal
 import werewolf.view.R
 
 class Jester(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Jester
+    playerName: String
+): AbstractPlayer(playerName){
     override var abilityState: AbilityState = NoAbility()
 
     override fun fetchImageSrc(): Int {
@@ -27,5 +26,9 @@ class Jester(
             PlayerEventEnum.KilledPlayer
         }
         onActionSubject.notify(PlayerSignal(this))
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Jester
     }
 }

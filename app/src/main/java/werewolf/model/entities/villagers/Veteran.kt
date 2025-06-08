@@ -15,17 +15,20 @@ import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.VeteranFragment
 
 class Veteran(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Veteran
+    playerName: String
+): AbstractPlayer(playerName){
+
+    override fun fetchImageSrc(): Int {
+        return R.drawable.veteran
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Veteran
+    }
 
     override fun addUsedAbility() {
         abilityState = NoUsesLeft()
         usedAbilities.add(Alert(visitors))
-    }
-
-    override fun fetchImageSrc(): Int {
-        return R.drawable.veteran
     }
 
     override fun resolveFetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {

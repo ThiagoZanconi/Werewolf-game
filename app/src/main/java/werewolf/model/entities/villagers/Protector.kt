@@ -11,10 +11,17 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 
 class Protector(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Protector
+    playerName: String
+): AbstractPlayer(playerName){
     private var armored = true
+
+    override fun fetchImageSrc(): Int {
+        return R.drawable.protector
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Protector
+    }
 
     override fun addUsedAbility() {
         usedAbilities.add(Protection(targetPlayers[0],this))
@@ -29,12 +36,8 @@ class Protector(
         }
     }
 
-    override fun fetchImageSrc(): Int {
-        return R.drawable.protector
-    }
-
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetAlivePlayersTarget
+        return TargetPlayersEnum.OtherPlayersTarget
     }
 }
 

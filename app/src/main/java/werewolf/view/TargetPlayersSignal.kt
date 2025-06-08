@@ -3,7 +3,7 @@ package werewolf.view
 import werewolf.model.entities.Player
 
 enum class TargetPlayersEnum{
-    SetNoTargetPlayers, SetWerewolfTargets, SetAlivePlayersTarget, SetDeadTargets, SetWerewolfTeammates
+    NoTargetPlayers, WerewolfTargets, AlivePlayersTarget, DeadTargets, WerewolfTeammates, OtherPlayersTarget
 }
 
 class TargetPlayersSignal(private val targetPlayersEnum: TargetPlayersEnum){

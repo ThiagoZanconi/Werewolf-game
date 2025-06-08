@@ -7,12 +7,15 @@ import werewolf.model.entities.NoAbility
 import werewolf.view.R
 
 class Disguiser(
-    override val playerName: String
-): AbstractPlayer() {
-    override val role: Roles = Roles.Disguiser
+    playerName: String
+): AbstractPlayer(playerName){
     override var abilityState: AbilityState = NoAbility()
 
     override fun fetchImageSrc(): Int {
         return R.drawable.disguiser
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Disguiser
     }
 }

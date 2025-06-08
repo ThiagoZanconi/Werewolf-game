@@ -47,7 +47,7 @@ class NoAbility: Neutral() {
     override fun useAbility(player: AbstractPlayer) {}
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
-        return TargetPlayersEnum.SetNoTargetPlayers
+        return TargetPlayersEnum.NoTargetPlayers
     }
 
     override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
@@ -68,7 +68,7 @@ class OffCooldown: Neutral(){
     }
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
-        return TargetPlayersEnum.SetNoTargetPlayers
+        return TargetPlayersEnum.NoTargetPlayers
     }
 
     override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
@@ -89,7 +89,7 @@ class OneTurnCooldown: Neutral(){
     }
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
-        return TargetPlayersEnum.SetNoTargetPlayers
+        return TargetPlayersEnum.NoTargetPlayers
     }
 
     override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
@@ -105,7 +105,7 @@ class NoUsesLeft: Neutral(){
     }
 
     override fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum {
-        return TargetPlayersEnum.SetNoTargetPlayers
+        return TargetPlayersEnum.NoTargetPlayers
     }
 
     override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {

@@ -11,16 +11,19 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 
 class Cleric(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Cleric
+    playerName: String
+): AbstractPlayer(playerName){
 
     override fun fetchImageSrc(): Int {
         return R.drawable.cleric
     }
 
+    override fun fetchRole(): Roles {
+        return Roles.Cleric
+    }
+
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetAlivePlayersTarget
+        return TargetPlayersEnum.AlivePlayersTarget
     }
 
     override fun addUsedAbility() {

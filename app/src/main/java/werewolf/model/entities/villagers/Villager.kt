@@ -7,12 +7,15 @@ import werewolf.model.entities.NoAbility
 import werewolf.view.R
 
 class Villager(
-    override val playerName: String
-): AbstractPlayer() {
-    override val role: Roles = Roles.Villager
+    playerName: String
+): AbstractPlayer(playerName){
     override var abilityState: AbilityState = NoAbility()
 
     override fun fetchImageSrc(): Int {
         return R.drawable.villager
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Villager
     }
 }

@@ -19,7 +19,6 @@ interface Player{
 
     fun fetchPlayerName(): String
     fun fetchRole(): Roles
-    fun fetchTeammates(): TargetPlayersEnum
     fun fetchTargetPlayersOptions(): TargetPlayersEnum
     fun fetchTargetPlayers(): List<Player>
     fun fetchEvent(): PlayerEventEnum
@@ -57,9 +56,7 @@ interface Player{
     fun cancelAbility()
 }
 
-abstract class AbstractPlayer: Player{
-    protected abstract val playerName: String
-    protected abstract val role: Roles
+abstract class AbstractPlayer(private val playerName: String): Player{
     protected open var defenseState: DefenseState = NoDefense()
     protected open var abilityState: AbilityState = Neutral()
     protected open var usedAbilities: MutableList<Ability> = mutableListOf()
@@ -76,14 +73,6 @@ abstract class AbstractPlayer: Player{
 
     override fun fetchPlayerName(): String{
         return playerName
-    }
-
-    override fun fetchRole(): Roles {
-        return role
-    }
-
-    override fun fetchTeammates(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetNoTargetPlayers
     }
 
     override fun fetchTargetPlayersOptions(): TargetPlayersEnum {
@@ -226,7 +215,7 @@ abstract class AbstractPlayer: Player{
     }
 
     open fun resolveFetchTargetPlayers(): TargetPlayersEnum{
-        return TargetPlayersEnum.SetNoTargetPlayers
+        return TargetPlayersEnum.NoTargetPlayers
     }
 
     open fun addUsedAbility(){}
@@ -237,7 +226,7 @@ abstract class AbstractPlayer: Player{
 
 }
 
-abstract class WerewolfTeamPlayer: AbstractPlayer(){
+abstract class WerewolfTeamPlayer(playerName: String): AbstractPlayer(playerName){
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
         return WerewolfPlayerFragment(onActionSubject,this,targetPlayersOnActionSubject)
@@ -245,6 +234,10 @@ abstract class WerewolfTeamPlayer: AbstractPlayer(){
 
     override fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility) {
 
+    }
+
+    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
+        return TargetPlayersEnum.WerewolfTargets
     }
 
 }

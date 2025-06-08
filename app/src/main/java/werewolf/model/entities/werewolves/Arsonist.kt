@@ -11,14 +11,12 @@ import werewolf.model.entities.villagers.Bomb
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.ArsonistFragment
 
 class Arsonist(
-    override val playerName: String
-): WerewolfTeamPlayer(){
-    override val role: Roles = Roles.Arsonist
+    playerName: String
+): WerewolfTeamPlayer(playerName){
     private val oiledPlayers: MutableList<Player> = mutableListOf(this)
     private var ignite: Boolean = false
 
@@ -30,8 +28,8 @@ class Arsonist(
         return R.drawable.arsonist
     }
 
-    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetWerewolfTargets
+    override fun fetchRole(): Roles {
+        return Roles.Arsonist
     }
 
     override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {

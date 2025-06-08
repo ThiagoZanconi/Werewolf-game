@@ -3,7 +3,6 @@ package werewolf.model.entities.villagers
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
-import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.WerewolfAttack
@@ -12,21 +11,24 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 
 class Elusive(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Elusive
+    playerName: String
+): AbstractPlayer(playerName){
+
+    override fun fetchImageSrc(): Int {
+        return R.drawable.elusive
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Elusive
+    }
 
     override fun addUsedAbility() {
         usedAbilities.add(Hidden(this,targetPlayers[0]))
         usedAbilities.add(Hide(this,visitors))
     }
 
-    override fun fetchImageSrc(): Int {
-        return R.drawable.elusive
-    }
-
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetAlivePlayersTarget
+        return TargetPlayersEnum.OtherPlayersTarget
     }
 }
 

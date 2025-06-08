@@ -9,20 +9,18 @@ import werewolf.model.entities.WerewolfAttackAbility
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 
 class Vampire(
-    override val playerName: String
-): WerewolfTeamPlayer(){
-    override val role: Roles = Roles.Vampire
+    playerName: String
+): WerewolfTeamPlayer(playerName){
     override var abilityState: AbilityState = OneTurnCooldown()
 
     override fun fetchImageSrc(): Int {
         return R.drawable.vampire
     }
 
-    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetWerewolfTargets
+    override fun fetchRole(): Roles {
+        return Roles.Vampire
     }
 
     override fun addUsedAbility() {

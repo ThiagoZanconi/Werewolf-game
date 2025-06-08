@@ -11,25 +11,23 @@ import werewolf.model.entities.werewolves.Werewolf
 import werewolf.view.GameUiEvent
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.DetectiveFragment
 import werewolf.view.fragments.DetectiveGridFragment
 
 class Detective(
-    override val playerName: String,
+    playerName: String,
     private val werewolves: MutableList<Player>,
     private val villagers: MutableList<Player>,
-): AbstractPlayer(){
-    override val role: Roles = Roles.Detective
+): AbstractPlayer(playerName){
     private var investigatedPlayers: List<Player>? = null
 
     override fun fetchImageSrc(): Int {
         return R.drawable.detective
     }
 
-    override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetNoTargetPlayers
+    override fun fetchRole(): Roles {
+        return Roles.Detective
     }
 
     override fun addUsedAbility() {

@@ -11,17 +11,20 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 
 class Detonator(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Detonator
+    playerName: String
+): AbstractPlayer(playerName){
     private var bomb: Bomb? = null
 
     override fun fetchImageSrc(): Int {
         return R.drawable.detonator
     }
 
+    override fun fetchRole(): Roles {
+        return Roles.Detonator
+    }
+
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetAlivePlayersTarget
+        return TargetPlayersEnum.OtherPlayersTarget
     }
 
     override fun addUsedAbility() {

@@ -41,7 +41,7 @@ open class WerewolfPlayerFragment(
     }
 
     private fun initTeammatesGridLayout(){
-        val teammatesPlayerSignal = TargetPlayersSignal(TargetPlayersEnum.SetWerewolfTeammates)
+        val teammatesPlayerSignal = TargetPlayersSignal(TargetPlayersEnum.WerewolfTeammates)
         targetPlayersOnActionSubject.notify(teammatesPlayerSignal)
         teammates = teammatesPlayerSignal.targetPlayers - listOf(player).toSet()
         teammates.forEach{

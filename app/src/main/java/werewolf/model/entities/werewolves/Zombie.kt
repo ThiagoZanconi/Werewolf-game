@@ -8,13 +8,16 @@ import werewolf.model.entities.WerewolfAttackAbility
 import werewolf.view.R
 
 class Zombie(
-    override val playerName: String
-): AbstractPlayer() {
-    override val role: Roles = Roles.Zombie
+    playerName: String
+): AbstractPlayer(playerName) {
     override var abilityState: AbilityState = NoAbility()
 
     override fun fetchImageSrc(): Int {
         return R.drawable.zombie
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Zombie
     }
 
     override fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility) {

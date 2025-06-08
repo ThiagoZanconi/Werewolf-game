@@ -53,11 +53,12 @@ class GameControllerImpl(
     private val fragmentTargetPlayersObserver: Observer<TargetPlayersSignal> =
         Observer { value ->
             when (value.getTargetPlayersEnum()) {
-                TargetPlayersEnum.SetNoTargetPlayers -> setNoTargetPlayers(value)
-                TargetPlayersEnum.SetWerewolfTeammates -> setWerewolfTeammates(value)
-                TargetPlayersEnum.SetAlivePlayersTarget -> setAlivePlayersTarget(value)
-                TargetPlayersEnum.SetDeadTargets -> setDeadTargets(value)
-                TargetPlayersEnum.SetWerewolfTargets -> setWerewolfTargets(value)
+                TargetPlayersEnum.NoTargetPlayers -> setNoTargetPlayers(value)
+                TargetPlayersEnum.WerewolfTeammates -> setWerewolfTeammates(value)
+                TargetPlayersEnum.AlivePlayersTarget -> setAlivePlayersTarget(value)
+                TargetPlayersEnum.DeadTargets -> setDeadTargets(value)
+                TargetPlayersEnum.WerewolfTargets -> setWerewolfTargets(value)
+                TargetPlayersEnum.OtherPlayersTarget -> setOtherAlivePlayersTarget(value)
             }
         }
 
@@ -92,7 +93,7 @@ class GameControllerImpl(
     }
 
     private fun setOtherAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
-        //targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()-listOf(player).toSet()
+        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()-listOf(gameStateModel.getAlivePlayers()[counter]).toSet()
     }
 
     private fun setDeadTargets(targetPlayersSignal: TargetPlayersSignal){

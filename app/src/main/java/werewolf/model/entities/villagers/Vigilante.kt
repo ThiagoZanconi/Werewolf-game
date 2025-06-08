@@ -1,9 +1,6 @@
 package werewolf.model.entities.villagers
 
-import com.example.observer.Observable
 import werewolf.model.Roles
-import werewolf.model.entities.AbilitySignal
-import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
@@ -14,21 +11,24 @@ import werewolf.view.R
 import werewolf.view.TargetPlayersEnum
 
 class Vigilante(
-    override val playerName: String
-): AbstractPlayer(){
-    override val role: Roles = Roles.Vigilante
+    playerName: String
+): AbstractPlayer(playerName) {
+
+    override fun fetchImageSrc(): Int {
+        return R.drawable.vigilante
+    }
+
+    override fun fetchRole(): Roles {
+        return Roles.Vigilante
+    }
 
     override fun addUsedAbility() {
         abilityState = NoUsesLeft()
         usedAbilities.add(Shot(targetPlayers[0]))
     }
 
-    override fun fetchImageSrc(): Int {
-        return R.drawable.vigilante
-    }
-
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
-        return TargetPlayersEnum.SetAlivePlayersTarget
+        return TargetPlayersEnum.AlivePlayersTarget
     }
 }
 
