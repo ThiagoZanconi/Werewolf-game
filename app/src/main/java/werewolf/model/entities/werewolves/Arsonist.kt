@@ -74,7 +74,7 @@ class Ignite(private val targetPlayers: MutableList<Player>): AbstractAbility(We
     }
 
     override fun fetchPriority(): Int {
-        return 2
+        return 3
     }
 }
 

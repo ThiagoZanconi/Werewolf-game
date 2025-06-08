@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_margin="10dp"
-    android:text="Option"
+    android:text=""
     android:textSize="15sp"
     android:textColor="#FFFFFF"
     android:background="@drawable/textview_shape3"

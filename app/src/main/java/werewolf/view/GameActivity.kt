@@ -1,16 +1,15 @@
 package werewolf.view
 
-import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
-import com.example.observer.Observer
 import com.example.observer.Subject
 import werewolf.model.entities.Player
 import werewolf.view.fragments.FinishedGameFragment
@@ -67,12 +66,9 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
         initListeners()
         initModule()
         initMediaPlayer()
-    }
+        onBackPressedDispatcher.addCallback(this) {
 
-    @SuppressLint("MissingSuperCall")
-    @Deprecated("Deprecated")
-    override fun onBackPressed() {
-
+        }
     }
 
     override fun onDestroy() {
