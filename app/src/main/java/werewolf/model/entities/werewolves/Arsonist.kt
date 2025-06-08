@@ -89,6 +89,6 @@ class OilSpill(targetPlayer: Player,private val oiledPlayers: MutableList<Player
     }
 
     override fun fetchPriority(): Int {
-        return 2
+        return 3
     }
 }

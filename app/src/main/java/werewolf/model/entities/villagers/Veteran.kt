@@ -49,6 +49,6 @@ class Alert(private val targetPlayers: MutableList<Player>): AbstractAbility(Wer
     }
 
     override fun fetchPriority(): Int {
-        return 2
+        return 3
     }
 }

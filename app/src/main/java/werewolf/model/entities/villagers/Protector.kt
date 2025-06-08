@@ -47,7 +47,7 @@ class Protection(targetPlayer: Player, private val protector: Protector): Abstra
     }
 
     override fun fetchPriority(): Int {
-        return 3
+        return 2
     }
 
     override fun resolve() {
