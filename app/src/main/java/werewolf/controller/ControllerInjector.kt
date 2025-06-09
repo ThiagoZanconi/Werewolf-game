@@ -7,13 +7,13 @@ import werewolf.view.InitActivity
 object ControllerInjector {
 
     fun onViewStarted(initActivity: InitActivity) {
-        InitControllerImpl(ModelInjector.getModel()).apply {
+        InitControllerImpl().apply {
             setInitView(initActivity)
         }
     }
 
     fun onGameViewStarted(gameActivity: GameActivity){
-        GameControllerImpl(ModelInjector.getGameStateModel(),ModelInjector.getModel().players()).apply {
+        GameControllerImpl(ModelInjector.getGameStateModel()).apply {
             setGameView(gameActivity)
         }
     }

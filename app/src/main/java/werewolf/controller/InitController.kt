@@ -1,7 +1,8 @@
 package werewolf.controller
 
 import com.example.observer.Observer
-import werewolf.model.InitModel
+import werewolf.model.GameSettings
+import werewolf.model.GameSettingsImpl
 import werewolf.view.InitActivity
 import werewolf.view.InitUiEvent
 
@@ -9,10 +10,9 @@ interface InitController{
     fun setInitView(initActivity: InitActivity)
 }
 
-class InitControllerImpl(
-    private val initModel: InitModel
-): InitController {
+class InitControllerImpl: InitController {
     private lateinit var initActivity: InitActivity
+    private val gameSettings: GameSettings = GameSettingsImpl
 
     override fun setInitView(initActivity: InitActivity) {
         this.initActivity = initActivity
@@ -30,21 +30,26 @@ class InitControllerImpl(
 
     private fun addPlayer() {
         val name = initActivity.getEditTextName()
-        initModel.addPlayer(name)
+        val added = gameSettings.addPlayer(name)
+        if(added){
+            initActivity.addPlayer(name)
+        }
     }
 
     private fun removePlayer() {
         val index = obtainIndex()
-        initModel.removePlayer(index)
+        val name = gameSettings.removePlayer(index)
+        initActivity.removePlayer(index,name)
     }
 
     private fun startGame() {
-        if(initModel.players().isNotEmpty()){
+        if(gameSettings.fetchPlayers().isNotEmpty()){
+            gameSettings.init()
             initActivity.startGame()
         }
     }
 
     private fun obtainIndex(): Int {
-        return initModel.players().indexOfFirst { it == initActivity.getPlayerToRemove() }
+        return gameSettings.fetchPlayers().indexOfFirst { it == initActivity.getPlayerToRemove() }
     }
 }

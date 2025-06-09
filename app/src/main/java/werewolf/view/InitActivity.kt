@@ -16,8 +16,7 @@ import com.example.observer.Observable
 import com.example.observer.Subject
 import werewolf.view.fragments.HowToPlayFragment
 import werewolf.view.fragments.SettingsFragment
-import werewolf.view.settings.RoleQuantitySettings
-import werewolf.view.settings.RoleQuantitySettingsImpl
+import werewolf.model.GameSettingsImpl
 
 interface InitActivity{
     val uiEventObservable: Observable<InitUiEvent>
@@ -30,8 +29,6 @@ interface InitActivity{
 }
 
 class InitActivityImpl : AppCompatActivity(), InitActivity {
-    private val onActionSubject = Subject<InitUiEvent>()
-    private val roleQuantitySettings: RoleQuantitySettings = RoleQuantitySettingsImpl()
 
     private lateinit var addPlayerButton: Button
     private lateinit var startGameButton: Button
@@ -40,6 +37,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private lateinit var gridLayout: GridLayout
     private lateinit var howToPlayButton: Button
 
+    private val onActionSubject = Subject<InitUiEvent>()
     override val uiEventObservable: Observable<InitUiEvent> = onActionSubject
 
     private var playerToRemove : String =""
@@ -56,7 +54,6 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     override fun startGame() {
         hideKeyboard()
-        roleQuantitySettings.init(gridLayout.childCount)
         initSettingsFragment()
     }
 
@@ -75,10 +72,13 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
         initModule()
         initComponents()
         initListeners()
+        if(GameSettingsImpl.size()>0) {
+            initSettingsFragment()
+        }
     }
 
     private fun initModule() {
-        ViewInjector.init(this,roleQuantitySettings)
+        ViewInjector.init(this)
     }
 
     private fun initComponents(){
@@ -121,7 +121,7 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
 
     private fun initSettingsFragment(){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.OptionFragment, SettingsFragment(roleQuantitySettings))
+            .replace(R.id.OptionFragment, SettingsFragment())
             .addToBackStack(null)
             .commit()
     }

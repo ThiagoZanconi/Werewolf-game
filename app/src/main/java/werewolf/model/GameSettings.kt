@@ -1,33 +1,35 @@
-package werewolf.view.settings
+package werewolf.model
 
-import werewolf.model.Roles
-
-interface RoleQuantitySettings{
-    fun init(playerSize: Int)
+interface GameSettings{
+    fun init()
     fun size(): Int
-    fun indexOf(index: Int): Roles
+    fun fetchPlayers(): MutableList<String>
     fun fetchRoleMaxQuantity(role: Roles): Int
     fun fetchRoleQuantity(role: Roles): Int
+    fun addPlayer(player: String): Boolean
+    fun removePlayer(index: Int): String
+    fun indexOfRole(index: Int): Roles
     fun setRoleQuantity(role: Roles, size: Int)
     fun subtractRoleQuantity(role: Roles)
 }
 
-class RoleQuantitySettingsImpl: RoleQuantitySettings{
+object GameSettingsImpl: GameSettings {
     private val rolesQuantityMap: MutableMap<Roles, Int> = mutableMapOf()
     private val rolesMaxQuantityMap: MutableMap<Roles, Int> = mutableMapOf()
+    private val players: MutableList<String> = mutableListOf()
 
-    override fun init(playerSize: Int) {
+    override fun init() {
         Roles.entries.forEach{
-            rolesMaxQuantityMap[it] = playerSize - playerSize/3
+            rolesMaxQuantityMap[it] = players.size - players.size/3
         }
         rolesMaxQuantityMap.remove(Roles.Werewolf)
         rolesMaxQuantityMap.remove(Roles.Zombie)
         rolesMaxQuantityMap[Roles.Jester] = 1
-        rolesMaxQuantityMap[Roles.Necromancer] = playerSize/3 -1
-        rolesMaxQuantityMap[Roles.Vampire] = playerSize/3 -1
-        rolesMaxQuantityMap[Roles.Witch] = playerSize/3 -1
-        rolesMaxQuantityMap[Roles.Arsonist] = playerSize/3 -1
-        if(playerSize<6){
+        rolesMaxQuantityMap[Roles.Necromancer] = players.size/3 -1
+        rolesMaxQuantityMap[Roles.Vampire] = players.size/3 -1
+        rolesMaxQuantityMap[Roles.Witch] = players.size/3 -1
+        rolesMaxQuantityMap[Roles.Arsonist] = players.size/3 -1
+        if(players.size<6){
             rolesMaxQuantityMap[Roles.Disguiser] = 0
         }
         rolesMaxQuantityMap.keys.forEach{
@@ -39,7 +41,7 @@ class RoleQuantitySettingsImpl: RoleQuantitySettings{
         return rolesMaxQuantityMap.size
     }
 
-    override fun indexOf(index: Int): Roles {
+    override fun indexOfRole(index: Int): Roles {
         return rolesMaxQuantityMap.keys.elementAt(index)
     }
 
@@ -49,6 +51,24 @@ class RoleQuantitySettingsImpl: RoleQuantitySettings{
 
     override fun fetchRoleQuantity(role:Roles): Int{
         return rolesQuantityMap[role]!!
+    }
+
+    override fun fetchPlayers(): MutableList<String> {
+        return players
+    }
+
+    override fun addPlayer(player: String): Boolean {
+        return if(player !in players && player!=""){
+            players.add(player)
+            true
+        }
+        else{
+            false
+        }
+    }
+
+    override fun removePlayer(index: Int): String {
+        return players.removeAt(index)
     }
 
     override fun setRoleQuantity(role: Roles, size: Int){

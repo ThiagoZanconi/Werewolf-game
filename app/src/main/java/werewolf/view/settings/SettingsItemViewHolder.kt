@@ -6,11 +6,12 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import werewolf.model.GameSettings
 import werewolf.model.Roles
 import werewolf.view.R
 import werewolf.view.RoleNameProvider
 
-class SettingsItemViewHolder(private val view: View, private val roleQuantitySettings: RoleQuantitySettings):RecyclerView.ViewHolder(view){
+class SettingsItemViewHolder(private val view: View, private val gameSettings: GameSettings):RecyclerView.ViewHolder(view){
 
     private val role = view.findViewById<TextView>(R.id.roleName)
     private val spinner = view.findViewById<Spinner>(R.id.spinnerOptions)
@@ -27,7 +28,7 @@ class SettingsItemViewHolder(private val view: View, private val roleQuantitySet
         }
         val adapter = ArrayAdapter(view.context, R.layout.item_spinner, options)
         spinner.adapter = adapter
-        spinner.setSelection(roleQuantitySettings.fetchRoleQuantity(role))
+        spinner.setSelection(gameSettings.fetchRoleQuantity(role))
         initSpinnerListener(role)
     }
 
@@ -39,7 +40,7 @@ class SettingsItemViewHolder(private val view: View, private val roleQuantitySet
                 position: Int,
                 id: Long
             ) {
-                roleQuantitySettings.setRoleQuantity(role, spinner.selectedItem.toString().toInt())
+                gameSettings.setRoleQuantity(role, spinner.selectedItem.toString().toInt())
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
 

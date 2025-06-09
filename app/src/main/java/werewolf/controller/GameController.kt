@@ -1,6 +1,7 @@
 package werewolf.controller
 
 import com.example.observer.Observer
+import werewolf.model.GameSettingsImpl
 import werewolf.model.GameStateModel
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityEventEnum
@@ -24,10 +25,9 @@ interface GameController{
 
 class GameControllerImpl(
     private val gameStateModel: GameStateModel,
-    private val players: MutableList<String>
+
 ): GameController {
     private lateinit var gameActivity: GameActivity
-
     private val abilityPriorityQueue: PriorityQueue<Ability> = PriorityQueue<Ability>(compareBy { it.fetchPriority() })
     private var counter = 0
     private var roundEventsSummary: String = ""
@@ -158,7 +158,7 @@ class GameControllerImpl(
     }
 
     private fun initGame(){
-        gameStateModel.initGame(players)
+        gameStateModel.initGame()
         gameStateModel.getAlivePlayers().forEach {
             player -> player.playerObservable.subscribe(playerObserver)
         }

@@ -18,7 +18,6 @@ import werewolf.model.entities.werewolves.Necromancer
 import werewolf.model.entities.werewolves.Vampire
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
-import werewolf.view.settings.RoleQuantitySettings
 import kotlin.math.floor
 
 enum class Roles{
@@ -31,7 +30,7 @@ interface RoleFactory{
 }
 
 class RoleFactoryImpl(
-    private val roleQuantitySettings: RoleQuantitySettings,
+    private val gameSettings: GameSettings,
     private val players: MutableList<String>
 ): RoleFactory {
     private val createdVillagers: MutableList<Player> = mutableListOf()
@@ -53,7 +52,7 @@ class RoleFactoryImpl(
         for(i in cut until players.size-1){
             toReturn.add(getRandomVillager(players[i]))
         }
-        if(roleQuantitySettings.fetchRoleQuantity(Roles.Jester)==0){
+        if(gameSettings.fetchRoleQuantity(Roles.Jester)==0){
             toReturn.add(getRandomVillager(players[players.size-1]))
         }
         else{
@@ -76,10 +75,10 @@ class RoleFactoryImpl(
                 break
             }
             val role = werewolfRoles.random()
-            val roleMaxAmount = roleQuantitySettings.fetchRoleQuantity(role)
+            val roleMaxAmount = gameSettings.fetchRoleQuantity(role)
             if(roleMaxAmount>0){
                 created = true
-                roleQuantitySettings.subtractRoleQuantity(role)
+                gameSettings.subtractRoleQuantity(role)
                 toReturn = createWerewolf(player, role)
             }
             else{
@@ -109,10 +108,10 @@ class RoleFactoryImpl(
                 break
             }
             val role = villagerRoles.random()
-            val roleMaxAmount = roleQuantitySettings.fetchRoleQuantity(role)
+            val roleMaxAmount = gameSettings.fetchRoleQuantity(role)
             if(roleMaxAmount>0){
                 created = true
-                roleQuantitySettings.subtractRoleQuantity(role)
+                gameSettings.subtractRoleQuantity(role)
                 toReturn = createVillager(player, role)
             }
             else{

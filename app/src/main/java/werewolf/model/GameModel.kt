@@ -6,7 +6,6 @@ import werewolf.model.entities.werewolves.Zombie
 import werewolf.model.repository.Repository
 import werewolf.model.repository.RepositoryImpl
 import werewolf.view.GameActivity
-import werewolf.view.settings.RoleQuantitySettings
 import kotlin.math.floor
 
 interface GameStateModel{
@@ -19,7 +18,7 @@ interface GameStateModel{
     fun getDeadPlayers(): List<Player>
     fun getNeutrals(): List<Player>
     fun getDisguisers(): List<Player>
-    fun initGame(players: MutableList<String>)
+    fun initGame()
     fun killVillager(player: Player)
     fun killWerewolf(player: Player)
     fun ascendWerewolf(): Player
@@ -28,11 +27,12 @@ interface GameStateModel{
 }
 
 class GameStateModelImpl(
-    private val roleQuantitySettings: RoleQuantitySettings, context: Context
+    context: Context
 ): GameStateModel{
 
     private val repository: Repository = RepositoryImpl(context)
     private val gameState: GameState = GameStateImpl()
+    private val gameSettings: GameSettings = GameSettingsImpl
     private lateinit var roleFactory: RoleFactory
     private lateinit var gameActivity: GameActivity
 
@@ -40,27 +40,27 @@ class GameStateModelImpl(
         this.gameActivity = gameActivity
     }
 
-    override fun initGame(players: MutableList<String>) {
+    override fun initGame() {
         //createProfiles(players)
         val playerPositionMap: MutableMap<String, Int> = mutableMapOf()
-        for(index in 0 until players.size){
-            playerPositionMap[players[index]] = index
+        for(index in 0 until gameSettings.fetchPlayers().size){
+            playerPositionMap[gameSettings.fetchPlayers()[index]] = index
         }
-        players.shuffle()
-        roleFactory = RoleFactoryImpl(roleQuantitySettings,players)
+        gameSettings.fetchPlayers().shuffle()
+        roleFactory = RoleFactoryImpl(gameSettings,gameSettings.fetchPlayers())
         val playersAssigned = roleFactory.getPlayers()
-        val cut = floor(players.size / 3.0).toInt()
+        val cut = floor(gameSettings.fetchPlayers().size / 3.0).toInt()
         for(i in 0 until cut){
             addWerewolf(playersAssigned[i])
         }
-        for(i in cut until players.size-1){
+        for(i in cut until gameSettings.fetchPlayers().size-1){
             addVillager(playersAssigned[i])
         }
-        if(roleQuantitySettings.fetchRoleQuantity(Roles.Jester)==0){
-            addVillager(playersAssigned[players.size-1])
+        if(gameSettings.fetchRoleQuantity(Roles.Jester)==0){
+            addVillager(playersAssigned[gameSettings.fetchPlayers().size-1])
         }
         else{
-            addNeutral(playersAssigned[players.size-1])
+            addNeutral(playersAssigned[gameSettings.fetchPlayers().size-1])
         }
         gameState.initAlivePlayers(playerPositionMap)
         //printProfiles()

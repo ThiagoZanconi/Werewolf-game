@@ -9,15 +9,15 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import werewolf.model.Roles
 import werewolf.view.GameActivityImpl
 import werewolf.view.R
-import werewolf.view.settings.RoleQuantitySettings
+import werewolf.model.GameSettings
+import werewolf.model.GameSettingsImpl
 import werewolf.view.settings.SettingsAdapter
 
-class SettingsFragment(
-    private val roleQuantitySettings: RoleQuantitySettings
-): Fragment(){
+class SettingsFragment: Fragment(){
+
+    private val gameSettings: GameSettings = GameSettingsImpl
     private lateinit var recyclerView: RecyclerView
     private lateinit var doneButton: Button
 
@@ -34,7 +34,7 @@ class SettingsFragment(
     }
 
     private fun initComponents(view: View) {
-        initRecyclerView(view,roleQuantitySettings)
+        initRecyclerView(view,gameSettings)
         doneButton = view.findViewById(R.id.doneButton)
     }
 
@@ -42,10 +42,10 @@ class SettingsFragment(
         doneButton.setOnClickListener { startGame() }
     }
 
-    private fun initRecyclerView(view: View,roleQuantitySettings: RoleQuantitySettings){
+    private fun initRecyclerView(view: View, gameSettings: GameSettings){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        val adapter = SettingsAdapter(roleQuantitySettings)
+        val adapter = SettingsAdapter(gameSettings)
         recyclerView.adapter = adapter
     }
 
