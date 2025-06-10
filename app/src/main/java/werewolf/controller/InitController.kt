@@ -43,7 +43,7 @@ class InitControllerImpl: InitController {
     }
 
     private fun startGame() {
-        if(gameSettings.fetchPlayers().isNotEmpty()){
+        if(gameSettings.fetchPlayers().size>=3){
             gameSettings.init()
             initActivity.startGame()
         }
