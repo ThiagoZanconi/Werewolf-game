@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
+import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -145,8 +146,12 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
     private fun createLinearLayout():LinearLayout{
         val linearLayout = LinearLayout(this).apply {
             layoutParams = GridLayout.LayoutParams().apply {
-                width = (resources.displayMetrics.widthPixels / 3) - 25
+                width = 0
                 height = GridLayout.LayoutParams.WRAP_CONTENT
+                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f); // peso 1
+                marginEnd = 5
+                marginStart = 5
+                setGravity(Gravity.FILL);
                 setMargins(8, 8, 8, 8)
             }
             orientation = LinearLayout.VERTICAL
