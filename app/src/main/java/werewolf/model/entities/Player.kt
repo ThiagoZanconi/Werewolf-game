@@ -148,12 +148,7 @@ abstract class AbstractPlayer(private val playerName: String): Player{
 
     override fun notifyAbilityUsed(targetPlayer: Player?){
         if(targetPlayer!=null){
-            if(targetPlayers.isEmpty()){
-                targetPlayers.add(targetPlayer)
-            }
-            else{
-                targetPlayers[0] = targetPlayer
-            }
+            targetPlayers.add(targetPlayer)
         }
         targetPlayer?.visitedBy(this)
         abilityState.useAbility(this)

@@ -14,7 +14,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.entities.Player
