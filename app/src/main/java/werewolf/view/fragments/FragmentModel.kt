@@ -190,10 +190,8 @@ abstract class GridFragment: FragmentModel() {
                 width = 0
                 height = GridLayout.LayoutParams.WRAP_CONTENT
                 columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
-                marginEnd = 5
-                marginStart = 5
                 setGravity(Gravity.FILL)
-                setMargins(12, 12, 12, 12)
+                setMargins(10, 10, 10, 10)
             }
             text = playerName
             textSize = 18f
@@ -201,10 +199,6 @@ abstract class GridFragment: FragmentModel() {
             setTextColor(Color.BLACK)
             gravity = Gravity.CENTER
             setPadding(15,15,15,15)
-
-            val scale = resources.displayMetrics.density
-            minWidth = (100 * scale).toInt()
-            minHeight = (50 * scale).toInt()
 
             setOnClickListener {
                 onPlayerClick(this, playerName)
