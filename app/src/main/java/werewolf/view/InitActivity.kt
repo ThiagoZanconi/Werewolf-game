@@ -148,10 +148,10 @@ class InitActivityImpl : AppCompatActivity(), InitActivity {
             layoutParams = GridLayout.LayoutParams().apply {
                 width = 0
                 height = GridLayout.LayoutParams.WRAP_CONTENT
-                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f); // peso 1
+                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
                 marginEnd = 5
                 marginStart = 5
-                setGravity(Gravity.FILL);
+                setGravity(Gravity.FILL)
                 setMargins(8, 8, 8, 8)
             }
             orientation = LinearLayout.VERTICAL

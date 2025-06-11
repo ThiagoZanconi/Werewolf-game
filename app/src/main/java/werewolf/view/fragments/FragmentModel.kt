@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import werewolf.model.entities.Player
@@ -186,9 +187,13 @@ abstract class GridFragment: FragmentModel() {
     protected open fun createTextView(playerName: String): TextView {
         val textView = TextView(requireContext()).apply {
             layoutParams = GridLayout.LayoutParams().apply {
-                width = GridLayout.LayoutParams.WRAP_CONTENT
+                width = 0
                 height = GridLayout.LayoutParams.WRAP_CONTENT
-                setMargins(8, 8, 8, 8)
+                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                marginEnd = 5
+                marginStart = 5
+                setGravity(Gravity.FILL)
+                setMargins(12, 12, 12, 12)
             }
             text = playerName
             textSize = 18f

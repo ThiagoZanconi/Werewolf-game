@@ -27,11 +27,19 @@
     <string name="team">Team:</string>
     <string name="saw">%1$s saw %2$s</string>
 
-    <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later). For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that can be used to achieve victory.</string>
-    <string name="intro2">The game also consists of two phases: night and day. At night, players will use their abilities to kill or survive attacks from the opposing team. The werewolf team knows who the villagers are, and therefore who their teammates are. In contrast, the villagers must figure out who the werewolves are in order to kill them. If the werewolf is not killed last, a teammate will take his place as the werewolf.</string>
-    <string name="intro3">During the day, players will have time (as much as they want, although a timer can be set if desired) to discuss who the werewolves might be (werewolves should pretend to be innocent), and at the end of the discussion, players can vote for someone to be put on trial. After their defense (in which they are only allowed to speak), the rest of the players will vote on whether they want to hang them or not. After that, the round ends, night falls, and a new round begins.</string>
+    <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later).
+        For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that
+        can be used to achieve victory.</string>
+    <string name="intro2">The game consists of two phases: night and day. At night, players will use their abilities to attack, survive attacks from
+        the opposing team, gain information, etc. The werewolf team knows who the villagers are and who their teammates are. In contrast, the villagers must figure out
+        who the werewolves are in order to kill them. If the werewolf killed, and it is not the last of his team, a teammate will take his place as the werewolf.</string>
+    <string name="intro3">During the day, players will have time (as much as they want, although a timer can be set if desired) to discuss who the werewolves
+        might be (werewolves are encouraged to pretend being villagers), and at the end of the discussion, players can vote for someone to be put on trial. After their
+        defense, the rest of the players will individually vote on whether they want to hang them or not (the player is hanged if the majority votes so.
+        After that, the round ends, night falls, and a new round begins.</string>
     <string name="intro4">There is one role that plays solo: the jester. The jester wins only by getting himself hanged at the end of the round.</string>
-    <string name="intro5">The game starts at night, each player is secretly assigned a role and should perform their actions discreetly (without showing their phone screen to the other players)."</string>
+    <string name="intro5">The game starts at night, each player is secretly assigned a role and should perform their actions discreetly (without showing their
+        phone screen to the other players)."</string>
 
     <string name="werewolves_win">Werewolves Win</string>
     <string name="villagers_win">Villagers Win</string>
@@ -84,21 +92,31 @@
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
     <string name="witch_description">Belongs to the werewolves team. Every night can select a villager to cancel his/her ability</string>
-    <string name="vampire_description">Belongs to the werewolves team. Can select a villager to kill at night. Ability has 1 turn cooldown. Ability starts on cooldown</string>
+    <string name="vampire_description">Belongs to the werewolves team. Can select a villager to kill at night. Ability has 1 turn cooldown.
+        Ability starts on cooldown</string>
     <string name="necromancer_description">Belongs to the werewolves team. Can select a dead player to revive it as a zombie</string>
-    <string name="zombie_description">Belongs to the werewolves team. Has no ability, but can vote at the end of the round (only appears when revived by necromancer).</string>
-    <string name="arsonist_description">Belongs to the werewolves team. At night can spill oil on up to 2 players or ignite. Ignite kills all the players with oil, including the arsonist.</string>
+    <string name="zombie_description">Belongs to the werewolves team. Has no ability, but can vote at the end of the round (only appears
+        when revived by necromancer).</string>
+    <string name="arsonist_description">Belongs to the werewolves team. At night can spill oil on up to 2 players or ignite. Ignite kills all
+        the players with oil, including the arsonist.</string>
     <string name="villager_description">Belongs to the villagers team. Has no ability</string>
-    <string name="cleric_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn). Ability has 1 turn cooldown.</string>
+    <string name="cleric_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn).
+        Ability has 1 turn cooldown.</string>
     <string name="priest_description">Belongs to the villagers team. Once a game can select a player to revive (werewolves included)</string>
     <string name="vigilante_description">Belongs to the villagers team. Once a game can select a player to shot to kill(villagers included)</string>
     <string name="veteran_description">Belongs to the villagers team. Once a game can stay alert at night (Every player that visits him, will get shot).</string>
-    <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect from all attacks received.</string>
-    <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All abilities that target him directly have no effect. Both he and the host receive the abilities targeted to he host. If hi hides in the house of werewolf he is attacked.</string>
-    <string name="detonator_description">Belongs to the villagers team. At night cab set the bomb in a player\'s house . When detonator dies, the bomb explodes, striking target player. Detonator may change the bomb to other location. If he dies when setting the bomb, ability has no effect.</string>
-    <string name="stalker_description">Belongs to the villagers team. At night can stalk a player, next round will be revealed to him ONE player that visited or was visited by target player (if there was any).</string>
-    <string name="detective_description">Belongs to the villagers team. At night can investigate. Next day 3 players will be revealed to him. At least one of them is a werewolf</string>
-    <string name="disguiser_description">Belongs to the villagers team. Appears as a werewolf teammate secretly. If a werewolf uses an ability over a teammate, it will have no effect.</string>
+    <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect
+        from all attacks received.</string>
+    <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All abilities that target him directly have
+        no effect. Both he and the host receive the abilities targeted to he host. If hi hides in the house of werewolf he is attacked.</string>
+    <string name="detonator_description">Belongs to the villagers team. At night cab set the bomb in a player\'s house . When detonator dies, the bomb
+        explodes, striking target player. Detonator may change the bomb to other location. If he dies when setting the bomb, ability has no effect.</string>
+    <string name="stalker_description">Belongs to the villagers team. At night can stalk a player, next round will be revealed to him ONE player that
+        visited or was visited by target player (if there was any).</string>
+    <string name="detective_description">Belongs to the villagers team. At night can investigate. Next day 3 players will be revealed to him. At least
+        one of them is a werewolf</string>
+    <string name="disguiser_description">Belongs to the villagers team. Appears as a werewolf teammate secretly. If a werewolf uses an ability over a
+        teammate, it will have no effect.</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 
 </resources>

@@ -17,7 +17,7 @@ class HowToPlayFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_howtoplay, container, false)
+        val view = inflater.inflate(R.layout.fragment_how_to_play, container, false)
         initComponents(view)
         initListeners()
 
