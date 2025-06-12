@@ -149,8 +149,8 @@ abstract class AbstractPlayer(private val playerName: String): Player{
     override fun notifyAbilityUsed(targetPlayer: Player?){
         if(targetPlayer!=null){
             targetPlayers.add(targetPlayer)
+            targetPlayer.visitedBy(this)
         }
-        targetPlayer?.visitedBy(this)
         abilityState.useAbility(this)
     }
 

@@ -49,6 +49,13 @@ open class WerewolfPlayerFragment(
         }
     }
 
+    override fun setSelectedPlayer(playerName: String){
+        super.setSelectedPlayer(playerName)
+        if(selectedPlayer==null){
+            selectedPlayer = teammates.find { it.fetchPlayerName() == playerName }
+        }
+    }
+
     override fun markNotSelected(playerName: String) {
         super.markNotSelected(playerName)
         for (i in 0 until teammatesGridLayout.childCount) {
