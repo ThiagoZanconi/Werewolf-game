@@ -12,6 +12,7 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:background="@drawable/textview_shape"
+        android:textColor="@android:color/black"
         android:text="@string/role"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

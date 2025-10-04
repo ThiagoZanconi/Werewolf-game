@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import werewolf.model.Roles
 import werewolf.view.R
+import werewolf.view.RoleNameProvider
+import werewolf.view.howtoplay.RoleImageProvider
 
-class ImageFragment(private val imageSrc: Int): Fragment(){
+class ImageFragment(private val role: Roles): Fragment(){
 
     private lateinit var imageView: ImageView
     private lateinit var titleLabel: TextView
@@ -26,8 +29,9 @@ class ImageFragment(private val imageSrc: Int): Fragment(){
 
     private fun initComponents(view: View) {
         imageView = view.findViewById(R.id.roleImageLabel)
-        imageView.setImageResource(imageSrc)
+        imageView.setImageResource(RoleImageProvider.getRoleImage(role))
         titleLabel = view.findViewById(R.id.titleLabel)
+        titleLabel.text = RoleNameProvider.getRoleName(role)
     }
 
 }

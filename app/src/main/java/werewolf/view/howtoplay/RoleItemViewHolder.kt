@@ -23,7 +23,7 @@ class RoleItemViewHolder(view: View):RecyclerView.ViewHolder(view){
     }
 
     private fun initFragment(role: Roles, fragmentManager: FragmentManager){
-        val fragment = ImageFragment(RoleImageProvider.getRoleImage(role))
+        val fragment = ImageFragment(role)
         fragmentManager.beginTransaction()
             .replace(R.id.OptionFragment, fragment)
             .commit()
