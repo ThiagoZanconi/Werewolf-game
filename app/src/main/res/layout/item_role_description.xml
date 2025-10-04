@@ -13,6 +13,7 @@
         android:layout_margin="15dp"
         android:gravity="center"
         android:background="@drawable/textview_shape"
+        android:textColor="@android:color/black"
         android:text="@string/werewolf"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,6 +30,19 @@
         android:textColor="@android:color/black"
         android:text="@string/werewolf_description"
         app:layout_constraintStart_toEndOf="@id/roleName"
+        app:layout_constraintEnd_toStartOf="@id/btnOpenImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/btnOpenImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/role"
+        android:src="@drawable/ic_image"
+        android:scaleType="centerInside"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toEndOf="@id/roleDescriptionTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

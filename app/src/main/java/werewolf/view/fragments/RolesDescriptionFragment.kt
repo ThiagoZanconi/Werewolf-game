@@ -30,7 +30,7 @@ class RolesDescriptionFragment: Fragment(){
     private fun initRecyclerView(view: View){
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = RolesDescriptionAdapter(Roles.entries.toTypedArray())
+        recyclerView.adapter = RolesDescriptionAdapter(Roles.entries.toTypedArray(), parentFragmentManager)
     }
 
 }
