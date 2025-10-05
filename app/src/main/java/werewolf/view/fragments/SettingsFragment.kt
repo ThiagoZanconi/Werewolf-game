@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import werewolf.view.GameActivityImpl
@@ -44,7 +45,7 @@ class SettingsFragment: Fragment(){
 
     private fun initRecyclerView(view: View, gameSettings: GameSettings){
         recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        recyclerView.layoutManager = GridLayoutManager(view.context,2)
         val adapter = SettingsAdapter(gameSettings)
         recyclerView.adapter = adapter
     }

@@ -21,7 +21,7 @@
 
     <Spinner
         android:id="@+id/spinnerOptions"
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/textview_shape"
         android:gravity="center"
