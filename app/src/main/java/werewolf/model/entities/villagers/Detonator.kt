@@ -5,10 +5,10 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
+import werewolf.model.entities.TargetPlayersEnum
 import werewolf.model.entities.VillagerAttackAbility
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 
 class Detonator(
     playerName: String

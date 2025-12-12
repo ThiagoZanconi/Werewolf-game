@@ -2,9 +2,9 @@ package werewolf.model.entities
 
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
+import werewolf.view.FragmentEnum
 import werewolf.view.GameUiEvent
-import werewolf.view.TargetPlayersEnum
-import werewolf.view.TargetPlayersSignal
+import werewolf.view.GameUiEventSignal
 import werewolf.view.fragments.PlayerFragment
 
 enum class AbilityStateEnum{
@@ -16,7 +16,7 @@ interface AbilityState{
     fun getAbilityState(): AbilityStateEnum
     fun turnSetUp(player: AbstractPlayer)
     fun fetchTargetPlayers(player: AbstractPlayer): TargetPlayersEnum
-    fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment
+    fun fetchView(player: AbstractPlayer): FragmentEnum
 }
 
 open class Neutral: AbilityState{
@@ -34,8 +34,8 @@ open class Neutral: AbilityState{
         return player.resolveFetchTargetPlayers()
     }
 
-    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return player.resolveFetchView(onActionSubject,targetPlayersOnActionSubject)
+    override fun fetchView(player: AbstractPlayer): FragmentEnum {
+        return player.resolveFetchView()
     }
 }
 
@@ -50,8 +50,8 @@ class NoAbility: Neutral() {
         return TargetPlayersEnum.NoTargetPlayers
     }
 
-    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return PlayerFragment(onActionSubject,player)
+    override fun fetchView(player: AbstractPlayer): FragmentEnum {
+        return FragmentEnum.PlayerFragment
     }
 }
 
@@ -71,8 +71,8 @@ class OffCooldown: Neutral(){
         return TargetPlayersEnum.NoTargetPlayers
     }
 
-    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return PlayerFragment(onActionSubject,player)
+    override fun fetchView(player: AbstractPlayer): FragmentEnum {
+        return FragmentEnum.PlayerFragment
     }
 }
 
@@ -92,8 +92,8 @@ class OneTurnCooldown: Neutral(){
         return TargetPlayersEnum.NoTargetPlayers
     }
 
-    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return PlayerFragment(onActionSubject,player)
+    override fun fetchView(player: AbstractPlayer): FragmentEnum {
+        return FragmentEnum.PlayerFragment
     }
 }
 
@@ -108,7 +108,7 @@ class NoUsesLeft: Neutral(){
         return TargetPlayersEnum.NoTargetPlayers
     }
 
-    override fun fetchView(player: AbstractPlayer, onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return PlayerFragment(onActionSubject,player)
+    override fun fetchView(player: AbstractPlayer): FragmentEnum {
+        return FragmentEnum.PlayerFragment
     }
 }

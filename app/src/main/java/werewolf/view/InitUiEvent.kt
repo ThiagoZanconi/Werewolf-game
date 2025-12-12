@@ -1,7 +1,15 @@
 package werewolf.view
 
-sealed class InitUiEvent {
-    data object AddPlayer : InitUiEvent()
-    data object RemovePlayer : InitUiEvent()
-    data object StartGame : InitUiEvent()
+enum class InitUiEvent{
+    AddLocalPlayer, AddConnectedPlayer, RemovePlayer, StartGame
+}
+
+class InitUiSignal(private val initUiEvent: InitUiEvent, private val playerName: String = ""){
+    fun getEvent(): InitUiEvent{
+        return initUiEvent
+    }
+
+    fun getPlayerName(): String{
+        return playerName
+    }
 }

@@ -1,55 +1,64 @@
-package werewolf.controller
+package werewolf.controller.server
 
 import com.example.observer.Observer
 import werewolf.model.GameSettings
 import werewolf.model.GameSettingsImpl
-import werewolf.view.InitActivity
 import werewolf.view.InitUiEvent
+import werewolf.view.InitUiSignal
+import werewolf.view.fragments.ServerFragment
 
 interface InitController{
-    fun setInitView(initActivity: InitActivity)
+    fun setInitView(playerSelectionFragment: ServerFragment)
 }
 
 class InitControllerImpl: InitController {
-    private lateinit var initActivity: InitActivity
+    private lateinit var playerSelectionFragment: ServerFragment
     private val gameSettings: GameSettings = GameSettingsImpl
 
-    override fun setInitView(initActivity: InitActivity) {
-        this.initActivity = initActivity
-        initActivity.uiEventObservable.subscribe(observer)
+    override fun setInitView(playerSelectionFragment: ServerFragment) {
+        this.playerSelectionFragment = playerSelectionFragment
+        playerSelectionFragment.uiEventObservable.subscribe(observer)
     }
 
-    private val observer: Observer<InitUiEvent> =
+    private val observer: Observer<InitUiSignal> =
         Observer { value ->
-            when (value) {
-                InitUiEvent.AddPlayer -> addPlayer()
-                InitUiEvent.RemovePlayer -> removePlayer()
+            when (value.getEvent()) {
+                InitUiEvent.AddLocalPlayer -> addLocalPlayer(value.getPlayerName())
+                InitUiEvent.AddConnectedPlayer -> addConnectedPlayer(value.getPlayerName())
+                InitUiEvent.RemovePlayer -> removePlayer(value.getPlayerName())
                 InitUiEvent.StartGame -> startGame()
             }
         }
 
-    private fun addPlayer() {
-        val name = initActivity.getEditTextName()
-        val added = gameSettings.addPlayer(name)
+    private fun addLocalPlayer(playerName: String) {
+        val added = gameSettings.addLocalPlayer(playerName)
         if(added){
-            initActivity.addPlayer(name)
+            playerSelectionFragment.addLocalPlayer(playerName)
         }
     }
 
-    private fun removePlayer() {
-        val index = obtainIndex()
+    private fun addConnectedPlayer(playerName: String){
+        println("Players: ${gameSettings.fetchPlayers()}")
+        val added = gameSettings.addPlayer(playerName)
+        if(added){
+            playerSelectionFragment.addConnectedPlayer(playerName)
+        }
+    }
+
+    private fun removePlayer(playerName: String) {
+        val index = obtainIndex(playerName)
         val name = gameSettings.removePlayer(index)
-        initActivity.removePlayer(index,name)
+        playerSelectionFragment.removePlayer(index,name)
     }
 
     private fun startGame() {
         if(gameSettings.fetchPlayers().size>=3){
             gameSettings.init()
-            initActivity.startGame()
+            playerSelectionFragment.startGame()
         }
     }
 
-    private fun obtainIndex(): Int {
-        return gameSettings.fetchPlayers().indexOfFirst { it == initActivity.getPlayerToRemove() }
+    private fun obtainIndex(name: String): Int {
+        return gameSettings.fetchPlayers().indexOfFirst { it == name }
     }
 }

@@ -11,20 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
+import org.json.JSONObject
 import werewolf.model.entities.Player
 import werewolf.view.fragments.FinishedGameFragment
 import werewolf.view.fragments.FinishedRoundFragment
-import werewolf.view.fragments.WinnerTeam
 import java.util.Locale
 
 interface GameActivity{
-    val uiEventObservable: Observable<GameUiEvent>
-    val targetPlayersObservable: Observable<TargetPlayersSignal>
-
+    val uiEventObservable: Observable<GameUiEventSignal>
     fun setCurrentPlayer(player: String)
-    fun startTurn(player: Player)
+    fun startTurn(jsonObject: JSONObject)
     fun finishRound(text: String, alivePlayers: List<Player>)
-    fun gameFinished(winners:List<Player>, winnerTeam:WinnerTeam, gameLogs: String)
+    fun gameFinished(jsonObject: JSONObject)
 }
 
 class GameActivityImpl: AppCompatActivity(), GameActivity{
@@ -33,29 +31,28 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     private lateinit var startTurnButton: Button
     private lateinit var mediaPlayer: MediaPlayer
 
-    private val onActionSubject = Subject<GameUiEvent>()
-    override val uiEventObservable: Observable<GameUiEvent> = onActionSubject
-
-    private val targetPlayersOnActionSubject = Subject<TargetPlayersSignal>()
-    override val targetPlayersObservable: Observable<TargetPlayersSignal> = targetPlayersOnActionSubject
+    private val onActionSubject = Subject<GameUiEventSignal>()
+    override val uiEventObservable: Observable<GameUiEventSignal> = onActionSubject
 
     override fun setCurrentPlayer(player: String) {
+        nameTextView.text = player
         turnOnCover()
         clearAllFragments()
-        nameTextView.text = player
+        startTurnButton.isEnabled = true
     }
 
-    override fun startTurn(player: Player) {
+    override fun startTurn(jsonObject: JSONObject) {
         startTurnButton.isEnabled = false
-        startTimer(player.fetchView(onActionSubject, targetPlayersOnActionSubject))
+        val fragment = FragmentProvider.getFragment(onActionSubject, jsonObject)
+        startTimer(fragment)
     }
 
     override fun finishRound(text: String, alivePlayers: List<Player>) {
         initFragment(FinishedRoundFragment(onActionSubject,text,alivePlayers))
     }
 
-    override fun gameFinished(winners:List<Player>, winnerTeam:WinnerTeam, gameLogs: String) {
-        initFragment(FinishedGameFragment(onActionSubject,winners,winnerTeam, gameLogs))
+    override fun gameFinished(jsonObject: JSONObject) {
+        initFragment(FinishedGameFragment(onActionSubject, jsonObject))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,7 +89,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     }
 
     private fun initModule(){
-        ViewInjector.initGameActivity(this)
+        ViewInjector.initServerGameFragment(this)
     }
 
     private fun initComponents(){
@@ -112,7 +109,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     }
 
     private fun startTurnEvent(){
-        onActionSubject.notify(GameUiEvent.StartTurn)
+        onActionSubject.notify(GameUiEventSignal(GameUiEvent.StartTurn, JSONObject()))
     }
 
     private fun startTimer(fragment: Fragment) {
@@ -124,7 +121,6 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
             override fun onFinish() {
                 initFragment(fragment)
                 turnOffCover()
-                startTurnButton.isEnabled = true
             }
         }.start()
     }

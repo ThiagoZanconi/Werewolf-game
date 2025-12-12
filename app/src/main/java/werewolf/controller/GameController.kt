@@ -1,21 +1,23 @@
 package werewolf.controller
 
 import com.example.observer.Observer
-import werewolf.model.GameSettingsImpl
+import org.json.JSONArray
+import org.json.JSONObject
 import werewolf.model.GameStateModel
 import werewolf.model.entities.Ability
 import werewolf.model.entities.AbilityEventEnum
 import werewolf.model.entities.AbilitySignal
+import werewolf.model.entities.Hang
 import werewolf.model.entities.Player
 import werewolf.model.entities.PlayerEventEnum
 import werewolf.model.entities.PlayerSignal
+import werewolf.model.entities.TargetPlayersEnum
 import werewolf.view.GameActivity
 import werewolf.view.GameUiEvent
+import werewolf.view.GameUiEventSignal
 import werewolf.view.MyApp
 import werewolf.view.R
 import werewolf.view.RoleNameProvider
-import werewolf.view.TargetPlayersEnum
-import werewolf.view.TargetPlayersSignal
 import werewolf.view.fragments.WinnerTeam
 import java.util.PriorityQueue
 
@@ -23,42 +25,39 @@ interface GameController{
     fun setGameView(gameActivity: GameActivity)
 }
 
+enum class GameState{
+    OnGoing, EndedJesterWin, Ended
+}
+
 class GameControllerImpl(
     private val gameStateModel: GameStateModel,
 
-): GameController {
+    ): GameController {
     private lateinit var gameActivity: GameActivity
+    private lateinit var currentPlayer: Player
     private val abilityPriorityQueue: PriorityQueue<Ability> = PriorityQueue<Ability>(compareBy { it.fetchPriority() })
     private var counter = 0
     private var roundEventsSummary: String = ""
     private var gameLogs: String = ""
-    private var gameEnded: Boolean = false
+    private var gameState: GameState = GameState.OnGoing
 
     override fun setGameView(gameActivity: GameActivity) {
         this.gameActivity = gameActivity
-        gameActivity.uiEventObservable.subscribe(observer)
-        gameActivity.targetPlayersObservable.subscribe(fragmentTargetPlayersObserver)
+        this.gameActivity.uiEventObservable.subscribe(observer)
         initGame()
     }
 
-    private val observer: Observer<GameUiEvent> =
+    private val observer: Observer<GameUiEventSignal> =
         Observer { value ->
-            when (value) {
+            when (value.getEvent()) {
                 GameUiEvent.ConfirmAction -> confirmAction()
                 GameUiEvent.StartTurn -> startTurn()
                 GameUiEvent.StartNextRound -> startNextRound()
-            }
-        }
-
-    private val fragmentTargetPlayersObserver: Observer<TargetPlayersSignal> =
-        Observer { value ->
-            when (value.getTargetPlayersEnum()) {
-                TargetPlayersEnum.NoTargetPlayers -> setNoTargetPlayers(value)
-                TargetPlayersEnum.WerewolfTeammates -> setWerewolfTeammates(value)
-                TargetPlayersEnum.AlivePlayersTarget -> setAlivePlayersTarget(value)
-                TargetPlayersEnum.DeadTargets -> setDeadTargets(value)
-                TargetPlayersEnum.WerewolfTargets -> setWerewolfTargets(value)
-                TargetPlayersEnum.OtherPlayersTarget -> setOtherAlivePlayersTarget(value)
+                GameUiEvent.AbilityUsed -> {
+                    abilityUsed(value.getJson())
+                    confirmAction()
+                }
+                GameUiEvent.HangedPlayer -> hangedPlayer(value.getJson())
             }
         }
 
@@ -80,32 +79,22 @@ class GameControllerImpl(
             }
         }
 
-    private fun setNoTargetPlayers(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = listOf()
-    }
+    private fun abilityUsed(json: JSONObject){
+        val player = getPlayer(json.getString("PlayerName"))
+        val jsonArray = json.getJSONArray("TargetPlayers")
+        val targetPlayersNames = List(jsonArray.length()) { i ->
+            jsonArray.getString(i)
+        }
+        val targetPlayers = mutableListOf<Player>()
+        targetPlayersNames.forEach {
+            targetPlayers.add(getPlayer(it))
+        }
 
-    private fun setWerewolfTargets(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = (gameStateModel.getAliveVillagers()-gameStateModel.getDisguisers().toSet()).shuffled()
-    }
-
-    private fun setAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = (gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()).shuffled()
-    }
-
-    private fun setOtherAlivePlayersTarget(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()-listOf(gameStateModel.getAlivePlayers()[counter]).toSet()
-    }
-
-    private fun setDeadTargets(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = gameStateModel.getDeadPlayers().shuffled()
-    }
-
-    private fun setWerewolfTeammates(targetPlayersSignal: TargetPlayersSignal){
-        targetPlayersSignal.targetPlayers = (gameStateModel.getAliveWerewolves()+gameStateModel.getDisguisers()).shuffled()
+        player.notifyAbilityUsed(targetPlayers)
     }
 
     private fun killedPlayer(player: Player){
-        roundEventsSummary += player.fetchPlayerName()+" "+DeathCauseProvider.getDeathCause(player.fetchDeathCause())+"\n"
+        roundEventsSummary += player.fetchPlayerName()+" "+ DeathCauseProvider.getDeathCause(player.fetchDeathCause())+"\n"
         gameLogs += player.fetchPlayerName()+" "+DeathCauseProvider.getDeathCause(player.fetchDeathCause())+"\n"
         var result = gameStateModel.getAliveWerewolves().find { it == player }
         if (result != null) {
@@ -131,8 +120,13 @@ class GameControllerImpl(
     }
 
     private fun jesterWin(player: Player){
-        gameEnded = true
-        gameActivity.gameFinished(listOf(player),WinnerTeam.JESTER, gameLogs)
+        val json = JSONObject()
+        json.put("Event", Events.GameFinished)
+        json.put("GameLogs",gameLogs)
+        json.put("WinnerTeam", WinnerTeam.JESTER)
+        json.put("WinnerPlayerList", JSONArray(listOf(player.fetchPlayerName())))
+        gameState = GameState.EndedJesterWin
+        gameActivity.gameFinished(json)
     }
 
     private fun revivePlayer(player: Player){
@@ -159,40 +153,80 @@ class GameControllerImpl(
 
     private fun initGame(){
         gameStateModel.initGame()
-        gameStateModel.getAlivePlayers().forEach {
-            player -> player.playerObservable.subscribe(playerObserver)
+        val players = gameStateModel.getAlivePlayers()
+        players.forEach {
+                player -> player.playerObservable.subscribe(playerObserver)
         }
         setCurrentPlayer()
     }
 
-    private fun setCurrentPlayer(){
-        gameActivity.setCurrentPlayer(gameStateModel.getAlivePlayers()[counter].fetchPlayerName())
+    private fun getPlayer(playerName: String): Player{
+        return (gameStateModel.getAlivePlayers()+gameStateModel.getDeadPlayers()).find { it.fetchPlayerName() == playerName }!!
     }
 
-    private fun confirmAction(){
-        counter++
-        if(counter<gameStateModel.getAlivePlayers().size){
-            setCurrentPlayer()
-        }
-        else{
-            counter = 0
-            finishRound()
-        }
+    private fun setCurrentPlayer(){
+        val player = gameStateModel.getAlivePlayers()[counter]
+        currentPlayer = player
+        gameActivity.setCurrentPlayer(currentPlayer.fetchPlayerName())
     }
 
     private fun startTurn(){
-        val player = gameStateModel.getAlivePlayers()[counter]
-        player.turnSetUp()
-        gameActivity.startTurn(player)
+        currentPlayer.turnSetUp()
+        val json = getPlayerTurnJson(currentPlayer)
+        gameActivity.startTurn(json)
+    }
+
+    private fun getPlayerTurnJson(player: Player): JSONObject{
+        val targetPlayerOptions = player.fetchTargetPlayersOptions()
+        val targetPlayers = getTargetPlayers(targetPlayerOptions)
+        player.definePossibleTargetPlayers(targetPlayers)
+        player.defineTeammates(getWerewolfTeammates()) //Werewolf Teammates
+        return player.json()
+    }
+
+    private fun getTargetPlayers(targetPlayerOptions: TargetPlayersEnum): List<String>{
+        return when (targetPlayerOptions) {
+            TargetPlayersEnum.NoTargetPlayers -> getNoTargetPlayers()
+            TargetPlayersEnum.WerewolfTeammates -> getWerewolfTeammates()
+            TargetPlayersEnum.AlivePlayersTarget -> getAlivePlayersTarget()
+            TargetPlayersEnum.DeadTargets -> getDeadTargets()
+            TargetPlayersEnum.WerewolfTargets -> getWerewolfTargets()
+            TargetPlayersEnum.OtherPlayersTarget -> getOtherAlivePlayersTarget()
+        }
+    }
+
+    private fun getNoTargetPlayers(): List<String>{
+        return listOf()
+    }
+
+    private fun getWerewolfTargets(): List<String> {
+        return (gameStateModel.getAliveVillagers() - gameStateModel.getDisguisers().toSet()).shuffled().map { it.fetchPlayerName() }
+    }
+
+    private fun getAlivePlayersTarget(): List<String>{
+        return (gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()).shuffled().map { it.fetchPlayerName() }
+    }
+
+    private fun getOtherAlivePlayersTarget(): List<String>{
+        return (gameStateModel.getAliveVillagers()+gameStateModel.getAliveWerewolves()-listOf(currentPlayer).toSet()).shuffled().map { it.fetchPlayerName() }
+    }
+
+    private fun getDeadTargets(): List<String>{
+        return gameStateModel.getDeadPlayers().shuffled().map { it.fetchPlayerName() }
+    }
+
+    private fun getWerewolfTeammates(): List<String>{
+        return (gameStateModel.getAliveWerewolves()+gameStateModel.getDisguisers()).shuffled().map { it.fetchPlayerName() }
     }
 
     private fun finishRound(){
+        counter = 0
         queueAbilities()
         resolveAbilities()
         resetDefenseState()
         resetVisitors()
         checkIfGameEnded()
-        if(!gameEnded){
+        if(gameState == GameState.OnGoing){
             gameActivity.finishRound(roundEventsSummary, gameStateModel.getAlivePlayers())
         }
     }
@@ -200,10 +234,16 @@ class GameControllerImpl(
     private fun queueAbilities(){
         gameStateModel.getAlivePlayers().forEach { player ->
             val usedAbilities = player.fetchUsedAbilities()
-            usedAbilities.forEachIndexed { index, ability ->
+            usedAbilities.forEach { ability ->
                 ability.playerObservable.subscribe(abilityObserver)
                 abilityPriorityQueue.add(ability)
-                gameLogs+=player.fetchPlayerName()+" ("+ RoleNameProvider.getRoleName(player.fetchRole())+") "+MyApp.getAppContext().getString(R.string.used)+" "+player.fetchUsedAbilityName(index)+" -> "+ (player.fetchTargetPlayers().firstOrNull()?.fetchPlayerName() ?: "") +"\n"
+            }
+            if(usedAbilities.isNotEmpty()){
+                gameLogs+="${player.fetchPlayerName()} " +
+                        "(${RoleNameProvider.getRoleName(player.fetchRole())}) " +
+                        "${MyApp.getAppContext().getString(R.string.used)} " +
+                        "${player.fetchUsedAbilityName(0)} -> " +
+                        "${player.fetchTargetPlayers().map{it.fetchPlayerName()}}\n"
             }
         }
     }
@@ -230,30 +270,61 @@ class GameControllerImpl(
         }
     }
 
-    private fun checkIfGameEnded(){
+    private fun checkIfGameEnded() {
+        val json = JSONObject()
+        json.put("Event", Events.GameFinished)
+        json.put("GameLogs",gameLogs)
         when {
             gameStateModel.getAliveVillagers().isEmpty() && gameStateModel.getAliveWerewolves().isEmpty() -> {
-                gameActivity.gameFinished(emptyList(), WinnerTeam.DRAW, gameLogs)
-                gameEnded = true
+                val winnerPlayerList = listOf<Player>().map{it.fetchPlayerName()}
+                json.put("WinnerTeam", WinnerTeam.DRAW)
+                json.put("WinnerPlayerList", JSONArray(winnerPlayerList))
+                gameState = GameState.Ended
             }
             gameStateModel.getAliveVillagers().isEmpty() -> {
-                gameActivity.gameFinished(gameStateModel.getAliveWerewolves() + gameStateModel.getDeadWerewolves(), WinnerTeam.WEREWOLVES, gameLogs)
-                gameEnded = true
+                val winnerTeamList = gameStateModel.getAliveWerewolves() + gameStateModel.getDeadWerewolves()
+                json.put("WinnerTeam", WinnerTeam.WEREWOLVES)
+                json.put("WinnerPlayerList", JSONArray(winnerTeamList.map{it.fetchPlayerName()}))
+                gameState = GameState.Ended
             }
             gameStateModel.getAliveWerewolves().isEmpty() -> {
-                gameActivity.gameFinished(gameStateModel.getAliveVillagers() + gameStateModel.getDeadVillagers() - gameStateModel.getNeutrals()
-                    .toSet(), WinnerTeam.VILLAGERS, gameLogs)
-                gameEnded = true
+                val winnerTeamList = gameStateModel.getAliveVillagers() + gameStateModel.getDeadVillagers() - gameStateModel.getNeutrals().toSet()
+                json.put("WinnerTeam", WinnerTeam.VILLAGERS)
+                json.put("WinnerPlayerList", JSONArray(winnerTeamList.map{it.fetchPlayerName()}))
+                gameState = GameState.Ended
             }
         }
+        if(gameState == GameState.Ended){
+            gameActivity.gameFinished(json)
+        }
+
     }
 
     private fun startNextRound(){
-        roundEventsSummary = ""
-        gameLogs += "---------------------------------------------------\n"
         checkIfGameEnded()
-        if(!gameEnded){
+        if(gameState == GameState.OnGoing){
+            roundEventsSummary = ""
+            gameLogs += "---------------------------------------------------\n"
             setCurrentPlayer()
         }
     }
+
+    private fun hangedPlayer(json: JSONObject){
+        val targetPlayerName = json.getString("TargetPlayer")
+        val targetPlayer = gameStateModel.getAlivePlayers().find { it.fetchPlayerName() == targetPlayerName }
+        targetPlayer?.receiveAttack(Hang(targetPlayer))
+        startNextRound()
+    }
+
+    private fun confirmAction(){
+        counter++
+        if(counter<gameStateModel.getAlivePlayers().size){
+            setCurrentPlayer()
+        }
+        else{
+            counter = 0
+            finishRound()
+        }
+    }
+
 }

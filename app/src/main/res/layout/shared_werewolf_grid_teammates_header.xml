@@ -23,22 +23,33 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
 
-    <TextView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/teamTextView"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/stalkedFrameLayout"
         app:layout_constraintBottom_toBottomOf="@id/stalkedFrameLayout"
         app:layout_constraintTop_toTopOf="@id/stalkedFrameLayout"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/font_old_english_five"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:gravity="center"
-        android:text="@string/team"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/textview_shape" />
+        android:layout_marginStart="10dp"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/dark_red"
+        app:strokeWidth="5dp"
+        app:shapeAppearanceOverlay="@style/corner10dp">
+
+        <TextView
+            android:id="@+id/maxAmountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/image_black_wood_background"
+            android:padding="6dp"
+            android:gravity="center"
+            android:fontFamily="@font/font_old_english_five"
+            android:textColor="@android:color/white"
+            android:text="@string/team"
+            android:textSize="18sp"/>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <FrameLayout
         android:id="@+id/stalkedFrameLayout"

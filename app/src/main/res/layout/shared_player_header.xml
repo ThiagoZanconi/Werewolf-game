@@ -62,17 +62,37 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/roleDescriptionButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <FrameLayout
+        android:id="@+id/roleDescriptionButtonContainer"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:background="@drawable/imageview_shape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewDescriptionLayout"
         app:layout_constraintTop_toTopOf="@id/textViewDescriptionLayout"
         app:layout_constraintBottom_toBottomOf="@id/textViewDescriptionLayout"
-        android:contentDescription="@string/role_description"
-        android:src="@drawable/image_questionmark"
-        android:scaleType="fitXY" />
+        android:contentDescription="@string/role_description">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_black_wood_background"
+            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+            />
+
+        <ImageButton
+            android:id="@+id/roleDescriptionButton"
+            android:layout_width="30dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/role"
+            android:src="@drawable/image_questionmark"
+            android:scaleType="centerInside"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/roleDescriptionTextView"
@@ -81,7 +101,6 @@
         android:layout_marginEnd="70dp"
         android:layout_marginStart="70dp"
         android:padding="35dp"
-        android:background="@drawable/textview_shape3"
         android:textColor="@android:color/black"
         android:text="@string/werewolf_description"
         android:visibility="gone"

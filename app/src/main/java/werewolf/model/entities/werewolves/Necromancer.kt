@@ -7,10 +7,10 @@ import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.Immune
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
+import werewolf.model.entities.TargetPlayersEnum
 import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 
 class Necromancer(
     playerName: String

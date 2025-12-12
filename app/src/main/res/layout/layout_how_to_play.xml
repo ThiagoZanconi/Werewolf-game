@@ -12,69 +12,150 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <FrameLayout
             android:id="@+id/intro1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/textview_shape3"
-            android:textColor="@android:color/black"
-            android:text="@string/intro1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-        <TextView
+            android:layout_height="118dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/imageview_shape">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_wood_background_clean"
+                app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="@string/intro1"
+                android:justificationMode="inter_word"
+                android:textSize="14sp"/>
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/intro2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/textview_shape3"
-            android:textColor="@android:color/black"
-            android:text="@string/intro2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/intro1"/>
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/imageview_shape">
 
-        <TextView
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_wood_background_clean"
+                app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="@string/intro2"
+                android:justificationMode="inter_word"
+                android:textSize="14sp"/>
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/intro3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/textview_shape3"
-            android:textColor="@android:color/black"
-            android:text="@string/intro3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/intro2"/>
+            android:layout_height="168dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/imageview_shape">
 
-        <TextView
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_wood_background_clean"
+                app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="@string/intro3"
+                android:justificationMode="inter_word"
+                android:textSize="14sp"/>
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/intro4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/textview_shape3"
-            android:textColor="@android:color/black"
-            android:text="@string/intro4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/intro3"/>
+            android:layout_height="55dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/imageview_shape">
 
-        <TextView
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_wood_background_clean"
+                app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="@string/intro4"
+                android:justificationMode="inter_word"
+                android:textSize="14sp"/>
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/intro5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:background="@drawable/textview_shape3"
-            android:textColor="@android:color/black"
-            android:text="@string/intro5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/intro4"/>
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/imageview_shape">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_wood_background_clean"
+                app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="@string/intro5"
+                android:justificationMode="inter_word"
+                android:textSize="14sp"/>
+        </FrameLayout>
 
     </LinearLayout>
 

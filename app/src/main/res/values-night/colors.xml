@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="text_color">#FFFFFF</color> <!-- Blanco para modo oscuro -->
+    <color name="white">#FFFFF0</color>
+    <color name="dark_red">#371515</color>
 </resources>

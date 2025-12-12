@@ -1,14 +1,16 @@
 package werewolf.controller
 
+import werewolf.controller.server.InitControllerImpl
 import werewolf.model.ModelInjector
 import werewolf.view.GameActivity
 import werewolf.view.InitActivity
+import werewolf.view.fragments.ServerFragment
 
 object ControllerInjector {
 
-    fun onViewStarted(initActivity: InitActivity) {
+    fun onViewStarted(playerSelectionFragment: ServerFragment) {
         InitControllerImpl().apply {
-            setInitView(initActivity)
+            setInitView(playerSelectionFragment)
         }
     }
 

@@ -15,21 +15,33 @@
             android:scaleType="centerCrop"
             android:src="@drawable/image_dark_village" />
 
-        <TextView
-            android:id="@+id/maxAmountTextView"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/textview_shape"
-            android:text="@string/max"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:gravity="center"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/maxAmountTextViewContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toTopOf="@id/recyclerView"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/dark_red"
+            app:strokeWidth="5dp"
+            app:shapeAppearanceOverlay="@style/corner10dp">
 
-        </TextView>
+            <TextView
+                android:id="@+id/maxAmountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_wood_background_clean"
+                android:padding="6dp"
+                android:gravity="center"
+                android:fontFamily="@font/beleren2016_bold"
+                android:textColor="@android:color/black"
+                android:text="@string/max"
+                android:textSize="18sp"/>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -39,7 +51,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/doneButton"
-            app:layout_constraintTop_toBottomOf="@id/maxAmountTextView">
+            app:layout_constraintTop_toBottomOf="@id/maxAmountTextViewContainer">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -55,6 +67,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/beleren2016_bold"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

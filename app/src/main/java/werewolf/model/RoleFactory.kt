@@ -2,12 +2,12 @@ package werewolf.model
 
 import werewolf.model.entities.Player
 import werewolf.model.entities.neutrals.Jester
-import werewolf.model.entities.villagers.Cleric
+import werewolf.model.entities.villagers.Lightbearer
 import werewolf.model.entities.villagers.Detective
 import werewolf.model.entities.villagers.Detonator
 import werewolf.model.entities.villagers.Disguiser
 import werewolf.model.entities.villagers.Elusive
-import werewolf.model.entities.villagers.Priest
+import werewolf.model.entities.villagers.Reviver
 import werewolf.model.entities.villagers.Protector
 import werewolf.model.entities.villagers.Stalker
 import werewolf.model.entities.villagers.Veteran
@@ -21,7 +21,7 @@ import werewolf.model.entities.werewolves.Witch
 import kotlin.math.floor
 
 enum class Roles{
-    Jester, Villager, Cleric, Priest, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Detective, Disguiser, Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie
+    Jester, Villager, Lightbearer, Reviver, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Detective, Disguiser, Werewolf, Witch, Arsonist, Vampire, Necromancer, Zombie
 }
 
 interface RoleFactory{
@@ -37,7 +37,7 @@ class RoleFactoryImpl(
     private val createdWerewolves: MutableList<Player> = mutableListOf()
     private val createdDisguisers: MutableList<Disguiser> = mutableListOf()
 
-    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Priest ,Roles.Vigilante ,Roles.Cleric,
+    private val villagerRoles = mutableListOf(Roles.Protector, Roles.Reviver ,Roles.Vigilante ,Roles.Lightbearer,
         Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker, Roles.Detective, Roles.Disguiser)
     private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch, Roles.Necromancer, Roles.Arsonist)
 
@@ -125,8 +125,8 @@ class RoleFactoryImpl(
     private fun createVillager(name: String, role:Roles): Player{
         return when(role){
             Roles.Villager -> Villager(name)
-            Roles.Cleric -> Cleric(name)
-            Roles.Priest -> Priest(name)
+            Roles.Lightbearer -> Lightbearer(name)
+            Roles.Reviver -> Reviver(name)
             Roles.Vigilante -> Vigilante(name)
             Roles.Protector -> Protector(name)
             Roles.Veteran -> Veteran(name)

@@ -9,4 +9,17 @@
         <item name="cornerSize">20%</item>
     </style>
 
+    <style name="AppFont" parent="Theme.Material3.DayNight">
+        <item name="android:fontFamily">@font/beleren2016_bold</item>
+        <item name="fontFamily">@font/beleren2016_bold</item>
+    </style>
+
+    <style name="corner10dp">
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="corner0dp">
+        <item name="cornerSize">0dp</item>
+    </style>
+
 </resources>

@@ -1,11 +1,11 @@
 package werewolf.model
 
-import android.content.Context
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Zombie
 import werewolf.model.repository.Repository
 import werewolf.model.repository.RepositoryImpl
 import werewolf.view.GameActivity
+import werewolf.view.MyApp
 import kotlin.math.floor
 
 interface GameStateModel{
@@ -26,11 +26,9 @@ interface GameStateModel{
     fun revivePlayerZombie(player: Player): Player?
 }
 
-class GameStateModelImpl(
-    context: Context
-): GameStateModel{
+class GameStateModelImpl: GameStateModel{
 
-    private val repository: Repository = RepositoryImpl(context)
+    private val repository: Repository = RepositoryImpl(MyApp.getAppContext())
     private val gameState: GameState = GameStateImpl()
     private val gameSettings: GameSettings = GameSettingsImpl
     private lateinit var roleFactory: RoleFactory

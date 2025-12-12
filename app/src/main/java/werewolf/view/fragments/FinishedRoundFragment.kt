@@ -6,18 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.observer.Subject
-import werewolf.model.entities.DeathCause
-import werewolf.model.entities.Hang
+import org.json.JSONObject
 import werewolf.model.entities.Player
 import werewolf.view.GameUiEvent
+import werewolf.view.GameUiEventSignal
 import werewolf.view.R
 
 class FinishedRoundFragment(
-    private val onActionSubject: Subject<GameUiEvent>,
+    onActionSubject: Subject<GameUiEventSignal>,
     private val text: String,
     private val alivePlayers: List<Player>
-): GridFragment(){
-
+): GridFragment(onActionSubject, JSONObject()){
     private lateinit var summaryTextView: TextView
 
     override fun onCreateView(
@@ -38,23 +37,27 @@ class FinishedRoundFragment(
         gridLayout = view.findViewById(R.id.gridLayout)
         initGridLayout()
         titleLabel.text = requireContext().getString(R.string.round_finished)
-        summaryTextView = view.findViewById(R.id.eventsSummaryLabel)
+        summaryTextView = view.findViewById(R.id.waitTextView)
         summaryTextView.text = text
     }
 
+    override fun initListeners() {
+        confirmButton.setOnClickListener { showConfirmActionDialog() }
+    }
+
     override fun confirmAction(){
-        selectedPlayer?.receiveAttack(Hang(selectedPlayer!!))
-        onActionSubject.notify(GameUiEvent.StartNextRound)
+        if(selectedPlayer!=null){
+            val json = JSONObject()
+            json.put("TargetPlayer",selectedPlayer)
+            onActionSubject.notify(GameUiEventSignal(GameUiEvent.HangedPlayer,json))
+        }
+        onActionSubject.notify(GameUiEventSignal(GameUiEvent.StartNextRound, JSONObject()))
     }
 
     override fun initGridLayout(){
         alivePlayers.forEach{
                 player -> gridLayout.addView(createTextView(player.fetchPlayerName()),gridLayout.childCount)
         }
-    }
-
-    override fun setSelectedPlayer(playerName: String){
-        selectedPlayer = alivePlayers.find { it.fetchPlayerName() == playerName }
     }
 
 }

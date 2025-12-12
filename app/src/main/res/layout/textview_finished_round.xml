@@ -9,14 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
-        android:src="@drawable/image_wood_textview_background"
+        android:src="@drawable/image_wood_background_clean"
         android:scaleType="fitXY"
         app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
         >
     </com.google.android.material.imageview.ShapeableImageView>
 
     <TextView
-        android:id="@+id/eventsSummaryLabel"
+        android:id="@+id/waitTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font_old_english_five"

@@ -1,18 +1,14 @@
 package werewolf.model.entities.villagers
 
-import androidx.fragment.app.Fragment
-import com.example.observer.Subject
 import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Werewolf
-import werewolf.view.GameUiEvent
+import werewolf.view.FragmentEnum
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersSignal
-import werewolf.view.fragments.VeteranFragment
 
 class Veteran(
     playerName: String
@@ -31,8 +27,8 @@ class Veteran(
         usedAbilities.add(Alert(visitors))
     }
 
-    override fun resolveFetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return VeteranFragment(onActionSubject,this)
+    override fun resolveFetchView(): FragmentEnum {
+        return FragmentEnum.VeteranFragment
     }
 }
 

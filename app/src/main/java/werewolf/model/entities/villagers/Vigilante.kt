@@ -5,10 +5,10 @@ import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.NoUsesLeft
 import werewolf.model.entities.Player
+import werewolf.model.entities.TargetPlayersEnum
 import werewolf.model.entities.VillagerAttackAbility
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 
 class Vigilante(
     playerName: String

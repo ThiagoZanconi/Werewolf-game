@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Werewolf</string>
+    <string name="app_name">Werewolf Premium</string>
     <string name="start">Start</string>
     <string name="name">Name</string>
     <string name="add">Add</string>
@@ -26,6 +26,8 @@
     <string name="role_description">Role Description</string>
     <string name="team">Team:</string>
     <string name="saw">%1$s saw %2$s</string>
+    <string name="waiting_server">Waiting for Server</string>
+    <string name="ip">IP</string>
 
     <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later).
         For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that
@@ -53,11 +55,11 @@
     <string name="no_ability">No Ability</string>
 
     <string name="unknown_role">Unknown Role</string>
-    <string name="cleric">Cleric</string>
+    <string name="lightbearer">Lightbearer</string>
     <string name="villager">Villager</string>
     <string name="protector">Protector</string>
     <string name="vigilante">Vigilante</string>
-    <string name="priest">Priest</string>
+    <string name="reviver">Reviver</string>
     <string name="veteran">Veteran</string>
     <string name="elusive">Elusive</string>
     <string name="detonator">Detonator</string>
@@ -88,6 +90,7 @@
     <string name="remove_bomb">Remove Bomb</string>
     <string name="stalk">Stalk</string>
     <string name="investigate">Investigate</string>
+    <string name="candidates">Candidates:</string>
 
     <string name="unknown_description">Description not found</string>
     <string name="werewolf_description">Belongs to the werewolves team. Every night can select a villager to kill</string>
@@ -100,16 +103,16 @@
     <string name="arsonist_description">Belongs to the werewolves team. At night can spill oil on up to 2 players or ignite. Ignite kills all
         the players with oil, including the arsonist.</string>
     <string name="villager_description">Belongs to the villagers team. Has no ability</string>
-    <string name="cleric_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn).
+    <string name="lightbearer_description">Belongs to the villagers team. Can cast a protection barrier on a player at night (from all attacks on that turn).
         Ability has 1 turn cooldown.</string>
-    <string name="priest_description">Belongs to the villagers team. Once a game can select a player to revive (werewolves included)</string>
+    <string name="reviver_description">Belongs to the villagers team. Once a game can select a player to revive (werewolves included)</string>
     <string name="vigilante_description">Belongs to the villagers team. Once a game can select a player to shot to kill(villagers included)</string>
     <string name="veteran_description">Belongs to the villagers team. Once a game can stay alert at night (Every player that visits him, will get shot).</string>
     <string name="protector_description">Belongs to the villagers team. Has to lives (dies instantly if hanged).Every night can select a player to protect
         from all attacks received.</string>
     <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All abilities that target him directly have
         no effect. Both he and the host receive the abilities targeted to he host. If hi hides in the house of werewolf he is attacked.</string>
-    <string name="detonator_description">Belongs to the villagers team. At night cab set the bomb in a player\'s house . When detonator dies, the bomb
+    <string name="detonator_description">Belongs to the villagers team. At night can set the bomb in a player\'s house . When detonator dies, the bomb
         explodes, striking target player. Detonator may change the bomb to other location. If he dies when setting the bomb, ability has no effect.</string>
     <string name="stalker_description">Belongs to the villagers team. At night can stalk a player, next round will be revealed to him ONE player that
         visited or was visited by target player (if there was any).</string>

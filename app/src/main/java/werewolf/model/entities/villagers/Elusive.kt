@@ -4,11 +4,11 @@ import werewolf.model.Roles
 import werewolf.model.entities.AbstractAbility
 import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.Player
+import werewolf.model.entities.TargetPlayersEnum
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.WerewolfAttack
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 
 class Elusive(
     playerName: String

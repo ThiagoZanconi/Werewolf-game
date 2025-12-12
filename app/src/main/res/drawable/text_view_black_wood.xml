@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:width="50dp"
+        android:height="70dp">
+        <bitmap
+            android:src="@drawable/image_black_wood_background"
+            android:gravity="fill" />
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="0dp" />
+            <stroke android:width="2dp" android:color="@color/dark_red" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+
+</layer-list>

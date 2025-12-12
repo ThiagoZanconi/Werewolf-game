@@ -1,6 +1,5 @@
 package werewolf.model
 
-import android.content.Context
 import werewolf.view.GameActivity
 
 object ModelInjector {
@@ -10,8 +9,9 @@ object ModelInjector {
         return gameStateModel
     }
 
-    fun setGameView(gameActivity: GameActivity){
-        gameStateModel = GameStateModelImpl(gameActivity as Context)
+    fun setServerGameView(gameActivity: GameActivity){
+        gameStateModel = GameStateModelImpl()
         gameStateModel.setGameView(gameActivity)
     }
+
 }

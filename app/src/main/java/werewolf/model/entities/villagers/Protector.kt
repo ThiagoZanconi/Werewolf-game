@@ -6,9 +6,9 @@ import werewolf.model.entities.AbstractPlayer
 import werewolf.model.entities.DeathCause
 import werewolf.model.entities.Player
 import werewolf.model.entities.Protected
+import werewolf.model.entities.TargetPlayersEnum
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.TargetPlayersEnum
 
 class Protector(
     playerName: String

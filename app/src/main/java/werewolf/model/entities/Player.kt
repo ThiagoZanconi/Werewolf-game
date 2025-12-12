@@ -1,25 +1,29 @@
 package werewolf.model.entities
 
-import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
+import org.json.JSONArray
+import org.json.JSONObject
 import werewolf.model.Roles
-import werewolf.view.GameUiEvent
-import werewolf.view.TargetPlayersEnum
-import werewolf.view.TargetPlayersSignal
-import werewolf.view.fragments.PlayerGridFragment
-import werewolf.view.fragments.WerewolfPlayerFragment
+import werewolf.view.FragmentEnum
 
 enum class DeathCause{
     HANGED, MAULED, SHOT, EXPLODED
 }
 
+enum class TargetPlayersEnum{
+    NoTargetPlayers, WerewolfTargets, AlivePlayersTarget, DeadTargets, WerewolfTeammates, OtherPlayersTarget
+}
+
 interface Player{
     val playerObservable: Observable<PlayerSignal>
 
+    fun json(): JSONObject
     fun fetchPlayerName(): String
     fun fetchRole(): Roles
+    fun fetchTeammates(): List<String>
     fun fetchTargetPlayersOptions(): TargetPlayersEnum
+    fun fetchPossibleTargetPlayers(): List<String>
     fun fetchTargetPlayers(): List<Player>
     fun fetchEvent(): PlayerEventEnum
     fun fetchAbilityState(): AbilityStateEnum
@@ -28,10 +32,12 @@ interface Player{
     fun fetchVisitors(): List<Player>
     fun fetchPersistentAbilities(): MutableList<Ability>
     fun fetchUsedAbilityName(index: Int): String?
-    fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment
+    fun fetchFragment(): FragmentEnum
     fun fetchDeathCause(): DeathCause
     fun fetchImageSrc(): Int
 
+    fun defineTeammates(teammates: List<String>)
+    fun definePossibleTargetPlayers(targetPlayers: List<String>)
     fun defineDefenseState(defenseState: DefenseState)
     fun defineTargetPlayer(targetPlayer: Player)
     fun definePersistentAbilities(abilities: MutableList<Ability>)
@@ -41,7 +47,7 @@ interface Player{
     fun removePersistentAbility(ability: Ability)
 
     //Ability delegated to abilityState contrary case
-    fun notifyAbilityUsed(targetPlayer: Player?)
+    fun notifyAbilityUsed(targetPlayers: List<Player>)
     fun notifyKilledPlayer(deathCause: DeathCause)
 
     fun resetVisitors()
@@ -64,19 +70,39 @@ abstract class AbstractPlayer(private val playerName: String): Player{
     protected lateinit var deathCause: DeathCause
     protected var visitors: MutableList<Player> = mutableListOf()
     protected var targetPlayers: MutableList<Player> = mutableListOf()
+    protected var teammates: List<String> = listOf()
     private var abilitiesUsedOnMe: MutableList<Ability> = mutableListOf()
     private var persistentAbilities: MutableList<Ability> = mutableListOf()
-
-
+    protected var possibleTargetPlayers: List<String> = listOf()
     protected val onActionSubject = Subject<PlayerSignal>()
     override val playerObservable: Observable<PlayerSignal> = onActionSubject
+
+    override fun json(): JSONObject {
+        val json = JSONObject()
+        json.put("PlayerName", fetchPlayerName())
+        json.put("AbilityState", fetchAbilityState())
+        json.put("Role", fetchRole())
+        json.put("ImageSrc", fetchImageSrc())
+        json.put("Teammates", JSONArray(teammates))
+        json.put("PossibleTargetPlayers", JSONArray(possibleTargetPlayers))
+        json.put("Fragment", fetchFragment())
+        return json
+    }
 
     override fun fetchPlayerName(): String{
         return playerName
     }
 
+    override fun fetchTeammates(): List<String> {
+        return teammates
+    }
+
     override fun fetchTargetPlayersOptions(): TargetPlayersEnum {
         return abilityState.fetchTargetPlayers(this)
+    }
+
+    override fun fetchPossibleTargetPlayers(): List<String> {
+        return possibleTargetPlayers
     }
 
     override fun fetchTargetPlayers(): List<Player>{
@@ -109,8 +135,8 @@ abstract class AbstractPlayer(private val playerName: String): Player{
         return visitors
     }
 
-    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return abilityState.fetchView(this, onActionSubject,targetPlayersOnActionSubject)
+    override fun fetchFragment(): FragmentEnum {
+        return abilityState.fetchView(this)
     }
 
     override fun fetchDeathCause(): DeathCause {
@@ -119,6 +145,14 @@ abstract class AbstractPlayer(private val playerName: String): Player{
 
     override fun fetchPersistentAbilities(): MutableList<Ability>{
         return persistentAbilities
+    }
+
+    override fun defineTeammates(teammates: List<String>) {
+        this.teammates = listOf()
+    }
+
+    override fun definePossibleTargetPlayers(targetPlayers: List<String>) {
+        possibleTargetPlayers = targetPlayers
     }
 
     override fun defineDefenseState(defenseState: DefenseState) {
@@ -146,10 +180,10 @@ abstract class AbstractPlayer(private val playerName: String): Player{
         persistentAbilities.remove(ability)
     }
 
-    override fun notifyAbilityUsed(targetPlayer: Player?){
-        if(targetPlayer!=null){
-            targetPlayers.add(targetPlayer)
-            targetPlayer.visitedBy(this)
+    override fun notifyAbilityUsed(targetPlayers: List<Player>){
+        targetPlayers.forEach {
+            this.targetPlayers.add(it)
+            it.visitedBy(this)
         }
         abilityState.useAbility(this)
     }
@@ -205,8 +239,8 @@ abstract class AbstractPlayer(private val playerName: String): Player{
         this.abilityState = abilityState
     }
 
-    open fun resolveFetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return PlayerGridFragment(onActionSubject,this,targetPlayersOnActionSubject)
+    open fun resolveFetchView(): FragmentEnum {
+        return FragmentEnum.PlayerGridFragment
     }
 
     open fun resolveFetchTargetPlayers(): TargetPlayersEnum{
@@ -223,8 +257,8 @@ abstract class AbstractPlayer(private val playerName: String): Player{
 
 abstract class WerewolfTeamPlayer(playerName: String): AbstractPlayer(playerName){
 
-    override fun fetchView(onActionSubject: Subject<GameUiEvent>, targetPlayersOnActionSubject: Subject<TargetPlayersSignal>): Fragment {
-        return WerewolfPlayerFragment(onActionSubject,this,targetPlayersOnActionSubject)
+    override fun fetchFragment(): FragmentEnum {
+        return FragmentEnum.WerewolfPlayerFragment
     }
 
     override fun receiveAttack(werewolfAttackAbility: WerewolfAttackAbility) {
@@ -233,6 +267,10 @@ abstract class WerewolfTeamPlayer(playerName: String): AbstractPlayer(playerName
 
     override fun resolveFetchTargetPlayers(): TargetPlayersEnum {
         return TargetPlayersEnum.WerewolfTargets
+    }
+
+    override fun defineTeammates(teammates: List<String>){
+        this.teammates = teammates
     }
 
 }

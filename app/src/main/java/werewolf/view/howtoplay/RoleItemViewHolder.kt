@@ -26,6 +26,7 @@ class RoleItemViewHolder(view: View):RecyclerView.ViewHolder(view){
         val fragment = ImageFragment(role)
         fragmentManager.beginTransaction()
             .replace(R.id.OptionFragment, fragment)
+            .addToBackStack(null)
             .commit()
     }
 }

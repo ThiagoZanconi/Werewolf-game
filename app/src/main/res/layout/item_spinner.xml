@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="wrap_content"
-    android:gravity="center"
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemSpinner"
+    android:layout_width="50dp"
+    android:layout_height="70dp"
+    android:background="@drawable/text_view_black_wood"
     android:layout_margin="10dp"
-    android:text=""
-    android:textSize="15sp"
-    android:textColor="#FFFFFF"
-    android:background="@drawable/textview_shape3"
-    />
+    android:gravity="center"
+    android:fontFamily="@font/beleren2016_bold"
+    android:textColor="@android:color/white"
+    android:text=""/>

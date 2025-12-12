@@ -8,8 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import werewolf.view.R
 
-class HowToPlayFragment(
-): Fragment(){
+class HowToPlayFragment: Fragment(){
     private lateinit var rolesDescriptionButton: Button
 
     override fun onCreateView(

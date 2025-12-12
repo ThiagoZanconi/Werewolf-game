@@ -1,0 +1,41 @@
+<RelativeLayout
+    android:id="@+id/dialogConfirmation"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="50dp"
+    android:layout_gravity="center"
+    android:background="@drawable/imageview_shape"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerInParent="true">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:src="@drawable/image_black_wood_background"
+        android:scaleType="fitXY"
+        android:background="@drawable/imageview_shape"
+        app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+        >
+    </com.google.android.material.imageview.ShapeableImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/roleDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/beleren2016_bold"
+            android:text="@string/werewolf_description"
+            android:justificationMode="inter_word"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -6,45 +6,110 @@
     android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/roleName"
+    <FrameLayout
+        android:id="@+id/roleNameContainer"
         android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:gravity="center"
-        android:background="@drawable/textview_shape"
-        android:textColor="@android:color/black"
-        android:text="@string/werewolf"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:padding="5dp"
+        android:background="@drawable/imageview_shape"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-    </TextView>
 
-    <TextView
-        android:id="@+id/roleDescriptionTextView"
-        android:layout_width="0dp"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_black_wood_background"
+            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/roleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="6dp"
+            android:fontFamily="@font/font_old_english_five"
+            android:textColor="@android:color/white"
+            android:text="@string/necromancer"
+            android:textSize="11sp"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/roleDescriptionTextViewContainer"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:background="@drawable/textview_shape3"
-        android:textColor="@android:color/black"
-        android:text="@string/werewolf_description"
-        app:layout_constraintStart_toEndOf="@id/roleName"
-        app:layout_constraintEnd_toStartOf="@id/btnOpenImage"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:padding="5dp"
+        android:background="@drawable/imageview_shape"
+        app:layout_constraintStart_toEndOf="@id/roleNameContainer"
+        app:layout_constraintEnd_toStartOf="@id/imageview_shapeContainer"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <ImageButton
-        android:id="@+id/btnOpenImage"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_wood_background_clean"
+            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+            />
+
+        <TextView
+            android:id="@+id/roleDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="@string/detonator_description"
+            android:justificationMode="inter_word"
+            android:textSize="13sp"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/imageview_shapeContainer"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:contentDescription="@string/role"
-        android:src="@drawable/ic_image"
-        android:scaleType="centerInside"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintStart_toEndOf="@id/roleDescriptionTextView"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:padding="5dp"
+        android:background="@drawable/imageview_shape"
+        app:layout_constraintStart_toEndOf="@id/roleDescriptionTextViewContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_wood_background_clean"
+            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+            />
+
+        <ImageButton
+            android:id="@+id/btnOpenImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/role"
+            android:src="@drawable/ic_image"
+            android:scaleType="centerInside"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

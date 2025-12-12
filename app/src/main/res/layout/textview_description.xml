@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
-        android:src="@drawable/image_wood_textview_background"
+        android:src="@drawable/image_wood_background_clean"
         android:scaleType="fitXY"
         android:background="@drawable/imageview_shape"
         app:shapeAppearanceOverlay="@style/CustomShapeAppearance"

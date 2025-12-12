@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/roleName"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:background="@drawable/textview_shape"
-        android:textColor="@android:color/black"
-        android:text="@string/role"
+    <com.google.android.material.card.MaterialCardView
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/dark_red"
+        app:strokeWidth="5dp"
+        app:shapeAppearanceOverlay="@style/corner10dp">
 
-    </TextView>
+        <TextView
+            android:id="@+id/roleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/image_black_wood_background"
+        android:padding="6dp"
+            android:gravity="center"
+        android:fontFamily="@font/beleren2016_bold"
+        android:textColor="@android:color/white"
+            android:text="@string/role"/>
 
-    <Spinner
-        android:id="@+id/spinnerOptions"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/textview_shape"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/dark_red"
+        app:strokeWidth="5dp"
+        app:shapeAppearanceOverlay="@style/corner10dp">
+
+        <Spinner
+            android:id="@+id/spinnerOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/image_black_wood_background"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/beleren2016_bold"
+            android:gravity="center"
+            android:text=""
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
