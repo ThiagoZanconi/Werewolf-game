@@ -1,4 +1,4 @@
-package werewolf.controller.server
+package werewolf.controller
 
 import com.example.observer.Observer
 import werewolf.model.GameSettings

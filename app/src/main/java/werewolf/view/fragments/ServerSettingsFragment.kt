@@ -9,6 +9,14 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import werewolf.view.R
 import werewolf.model.GameSettings
 import werewolf.model.GameSettingsImpl
@@ -20,6 +28,7 @@ class ServerSettingsFragment: Fragment(){
     private val gameSettings: GameSettings = GameSettingsImpl
     private lateinit var recyclerView: RecyclerView
     private lateinit var doneButton: Button
+    private var rewardedAd: RewardedAd? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +38,7 @@ class ServerSettingsFragment: Fragment(){
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         initComponents(view)
         initListeners()
+        loadInterstitial()
 
         return view
     }
@@ -39,7 +49,7 @@ class ServerSettingsFragment: Fragment(){
     }
 
     private fun initListeners(){
-        doneButton.setOnClickListener { startGame() }
+        doneButton.setOnClickListener { showAdThenNavigate() }
     }
 
     private fun initRecyclerView(view: View, gameSettings: GameSettings){
@@ -53,6 +63,30 @@ class ServerSettingsFragment: Fragment(){
         val intent = Intent(requireActivity().applicationContext, GameActivityImpl::class.java)
         startActivity(intent)
         requireActivity().finish()
+    }
+
+    private fun loadInterstitial() {
+        RewardedAd.load(
+            requireContext(),
+            "ca-app-pub-3940256099942544/5224354917",
+            AdRequest.Builder().build(),
+            object : RewardedAdLoadCallback() {
+                override fun onAdLoaded(ad: RewardedAd) {
+                    rewardedAd = ad
+                }
+
+                override fun onAdFailedToLoad(error: LoadAdError) {
+                    rewardedAd = null
+                }
+            }
+        )
+
+    }
+
+    private fun showAdThenNavigate() {
+        rewardedAd?.show(requireActivity()) {
+            startGame()
+        }
     }
 
 }

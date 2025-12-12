@@ -21,13 +21,13 @@
             android:id="@+id/roleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/image_black_wood_background"
+        android:background="@drawable/image_wood_background_clean"
         android:padding="6dp"
             android:gravity="center"
+            android:textSize="14sp"
         android:fontFamily="@font/beleren2016_bold"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
             android:text="@string/role"/>
-
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
