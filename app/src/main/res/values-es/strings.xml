@@ -28,6 +28,7 @@
     <string name="saw">%1$s vio a %2$s</string>
     <string name="waiting_server">Esperando al Servidor</string>
     <string name="ip">IP</string>
+    <string name="upgrade">Premium</string>
 
     <string name="intro1">El juego consiste en dos equipos: el hombre lobo y sus seguidores; y los aldeanos (junto con el bufón, que será explicado más adelante).
         Para que un equipo gane, este debe matar a todos los jugadores del equipo contrario.

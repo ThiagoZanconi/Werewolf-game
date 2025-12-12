@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import werewolf.view.R
 import werewolf.view.ViewInjector
@@ -13,6 +14,7 @@ class ActivityMainFragment : Fragment(){
 
     private lateinit var hostServerButton: Button
     private lateinit var howToPlayButton: Button
+    private lateinit var upgradeButton: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,11 +30,13 @@ class ActivityMainFragment : Fragment(){
     private fun initComponents(view: View) {
         hostServerButton = view.findViewById(R.id.hostServer)
         howToPlayButton = view.findViewById(R.id.howToPlayButton)
+        upgradeButton = view.findViewById(R.id.updateButton)
     }
 
     private fun initListeners() {
         hostServerButton.setOnClickListener { hostServer() }
         howToPlayButton.setOnClickListener { goToHowPlay() }
+        upgradeButton.setOnClickListener{ upgrade() }
     }
 
     private fun hostServer(){
@@ -47,6 +51,10 @@ class ActivityMainFragment : Fragment(){
 
     private fun goToHowPlay(){
         initFragment(HowToPlayFragment())
+    }
+
+    private fun upgrade(){
+
     }
 
     private fun initFragment(fragment: Fragment){
