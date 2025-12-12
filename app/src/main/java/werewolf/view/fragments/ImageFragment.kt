@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -19,6 +20,7 @@ class ImageFragment(private val role: Roles): Fragment(){
     private lateinit var imageView: ImageView
     private lateinit var titleLabel: TextView
     private lateinit var roleDescriptionButton: ImageButton
+    private lateinit var roleDescriptionButtonContainer: FrameLayout
     private lateinit var textViewDescriptionLayout: LinearLayout
 
     override fun onCreateView(
@@ -40,6 +42,8 @@ class ImageFragment(private val role: Roles): Fragment(){
         roleDescriptionButton.visibility = View.GONE
         textViewDescriptionLayout = view.findViewById(R.id.textViewDescriptionLayout)
         textViewDescriptionLayout.visibility = View.GONE
+        roleDescriptionButtonContainer = view.findViewById(R.id.roleDescriptionButtonContainer)
+        roleDescriptionButtonContainer.visibility = View.GONE
     }
 
 }
