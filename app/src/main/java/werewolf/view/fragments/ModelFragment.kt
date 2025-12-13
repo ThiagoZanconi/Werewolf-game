@@ -116,12 +116,16 @@ open class PlayerFragment(protected val onActionSubject: Subject<GameUiEventSign
     private fun showRoleDescription(){
         val dialog = Dialog(requireContext())
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_role_description, null)
+        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
         dialog.setContentView(view)
         dialog.show()
 
         val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
-        textView.text = RoleDescriptionProvider.getRoleDescription(Roles.valueOf(jsonObject.getString("Role")))
+        textView.text = getDescription()
+    }
+
+    protected open fun getDescription(): String{
+        return RoleDescriptionProvider.getRoleDescription(Roles.valueOf(jsonObject.getString("Role")))
     }
 
 }
@@ -279,7 +283,7 @@ open class PlayerGridFragment(
     private fun showRoleDescription(){
         val dialog = Dialog(requireContext())
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_role_description, null)
+        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
         dialog.setContentView(view)
         dialog.show()
 

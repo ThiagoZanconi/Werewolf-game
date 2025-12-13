@@ -9,6 +9,7 @@
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/background_image"
         android:scaleType="centerCrop"
         android:src="@drawable/image_dark_village" />
 
@@ -24,30 +25,93 @@
         <include layout="@layout/textview_title" />
     </LinearLayout>
 
-    <FrameLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/finishedRoundLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/titleTextViewLayout"
-        app:layout_constraintBottom_toTopOf="@id/playerGridLayoutContainer">
+        app:layout_constraintBottom_toTopOf="@id/descriptionLabelContainer"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="30dp"
+        app:strokeWidth="5dp"
+        app:strokeColor="@color/dark_red"
+        app:shapeAppearanceOverlay="@style/corner10dp">
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
-            app:layout_constraintBottom_toTopOf="@id/confirmButton"
+            android:layout_height="wrap_content"
             android:elevation="1dp">
-            <include
-                android:elevation="0dp"
-                layout="@layout/textview_finished_round" />
+            <TextView
+                android:id="@+id/waitTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:background="@drawable/image_wood_background_clean"
+                android:fontFamily="@font/beleren2016_bold"
+                android:text="@string/intro1"
+                android:justificationMode="inter_word"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
         </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/descriptionLabelContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/finishedRoundLayout"
+        app:layout_constraintBottom_toTopOf="@id/playerGridLayoutContainer"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="60dp"
+        app:strokeWidth="5dp"
+        app:strokeColor="@color/dark_red"
+        app:shapeAppearanceOverlay="@style/corner10dp">
+        <TextView
+            android:id="@+id/descriptionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="@drawable/image_wood_background_clean"
+            android:fontFamily="@font/beleren2016_bold"
+            android:text="@string/remaining_players"
+            android:justificationMode="inter_word"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <FrameLayout
+        android:id="@+id/roleDescriptionButtonContainer"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:background="@drawable/imageview_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/descriptionLabelContainer"
+        app:layout_constraintTop_toTopOf="@id/descriptionLabelContainer"
+        app:layout_constraintBottom_toBottomOf="@id/descriptionLabelContainer"
+        android:contentDescription="@string/role_description">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_black_wood_background"
+            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+            />
+
+        <ImageButton
+            android:id="@+id/roleDescriptionButton"
+            android:layout_width="30dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/role"
+            android:src="@drawable/image_questionmark"
+            android:scaleType="centerInside"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </FrameLayout>
 
     <LinearLayout
@@ -56,7 +120,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/finishedRoundLayout"
+        app:layout_constraintTop_toBottomOf="@id/descriptionLabelContainer"
         app:layout_constraintBottom_toTopOf="@id/confirmButton">
         <include
             layout="@layout/gridlayout_wood_shared" />

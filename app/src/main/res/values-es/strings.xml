@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Werewolf</string>
+    <string name="app_name">Werewolf Premium</string>
     <string name="start">Comenzar</string>
     <string name="name">Nombre</string>
     <string name="add">Agregar</string>
@@ -28,7 +28,14 @@
     <string name="saw">%1$s vio a %2$s</string>
     <string name="waiting_server">Esperando al Servidor</string>
     <string name="ip">IP</string>
-    <string name="upgrade">Premium</string>
+    <string name="refresh">Recargar</string>
+    <string name="server_list">Lista de Servidores</string>
+    <string name="host">Host</string>
+    <string name="join">Unirse</string>
+    <string name="enter_name">Ingresa Nombre</string>
+    <string name="select_server">Selecciona Servidor</string>
+    <string name="background_image">Imagen de Fondo</string>
+    <string name="remaining_players">Jugadores Restantes</string>
 
     <string name="intro1">El juego consiste en dos equipos: el hombre lobo y sus seguidores; y los aldeanos (junto con el bufón, que será explicado más adelante).
         Para que un equipo gane, este debe matar a todos los jugadores del equipo contrario.
@@ -44,6 +51,13 @@
     <string name="intro4">Hay un rol que juega solo: el bufón. El bufón gana solo si logra que lo cuelguen al final de la ronda.</string>
     <string name="intro5">Cuando comienza el juego, a cada jugador se le asigna un rol en secreto y debe realizar sus acciones discretamente (sin mostrar la
         pantalla de su teléfono a los demás jugadores).</string>
+    <string name="finished_round_description">Ahora deben establecer un tiempo para discutir quienes pertenecen al equipo de los lobos.\n
+    Cada persona puede mencionar que rol le toco (o mentir sobre este), o mencionar que habilidad utilizo a la noche(o también mentir).\n
+    Cuando el tiempo terminan, todos los jugadores votan al mismo tiempo si desean colgar a alguien (lo señalan).
+        Si hay un empate, nadie muere y se continua a la siguiente ronda.\n
+    Si alguien es seleccionado, tiene una chance para defenderse y decir lo que mejor le parezca.\n
+    Después de su defensa, el resto de jugadores vota si desea colgarlo o no (pulgar arriba / pulgar hacia abajo).\n
+    Si la mayoría desea colgarlo, se selecciona al jugador y se contina a la próxima ronda.</string>
 
     <string name="werewolves_win">Hombres Lobo Ganan</string>
     <string name="villagers_win">Aldeanos Ganan</string>

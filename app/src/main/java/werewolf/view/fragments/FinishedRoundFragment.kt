@@ -35,14 +35,15 @@ class FinishedRoundFragment(
         confirmButton = view.findViewById(R.id.confirmButton)
         titleLabel = view.findViewById(R.id.titleLabel)
         gridLayout = view.findViewById(R.id.gridLayout)
+        roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
         initGridLayout()
         titleLabel.text = requireContext().getString(R.string.round_finished)
         summaryTextView = view.findViewById(R.id.waitTextView)
         summaryTextView.text = text
     }
 
-    override fun initListeners() {
-        confirmButton.setOnClickListener { showConfirmActionDialog() }
+    override fun getDescription(): String{
+        return requireContext().getString(R.string.finished_round_description)
     }
 
     override fun confirmAction(){
