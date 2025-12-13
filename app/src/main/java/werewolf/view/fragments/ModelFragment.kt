@@ -196,45 +196,32 @@ abstract class GridFragment(onActionSubject: Subject<GameUiEventSignal>, jsonObj
 
     protected abstract fun initGridLayout()
 
-    protected open fun createTextView(playerName: String): TextView {
-        val textView = TextView(requireContext()).apply {
-            layoutParams = GridLayout.LayoutParams().apply {
-                width = 0
-                height = GridLayout.LayoutParams.WRAP_CONTENT
-                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
-                setGravity(Gravity.FILL)
-                setMargins(10, 10, 10, 10)
-            }
-            text = playerName
-            textSize = 18f
-            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
-            setTextColor(Color.BLACK)
-            gravity = Gravity.CENTER
-            setPadding(15,15,15,15)
+    protected open fun createTextView(playerName: String): View {
+        val view = LayoutInflater.from(context).inflate(R.layout.item_client_player_container, gridLayout, false)
+        val playerNameTextView = view.findViewById<TextView>(R.id.playerNameTextView)
+        playerNameTextView.text = playerName
+        playerNameTextView.setOnClickListener{ onPlayerClick(playerNameTextView, playerName) }
 
-            setOnClickListener {
-                onPlayerClick(this, playerName)
-            }
-        }
-        return textView
+        return view
     }
 
     protected open fun onPlayerClick(textView: TextView, playerName: String) {
-        if (textView.background == null) {
-            textView.setBackgroundResource(R.drawable.shape_dark_red_border)
+        if (textView.currentTextColor == Color.WHITE) {
+            textView.setTextColor(Color.RED)
             markNotSelected(playerName)
             defineSelectedPlayer(playerName)
         } else {
-            textView.background = null
+            textView.setTextColor(Color.WHITE)
             selectedPlayer = null
         }
     }
 
     protected open fun markNotSelected(playerName: String) {
         for (i in 0 until gridLayout.childCount) {
-            val child = gridLayout.getChildAt(i) as TextView
-            if (child.text != playerName) {
-                child.background = null
+            val view = gridLayout.getChildAt(i)
+            val textView = view.findViewById<TextView>(R.id.playerNameTextView)
+            if (textView.text != playerName) {
+                textView.setTextColor(Color.WHITE)
             }
         }
     }
