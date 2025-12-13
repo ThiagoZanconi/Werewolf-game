@@ -87,7 +87,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="5dp"
-        android:background="@drawable/imageview_shape"
+        android:background="@drawable/shape_dark_red_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/descriptionLabelContainer"
         app:layout_constraintTop_toTopOf="@id/descriptionLabelContainer"
@@ -109,7 +109,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:contentDescription="@string/role"
-            android:src="@drawable/image_questionmark"
+            android:src="@drawable/baseline_question_mark_24"
             android:scaleType="centerInside"
             android:background="?attr/selectableItemBackgroundBorderless" />
     </FrameLayout>
@@ -138,7 +138,7 @@
         app:layout_constraintTop_toBottomOf="@id/playerGridLayoutContainer"
 
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/shape_pink_button"
         android:text="@string/done"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"

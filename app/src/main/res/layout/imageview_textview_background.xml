@@ -2,7 +2,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/imageview_shape"
+    android:background="@drawable/shape_dark_red_border"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.imageview.ShapeableImageView
@@ -11,7 +11,7 @@
         android:layout_margin="4dp"
         android:src="@drawable/image_wood_background"
         android:scaleType="centerCrop"
-        android:background="@drawable/imageview_shape"
+        android:background="@drawable/shape_dark_red_border"
         app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
         >
     </com.google.android.material.imageview.ShapeableImageView>

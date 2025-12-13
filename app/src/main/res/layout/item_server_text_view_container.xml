@@ -6,7 +6,7 @@
     android:layout_height="50dp"
     android:layout_margin="5dp"
     android:padding="5dp"
-    android:background="@drawable/imageview_shape">
+    android:background="@drawable/shape_dark_red_border">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="match_parent"

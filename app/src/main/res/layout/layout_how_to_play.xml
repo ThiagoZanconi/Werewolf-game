@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:background="@drawable/imageview_shape"
+            android:background="@drawable/shape_dark_red_border"
             android:gravity="fill"
             >
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:background="@drawable/imageview_shape">
+            android:background="@drawable/shape_dark_red_border">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="0dp"
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:background="@drawable/imageview_shape">
+            android:background="@drawable/shape_dark_red_border">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="0dp"
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:background="@drawable/imageview_shape">
+            android:background="@drawable/shape_dark_red_border">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="0dp"
@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:background="@drawable/imageview_shape">
+            android:background="@drawable/shape_dark_red_border">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="0dp"

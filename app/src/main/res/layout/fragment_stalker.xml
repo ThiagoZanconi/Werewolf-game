@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/shape_pink_button"
         android:text="@string/done"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"

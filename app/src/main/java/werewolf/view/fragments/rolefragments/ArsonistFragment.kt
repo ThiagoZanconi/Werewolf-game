@@ -65,11 +65,11 @@ class ArsonistFragment(
             if(oilTargets.size==2){
                 val deleted = oilTargets.remove(oilTargets.keys.first())
                 deleted!!.background=null
-                textView.setBackgroundResource(R.drawable.imageview_shape)
+                textView.setBackgroundResource(R.drawable.shape_dark_red_border)
                 oilTargets[playerName] = textView
             }
             else{
-                textView.setBackgroundResource(R.drawable.imageview_shape)
+                textView.setBackgroundResource(R.drawable.shape_dark_red_border)
                 oilTargets[playerName] = textView
             }
         } else {

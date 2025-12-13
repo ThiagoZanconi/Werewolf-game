@@ -221,7 +221,7 @@ abstract class GridFragment(onActionSubject: Subject<GameUiEventSignal>, jsonObj
 
     protected open fun onPlayerClick(textView: TextView, playerName: String) {
         if (textView.background == null) {
-            textView.setBackgroundResource(R.drawable.imageview_shape)
+            textView.setBackgroundResource(R.drawable.shape_dark_red_border)
             markNotSelected(playerName)
             defineSelectedPlayer(playerName)
         } else {
