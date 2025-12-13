@@ -196,11 +196,12 @@ abstract class GridFragment(onActionSubject: Subject<GameUiEventSignal>, jsonObj
 
     protected abstract fun initGridLayout()
 
+
     protected open fun createTextView(playerName: String): View {
         val view = LayoutInflater.from(context).inflate(R.layout.item_client_player_container, gridLayout, false)
         val playerNameTextView = view.findViewById<TextView>(R.id.playerNameTextView)
         playerNameTextView.text = playerName
-        playerNameTextView.setOnClickListener{ onPlayerClick(playerNameTextView, playerName) }
+        view.setOnClickListener{ onPlayerClick(playerNameTextView, playerName) }
 
         return view
     }
