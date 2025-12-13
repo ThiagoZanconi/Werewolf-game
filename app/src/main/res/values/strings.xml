@@ -36,6 +36,7 @@
     <string name="select_server">Select Server</string>
     <string name="background_image">Background Image</string>
     <string name="remaining_players">Remaining Players</string>
+    <string name="premium">Premium</string>
 
     <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later).
         For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that

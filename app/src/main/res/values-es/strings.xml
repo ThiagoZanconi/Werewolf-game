@@ -36,6 +36,7 @@
     <string name="select_server">Selecciona Servidor</string>
     <string name="background_image">Imagen de Fondo</string>
     <string name="remaining_players">Jugadores Restantes</string>
+    <string name="premium">Premium</string>
 
     <string name="intro1">El juego consiste en dos equipos: el hombre lobo y sus seguidores; y los aldeanos (junto con el bufón, que será explicado más adelante).
         Para que un equipo gane, este debe matar a todos los jugadores del equipo contrario.
