@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/playerNameLabel"
         android:textSize="15sp"
         android:textColor="#FFFFFF"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/shape_pink_button"
         android:textAllCaps="false"/>
 
     <androidx.fragment.app.FragmentContainerView

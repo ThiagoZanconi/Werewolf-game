@@ -26,9 +26,9 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/teamTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/stalkedFrameLayout"
-        app:layout_constraintBottom_toBottomOf="@id/stalkedFrameLayout"
-        app:layout_constraintTop_toTopOf="@id/stalkedFrameLayout"
+        app:layout_constraintEnd_toStartOf="@id/playerGridLayoutContainer"
+        app:layout_constraintBottom_toBottomOf="@id/playerGridLayoutContainer"
+        app:layout_constraintTop_toTopOf="@id/playerGridLayoutContainer"
         android:layout_marginStart="10dp"
         android:layout_width="100dp"
         android:layout_height="70dp"
@@ -41,54 +41,26 @@
             android:id="@+id/maxAmountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/image_black_wood_background"
+            android:background="@drawable/image_wood_background_clean"
             android:padding="6dp"
             android:gravity="center"
             android:fontFamily="@font/font_old_english_five"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:text="@string/team"
             android:textSize="18sp"/>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <FrameLayout
-        android:id="@+id/stalkedFrameLayout"
+    <LinearLayout
+        android:id="@+id/playerGridLayoutContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
         app:layout_constraintStart_toEndOf="@id/teamTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playerHeader"
+        app:layout_constraintTop_toBottomOf="@id/guideline_half"
         app:layout_constraintBottom_toBottomOf="parent">
         <include
-            android:elevation="0dp"
-            layout="@layout/imageview_textview_background" />
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toEndOf="@id/teamTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/teamTextView"
-            app:layout_constraintBottom_toBottomOf="@id/teamTextView">
-            <GridLayout
-                android:id="@+id/teammatesGridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewDescriptionLayout"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:alignmentMode="alignMargins"
-                android:useDefaultMargins="true"
-                android:gravity="center"
-                android:columnCount="3"
-                android:padding="16dp">
-            </GridLayout>
-        </ScrollView>
-    </FrameLayout>
+            layout="@layout/gridlayout_wood_two_child" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

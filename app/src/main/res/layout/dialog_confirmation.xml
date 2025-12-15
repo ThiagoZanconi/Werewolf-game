@@ -3,7 +3,7 @@
     android:layout_width="240dp"
     android:layout_height="180dp"
     android:layout_gravity="center"
-    android:background="@drawable/imageview_shape"
+    android:background="@drawable/shape_dark_red_border"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_centerInParent="true">
@@ -13,7 +13,7 @@
         android:layout_margin="4dp"
         android:src="@drawable/image_black_wood_background"
         android:scaleType="fitXY"
-        android:background="@drawable/imageview_shape"
+        android:background="@drawable/shape_dark_red_border"
         app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
         >
     </com.google.android.material.imageview.ShapeableImageView>

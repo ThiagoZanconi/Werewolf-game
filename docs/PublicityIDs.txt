@@ -1,0 +1,10 @@
+Manifest:
+
+<meta-data
+            android:name = "com.google.android.gms.ads.APPLICATION_ID"
+            android:value = "ca-app-pub-9153943970818884~9684259149"
+        />
+
+
+Reward AD:
+"ca-app-pub-9153943970818884/3027351452"

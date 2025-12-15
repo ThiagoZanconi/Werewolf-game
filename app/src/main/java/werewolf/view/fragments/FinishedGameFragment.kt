@@ -52,7 +52,8 @@ class FinishedGameFragment(
         roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
         descriptionLabel = view.findViewById(R.id.descriptionLabel)
         roleDescriptionButtonContainer = view.findViewById(R.id.roleDescriptionButtonContainer)
-
+        gridLayout = view.findViewById(R.id.gridLayout)
+        initGridLayout()
         roleDescriptionButtonContainer.visibility = View.GONE
         roleDescriptionButton.visibility = View.GONE
         descriptionLabel.text = requireContext().getString(R.string.winners)

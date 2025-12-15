@@ -116,12 +116,16 @@ open class PlayerFragment(protected val onActionSubject: Subject<GameUiEventSign
     private fun showRoleDescription(){
         val dialog = Dialog(requireContext())
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_role_description, null)
+        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
         dialog.setContentView(view)
         dialog.show()
 
         val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
-        textView.text = RoleDescriptionProvider.getRoleDescription(Roles.valueOf(jsonObject.getString("Role")))
+        textView.text = getDescription()
+    }
+
+    protected open fun getDescription(): String{
+        return RoleDescriptionProvider.getRoleDescription(Roles.valueOf(jsonObject.getString("Role")))
     }
 
 }
@@ -192,45 +196,33 @@ abstract class GridFragment(onActionSubject: Subject<GameUiEventSignal>, jsonObj
 
     protected abstract fun initGridLayout()
 
-    protected open fun createTextView(playerName: String): TextView {
-        val textView = TextView(requireContext()).apply {
-            layoutParams = GridLayout.LayoutParams().apply {
-                width = 0
-                height = GridLayout.LayoutParams.WRAP_CONTENT
-                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
-                setGravity(Gravity.FILL)
-                setMargins(10, 10, 10, 10)
-            }
-            text = playerName
-            textSize = 18f
-            typeface = ResourcesCompat.getFont(context, R.font.font_old_english_five)
-            setTextColor(Color.BLACK)
-            gravity = Gravity.CENTER
-            setPadding(15,15,15,15)
 
-            setOnClickListener {
-                onPlayerClick(this, playerName)
-            }
-        }
-        return textView
+    protected open fun createTextView(playerName: String): View {
+        val view = LayoutInflater.from(context).inflate(R.layout.item_client_player_container, gridLayout, false)
+        val playerNameTextView = view.findViewById<TextView>(R.id.playerNameTextView)
+        playerNameTextView.text = playerName
+        view.setOnClickListener{ onPlayerClick(playerNameTextView, playerName) }
+
+        return view
     }
 
     protected open fun onPlayerClick(textView: TextView, playerName: String) {
-        if (textView.background == null) {
-            textView.setBackgroundResource(R.drawable.imageview_shape)
+        if (textView.currentTextColor == Color.WHITE) {
+            textView.setTextColor(Color.RED)
             markNotSelected(playerName)
             defineSelectedPlayer(playerName)
         } else {
-            textView.background = null
+            textView.setTextColor(Color.WHITE)
             selectedPlayer = null
         }
     }
 
     protected open fun markNotSelected(playerName: String) {
         for (i in 0 until gridLayout.childCount) {
-            val child = gridLayout.getChildAt(i) as TextView
-            if (child.text != playerName) {
-                child.background = null
+            val view = gridLayout.getChildAt(i)
+            val textView = view.findViewById<TextView>(R.id.playerNameTextView)
+            if (textView.text != playerName) {
+                textView.setTextColor(Color.WHITE)
             }
         }
     }
@@ -279,7 +271,7 @@ open class PlayerGridFragment(
     private fun showRoleDescription(){
         val dialog = Dialog(requireContext())
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_role_description, null)
+        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
         dialog.setContentView(view)
         dialog.show()
 

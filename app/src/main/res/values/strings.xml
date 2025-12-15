@@ -28,7 +28,15 @@
     <string name="saw">%1$s saw %2$s</string>
     <string name="waiting_server">Waiting for Server</string>
     <string name="ip">IP</string>
-    <string name="upgrade">Premium</string>
+    <string name="host">Host</string>
+    <string name="refresh">Refresh</string>
+    <string name="server_list">Server List</string>
+    <string name="join">Join</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="select_server">Select Server</string>
+    <string name="background_image">Background Image</string>
+    <string name="remaining_players">Remaining Players</string>
+    <string name="premium">Premium</string>
 
     <string name="intro1">The game consists of two teams: the werewolf and his followers, and the villagers (with the jester, who will be explained later).
         For a team to win, they must kill all the players on the opposing team. Each team has different roles, and each of them has unique abilities that
@@ -43,6 +51,12 @@
     <string name="intro4">There is one role that plays solo: the jester. The jester wins only by getting himself hanged at the end of the round.</string>
     <string name="intro5">The game starts at night, each player is secretly assigned a role and should perform their actions discreetly (without showing their
         phone screen to the other players)."</string>
+    <string name="finished_round_description">Now you may set a time to discuss to find out who the werewolves are.\n
+    Everyone can comment his role (or lie about it), or comment what ability did he use at night (or lie about it).\n
+    After the set time is completed, all players vote at the same time. If it\'s a draw, no one is hanged and you shall continue to the next round.\n
+    If someone is selected, he/her has a chance to defend himself and say whatever he wishes.\n
+    After his/her defense, everyone votes at the same time if he wishes to hang the accused player or to save him (thumbs up / thumbs down).\n
+    If the majority wants to hang him, select the player and continue to next round</string>
 
     <string name="werewolves_win">Werewolves Win</string>
     <string name="villagers_win">Villagers Win</string>

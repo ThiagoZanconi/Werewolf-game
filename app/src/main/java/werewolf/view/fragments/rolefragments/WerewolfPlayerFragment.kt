@@ -1,5 +1,6 @@
 package werewolf.view.fragments.rolefragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,9 +50,10 @@ open class WerewolfPlayerFragment(
     override fun markNotSelected(playerName: String) {
         super.markNotSelected(playerName)
         for (i in 0 until teammatesGridLayout.childCount) {
-            val child = teammatesGridLayout.getChildAt(i) as TextView
-            if (child.text != playerName) {
-                child.background = null
+            val view = teammatesGridLayout.getChildAt(i)
+            val textView = view.findViewById<TextView>(R.id.playerNameTextView)
+            if (textView.text != playerName) {
+                textView.setTextColor(Color.WHITE)
             }
         }
     }

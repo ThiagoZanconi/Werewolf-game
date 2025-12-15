@@ -1,5 +1,6 @@
 package werewolf.view.fragments.rolefragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -61,19 +62,19 @@ class ArsonistFragment(
 
     override fun onPlayerClick(textView: TextView, playerName: String) {
         igniteSelectedTextViewOnClickListener()
-        if (textView.background == null) {
+        if (textView.currentTextColor == Color.WHITE) {
             if(oilTargets.size==2){
                 val deleted = oilTargets.remove(oilTargets.keys.first())
-                deleted!!.background=null
-                textView.setBackgroundResource(R.drawable.imageview_shape)
+                deleted!!.setTextColor(Color.WHITE)
+                textView.setTextColor(Color.RED)
                 oilTargets[playerName] = textView
             }
             else{
-                textView.setBackgroundResource(R.drawable.imageview_shape)
+                textView.setTextColor(Color.RED)
                 oilTargets[playerName] = textView
             }
         } else {
-            textView.background = null
+            textView.setTextColor(Color.WHITE)
             oilTargets.remove(playerName)
         }
     }
