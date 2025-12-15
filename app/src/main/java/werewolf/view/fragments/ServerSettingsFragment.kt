@@ -89,9 +89,11 @@ class ServerSettingsFragment(private var rewardedAd: RewardedAd?): Fragment(){
     }
 
     private fun loadInterstitial() {
+        //"ca-app-pub-3940256099942544/5224354917" Test ID
+        //"ca-app-pub-9153943970818884/3027351452" Original ID
         RewardedAd.load(
             requireContext(),
-            "ca-app-pub-9153943970818884/3027351452",
+            "ca-app-pub-3940256099942544/5224354917",
             AdRequest.Builder().build(),
             object : RewardedAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedAd) {

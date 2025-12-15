@@ -2,6 +2,8 @@ package werewolf.view.fragments
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -87,8 +89,9 @@ class FinishedGameFragment(
 
     private fun showGameLogsDialog(){
         val dialog = Dialog(requireContext())
-        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_gamelogs, null)
-        val textView: TextView = view.findViewById(R.id.gameLogsLabel)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
+        val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
         textView.text = jsonObject.getString("GameLogs")
         dialog.setContentView(view)
         dialog.show()
