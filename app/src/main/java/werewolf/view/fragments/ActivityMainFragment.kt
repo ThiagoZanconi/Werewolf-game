@@ -1,5 +1,8 @@
 package werewolf.view.fragments
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,7 +57,13 @@ class ActivityMainFragment : Fragment(){
     }
 
     private fun upgrade(){
-
+        val dialog = Dialog(requireContext())
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
+        dialog.setContentView(view)
+        val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
+        textView.text = "Coming Soon!"
+        dialog.show()
     }
 
     private fun initFragment(fragment: Fragment){
