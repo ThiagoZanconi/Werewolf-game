@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.observer.Observable
 import com.example.observer.Subject
+import com.google.android.gms.ads.rewarded.RewardedAd
 import werewolf.model.GameSettingsImpl
 import werewolf.view.InitUiEvent
 import werewolf.view.InitUiSignal
@@ -27,7 +28,7 @@ interface ServerInterface{
     fun startGame()
 }
 
-class ServerFragment: Fragment(), ServerInterface {
+class ServerFragment(private val rewardedAd: RewardedAd?): Fragment(), ServerInterface {
     private lateinit var addPlayerButton: Button
     private lateinit var startGameButton: Button
     private lateinit var nameEditText: EditText
@@ -113,7 +114,7 @@ class ServerFragment: Fragment(), ServerInterface {
 
     private fun initSettingsFragment(){
         parentFragmentManager.beginTransaction()
-            .replace(R.id.OptionFragment, ServerSettingsFragment())
+            .replace(R.id.OptionFragment, ServerSettingsFragment(rewardedAd))
             .addToBackStack(null)
             .commit()
     }

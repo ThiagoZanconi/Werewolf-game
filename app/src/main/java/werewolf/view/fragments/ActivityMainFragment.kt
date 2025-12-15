@@ -10,6 +10,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import werewolf.view.R
 import werewolf.view.ViewInjector
 
@@ -18,6 +22,7 @@ class ActivityMainFragment : Fragment(){
     private lateinit var hostServerButton: Button
     private lateinit var howToPlayButton: Button
     private lateinit var upgradeButton: TextView
+    private var rewardedAd: RewardedAd? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +30,7 @@ class ActivityMainFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_activity_main, container, false)
+        loadInterstitial()
         initComponents(view)
         initListeners()
         return view
@@ -43,7 +49,7 @@ class ActivityMainFragment : Fragment(){
     }
 
     private fun hostServer(){
-        val serverFragment = ServerFragment()
+        val serverFragment = ServerFragment(rewardedAd)
         initServer(serverFragment)
         initFragment(serverFragment)
     }
@@ -71,6 +77,23 @@ class ActivityMainFragment : Fragment(){
             .replace(R.id.OptionFragment, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun loadInterstitial() {
+        RewardedAd.load(
+            requireContext(),
+            "ca-app-pub-9153943970818884/3027351452",
+            AdRequest.Builder().build(),
+            object : RewardedAdLoadCallback() {
+                override fun onAdLoaded(ad: RewardedAd) {
+                    rewardedAd = ad
+                }
+
+                override fun onAdFailedToLoad(error: LoadAdError) {
+                    rewardedAd = null
+                }
+            }
+        )
     }
 
 }
