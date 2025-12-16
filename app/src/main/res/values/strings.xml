@@ -140,7 +140,7 @@
     <string name="detective_description">Belongs to the villagers team. At night can investigate. The next day 3 players will be revealed to him.
         At least one of them is a werewolf.</string>
     <string name="disguiser_description">Belongs to the villagers team. Appears as a werewolf teammate secretly. If a werewolf uses an ability over a
-        teammate, it will have no effect (so werewolves don't kill each other).</string>
+        teammate, it will have no effect (so werewolves don\'t kill each other).</string>
     <string name="jester_description">Plays alone. Has no ability. His objective is to be hanged at the end of any round.</string>
 
 </resources>
