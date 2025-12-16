@@ -91,7 +91,7 @@ class FinishedGameFragment(
         val dialog = Dialog(requireContext())
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
-        val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
+        val textView: TextView = view.findViewById(R.id.descriptionTextView)
         textView.text = jsonObject.getString("GameLogs")
         dialog.setContentView(view)
         dialog.show()

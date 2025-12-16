@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.observer.Subject
 import org.json.JSONArray
@@ -25,7 +23,7 @@ import werewolf.view.AbilityStateProvider
 import werewolf.view.GameUiEvent
 import werewolf.view.GameUiEventSignal
 import werewolf.view.R
-import werewolf.view.RoleNameProvider
+import werewolf.view.RoleProvider
 import werewolf.view.howtoplay.RoleDescriptionProvider
 
 abstract class ModelFragment: Fragment(){
@@ -104,7 +102,7 @@ open class PlayerFragment(protected val onActionSubject: Subject<GameUiEventSign
         descriptionLabel = view.findViewById(R.id.descriptionLabel)
         descriptionLabel.text = AbilityStateProvider.getAbilityState(AbilityStateEnum.valueOf(jsonObject.getString("AbilityState")))
         roleDescriptionButton = view.findViewById(R.id.roleDescriptionButton)
-        titleLabel.text = RoleNameProvider.getRoleName(Roles.valueOf(jsonObject.getString("Role")))
+        titleLabel.text = RoleProvider.getRoleName(Roles.valueOf(jsonObject.getString("Role")))
         imageView.setImageResource(jsonObject.getInt("ImageSrc"))
     }
 
@@ -120,7 +118,7 @@ open class PlayerFragment(protected val onActionSubject: Subject<GameUiEventSign
         dialog.setContentView(view)
         dialog.show()
 
-        val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
+        val textView: TextView = view.findViewById(R.id.descriptionTextView)
         textView.text = getDescription()
     }
 
@@ -275,7 +273,7 @@ open class PlayerGridFragment(
         dialog.setContentView(view)
         dialog.show()
 
-        val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
+        val textView: TextView = view.findViewById(R.id.descriptionTextView)
         textView.text = RoleDescriptionProvider.getRoleDescription(Roles.valueOf(jsonObject.getString("Role")))
     }
 }

@@ -8,8 +8,8 @@
 
     <FrameLayout
         android:id="@+id/roleNameContainer"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
         android:layout_marginStart="17dp"
         android:layout_marginEnd="17dp"
         android:layout_marginTop="10dp"
@@ -45,41 +45,6 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/roleDescriptionTextViewContainer"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:padding="5dp"
-        android:background="@drawable/shape_dark_red_border"
-        app:layout_constraintStart_toEndOf="@id/roleNameContainer"
-        app:layout_constraintEnd_toStartOf="@id/imageview_shapeContainer"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="center"
-            android:adjustViewBounds="true"
-            android:src="@drawable/image_wood_background_clean"
-            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
-            />
-
-        <TextView
-            android:id="@+id/roleDescriptionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:padding="8dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:text="@string/detonator_description"
-            android:justificationMode="inter_word"
-            android:textSize="13sp"/>
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/imageview_shapeContainer"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -87,8 +52,8 @@
         android:layout_marginBottom="15dp"
         android:padding="5dp"
         android:background="@drawable/shape_dark_red_border"
-        app:layout_constraintStart_toEndOf="@id/roleDescriptionTextViewContainer"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/roleNameContainer"
+        app:layout_constraintEnd_toStartOf="@id/premiumTextViewContainer"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -110,6 +75,40 @@
             android:src="@drawable/ic_image"
             android:scaleType="centerInside"
             android:background="?attr/selectableItemBackgroundBorderless" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/premiumTextViewContainer"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:padding="5dp"
+        android:background="@drawable/shape_dark_red_border"
+        app:layout_constraintStart_toEndOf="@id/imageview_shapeContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_black_wood_background"
+            app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
+            />
+
+        <TextView
+            android:id="@+id/premiumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="6dp"
+            android:fontFamily="@font/beleren2016_bold"
+            android:textColor="#FFD700"
+            android:text="P"
+            android:textSize="30sp"/>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

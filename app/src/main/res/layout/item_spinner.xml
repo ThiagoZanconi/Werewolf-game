@@ -9,4 +9,5 @@
     android:gravity="center"
     android:fontFamily="@font/beleren2016_bold"
     android:textColor="@android:color/white"
-    android:text=""/>
+    android:text=""
+    android:textSize="18sp"/>

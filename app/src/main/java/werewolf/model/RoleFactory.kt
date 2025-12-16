@@ -18,6 +18,7 @@ import werewolf.model.entities.werewolves.Necromancer
 import werewolf.model.entities.werewolves.Vampire
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.Witch
+import werewolf.view.RoleProvider
 import kotlin.math.floor
 
 enum class Roles{
@@ -38,8 +39,12 @@ class RoleFactoryImpl(
     private val createdDisguisers: MutableList<Disguiser> = mutableListOf()
 
     private val villagerRoles = mutableListOf(Roles.Protector, Roles.Reviver ,Roles.Vigilante ,Roles.Lightbearer,
-        Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker, Roles.Detective, Roles.Disguiser)
-    private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch, Roles.Necromancer, Roles.Arsonist)
+        Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker, Roles.Detective, Roles.Disguiser).apply {
+        removeAll(RoleProvider.getPremiumRoles())
+    }
+    private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.Witch, Roles.Necromancer, Roles.Arsonist).apply {
+        removeAll(RoleProvider.getPremiumRoles())
+    }
 
     override fun getPlayers(): List<Player> {
         val toReturn = mutableListOf<Player>()

@@ -1,6 +1,8 @@
 package werewolf.view.settings
 
+import android.graphics.Color
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -9,7 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import werewolf.model.GameSettings
 import werewolf.model.Roles
 import werewolf.view.R
-import werewolf.view.RoleNameProvider
+import werewolf.view.RoleProvider
+
+data class SettingItem(
+    val role: Roles,
+    val isPremium: Boolean,
+    val options: List<Int>
+)
 
 class SettingsItemViewHolder(private val view: View, private val gameSettings: GameSettings):RecyclerView.ViewHolder(view){
 
@@ -17,8 +25,18 @@ class SettingsItemViewHolder(private val view: View, private val gameSettings: G
     private val spinner = view.findViewById<Spinner>(R.id.spinnerOptions)
 
     fun render(role: Roles, playersSize: Int){
-        this.role.text = RoleNameProvider.getRoleName(role)
-        initSpinner(role,playersSize)
+
+        this.role.text = RoleProvider.getRoleName(role)
+        spinner.onItemSelectedListener = null
+        spinner.adapter = null
+
+        if(role in RoleProvider.getPremiumRoles()){
+            initPremiumRoleSpinner()
+        }
+        else{
+            initSpinner(role,playersSize)
+        }
+
     }
 
     private fun initSpinner(role: Roles,playersSize: Int){
@@ -30,6 +48,28 @@ class SettingsItemViewHolder(private val view: View, private val gameSettings: G
         spinner.adapter = adapter
         spinner.setSelection(gameSettings.fetchRoleQuantity(role))
         initSpinnerListener(role)
+    }
+
+    private fun initPremiumRoleSpinner(){
+        val adapter = object : ArrayAdapter<String>(
+            view.context,
+            R.layout.item_spinner,
+            listOf("P")
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val tv = super.getView(position, convertView, parent) as TextView
+                tv.setTextColor(Color.parseColor("#FFD700"))
+                return tv
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val tv = super.getDropDownView(position, convertView, parent) as TextView
+                tv.setTextColor(Color.parseColor("#FFD700"))
+                return tv
+            }
+        }
+        spinner.adapter = adapter
+        spinner.setSelection(0)
     }
 
     private fun initSpinnerListener(role: Roles) {

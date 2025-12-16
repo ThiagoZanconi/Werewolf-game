@@ -25,7 +25,7 @@
     <string name="exploded">Explotó</string>
     <string name="role_description">Descripcion de Rol</string>
     <string name="team">Equipo:</string>
-    <string name="saw">%1$s vio a %2$s</string>
+    <string name="saw">%1$s Visitó o fue visitado por %2$s</string>
     <string name="waiting_server">Esperando al Servidor</string>
     <string name="ip">IP</string>
     <string name="refresh">Recargar</string>
@@ -38,27 +38,28 @@
     <string name="remaining_players">Jugadores Restantes</string>
     <string name="premium">Premium</string>
 
-    <string name="intro1">El juego consiste en dos equipos: el hombre lobo y sus seguidores; y los aldeanos (junto con el bufón, que será explicado más adelante).
-        Para que un equipo gane, este debe matar a todos los jugadores del equipo contrario.
+    <string name="intro1">El juego consiste en dos equipos: por un lado el hombre lobo y sus seguidores; y por otro los aldeanos
+        (junto con el bufón, que será explicado más adelante). Para que un equipo gane, este debe eliminar a todos los jugadores del equipo contrario.
         Cada equipo tiene diferentes roles, y cada uno de ellos tiene habilidades únicas que se pueden utilizar para lograr la victoria.</string>
     <string name="intro2">El juego consta de dos fases: noche y día. Durante la noche, los jugadores usarán sus habilidades para atacar, sobrevivir
-        de los ataques del equipo contrario y ganar informacion, entre otras cosas. El equipo de los hombres lobo sabe quiénes son los aldeanos y quiénes son sus
-        compañeros de equipo. En cambio, los aldeanos deben descubrir quiénes son los hombres lobo para poder matarlos. Si el hombre lobo muere, y no es el último
-        miembro de su equipo, uno de sus compañeros tomará su lugar como el hombre lobo.</string>
-    <string name="intro3">Durante el día, los jugadores tendrán tiempo (todo el que deseen, aunque se puede configurar un temporizador si se prefiere) para
-        discutir quiénes podrían ser los hombres lobo (es conveniente que los hombres lobo fingan ser inocentes), y al final de la discusión, los jugadores podrán votar
-        para poner a alguien en juicio. El que tenga la mayoría de los votos podra defenderse. Después de su defensa, el resto de los jugadores votará individualmente
-        si desean colgarlo o no (es colgado si la mayoría lo decide). Luego de eso, la ronda termina, cae la noche y comienza una nueva ronda.</string>
-    <string name="intro4">Hay un rol que juega solo: el bufón. El bufón gana solo si logra que lo cuelguen al final de la ronda.</string>
+        de ataques y ganar información, etc. El equipo de los hombres lobo sabe quiénes son los aldeanos y quiénes son sus
+        compañeros de equipo. En cambio, los aldeanos deben descubrir quiénes son los hombres lobo para poder eliminarlos. Si el hombre lobo muere,
+        y no es el último miembro de su equipo, uno de sus compañeros tomará su lugar como el hombre lobo.</string>
+    <string name="intro3">Durante el día, los jugadores tendrán tiempo (todo el que deseen, aunque se puede configurar un temporizador si se prefiere)
+        para discutir quiénes podrían ser los hombres lobo (es conveniente que los hombres lobo finjan ser inocentes), y al final de la discusión,
+        los jugadores podrán votar para poner a alguien en juicio. El que tenga la mayoría de los votos podrá defenderse. Después de su defensa,
+        el resto de los jugadores votará individualmente si desean eliminarlo (por ahorcamiento) o no (es ahorcado si la mayoría lo decide).
+        Luego de eso, la ronda termina, cae la noche y comienza una nueva ronda.</string>
+    <string name="intro4">Hay un rol que juega solo: el bufón. El bufón gana solo si logra que lo ahorquen al final de cualquier ronda.</string>
     <string name="intro5">Cuando comienza el juego, a cada jugador se le asigna un rol en secreto y debe realizar sus acciones discretamente (sin mostrar la
         pantalla de su teléfono a los demás jugadores).</string>
     <string name="finished_round_description">Ahora deben establecer un tiempo para discutir quienes pertenecen al equipo de los lobos.\n
-    Cada persona puede mencionar que rol le toco (o mentir sobre este), o mencionar que habilidad utilizo a la noche(o también mentir).\n
-    Cuando el tiempo terminan, todos los jugadores votan al mismo tiempo si desean colgar a alguien (lo señalan).
+    Cada persona puede mencionar que rol le tocó (o mentir sobre este), o mencionar que habilidad utilizó a la noche(o también mentir).\n
+    Cuando el tiempo termina (si se seteó un cronómetro), todos los jugadores votan al mismo tiempo si desean ahorcar a alguien (lo señalan).
         Si hay un empate, nadie muere y se continua a la siguiente ronda.\n
     Si alguien es seleccionado, tiene una chance para defenderse y decir lo que mejor le parezca.\n
-    Después de su defensa, el resto de jugadores vota si desea colgarlo o no (pulgar arriba / pulgar hacia abajo).\n
-    Si la mayoría desea colgarlo, se selecciona al jugador y se contina a la próxima ronda.</string>
+    Después de su defensa, el resto de jugadores vota si desea ahorcarlo o no (pulgar arriba / pulgar hacia abajo).\n
+    Si la mayoría desea ahorcarlo, se selecciona al jugador y se continúa a la próxima ronda.</string>
 
     <string name="werewolves_win">Hombres Lobo Ganan</string>
     <string name="villagers_win">Aldeanos Ganan</string>
@@ -109,34 +110,39 @@
     <string name="investigate">Investigar</string>
     <string name="candidates">Candidatos:</string>
 
-    <string name="unknown_description">Descripcion no encontrada</string>
-    <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para matar</string>
-    <string name="witch_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un aldeano para cancelar su habilidad</string>
-    <string name="vampire_description">Pertenece al equipo de los hombres lobo. A la noche puede seleccionar un jugador para matar. La habilidad tiene
-        enfriamiento de un turno. La habilidad comienza en enfriamiento</string>
-    <string name="necromancer_description">Pertenece al equipo de los hombres lobo. Una vez por juego puede revivir a un jugador como zombie.</string>
-    <string name="zombie_description">Pertenece al equipo de los hombres lobo. No tiene habilidad, pero puede votar al final de cada ronda. Solo aparece si
-        es revivido por un nigromante.</string>
-    <string name="arsonist_description">Pertenece al equipo de los hombres lobo. A la noche puede derramar aceite sobre hasta 2 jugadores o usar ignicion.
-        Ignicion mata a todos los jugadores con aceite, incluyendo al incendiario.</string>
-    <string name="villager_description">Pertenece al equipo de los aldeanos. No tiene habilidad</string>
-    <string name="lightbearer_description">Pertenece al equipo de los aldeanos. A la noche puede seleccionar un jugador para lanzar una barrera protectora sobre
-        el (protege de todos los ataques que este reciba). La habilidad tiene enfriamiento de un turno.</string>
-    <string name="reviver_description">Pertenece al equipo de los aldeanos. Una vez por juego puede revivir a un jugador (hombres lobo incluidos)</string>
-    <string name="vigilante_description">Pertenece al equipo de los aldeanos. Una vez por juego puede matar a un jugador (aldeanos incluidos)</string>
-    <string name="veteran_description">Pertenece al equipo de los aldeanos. Una vez por juego puede mantenerse alerta (Todos los jugadores que lo visiten seran
-        disparados).</string>
-    <string name="protector_description">Pertenece al equipo de los aldeanos. Tiene dos vidas (si es colgado muere instantaneamente).Cada noche puede proteger
-        a un jugador para recibir todos los atques dirigidos a este último.</string>
-    <string name="elusive_description">Pertenece al equipo de los aldeanos. A la noche puede esconderse en la casa de un jugador. Todas las habilidades dirigidas
-        directamente a el no tienen efecto. Tanto el como su hospedador reciben las habilidades dirigidas al hospedador. Si se esconde en la casa del lobo es atacado.</string>
-    <string name="detonator_description">Pertenece al equipo de los aldeanos. A la noche puede depositar la bomba a otro jugador. Cuando el detonador muere,
-        explota la bomba, atacando al jugador objetivo. El detonador puede cambiar la bomba de lugar. Si muere cuando pone/cambia la bomba, la habilidad no tiene efecto.</string>
-    <string name="stalker_description">Pertenece al equipo de los aldeanos. A la noche puede acechar a un jugador, la ronda siguiente se le revelara un jugador
-        que lo haya visitado o haya sido visitado por el. Ninguno si no hay.</string>
-    <string name="detective_description">Pertenece al equipo de los aldeanos. A la noche puede investigar. Al día siguiente se le revelaran 3 jugadores, al menos
-        uno de ellos es un lobo.</string>
-    <string name="disguiser_description">Pertenece al equipo de los aldeanos. Figura como equipo de los lobos secretamente. Si un lobo utiliza una habilidad sobre
-        un jugador de su equipo, esta no tendra efecto.</string>
+    <string name="unknown_description">Descripción no encontrada.</string>
+    <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para eliminar.</string>
+    <string name="witch_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un aldeano para cancelar su habilidad.</string>
+    <string name="vampire_description">Pertenece al equipo de los hombres lobo. A la noche puede seleccionar un jugador para eliminar. La habilidad tiene
+        enfriamiento de un turno y comienza en enfriamiento.</string>
+    <string name="necromancer_description">Pertenece al equipo de los hombres lobo. Una vez por juego puede revivir a un jugador como zombie.
+    Su habilidad tiene prioridad ante la del revividor.</string>
+    <string name="zombie_description">Pertenece al equipo de los hombres lobo. No tiene habilidad, pero puede votar al final de cada ronda.
+        Solo aparece si es revivido por un nigromante.</string>
+    <string name="arsonist_description">Pertenece al equipo de los hombres lobo. A la noche puede derramar aceite sobre hasta 2 jugadores o usar
+        ignición. Ignición elimina al incendiario y a todos los jugadores con aceite.</string>
+    <string name="villager_description">Pertenece al equipo de los aldeanos. No tiene habilidad.</string>
+    <string name="lightbearer_description">Pertenece al equipo de los aldeanos. A la noche puede seleccionar un jugador para lanzar una barrera
+        protectora sobre él (protege de todos los ataques que este reciba). La habilidad tiene enfriamiento de un turno.</string>
+    <string name="reviver_description">Pertenece al equipo de los aldeanos. Una vez por juego puede revivir a un jugador (hombres lobo incluidos,
+        cuáles son reividos con un rol de hombre lobo, elegir sabiamente).</string>
+    <string name="vigilante_description">Pertenece al equipo de los aldeanos. Una vez por juego puede disparar a un jugador (aldeanos incluidos)</string>
+    <string name="veteran_description">Pertenece al equipo de los aldeanos. Una vez por juego puede mantenerse alerta
+        (Todos los jugadores que lo visiten serán disparados).</string>
+    <string name="protector_description">Pertenece al equipo de los aldeanos. Tiene dos vidas (si es ahorcado muere instantáneamente).
+        Cada noche puede proteger a un jugador para recibir todos los atques dirigidos a este último.</string>
+    <string name="elusive_description">Pertenece al equipo de los aldeanos. A la noche puede esconderse en la casa de un jugador.
+        Todas las habilidades dirigidas directamente a él no tienen efecto. Tanto él como su hospedador reciben todas las habilidades dirigidas
+        al hospedador. Si se esconde en la casa del lobo es atacado.</string>
+    <string name="detonator_description">Pertenece al equipo de los aldeanos. A la noche puede depositar la bomba a otro jugador.
+        Cuando el detonador muere, explota la bomba, atacando al jugador objetivo. El detonador puede cambiar la bomba de lugar en cualquier ronda.
+        Si muere en la misma noche que pone/cambia la bomba, la habilidad no tiene efecto.</string>
+    <string name="stalker_description">Pertenece al equipo de los aldeanos. A la noche puede acechar a un jugador, la ronda siguiente se le revelará
+        un jugador que lo haya visitado o haya sido visitado por él. Nada en caso contrario. Si se le revela que el jugador objetivo
+        lo visitó o fue visitado por el chusma, quiere decir que ese jugador visitó al chusma</string>
+    <string name="detective_description">Pertenece al equipo de los aldeanos. A la noche puede investigar. Al día siguiente se le revelarán 3 jugadores,
+        al menos uno de ellos es un lobo.</string>
+    <string name="disguiser_description">Pertenece al equipo de los aldeanos. Figura como equipo de los lobos secretamente.
+        Si un lobo utiliza una habilidad sobre un jugador de su equipo, esta no tendrá efecto.</string>
     <string name="jester_description">Juega solo. No tiene habilidad. Su objetivo es ser colgado al final del día.</string>
 </resources>

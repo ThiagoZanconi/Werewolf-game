@@ -67,7 +67,7 @@ class ActivityMainFragment : Fragment(){
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
         dialog.setContentView(view)
-        val textView: TextView = view.findViewById(R.id.roleDescriptionTextView)
+        val textView: TextView = view.findViewById(R.id.descriptionTextView)
         textView.text = "Coming Soon!"
         dialog.show()
     }

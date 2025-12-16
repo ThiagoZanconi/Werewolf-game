@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import werewolf.model.GameSettings
 import werewolf.view.R
+import werewolf.view.RoleProvider
 
 class SettingsAdapter(
     private val gameSettings: GameSettings
@@ -19,6 +20,7 @@ class SettingsAdapter(
     }
 
     override fun onBindViewHolder(holder: SettingsItemViewHolder, position: Int) {
-        holder.render(gameSettings.indexOfRole(position),gameSettings.fetchRoleMaxQuantity(gameSettings.indexOfRole(position)))
+        val role = gameSettings.indexOfRole(position)
+        holder.render(role,gameSettings.fetchRoleMaxQuantity(gameSettings.indexOfRole(position)))
     }
 }

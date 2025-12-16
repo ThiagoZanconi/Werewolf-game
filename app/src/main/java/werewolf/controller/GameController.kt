@@ -17,7 +17,7 @@ import werewolf.view.GameUiEvent
 import werewolf.view.GameUiEventSignal
 import werewolf.view.MyApp
 import werewolf.view.R
-import werewolf.view.RoleNameProvider
+import werewolf.view.RoleProvider
 import werewolf.view.fragments.WinnerTeam
 import java.util.PriorityQueue
 
@@ -240,7 +240,7 @@ class GameControllerImpl(
             }
             if(usedAbilities.isNotEmpty()){
                 gameLogs+="${player.fetchPlayerName()} " +
-                        "(${RoleNameProvider.getRoleName(player.fetchRole())}) " +
+                        "(${RoleProvider.getRoleName(player.fetchRole())}) " +
                         "${MyApp.getAppContext().getString(R.string.used)} " +
                         "${player.fetchUsedAbilityName(0)} -> " +
                         "${player.fetchTargetPlayers().map{it.fetchPlayerName()}}\n"
