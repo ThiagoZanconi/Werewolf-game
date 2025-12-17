@@ -38,7 +38,8 @@ class GameControllerImpl(
     private val abilityPriorityQueue: PriorityQueue<Ability> = PriorityQueue<Ability>(compareBy { it.fetchPriority() })
     private var counter = 0
     private var roundEventsSummary: String = ""
-    private var gameLogs: String = ""
+    private var round = 1
+    private var gameLogs: String = "<--Round $round-->\n"
     private var gameState: GameState = GameState.OnGoing
 
     override fun setGameView(gameActivity: GameActivity) {
@@ -304,7 +305,8 @@ class GameControllerImpl(
         checkIfGameEnded()
         if(gameState == GameState.OnGoing){
             roundEventsSummary = ""
-            gameLogs += "---------------------------------------------------\n"
+            round++
+            gameLogs += "<--Round $round-->\n"
             setCurrentPlayer()
         }
     }

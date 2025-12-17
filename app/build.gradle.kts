@@ -23,10 +23,11 @@ android {
         applicationId = "werewolf.view"
         minSdk = 29
         targetSdk = 35
-        versionCode = 15122025
+        versionCode = 16122025
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("debug")
     }
 
     buildTypes {
@@ -44,6 +45,37 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    flavorDimensions += "env"
+
+    productFlavors {
+
+        create("staging") {
+            dimension = "env"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+
+            buildConfigField(
+                "String",
+                "REWARDED_AD_UNIT_ID",
+                "\"ca-app-pub-3940256099942544/5224354917\"" // TEST
+            )
+        }
+
+        create("production") {
+            dimension = "env"
+
+            buildConfigField(
+                "String",
+                "REWARDED_AD_UNIT_ID",
+                "\"ca-app-pub-9153943970818884/3027351452\"" // REAL
+            )
+        }
     }
 }
 

@@ -28,11 +28,10 @@ interface ServerInterface{
     fun startGame()
 }
 
-class ServerFragment(private val rewardedAd: RewardedAd?): Fragment(), ServerInterface {
+class ServerFragment: Fragment(), ServerInterface {
     private lateinit var addPlayerButton: Button
     private lateinit var startGameButton: Button
     private lateinit var nameEditText: EditText
-    private lateinit var tvServerIpTextView: TextView
     private lateinit var gridLayout: GridLayout
 
     private val onActionSubject = Subject<InitUiSignal>()
@@ -77,7 +76,6 @@ class ServerFragment(private val rewardedAd: RewardedAd?): Fragment(), ServerInt
     }
 
     private fun initComponents(view: View){
-        tvServerIpTextView = view.findViewById(R.id.tvServerIp)
         addPlayerButton = view.findViewById(R.id.addButton)
         startGameButton = view.findViewById(R.id.startButton)
         nameEditText = view.findViewById(R.id.termEditText)
@@ -87,10 +85,6 @@ class ServerFragment(private val rewardedAd: RewardedAd?): Fragment(), ServerInt
     private fun initListeners(){
         addPlayerButton.setOnClickListener{ notifyAddLocalPlayerAction() }
         startGameButton.setOnClickListener{ notifyStartGameAction() }
-    }
-
-    private fun notifyAddConnectedPlayerAction(name: String){
-        onActionSubject.notify(InitUiSignal(InitUiEvent.AddConnectedPlayer, name))
     }
 
     private fun notifyAddLocalPlayerAction(){
@@ -114,7 +108,7 @@ class ServerFragment(private val rewardedAd: RewardedAd?): Fragment(), ServerInt
 
     private fun initSettingsFragment(){
         parentFragmentManager.beginTransaction()
-            .replace(R.id.OptionFragment, ServerSettingsFragment(rewardedAd))
+            .replace(R.id.OptionFragment, ServerSettingsFragment())
             .addToBackStack(null)
             .commit()
     }

@@ -13,25 +13,24 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import werewolf.view.R
 import werewolf.model.GameSettings
 import werewolf.model.GameSettingsImpl
+import werewolf.view.BuildConfig
 import werewolf.view.GameActivityImpl
 import werewolf.view.settings.SettingsAdapter
 
-class ServerSettingsFragment(private var rewardedAd: RewardedAd?): Fragment(){
+class ServerSettingsFragment: Fragment(){
 
     private val gameSettings: GameSettings = GameSettingsImpl
     private lateinit var recyclerView: RecyclerView
     private lateinit var doneButton: Button
+    private var rewardedAd: RewardedAd? = null
+    private var pendingStartGame = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +38,7 @@ class ServerSettingsFragment(private var rewardedAd: RewardedAd?): Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        loadInterstitial()
         initComponents(view)
         initListeners()
 
@@ -76,28 +76,34 @@ class ServerSettingsFragment(private var rewardedAd: RewardedAd?): Fragment(){
             }
         }
         else{
-            loadInterstitial()
+            pendingStartGame = true
             val dialog = Dialog(requireContext())
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
             dialog.setContentView(view)
             val textView: TextView = view.findViewById(R.id.descriptionTextView)
-            textView.text = "Loading ad...! Review your internet connection"
+            textView.text = "Loading ad...!"
             dialog.show()
         }
 
     }
 
     private fun loadInterstitial() {
-        //"ca-app-pub-3940256099942544/5224354917" Test ID
-        //"ca-app-pub-9153943970818884/3027351452" Original ID
+        val adUnitId = BuildConfig.REWARDED_AD_UNIT_ID
         RewardedAd.load(
             requireContext(),
-            "ca-app-pub-9153943970818884/3027351452",
+            adUnitId,
             AdRequest.Builder().build(),
             object : RewardedAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedAd) {
                     rewardedAd = ad
+                    if (pendingStartGame) {
+                        doneButton.isEnabled = false
+                        pendingStartGame = false
+                        rewardedAd?.show(requireActivity()) {
+                            startGame()
+                        }
+                    }
                 }
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
