@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import werewolf.model.GameSettingsImpl
 import werewolf.view.R
 import werewolf.view.ViewInjector
 
@@ -24,6 +27,9 @@ class ActivityMainFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewLifecycleOwner.lifecycleScope.launch {
+            GameSettingsImpl.loadMaxRoleQuantitySettings()
+        }
         val view = inflater.inflate(R.layout.fragment_activity_main, container, false)
         initComponents(view)
         initListeners()

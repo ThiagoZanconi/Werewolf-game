@@ -1,5 +1,6 @@
 package werewolf.model
 
+import kotlinx.coroutines.CoroutineScope
 import werewolf.model.entities.Player
 import werewolf.model.entities.werewolves.Zombie
 import werewolf.model.repository.Repository
@@ -18,7 +19,7 @@ interface GameStateModel{
     fun getDeadPlayers(): List<Player>
     fun getNeutrals(): List<Player>
     fun getDisguisers(): List<Player>
-    fun initGame()
+    fun initGame(scope: CoroutineScope)
     fun killVillager(player: Player)
     fun killWerewolf(player: Player)
     fun ascendWerewolf(): Player
@@ -33,12 +34,15 @@ class GameStateModelImpl: GameStateModel{
     private val gameSettings: GameSettings = GameSettingsImpl
     private lateinit var roleFactory: RoleFactory
     private lateinit var gameActivity: GameActivity
+    private lateinit var gameSettingsWriter: GameSettingsWriter
 
     override fun setGameView(gameActivity: GameActivity) {
         this.gameActivity = gameActivity
     }
 
-    override fun initGame() {
+    override fun initGame(scope: CoroutineScope) {
+        gameSettingsWriter = DataStoreGameSettingsWriter()
+        gameSettingsWriter.saveMaxRoleQuantitySettings(scope)
         //createProfiles(players)
         val playerPositionMap: MutableMap<String, Int> = mutableMapOf()
         for(index in 0 until gameSettings.fetchPlayers().size){

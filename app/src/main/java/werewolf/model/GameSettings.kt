@@ -1,5 +1,29 @@
 package werewolf.model
 
+import android.content.Context
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import werewolf.view.MyApp
+
+interface GameSettingsWriter{
+    fun saveMaxRoleQuantitySettings(scope: CoroutineScope)
+}
+
+class DataStoreGameSettingsWriter: GameSettingsWriter {
+
+    override fun saveMaxRoleQuantitySettings(scope: CoroutineScope) {
+        scope.launch {
+            GameSettingsImpl.saveMaxRoleQuantitySettings()
+        }
+    }
+}
+
 interface GameSettings{
     fun init()
     fun reset()
@@ -14,6 +38,8 @@ interface GameSettings{
     fun indexOfRole(index: Int): Roles
     fun setRoleQuantity(role: Roles, size: Int)
     fun subtractRoleQuantity(role: Roles)
+    suspend fun loadMaxRoleQuantitySettings()
+    suspend fun saveMaxRoleQuantitySettings()
 }
 
 object GameSettingsImpl: GameSettings {
@@ -21,6 +47,10 @@ object GameSettingsImpl: GameSettings {
     private val rolesMaxQuantityMap: MutableMap<Roles, Int> = mutableMapOf()
     private val players: MutableList<String> = mutableListOf()
     private val localPlayers: MutableList<String> = mutableListOf()
+    private var cachedRoleLimits: MutableMap<Roles, Int> = mutableMapOf()
+    private val Context.gameConfigDataStore by preferencesDataStore(
+        name = "game_config"
+    )
 
     override fun init() {
         Roles.entries.forEach{
@@ -39,6 +69,14 @@ object GameSettingsImpl: GameSettings {
         }
         rolesMaxQuantityMap.keys.forEach{
             rolesQuantityMap[it] = rolesMaxQuantityMap[it]!!
+        }
+
+        cachedRoleLimits.forEach {
+            val role = it.key
+            val size = it.value
+            if (rolesQuantityMap[role]!! > size){
+                rolesQuantityMap[role] = size
+            }
         }
     }
 
@@ -102,10 +140,43 @@ object GameSettingsImpl: GameSettings {
     }
 
     override fun setRoleQuantity(role: Roles, size: Int){
+        cachedRoleLimits[role] = size
         rolesQuantityMap[role] = size
     }
 
     override fun subtractRoleQuantity(role: Roles) {
         rolesQuantityMap[role] = rolesQuantityMap[role]!!-1
+    }
+
+    override suspend fun loadMaxRoleQuantitySettings() {
+        try{
+            cachedRoleLimits = readRoleLimits().first()
+            println("Loading role limits... $cachedRoleLimits")
+        }catch (e: NoSuchElementException ){
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun saveMaxRoleQuantitySettings() {
+        MyApp.getAppContext().gameConfigDataStore.edit { prefs ->
+            cachedRoleLimits.forEach { (role, maxCount) ->
+                prefs[intPreferencesKey("role_${role.name}")] = maxCount
+            }
+        }
+        println("Saving role limits... $cachedRoleLimits")
+        println("Selected role limits... $rolesQuantityMap")
+    }
+
+    private fun readRoleLimits(): Flow<MutableMap<Roles, Int>> {
+        return MyApp.getAppContext().gameConfigDataStore.data.map { prefs ->
+            prefs.asMap()
+                .filterKeys { it.name.startsWith("role_") }
+                .mapNotNull { (key, value) ->
+                    val roleName = key.name.removePrefix("role_")
+                    val role = runCatching { Roles.valueOf(roleName) }.getOrNull()
+                    role?.let { it to (value as Int) }
+                }
+                .toMap().toMutableMap()
+        }
     }
 }

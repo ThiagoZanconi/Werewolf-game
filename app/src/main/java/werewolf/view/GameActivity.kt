@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.observer.Observable
 import com.example.observer.Subject
 import org.json.JSONObject
@@ -89,7 +90,7 @@ class GameActivityImpl: AppCompatActivity(), GameActivity{
     }
 
     private fun initModule(){
-        ViewInjector.initServerGameFragment(this)
+        ViewInjector.initServerGameFragment(this, lifecycleScope)
     }
 
     private fun initComponents(){

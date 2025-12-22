@@ -1,6 +1,7 @@
 package werewolf.controller
 
 import com.example.observer.Observer
+import kotlinx.coroutines.CoroutineScope
 import org.json.JSONArray
 import org.json.JSONObject
 import werewolf.model.GameStateModel
@@ -22,7 +23,7 @@ import werewolf.view.fragments.WinnerTeam
 import java.util.PriorityQueue
 
 interface GameController{
-    fun setGameView(gameActivity: GameActivity)
+    fun setGameView(gameActivity: GameActivity, scope: CoroutineScope)
 }
 
 enum class GameState{
@@ -35,6 +36,7 @@ class GameControllerImpl(
     ): GameController {
     private lateinit var gameActivity: GameActivity
     private lateinit var currentPlayer: Player
+    private lateinit var scope: CoroutineScope
     private val abilityPriorityQueue: PriorityQueue<Ability> = PriorityQueue<Ability>(compareBy { it.fetchPriority() })
     private var counter = 0
     private var roundEventsSummary: String = ""
@@ -42,7 +44,8 @@ class GameControllerImpl(
     private var gameLogs: String = "<--Round $round-->\n"
     private var gameState: GameState = GameState.OnGoing
 
-    override fun setGameView(gameActivity: GameActivity) {
+    override fun setGameView(gameActivity: GameActivity, scope: CoroutineScope) {
+        this.scope = scope
         this.gameActivity = gameActivity
         this.gameActivity.uiEventObservable.subscribe(observer)
         initGame()
@@ -153,7 +156,7 @@ class GameControllerImpl(
     }
 
     private fun initGame(){
-        gameStateModel.initGame()
+        gameStateModel.initGame(scope)
         val players = gameStateModel.getAlivePlayers()
         players.forEach {
                 player -> player.playerObservable.subscribe(playerObserver)

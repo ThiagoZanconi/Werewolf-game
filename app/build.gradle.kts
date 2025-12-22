@@ -23,7 +23,7 @@ android {
         applicationId = "werewolf.view"
         minSdk = 29
         targetSdk = 35
-        versionCode = 16122025
+        versionCode = 19122025
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -86,6 +86,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation(project(mapOf("path" to ":Observer")))
     implementation("com.google.android.gms:play-services-ads-api:24.9.0")
     testImplementation("junit:junit:4.13.2")

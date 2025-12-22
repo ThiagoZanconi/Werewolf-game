@@ -13,12 +13,6 @@ import werewolf.model.Roles
 import werewolf.view.R
 import werewolf.view.RoleProvider
 
-data class SettingItem(
-    val role: Roles,
-    val isPremium: Boolean,
-    val options: List<Int>
-)
-
 class SettingsItemViewHolder(private val view: View, private val gameSettings: GameSettings):RecyclerView.ViewHolder(view){
 
     private val role = view.findViewById<TextView>(R.id.roleName)
@@ -80,7 +74,12 @@ class SettingsItemViewHolder(private val view: View, private val gameSettings: G
                 position: Int,
                 id: Long
             ) {
-                gameSettings.setRoleQuantity(role, spinner.selectedItem.toString().toInt())
+                val selected = parent.getItemAtPosition(position) as Int
+                val current = gameSettings.fetchRoleQuantity(role)
+
+                if (selected != current) {
+                    gameSettings.setRoleQuantity(role, selected)
+                }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
 

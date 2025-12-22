@@ -1,5 +1,6 @@
 package werewolf.controller
 
+import kotlinx.coroutines.CoroutineScope
 import werewolf.model.ModelInjector
 import werewolf.view.GameActivity
 import werewolf.view.fragments.ServerFragment
@@ -12,9 +13,9 @@ object ControllerInjector {
         }
     }
 
-    fun onGameViewStarted(gameActivity: GameActivity){
+    fun onGameViewStarted(gameActivity: GameActivity, scope: CoroutineScope){
         GameControllerImpl(ModelInjector.getGameStateModel()).apply {
-            setGameView(gameActivity)
+            setGameView(gameActivity, scope)
         }
     }
 }
