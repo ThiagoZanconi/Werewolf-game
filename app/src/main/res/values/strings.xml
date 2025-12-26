@@ -130,7 +130,8 @@
     <string name="protector_description">Belongs to the villagers team. Has two lives (dies instantly if hanged).Every night can select a player
         to protect from all attacks he/she receives.</string>
     <string name="elusive_description">Belongs to the villagers team. At night can hide into a player\'s house. All the abilities that target him
-        directly have no effect. Both he and his host receive the abilities targeted to the host. If he hides in the house of werewolf, he is attacked.</string>
+        directly have no effect. Both he and his host receive the abilities targeted to the host. If he hides in the house of werewolf, he is attacked.
+    When two elusive hide in each other\'s houses, one of them will have the priority and will hide in the other elusive house. The other elusive will not hide.</string>
     <string name="detonator_description">Belongs to the villagers team. At night can set the bomb in a player\'s house . When the detonator dies,
         the bomb explodes, striking the target player. The Detonator may change the bomb to other location. If he dies in the same night when
         he set the bomb, the ability has no effect.</string>

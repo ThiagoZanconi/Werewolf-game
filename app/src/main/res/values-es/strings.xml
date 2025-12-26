@@ -133,7 +133,8 @@
         Cada noche puede proteger a un jugador para recibir todos los atques dirigidos a este último.</string>
     <string name="elusive_description">Pertenece al equipo de los aldeanos. A la noche puede esconderse en la casa de un jugador.
         Todas las habilidades dirigidas directamente a él no tienen efecto. Tanto él como su hospedador reciben todas las habilidades dirigidas
-        al hospedador. Si se esconde en la casa del lobo es atacado.</string>
+        al hospedador. Si se esconde en la casa del lobo es atacado. Cuando dos escurridizos se esconden mutuamente en la casa del otro, uno de ellos tendrá la prioridad
+        y se esconderá en la casa del otro escurridizo, el otro escurridizo no se esconderá.</string>
     <string name="detonator_description">Pertenece al equipo de los aldeanos. A la noche puede depositar la bomba a otro jugador.
         Cuando el detonador muere, explota la bomba, atacando al jugador objetivo. El detonador puede cambiar la bomba de lugar en cualquier ronda.
         Si muere en la misma noche que pone/cambia la bomba, la habilidad no tiene efecto.</string>
