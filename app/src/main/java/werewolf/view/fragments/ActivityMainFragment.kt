@@ -1,8 +1,11 @@
 package werewolf.view.fragments
 
 import android.app.Dialog
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -63,13 +66,24 @@ class ActivityMainFragment : Fragment(){
     }
 
     private fun upgrade(){
-        val dialog = Dialog(requireContext())
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_description, null)
-        dialog.setContentView(view)
-        val textView: TextView = view.findViewById(R.id.descriptionTextView)
-        textView.text = "Coming Soon!"
-        dialog.show()
+        val appPackageName = "com.socialgamesclub.werewolf.premium"
+
+        try {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("market://details?id=$appPackageName")
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            requireContext().startActivity(intent)
+
+        } catch (e: ActivityNotFoundException) {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            requireContext().startActivity(intent)
+        }
     }
 
     private fun initFragment(fragment: Fragment){
