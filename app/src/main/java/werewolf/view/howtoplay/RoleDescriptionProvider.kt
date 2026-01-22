@@ -10,7 +10,7 @@ object RoleDescriptionProvider {
             Roles.Werewolf to R.string.werewolf_description,
             Roles.EvilJailer to R.string.evil_jailer_description,
             Roles.Vampire to R.string.vampire_description,
-            Roles.Necromancer to R.string.necromancer_description,
+            Roles.Skeleton to R.string.skeleton_description,
             Roles.Zombie to R.string.zombie_description,
             Roles.Arsonist to R.string.arsonist_description,
             Roles.Villager to R.string.villager_description,

@@ -12,16 +12,16 @@ import werewolf.model.entities.WerewolfTeamPlayer
 import werewolf.view.MyApp
 import werewolf.view.R
 
-class Necromancer(
+class Skeleton(
     playerName: String
 ): WerewolfTeamPlayer(playerName){
 
     override fun fetchImageSrc(): Int {
-        return R.drawable.necromancer
+        return R.drawable.skeleton
     }
 
     override fun fetchRole(): Roles {
-        return Roles.Necromancer
+        return Roles.Skeleton
     }
 
     override fun addUsedAbility(){

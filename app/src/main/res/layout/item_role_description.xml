@@ -40,7 +40,7 @@
             android:padding="6dp"
             android:fontFamily="@font/font_old_english_five"
             android:textColor="@android:color/white"
-            android:text="@string/necromancer"
+            android:text="@string/skeleton"
             android:textSize="11sp"/>
     </FrameLayout>
 

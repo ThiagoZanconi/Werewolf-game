@@ -85,7 +85,7 @@
     <string name="werewolf">Hombre Lobo</string>
     <string name="evil_jailer">Carcelero Malvado</string>
     <string name="vampire">Vampiro</string>
-    <string name="necromancer">Nigromante</string>
+    <string name="skeleton">Esqueleto</string>
     <string name="zombie">Zombie</string>
     <string name="arsonist">Incendiario</string>
     <string name="stalker">Chusma</string>
@@ -115,7 +115,7 @@
     <string name="evil_jailer_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un aldeano para cancelar su habilidad.</string>
     <string name="vampire_description">Pertenece al equipo de los hombres lobo. A la noche puede seleccionar un jugador para eliminar. La habilidad tiene
         enfriamiento de un turno y comienza en enfriamiento.</string>
-    <string name="necromancer_description">Pertenece al equipo de los hombres lobo. Una vez por juego puede revivir a un jugador como zombie.
+    <string name="skeleton_description">Pertenece al equipo de los hombres lobo. Una vez por juego puede revivir a un jugador como zombie.
     Su habilidad tiene prioridad ante la del revividor.</string>
     <string name="zombie_description">Pertenece al equipo de los hombres lobo. No tiene habilidad, pero puede votar al final de cada ronda.
         Solo aparece si es revivido por un nigromante.</string>

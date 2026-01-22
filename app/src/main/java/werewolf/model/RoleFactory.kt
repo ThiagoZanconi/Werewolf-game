@@ -14,7 +14,7 @@ import werewolf.model.entities.villagers.Veteran
 import werewolf.model.entities.villagers.Vigilante
 import werewolf.model.entities.villagers.Villager
 import werewolf.model.entities.werewolves.Arsonist
-import werewolf.model.entities.werewolves.Necromancer
+import werewolf.model.entities.werewolves.Skeleton
 import werewolf.model.entities.werewolves.Vampire
 import werewolf.model.entities.werewolves.Werewolf
 import werewolf.model.entities.werewolves.EvilJailer
@@ -22,7 +22,7 @@ import werewolf.view.RoleProvider
 import kotlin.math.floor
 
 enum class Roles{
-    Jester, Villager, Lightbearer, Reviver, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Detective, Disguiser, Werewolf, EvilJailer, Arsonist, Vampire, Necromancer, Zombie
+    Jester, Villager, Lightbearer, Reviver, Vigilante, Protector, Veteran, Elusive, Detonator, Stalker, Detective, Disguiser, Werewolf, EvilJailer, Arsonist, Vampire, Skeleton, Zombie
 }
 
 interface RoleFactory{
@@ -42,7 +42,7 @@ class RoleFactoryImpl(
         Roles.Villager, Roles.Veteran, Roles.Elusive, Roles.Detonator, Roles.Stalker, Roles.Detective, Roles.Disguiser).apply {
         removeAll(RoleProvider.getPremiumRoles())
     }
-    private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.EvilJailer, Roles.Necromancer, Roles.Arsonist).apply {
+    private val werewolfRoles = mutableListOf(Roles.Vampire, Roles.EvilJailer, Roles.Skeleton, Roles.Arsonist).apply {
         removeAll(RoleProvider.getPremiumRoles())
     }
 
@@ -98,7 +98,7 @@ class RoleFactoryImpl(
         return when(role){
             Roles.EvilJailer -> EvilJailer(name)
             Roles.Vampire -> Vampire(name)
-            Roles.Necromancer -> Necromancer(name)
+            Roles.Skeleton -> Skeleton(name)
             Roles.Arsonist -> Arsonist(name)
             else -> EvilJailer(name)
         }

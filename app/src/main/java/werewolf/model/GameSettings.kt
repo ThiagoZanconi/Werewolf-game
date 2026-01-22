@@ -59,7 +59,7 @@ object GameSettingsImpl: GameSettings {
         rolesMaxQuantityMap.remove(Roles.Werewolf)
         rolesMaxQuantityMap.remove(Roles.Zombie)
         rolesMaxQuantityMap[Roles.Jester] = 1
-        rolesMaxQuantityMap[Roles.Necromancer] = players.size/3 -1
+        rolesMaxQuantityMap[Roles.Skeleton] = players.size/3 -1
         rolesMaxQuantityMap[Roles.Vampire] = players.size/3 -1
         rolesMaxQuantityMap[Roles.EvilJailer] = players.size/3 -1
         rolesMaxQuantityMap[Roles.Arsonist] = players.size/3 -1

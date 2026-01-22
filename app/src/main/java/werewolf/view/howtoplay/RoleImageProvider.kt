@@ -9,7 +9,7 @@ object RoleImageProvider {
             Roles.Werewolf to R.drawable.werewolf,
             Roles.EvilJailer to R.drawable.witch,
             Roles.Vampire to R.drawable.vampire,
-            Roles.Necromancer to R.drawable.necromancer,
+            Roles.Skeleton to R.drawable.skeleton,
             Roles.Zombie to R.drawable.zombie,
             Roles.Arsonist to R.drawable.arsonist,
             Roles.Villager to R.drawable.villager,
