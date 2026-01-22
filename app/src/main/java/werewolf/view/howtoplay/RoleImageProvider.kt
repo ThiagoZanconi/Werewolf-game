@@ -7,7 +7,7 @@ object RoleImageProvider {
     fun getRoleImage(role: Roles): Int{
         val roleImageMap = mapOf(
             Roles.Werewolf to R.drawable.werewolf,
-            Roles.Witch to R.drawable.witch,
+            Roles.EvilJailer to R.drawable.witch,
             Roles.Vampire to R.drawable.vampire,
             Roles.Necromancer to R.drawable.necromancer,
             Roles.Zombie to R.drawable.zombie,

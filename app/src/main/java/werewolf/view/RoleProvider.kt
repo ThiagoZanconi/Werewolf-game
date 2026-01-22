@@ -6,7 +6,7 @@ object RoleProvider {
     fun getRoleName(role: Roles): String{
         val roleMap = mapOf(
             Roles.Werewolf to R.string.werewolf,
-            Roles.Witch to R.string.witch,
+            Roles.EvilJailer to R.string.evil_jailer,
             Roles.Vampire to R.string.vampire,
             Roles.Necromancer to R.string.necromancer,
             Roles.Zombie to R.string.zombie,
@@ -31,7 +31,7 @@ object RoleProvider {
     fun getRoleDescription(role: Roles): String{
         val roleDescriptionMap = mapOf(
             Roles.Werewolf to R.string.werewolf_description,
-            Roles.Witch to R.string.witch_description,
+            Roles.EvilJailer to R.string.evil_jailer_description,
             Roles.Vampire to R.string.vampire_description,
             Roles.Necromancer to R.string.necromancer_description,
             Roles.Zombie to R.string.zombie_description,

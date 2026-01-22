@@ -83,7 +83,7 @@
     <string name="detonator">Detonador</string>
     <string name="jester">Bufon</string>
     <string name="werewolf">Hombre Lobo</string>
-    <string name="witch">Bruja</string>
+    <string name="evil_jailer">Carcelero Malvado</string>
     <string name="vampire">Vampiro</string>
     <string name="necromancer">Nigromante</string>
     <string name="zombie">Zombie</string>
@@ -112,7 +112,7 @@
 
     <string name="unknown_description">Descripción no encontrada.</string>
     <string name="werewolf_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un jugador para eliminar.</string>
-    <string name="witch_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un aldeano para cancelar su habilidad.</string>
+    <string name="evil_jailer_description">Pertenece al equipo de los hombres lobo. Cada noche puede seleccionar un aldeano para cancelar su habilidad.</string>
     <string name="vampire_description">Pertenece al equipo de los hombres lobo. A la noche puede seleccionar un jugador para eliminar. La habilidad tiene
         enfriamiento de un turno y comienza en enfriamiento.</string>
     <string name="necromancer_description">Pertenece al equipo de los hombres lobo. Una vez por juego puede revivir a un jugador como zombie.

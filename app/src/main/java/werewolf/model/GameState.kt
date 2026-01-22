@@ -1,9 +1,8 @@
 package werewolf.model
 
 import werewolf.model.entities.Player
-import werewolf.model.entities.villagers.Disguiser
 import werewolf.model.entities.werewolves.Werewolf
-import werewolf.model.entities.werewolves.Witch
+import werewolf.model.entities.werewolves.EvilJailer
 
 interface GameState{
     fun initAlivePlayers( playerPositionMap: MutableMap<String, Int>)
@@ -108,10 +107,10 @@ class GameStateImpl: GameState{
 
     override fun reviveWerewolf(werewolf: Player): Player {
         deadWerewolves.remove(werewolf)
-        val witch: Player = Witch(werewolf.fetchPlayerName())
-        aliveWerewolves.add(witch)
-        alivePlayers.add(witch)
-        return witch
+        val evilJailer: Player = EvilJailer(werewolf.fetchPlayerName())
+        aliveWerewolves.add(evilJailer)
+        alivePlayers.add(evilJailer)
+        return evilJailer
     }
 
     override fun removeDeadPlayer(player: Player): Boolean {

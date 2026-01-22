@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints="@string/name"
+            android:textColorHint="#7d8182"
             android:background="@drawable/image_wood_background_clean"
             android:fontFamily="@font/beleren2016_bold"
             android:gravity="center"

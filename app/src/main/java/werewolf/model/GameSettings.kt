@@ -61,7 +61,7 @@ object GameSettingsImpl: GameSettings {
         rolesMaxQuantityMap[Roles.Jester] = 1
         rolesMaxQuantityMap[Roles.Necromancer] = players.size/3 -1
         rolesMaxQuantityMap[Roles.Vampire] = players.size/3 -1
-        rolesMaxQuantityMap[Roles.Witch] = players.size/3 -1
+        rolesMaxQuantityMap[Roles.EvilJailer] = players.size/3 -1
         rolesMaxQuantityMap[Roles.Arsonist] = players.size/3 -1
         if(players.size<6){
             rolesMaxQuantityMap[Roles.Disguiser] = 0

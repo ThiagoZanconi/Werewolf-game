@@ -23,8 +23,8 @@ android {
         applicationId = "werewolf.view"
         minSdk = 29
         targetSdk = 35
-        versionCode = 20012026
-        versionName = "1.0.5"
+        versionCode = 22012026
+        versionName = "1.0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         signingConfig = signingConfigs.getByName("debug")
